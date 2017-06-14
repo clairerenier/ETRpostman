@@ -420,7 +420,7 @@
                   "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
                   "                break;",
                   "            case \"CheckPubPointJmnFgaData\":",
-                  "                tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"260\";",
                   "                break;",
                   "            case \"CheckStockAcquisitionForAcq\":",
                   "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
