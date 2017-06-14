@@ -1,0 +1,886 @@
+{
+  "variables": [],
+  "info": {
+    "name": "FR_AGILE",
+    "_postman_id": "704b61d8-33ad-10bd-e4b6-a752f7e2b290",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "c337cdd9-c01e-2e19-63cf-7b00cf1a335e",
+      "name": "REL000",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL000",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "c7b361ab-d916-d726-d255-578487f5efca",
+      "name": "REL002",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL002",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "b3ae4e31-0d1b-35d3-7968-23425339ca9b",
+      "name": "REL004",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL004/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\",\r\n\"typeReleve\": \"S\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "632d31b1-8d60-45e9-0fcf-c3f72bf98c63",
+      "name": "REL016",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/REL016/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"ProRel019Request\":{\r\n  \"uidVpce\":25841,\r\n  \"temperature\":2.0,\r\n  \"pression\":13\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "b1825c66-5dc8-1404-b8e7-407f8bcc6c9c",
+      "name": "REL003",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL003",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\",\r\n\"typeEcv\": \"3\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "aeb8fe5b-6e74-c797-f5ed-bb4a498b042e",
+      "name": "REL054",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL054",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "14d75d49-c311-5a25-328e-204e82dcb8d6",
+      "name": "REL057",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL057",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "32502c58-d540-fc68-58bf-46c3f9dd02e9",
+      "name": "REL058",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL058/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\",\r\n\"typeReleve\": \"S\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "dec6c477-8e97-4b88-f573-68132b031c2e",
+      "name": "REL100",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL100/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\",\r\n\"typeReleve\": \"S\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "6f71c0ad-a598-1b07-1578-af7f8cc11c0d",
+      "name": "PROREL009",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/PROREL009/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n                \"ProRel009Request\": {\r\n                               \"typeForcage\": 2,\r\n                               \"nouveauTypeAppareil\": \"P\",\r\n                               \"deltaBrutCompt\": 24,\r\n                               \"coeffCorrTheo\": 1,\r\n                               \"deltaCorrigeCorr\": 44,\r\n                               \"deltaIndCalc\": 54,\r\n                               \"coeffCorrReel\": 28\r\n                }\r\n}\r\n"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "4b2d31f9-6783-8cff-788f-14de08ea808a",
+      "name": "PROREL013",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/PROREL013/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"ProRel013Request\":\r\n  {\r\n  \"deltaIndexBrutCompteur\": \"4\",\r\n  \"coefficientCorrectionReel\": \"1\",\r\n  \"coefficientCorrectionTheorique\": \"1\",\r\n  \"volumeForcage4\": \"22\",\r\n  \"forcage\": \"4\",\r\n  \"typeAppareil\": \"S\"\r\n  }\r\n}\r\n"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "bf09a201-927d-290d-55ab-f1d14ac16e3d",
+      "name": "PROREL016",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/PROREL016/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel016Request\":\r\n  {\r\n   \"uidReleve\":726402,\r\n   \"userModification\":\"name.lastname@mail.com\",\r\n   \"toCheck\":true,\r\n   \"libelleStatut\":\"jarjar\",\r\n   \"dateDebInter\": \"2016-11-12T07:03:09.000+0000\",\r\n   \"dateFinInter\": \"2016-11-14T07:03:11.000+0000\"\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "76da946f-0292-8f23-d5d9-7faaacf48c14",
+      "name": "PROREL017",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/PROREL017/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel017Request\": {\r\n    \"dateFinInterventionRelevePrecedente\": \"2016-10-11T06:00:00.000+0000\",\r\n    \"releve\": {\r\n      \"code\": \"PCEREL01\",\r\n      \"statutReleve\": \"P\",\r\n      \"typeReleve\": \"S\",\r\n      \"vpe\": false,\r\n      \"typeAppareil\": \"S\",\r\n      \"nouveauTypeApp\": \"S\",\r\n      \"utilisateurModif\": \"JarJar\",\r\n      \"dateModif\": \"2016-10-13T06:00:00.000+0000\",\r\n      \"dateDebInter\": \"2016-11-12T07:03:30.000+0000\",\r\n      \"indDebBrutCompt\": 1,\r\n      \"indDebBrutCorr\": 2,\r\n      \"indDebCorrigeCorr\": 10,\r\n      \"indDebCalculatrice\": 10,\r\n      \"indDebBrutAlarme\": 10,\r\n      \"indDebCorrigeAlarme\": 10,\r\n      \"dateFinInter\": \"2016-11-14T07:03:31.000+0000\",\r\n      \"indFinBrutCompt\": 2,\r\n      \"indFinBrutCorr\": 20,\r\n      \"indFinCorrigeCorr\": 20,\r\n      \"indFinCalculatrice\": 20,\r\n      \"indFinBrutAlarme\": 20,\r\n      \"indFinCorrigeAlarme\": 20,\r\n      \"poidsBrutCompt\": 30,\r\n      \"poidsBrutCorrecteur\": 10,\r\n      \"poidsCorrigeCorr\": 10,\r\n      \"poidsIndexCalc\": 10,\r\n      \"poidsBrutAlarme\": 20,\r\n      \"poidsCorrigeAlarme\": 10,\r\n      \"poidsFinBrutCompt\": 10,\r\n      \"poidsFinBrutCorrecteur\": 10,\r\n      \"poidsFinCorrigeCorr\": 10,\r\n      \"poidsFinIndexCalc\": 20,\r\n      \"poidsFinBrutAlarme\": 10,\r\n      \"poidsFinCorrigeAlarme\": 15,\r\n      \"nbChBrutCompt\": 2,\r\n      \"nbChBrutCorr\": 2,\r\n      \"nbChCorrigeCorr\": 3,\r\n      \"nbChIndCalc\": 20,\r\n      \"nbChBrutAlarme\": 10,\r\n      \"nbChCorrigeAlarme\": 30,\r\n      \"nbChFinBrutCompt\": 20,\r\n      \"nbChFinBrutCorr\": 10,\r\n      \"nbChFinCorrigeCorr\": 20,\r\n      \"nbChFinIndCalc\": 0,\r\n      \"nbChFinBrutAlarme\": 0,\r\n      \"nbChFinCorrigeAlarme\": 0,\r\n      \"deltaBrutCompt\": 10,\r\n      \"deltaBrutCorr\": 10,\r\n      \"deltaCorrigeCorr\": 10,\r\n      \"deltaIndCalc\": 20,\r\n      \"deltaBrutAlarme\": 20,\r\n      \"deltaCorrigeAlarme\": 10,\r\n      \"deltaCoeffTheo\": 20,\r\n      \"pression\": 10,\r\n      \"temperature\": 10,\r\n      \"coeffCorrTheo\": 10,\r\n      \"coeffCorrReel\": 20,\r\n      \"byPass\": 1,\r\n      \"volumeSimule\": 10,\r\n      \"commentaire\": \"VER\",\r\n      \"test1\": {\r\n        \"statut\": \"\",\r\n        \"value\": 0\r\n      },\r\n      \"test2\": {\r\n        \"statut\": \"\",\r\n        \"value\": 0\r\n      },\r\n      \"test3\": {\r\n        \"statut\": \"\",\r\n        \"value\": 0\r\n      },\r\n      \"test4\": {\r\n        \"statut\": \"\",\r\n        \"value\": 0\r\n      },\r\n      \"volTerP\": 10,\r\n      \"volPecP\": 20,\r\n      \"typeForcage\": 3,\r\n      \"volumePeriode\": 20,\r\n      \"causeRejet\": 1,\r\n      \"uidPce\": 25841,\r\n      \"uidReleve\": \"\"\r\n    }\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "e5849ec5-348c-6b73-7561-8c2f6b729b98",
+      "name": "PROREL018",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/PROREL018/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n{\"ProRel018Request\": {\r\n\"dateFinInterventionRelevePrecedente\":  \"2017-01-01T10:00:07.000+0000\",\r\n\"releve\": {\r\n\"code\":\"PCEREL01\",\r\n\"statutReleve\": \"P\",\r\n\"typeReleve\": \"S\",\r\n\"vpe\": true,\r\n\"typeAppareil\": \"S\",\r\n\"nouveauTypeApp\": \"S\",\r\n\"utilisateurModif\": \"admin\",\r\n\"dateModif\": \"2017-01-02T00:00:00.000+0000\",\r\n\"dateDebInter\": \"2017-01-02T00:00:00.000+0000\",\r\n\"indDebBrutCompt\": 1001,\r\n\"indDebBrutCorr\": 3,\r\n\"indDebCorrigeCorr\": 10,\r\n\"indDebCalculatrice\": 10,\r\n\"indDebBrutAlarme\": 10,\r\n\"indDebCorrigeAlarme\": 10,\r\n\"dateFinInter\": \"2017-01-02T00:00:00.000+0000\",\r\n\"indFinBrutCompt\": 2,\r\n\"indFinBrutCorr\": 20,\r\n\"indFinCorrigeCorr\": 20,\r\n\"indFinCalculatrice\": 200,\r\n\"indFinBrutAlarme\": 20,\r\n\"indFinCorrigeAlarme\": 20,\r\n\"poidsBrutCompt\": 30,\r\n\"poidsBrutCorrecteur\": 10,\r\n\"poidsCorrigeCorr\": 10,\r\n\"poidsIndexCalc\": 10,\r\n\"poidsBrutAlarme\": 20,\r\n\"poidsCorrigeAlarme\": 10,\r\n\"poidsFinBrutCompt\": 10,\r\n\"poidsFinBrutCorrecteur\": 10,\r\n\"poidsFinCorrigeCorr\": 10,\r\n\"poidsFinIndexCalc\": 20,\r\n\"poidsFinBrutAlarme\": 10,\r\n\"poidsFinCorrigeAlarme\": 15,\r\n\"nbChBrutCompt\": 2,\r\n\"nbChBrutCorr\": 2,\r\n\"nbChCorrigeCorr\": 3,\r\n\"nbChIndCalc\": 20,\r\n\"nbChBrutAlarme\": 10,\r\n\"nbChCorrigeAlarme\": 30,\r\n\"nbChFinBrutCompt\": 20,\r\n\"nbChFinBrutCorr\": 10,\r\n\"nbChFinCorrigeCorr\": 20,\r\n\"nbChFinIndCalc\": 0,\r\n\"nbChFinBrutAlarme\": 0,\r\n\"nbChFinCorrigeAlarme\": 0,\r\n\"deltaBrutCompt\": 11,\r\n\"deltaBrutCorr\": 10,\r\n\"deltaCorrigeCorr\": 10,\r\n\"deltaIndCalc\": 20,\r\n\"deltaBrutAlarme\": 20,\r\n\"deltaCorrigeAlarme\": 10,\r\n\"deltaCoeffTheo\": 20,\r\n\"pression\": 10,\r\n\"temperature\": 10,\r\n\"coeffCorrTheo\": 10,\r\n\"coeffCorrReel\": 20,\r\n\"byPass\": 1,\r\n\"volumeSimule\": 10,\r\n\"commentaire\": \"VER\",\r\n\"test1\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"test2\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"test3\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"test4\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"volTerP\": 10,\r\n\"volPecP\": 20,\r\n\"typeForcage\": 3,\r\n\"volumePeriode\": 20,\r\n\"causeRejet\": 1,\r\n\"uidPce\": 25841,\r\n\"uidReleve\": 726562\r\n}\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "6ba0ce7a-64cd-d534-13a4-f2805b92ca95",
+      "name": "PROREL019",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/PROREL019/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n{\"ProRel018Request\": {\r\n\"dateFinInterventionRelevePrecedente\":  \"2017-01-01T10:00:07.000+0000\",\r\n\"releve\": {\r\n\"code\":\"PCEREL01\",\r\n\"statutReleve\": \"P\",\r\n\"typeReleve\": \"S\",\r\n\"vpe\": true,\r\n\"typeAppareil\": \"S\",\r\n\"nouveauTypeApp\": \"S\",\r\n\"utilisateurModif\": \"admin\",\r\n\"dateModif\": \"2017-01-02T00:00:00.000+0000\",\r\n\"dateDebInter\": \"2017-01-02T00:00:00.000+0000\",\r\n\"indDebBrutCompt\": 1001,\r\n\"indDebBrutCorr\": 3,\r\n\"indDebCorrigeCorr\": 10,\r\n\"indDebCalculatrice\": 10,\r\n\"indDebBrutAlarme\": 10,\r\n\"indDebCorrigeAlarme\": 10,\r\n\"dateFinInter\": \"2017-01-02T00:00:00.000+0000\",\r\n\"indFinBrutCompt\": 2,\r\n\"indFinBrutCorr\": 20,\r\n\"indFinCorrigeCorr\": 20,\r\n\"indFinCalculatrice\": 200,\r\n\"indFinBrutAlarme\": 20,\r\n\"indFinCorrigeAlarme\": 20,\r\n\"poidsBrutCompt\": 30,\r\n\"poidsBrutCorrecteur\": 10,\r\n\"poidsCorrigeCorr\": 10,\r\n\"poidsIndexCalc\": 10,\r\n\"poidsBrutAlarme\": 20,\r\n\"poidsCorrigeAlarme\": 10,\r\n\"poidsFinBrutCompt\": 10,\r\n\"poidsFinBrutCorrecteur\": 10,\r\n\"poidsFinCorrigeCorr\": 10,\r\n\"poidsFinIndexCalc\": 20,\r\n\"poidsFinBrutAlarme\": 10,\r\n\"poidsFinCorrigeAlarme\": 15,\r\n\"nbChBrutCompt\": 2,\r\n\"nbChBrutCorr\": 2,\r\n\"nbChCorrigeCorr\": 3,\r\n\"nbChIndCalc\": 20,\r\n\"nbChBrutAlarme\": 10,\r\n\"nbChCorrigeAlarme\": 30,\r\n\"nbChFinBrutCompt\": 20,\r\n\"nbChFinBrutCorr\": 10,\r\n\"nbChFinCorrigeCorr\": 20,\r\n\"nbChFinIndCalc\": 0,\r\n\"nbChFinBrutAlarme\": 0,\r\n\"nbChFinCorrigeAlarme\": 0,\r\n\"deltaBrutCompt\": 11,\r\n\"deltaBrutCorr\": 10,\r\n\"deltaCorrigeCorr\": 10,\r\n\"deltaIndCalc\": 20,\r\n\"deltaBrutAlarme\": 20,\r\n\"deltaCorrigeAlarme\": 10,\r\n\"deltaCoeffTheo\": 20,\r\n\"pression\": 10,\r\n\"temperature\": 10,\r\n\"coeffCorrTheo\": 10,\r\n\"coeffCorrReel\": 20,\r\n\"byPass\": 1,\r\n\"volumeSimule\": 10,\r\n\"commentaire\": \"VER\",\r\n\"test1\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"test2\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"test3\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"test4\":\r\n{ \"statut\": \"\", \"value\": 0 }\r\n,\r\n\"volTerP\": 10,\r\n\"volPecP\": 20,\r\n\"typeForcage\": 3,\r\n\"volumePeriode\": 20,\r\n\"causeRejet\": 1,\r\n\"uidPce\": 25841,\r\n\"uidReleve\": 726562\r\n}\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "b8e8715e-9b07-cf82-beda-6aab07d824c3",
+      "name": "REL084REL085REL086",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/REL084REL085REL086/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel019Request\": {\r\n    \"uidPce\": \"1234\",\r\n    \"dateDebInter\": \"2016-01-02T06:00:00.000+0000\",\r\n    \"dateFinInterventionRelevePrecedente\": \"2016-10-11T06:00:00.000+0000\",\r\n    \"typeReleve\": \"S\",\r\n    \"volumePeriode\": 1234\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "ac40c285-c13a-a0a6-7fe8-f5ad33e38b27",
+      "name": "FIA252FIA253FIA254",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/FIA252FIA253FIA254/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel019Request\":\r\n  {\r\n    \"uidVpce\":12345,\r\n    \"valueTest\":999.99\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "ded5308c-0615-3467-2c18-3ad9602eee24",
+      "name": "FIA255FIA256",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/FIA255FIA256/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel019Request\":\r\n  {\r\n    \"uidVpce\":12345,\r\n    \"valueTest\":999.99\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "19d56e71-47d2-6adb-731c-8b4f748a69d9",
+      "name": "FIA257FIA258",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/FIA257FIA258/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel019Request\":\r\n  {\r\n    \"uidVpce\":12345,\r\n    \"valueTest\":999.99\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "220a83d3-9e90-5208-c1f3-615235fce4ca",
+      "name": "FIA259FIA260",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/FIA259FIA260/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ProRel019Request\":\r\n  {\r\n    \"uidVpce\":1234,\r\n    \"valueTest\":999.99,\r\n    \"dateDebInter\": \"2016-10-12T07:00:03.000+0000\"\r\n  }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "d177df4f-1fa8-0ca1-bef1-a5758fa7e7ac",
+      "name": "LienGdcPCE",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48050/rest/ETR_PRO_COMMON_REL/ws/REL057",
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel001Request\": \r\n{\r\n\"dateDebInter\": \"2016-10-13T10:00:00.000+0000\",\r\n\"dateFinInter\": \"2016-10-13T10:00:08.000+0000\",\r\n\"codePce\": \"PCEREL01\"\r\n}\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "ede944ac-b307-4e84-842a-b1865d31e054",
+      "name": "PROSOC03 TIN P2",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_SOC_03_IMPL/webservice/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"PROCESS_ID\":\"1\"}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "1391002d-1a38-6d7a-6ad5-ead2db83422c",
+      "name": "PROSOC04 TIN P2",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.3.60:48020/rest/ETR_PRO_SOC_04_IMPL/ws/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n\"ProSoc04Request\" : {\r\n\"uidpce\":\"26423\",\r\n\"debutPeriode1\":\"2017-04-01T06:00:00.000+0000\",\r\n\"finPeriode1\":\"2017-04-02T06:00:00.000+0000\",\r\n\"debutPeriode2\":\"2017-04-03T06:00:00.000+0000\",\r\n\"finPeriode2\":\"2017-04-04T06:00:00.000+0000\"\r\n      }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "48b1b8bd-cfe4-d862-a251-6728dae30df3",
+      "name": "PROSOC03 FOR",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.4.60:48020/rest/ETR_PRO_SOC_03_IMPL/webservice/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"PROCESS_ID\":\"1\"}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "334f13ad-8511-50ea-f9a5-03bc1fd76f03",
+      "name": "PROSOC04 FOR",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Administrator",
+            "password": "manage",
+            "saveHelperData": true,
+            "showPassword": false
+          }
+        },
+        "url": "http://172.30.4.60:48020/rest/ETR_PRO_SOC_04_IMPL/ws/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n\"ProSoc04Request\" : {\r\n\"uidpce\":\"26583\",\r\n\"debutPeriode1\":\"2017-01-03T06:00:00.000+0000\",\r\n\"finPeriode1\":\"2099-12-31T06:00:00.000+0000\",\r\n\"debutPeriode2\":\"2017-04-03T06:00:00.000+0000\",\r\n\"finPeriode2\":\"2017-07-04T06:00:00.000+0000\"\r\n      }\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    }
+  ]
+}
