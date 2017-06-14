@@ -148,16 +148,6 @@
                   "}"
                 ]
               }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
-                ]
-              }
             }
           ],
           "request": {
