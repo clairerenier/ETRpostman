@@ -10,7 +10,7 @@
     {
       "_postman_id": "396c3b69-1e90-8c7e-971b-8e30711b6996",
       "name": "[011102400]PRO_ACG_11_FGA_ACG_024_C220",
-      "description": "0-First file dropped to generate data\r\ntExpected result : everything is saved (all hours set to OUI)\r\no\t1  Same file dropped with the following changes : \r\n"\tMETMOY 8h has its value changed (89,63 to 90.63)\r\n"\tNothing changed for 9AM\r\no\t1b  Same file dropped with the following changes : \r\n"\tDENMOY 7h quality will be AF (M before)\r\n"\tMETMOY 8h has its value changed (90,63 to 91.63)\r\n"\tNothing changed for 9AM\r\ntExpected result : 7 and 8AM whould be set to OUI , and NON for 9h\r\no\t2  Same file dropped where :\r\n"\t9AM is changed PCSMOY will be CS (quality = to the previous one)\r\n"\tMETMOY 8h has its value changed (91,63 to 89.63)\r\ntExpected result : all set to NON except 8AM\r\no\t3 - Same file dropped where only 8AM is changed PCSMOY from AF to CS (quality <)\r\ntExpected result : all set to NON\r\no\t4  Same file dropped but PCSMOY to CS for 8h\r\ntExpected result : 8AM set to OUI\r\no\t5- file on a fresh gaz day :\r\ntExpeted result : all hours set to OUI\r\no\t6  file to test\r\ntRun first file\r\n"\tPCSMOY is set to 6/7/8AM AF, rest are set to CS\r\n"\tExpected results : everything set to OUI\r\ntRun second file\r\n"\tPCSMOY is unchanged for 6񙀀, for rest of the hours, they are set to AF\r\n"\tExpected results everything set to OUI except 6/7/8AM",
+      "description": "0-First file dropped to generate data\r\ntExpected result : everything is saved (all hours set to OUI)\r\no\t1  Same file dropped with the following changes : \r\n"\tMETMOY 8h has its value changed (89,63 to 90.63)\r\n"\tNothing changed for 9AM\r\no\t2  Same file dropped with the following changes : \r\n"\tDENMOY 7h quality will be AF (M before)\r\n"\tMETMOY 8h has its value changed (90,63 to 91.63)\r\n"\tNothing changed for 9AM\r\ntExpected result : 7 and 8AM whould be set to OUI , and NON for 9h\r\no\t3  Same file dropped where :\r\n"\t9AM is changed PCSMOY will be CS (quality = to the previous one)\r\n"\tMETMOY 8h has its value changed (91,63 to 89.63)\r\ntExpected result : all set to NON except 8AM\r\no\t4 - Same file dropped where only 8AM is changed PCSMOY from AF to CS (quality <)\r\ntExpected result : all set to NON\r\no\t5  Same file dropped but PCSMOY to CS for 8h\r\ntExpected result : 8AM set to OUI\r\no\t6- file on a fresh gaz day :\r\ntExpeted result : all hours set to OUI\r\no\t7  file to test\r\ntRun first file\r\n"\tPCSMOY is set to 6/7/8AM AF, rest are set to CS\r\n"\tExpected results : everything set to OUI\r\ntRun second file\r\n"\tPCSMOY is unchanged for 6񙀀, for rest of the hours, they are set to AF\r\n"\tExpected results everything set to OUI except 6/7/8AM",
       "item": [
         {
           "_postman_id": "4e28a05a-8c37-4ffb-2c22-e0bae3d97d67",
@@ -519,6 +519,65 @@
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105003_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "db0f207e-08d7-2389-f12c-03df81dcb0ec",
+          "name": "[011102401]Check process cal end copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102401]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
