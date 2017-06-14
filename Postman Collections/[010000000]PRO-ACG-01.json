@@ -355,7 +355,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId\");",
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
                   "console.log(sourcprocessid);"
                 ]
               }
@@ -378,7 +378,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102401PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
