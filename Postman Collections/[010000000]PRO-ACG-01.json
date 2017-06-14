@@ -417,7 +417,7 @@
                   "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
                   "                break;",
                   "            case \"CheckPointData\":",
-                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"338\";",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"104\";",
                   "                break;",
                   "            case \"CheckPubPointJmnFgaData\":",
                   "                tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"338\";",
