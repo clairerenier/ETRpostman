@@ -398,7 +398,7 @@
                   "                break;",
                   "            case \"CheckStockAcquisition2\":",
                   "                //Expected result : 8AM should be set to OUI , and NON for 7 and 9",
-                  "                if (result.lenght ==4){",
+                  "                if (result.length ==4){",
                   "                    if (results[0].STOCKAGE==\"OUI\" && results[1].STOCKAGE==\"OUI\" && results[2].STOCKAGE==\"OUI\" && results[3].STOCKAGE==\"NON\"){",
                   "                        tests[\"Check Stock_acquisition2\"]=true;",
                   "                    }",
