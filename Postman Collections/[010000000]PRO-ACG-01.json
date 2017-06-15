@@ -13,6 +13,66 @@
       "description": "0-First file dropped to generate data\r\ntExpected result : everything is saved (all hours set to OUI)\r\no\t1  Same file dropped with the following changes : \r\n"\tMETMOY 8h has its value changed (89,63 to 90.63)\r\n"\tNothing changed for 9AM\r\no\t2  Same file dropped with the following changes : \r\n"\tDENMOY 7h quality will be AF (M before)\r\n"\tMETMOY 8h has its value changed (90,63 to 91.63)\r\n"\tNothing changed for 9AM\r\ntExpected result : 7 and 8AM whould be set to OUI , and NON for 9h\r\no\t3  Same file dropped where :\r\n"\t9AM is changed PCSMOY will be CS (quality = to the previous one)\r\n"\tMETMOY 8h has its value changed (91,63 to 89.63)\r\ntExpected result : all set to NON except 8AM\r\no\t4 - Same file dropped where only 8AM is changed PCSMOY from AF to CS (quality <)\r\ntExpected result : all set to NON\r\no\t5  Same file dropped but PCSMOY to CS for 8h\r\ntExpected result : 8AM set to OUI\r\no\t6- file on a fresh gaz day :\r\ntExpeted result : all hours set to OUI\r\no\t7  file to test\r\ntRun first file\r\n"\tPCSMOY is set to 6/7/8AM AF, rest are set to CS\r\n"\tExpected results : everything set to OUI\r\ntRun second file\r\n"\tPCSMOY is unchanged for 6񙀀, for rest of the hours, they are set to AF\r\n"\tExpected results everything set to OUI except 6/7/8AM",
       "item": [
         {
+          "_postman_id": "8bb0128a-3295-a8f9-b522-3069d973e9f4",
+          "name": "[0111024000]Delete and Update data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "for(var i= 0; i < sqlResult.length; i++)",
+                  "{",
+                  "    switch (sqlResult[i].requestId) {",
+                  "        case \"DeletePointData\":",
+                  "            tests[\"Delete Point Data\"] = true;",
+                  "            break;",
+                  "        case \"DeleteAcqFgaData\":",
+                  "            tests[\"Delete Acq_Fga Data\"] = true;",
+                  "            break;",
+                  "        case \"DeletePubPointJmnFgaData\":",
+                  "            tests[\"Delete Pub_Point_Jmn_Fga Data\"] = true;",
+                  "            break;",
+                  "    }",
+                  "}",
+                  "if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
+                  "    tests[\"Delete data Sum up\"] = true; ",
+                  "    postman.setNextRequest(\"[0111024000]Drop file FGA\");",
+                  "}",
+                  "else {",
+                  "   tests[\"Delete data Sum up\"] = fase; ",
+                  "   //postman.setNextRequest(null);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('C220', 'SGGU2802E1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='C220' and horodate between TO_DATE('2017-02-23 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-24 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "4e28a05a-8c37-4ffb-2c22-e0bae3d97d67",
           "name": "[011102400]Delete and Update data",
           "event": [
@@ -1348,66 +1408,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "8bb0128a-3295-a8f9-b522-3069d973e9f4",
-          "name": "[0111024000]Delete and Update data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "var sqlResult = jsonData.sqlResult;",
-                  "for(var i= 0; i < sqlResult.length; i++)",
-                  "{",
-                  "    switch (sqlResult[i].requestId) {",
-                  "        case \"DeletePointData\":",
-                  "            tests[\"Delete Point Data\"] = true;",
-                  "            break;",
-                  "        case \"DeleteAcqFgaData\":",
-                  "            tests[\"Delete Acq_Fga Data\"] = true;",
-                  "            break;",
-                  "        case \"DeletePubPointJmnFgaData\":",
-                  "            tests[\"Delete Pub_Point_Jmn_Fga Data\"] = true;",
-                  "            break;",
-                  "    }",
-                  "}",
-                  "if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
-                  "    tests[\"Delete data Sum up\"] = true; ",
-                  "    postman.setNextRequest(\"[0111024000]Drop file FGA\");",
-                  "}",
-                  "else {",
-                  "   tests[\"Delete data Sum up\"] = fase; ",
-                  "   //postman.setNextRequest(null);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('C220', 'SGGU2802E1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='C220' and horodate between TO_DATE('2017-02-23 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-24 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
