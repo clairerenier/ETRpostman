@@ -2163,7 +2163,7 @@
                   "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                break;",
                   "            case \"CheckStatutOrcEtape\":",
-                  "                tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"2\";",
                   "                break;",
                   "            case \"CheckAcqPceConservee\":",
                   "                tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
