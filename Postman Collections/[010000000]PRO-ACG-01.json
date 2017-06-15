@@ -1421,7 +1421,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[011102405]Check data\");",
+                  "   postman.setNextRequest(\"[0111024000]Check data\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
@@ -1458,7 +1458,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
@@ -1466,7 +1466,7 @@
         },
         {
           "_postman_id": "67df8a2b-5ab2-9d3b-6f37-c89a6b9a707b",
-          "name": "[011102405]Check data copy",
+          "name": "[0111024000]Check data",
           "event": [
             {
               "listen": "test",
