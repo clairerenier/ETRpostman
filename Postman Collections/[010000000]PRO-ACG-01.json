@@ -1378,7 +1378,7 @@
                   "            break;",
                   "    }",
                   "}",
-                  "if (tests[\"Update Point Data\"] && tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
+                  "if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
                   "    tests[\"Delete data Sum up\"] = true; ",
                   "    postman.setNextRequest(\"[011102400]Drop file FGA\");",
                   "}",
