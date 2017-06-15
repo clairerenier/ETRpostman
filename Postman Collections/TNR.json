@@ -1025,7 +1025,7 @@
                   "        }",
                   "    }",
                   "}",
-                  ""
+                  "postman.setNextRequest(\"[00004]Delete data\");"
                 ]
               }
             },
