@@ -564,7 +564,7 @@
                   "}",
                   "if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"]){",
                   "    tests[\"Delete data Sum up\"] = true; ",
-                  "    postman.setNextRequest(\"[00003]Drop file PCE\");",
+                  "    postman.setNextRequest(\"[00004]Drop file PCE\");",
                   "}",
                   "else {",
                   "   tests[\"Delete data\"] = fase; ",
