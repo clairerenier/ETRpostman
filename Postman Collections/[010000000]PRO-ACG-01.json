@@ -2228,8 +2228,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[010100101]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[010100101]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check drop file PCE\"] = false;",
@@ -2237,7 +2237,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[010100100]Check data\");",
+                  "   postman.setNextRequest(\"[010100101]Check data\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file PCE\"] = false;",
@@ -2264,7 +2264,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170320_PCE_20170320103422_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170320_PCE_2017032010342_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
