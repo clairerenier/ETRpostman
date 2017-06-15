@@ -484,7 +484,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011102401]Drop file FGA\");",
+                  "postman.setNextRequest(\"[011102402]Drop file FGA\");",
                   ""
                 ]
               }
