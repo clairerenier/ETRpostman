@@ -73,6 +73,58 @@
           "response": []
         },
         {
+          "_postman_id": "193ecbdb-362c-6baa-cc18-3fd46c02c21f",
+          "name": "[0111024000]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[0111024000]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[0111024000]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "4e28a05a-8c37-4ffb-2c22-e0bae3d97d67",
           "name": "[011102400]Delete and Update data",
           "event": [
@@ -1408,58 +1460,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "193ecbdb-362c-6baa-cc18-3fd46c02c21f",
-          "name": "[0111024000]Drop file FGA",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[0111024000]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
-                  "",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file FGA\"] = false;",
-                  "    //postman.setNextRequest(null);",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[0111024000]Check process cal end\");",
-                  "}",
-                  "else {",
-                  "    tests[\"Check drop file FGA\"] = false;",
-                  "    //postman.setNextRequest(null);  ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
