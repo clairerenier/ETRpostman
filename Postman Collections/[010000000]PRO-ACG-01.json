@@ -239,7 +239,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011102400]Delete and Update data\");",
+                  "postman.setNextRequest(\"[011102401]Delete and Update data\");",
                   ""
                 ]
               }
