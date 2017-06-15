@@ -2089,7 +2089,7 @@
     {
       "_postman_id": "717dc411-c4da-deec-7a6e-31a3fc9b8f9b",
       "name": "[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC",
-      "description": "",
+      "description": "o\t0 - ok Case - file go through next step\r\no\t1 - ko Case - file stops here",
       "item": [
         {
           "_postman_id": "0c23201d-15cf-f043-d9ab-afe4c4249ff0",
@@ -2101,19 +2101,19 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011102400]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011102400]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    tests[\"Check drop file PCE\"] = false;",
                   "    //postman.setNextRequest(null);",
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   tests[\"Check drop file PCE\"] = true; ",
                   "   postman.setNextRequest(\"[011102400]Check process cal end\");",
                   "}",
                   "else {",
-                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    tests[\"Check drop file PCE\"] = false;",
                   "    //postman.setNextRequest(null);  ",
                   "}"
                 ]
@@ -2137,7 +2137,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170320_PCE_20170320103422_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
