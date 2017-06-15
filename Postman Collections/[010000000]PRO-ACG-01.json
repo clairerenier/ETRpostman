@@ -184,6 +184,102 @@
           "response": []
         },
         {
+          "_postman_id": "67df8a2b-5ab2-9d3b-6f37-c89a6b9a707b",
+          "name": "[0111024000]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                //Expected result : 8AM should be set to OUI , and NON for 7 and 9",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"OUI\" && sqlResult[i].results[1].STOCKAGE==\"OUI\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"OUI\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[00002]Delete data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "4e28a05a-8c37-4ffb-2c22-e0bae3d97d67",
           "name": "[011102400]Delete and Update data",
           "event": [
@@ -1519,102 +1615,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "67df8a2b-5ab2-9d3b-6f37-c89a6b9a707b",
-          "name": "[0111024000]Check data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "var sqlResult = jsonData.sqlResult;",
-                  "if(sqlResult != null){",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        if(sqlResult[i].results != null){",
-                  "            switch (sqlResult[i].requestId) {",
-                  "            case \"CheckStatutOrcProcessus\":",
-                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                  "                break;",
-                  "            case \"CheckAcqFgaConservee\":",
-                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                break;",
-                  "            case \"CheckStockAcquisition2\":",
-                  "                //Expected result : 8AM should be set to OUI , and NON for 7 and 9",
-                  "                if (sqlResult[i].results.length ==4){",
-                  "                    if (sqlResult[i].results[0].STOCKAGE==\"OUI\" && sqlResult[i].results[1].STOCKAGE==\"OUI\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"OUI\"){",
-                  "                        tests[\"Check Stock_acquisition2\"]=true;",
-                  "                    }",
-                  "                    else{",
-                  "                        tests[\"Check Stock_acquisition2\"]=false;",
-                  "                    }",
-                  "                }",
-                  "                else{",
-                  "                     tests[\"Check Stock_acquisition2\"]=false;",
-                  "                }",
-                  "                break;",
-                  "            case \"CheckDmdCalcul\":",
-                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break;",
-                  "            case \"CheckStockAcquisitionCal\":",
-                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break;",
-                  "            case \"CheckPointData\":",
-                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
-                  "                break;",
-                  "",
-                  "            case \"CheckStockAcquisitionForAcq\":",
-                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break;   ",
-                  "            case \"CheckStockAcquisitionForCal\":",
-                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break; ",
-                  "            }",
-                  "        }",
-                  "    }",
-                  "}",
-                  "postman.setNextRequest(\"[00002]Delete data\");",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[0111024000]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
