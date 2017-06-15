@@ -303,7 +303,7 @@
                   "}",
                   "if (tests[\"Update Point Data\"] && tests[\"Delete Point Data\"] ){",
                   "    tests[\"Delete data Sum up\"] = true; ",
-                  "    postman.setNextRequest(\"[011102400]Drop file FGA\");",
+                  "    postman.setNextRequest(\"[011102401]Drop file FGA\");",
                   "}",
                   "else {",
                   "   tests[\"Delete data Sum up\"] = fase; ",
