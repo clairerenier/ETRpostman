@@ -2165,18 +2165,12 @@
                   "            case \"CheckStatutOrcEtape\":",
                   "                tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                break;",
-                  "            case \"CheckAcqFgaConservee\":",
+                  "            case \"CheckAcqPceConservee\":",
                   "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                break;",
-                  "            case \"CheckStockAcquisitionCal\":",
-                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
                   "                break;",
                   "            case \"CheckStockAcquisitionForAcq\":",
                   "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
                   "                break;   ",
-                  "            case \"CheckStockAcquisitionForCal\":",
-                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break; ",
                   "            }",
                   "        }",
                   "    }",
@@ -2215,7 +2209,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102408]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102408]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102408]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}')\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102408]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
