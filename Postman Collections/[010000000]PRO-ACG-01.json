@@ -1841,7 +1841,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011102407]Delete and Update data\");",
+                  "postman.setNextRequest(\"[011102408]Drop file FGA\");",
                   ""
                 ]
               }
