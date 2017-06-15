@@ -1141,7 +1141,7 @@
                   "                }",
                   "                break;",
                   "            case \"CheckDmdCalcul\":",
-                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                break;",
                   "            case \"CheckStockAcquisitionCal\":",
                   "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
