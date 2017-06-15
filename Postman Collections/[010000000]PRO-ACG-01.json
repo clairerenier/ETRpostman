@@ -1214,7 +1214,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[011102404]Check data\");",
+                  "   postman.setNextRequest(\"[011102405]Check data\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
