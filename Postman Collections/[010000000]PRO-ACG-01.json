@@ -1750,16 +1750,6 @@
                   "}"
                 ]
               }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
-                ]
-              }
             }
           ],
           "request": {
