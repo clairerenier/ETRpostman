@@ -490,7 +490,7 @@
                   "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
                   "                break; ",
                   "            case \"CheckAlerte\" :",
-                  "                tests[\"Check Alerte\"] = sqlResult[i].results[0].COUNT == \"10\";",
+                  "                tests[\"Check Alerte\"] = sqlResult[i].results[0].COUNT == \"13\";",
                   "                break; ",
                   "            } ",
                   "        }",
