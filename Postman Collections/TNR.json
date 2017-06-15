@@ -942,7 +942,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[00004]Check data\");",
+                  "   postman.setNextRequest(\"[00003]Check data\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
