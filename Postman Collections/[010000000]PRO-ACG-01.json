@@ -2110,7 +2110,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[011102400]Check process cal end\");",
+                  "   postman.setNextRequest(\"[010100100]Check data\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file PCE\"] = false;",
