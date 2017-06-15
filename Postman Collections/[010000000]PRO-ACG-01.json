@@ -1728,7 +1728,7 @@
         },
         {
           "_postman_id": "e2468712-b044-7f30-4fcc-f10ded648e09",
-          "name": "[011102407]Check process cal end copy",
+          "name": "[011102407]Check process cal end",
           "event": [
             {
               "listen": "test",
@@ -1787,7 +1787,7 @@
         },
         {
           "_postman_id": "c7ae03e5-b64c-a1c9-17ff-a46425a2467c",
-          "name": "[011102406]Check data copy",
+          "name": "[011102407]Check data",
           "event": [
             {
               "listen": "test",
