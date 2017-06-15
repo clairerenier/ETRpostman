@@ -1352,6 +1352,58 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "193ecbdb-362c-6baa-cc18-3fd46c02c21f",
+          "name": "[011102405]Drop file FGA copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102405]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102405]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102405]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105006_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     }
