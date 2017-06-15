@@ -346,8 +346,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011102400]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011102400]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check drop file FGA\"] = false;",
@@ -355,7 +355,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[011102400]Check process cal end\");",
+                  "   postman.setNextRequest(\"[011102401]Check process cal end\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file FGA\"] = false;",
@@ -390,7 +390,7 @@
         },
         {
           "_postman_id": "ed238719-2929-ed0b-511d-31a4e2c312ad",
-          "name": "[011102400]Check process cal end",
+          "name": "[011102401]Check process cal end",
           "event": [
             {
               "listen": "test",
