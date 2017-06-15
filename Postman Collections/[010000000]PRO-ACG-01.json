@@ -1426,7 +1426,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[011102405]Check process cal end\");",
+                  "   postman.setNextRequest(\"[011102406]Check process cal end\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file FGA\"] = false;",
