@@ -1148,7 +1148,7 @@
         },
         {
           "_postman_id": "8c7566aa-88bd-779d-eb6c-505198b66a0e",
-          "name": "[011102404]Drop file FGA copy",
+          "name": "[011102405]Drop file FGA",
           "event": [
             {
               "listen": "test",
