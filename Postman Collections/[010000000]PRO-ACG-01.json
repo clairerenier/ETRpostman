@@ -899,7 +899,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011102404]Drop file FGA\");",
+                  "postman.setNextRequest(\"[00002]Delete data\");",
                   ""
                 ]
               }
