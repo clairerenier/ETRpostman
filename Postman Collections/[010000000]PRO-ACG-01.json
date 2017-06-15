@@ -1616,7 +1616,7 @@
         },
         {
           "_postman_id": "660dca15-19f3-0bc6-e407-e39d4558d128",
-          "name": "[011102400]Delete and Update data copy",
+          "name": "[011102407]Delete and Update data",
           "event": [
             {
               "listen": "test",
