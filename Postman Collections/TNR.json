@@ -293,7 +293,7 @@
                   "        case \"DeleteEtrMeteringDataData\":",
                   "            tests[\"Delete Etr_Metering_Data Data\"] = true;",
                   "            break;",
-                  "        case \"CheckAlerte\":",
+                  "        case \"DeleteAlerte\":",
                   "            tests[\"Delete Alerte\"] = true;",
                   "            break;",
                   "    }",
