@@ -1428,7 +1428,7 @@
                   "}",
                   "if (tests[\"Update Point Data\"]){",
                   "    tests[\"Update data Sum up\"] = true; ",
-                  "    postman.setNextRequest(\"[011102403]Drop file FGA\");",
+                  "    postman.setNextRequest(\"[011102406]Drop file FGA\");",
                   "}",
                   "else {",
                   "   tests[\"Delete data Sum up\"] = fase; ",
