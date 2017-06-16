@@ -1455,7 +1455,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"UpdatePointData\",\r\n         \"requestContent\":\"update point set uidqualite_point='15', valeur='0' where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 07:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 07:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220') and (type_grandeur in ('DENMOY')))\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"UpdatePointData\",\r\n         \"requestContent\":\"update point set uidqualite_point='15' where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 08:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 08:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
