@@ -2046,7 +2046,7 @@
                   "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                break;",
                   "            case \"CheckStockAcquisition2\":",
-                  "                if (sqlResult[i].results.length ==4){",
+                  "                if (sqlResult[i].results.length ==24){",
                   "                    if (sqlResult[i].results[0].STOCKAGE==\"NON\" ",
                   "                    && sqlResult[i].results[1].STOCKAGE==\"NON\" ",
                   "                    && sqlResult[i].results[2].STOCKAGE==\"NON\" ",
