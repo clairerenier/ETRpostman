@@ -139,7 +139,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlerte\",\r\n         \"requestContent\":\"select count(*) as COUNT from alerte, fga where alerte.horodate>=(sysdate-3/24) and alerte.uidgrandeurs_objet=fga.uidgrandeurs_objet and IDfga='0709JLU10' and code_test='INIT' and alerte.lstime>=(sysdate-1/24) --and lstime<=TO_DATE('19/01/2016 19:30:00','DD/MM/YYYY HH24:MI:SS') order by alerte.horodate desc, alerte.uidtest_ref desc,alerte.LSTIME DESC;\"\r\n      }\r\n           \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlertePCEMJ\",\r\n         \"requestContent\":\"select type_pce,sous_type,SOURCE_ACQUISITION , type_point from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate and type_pce='M' and sous_type='J' group by type_pce,sous_type,SOURCE_ACQUISITION , type_point\"\r\n      }\r\n           \r\n   ]\r\n}"
             },
             "description": ""
           },
