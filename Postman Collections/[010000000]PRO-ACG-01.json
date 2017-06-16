@@ -338,7 +338,7 @@
         },
         {
           "_postman_id": "9a7dff24-2295-7f98-e9da-6ee7c275449d",
-          "name": "[011102401FGA]Drop file FGA",
+          "name": "[011102401]Drop file FGA",
           "event": [
             {
               "listen": "test",
@@ -390,7 +390,7 @@
         },
         {
           "_postman_id": "ed238719-2929-ed0b-511d-31a4e2c312ad",
-          "name": "[011102401FGA]Check process cal end",
+          "name": "[011102401]Check process cal end",
           "event": [
             {
               "listen": "test",
