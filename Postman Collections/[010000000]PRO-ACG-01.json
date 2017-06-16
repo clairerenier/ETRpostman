@@ -1106,7 +1106,7 @@
         },
         {
           "_postman_id": "19cacd33-2f51-d47d-e509-f7b54d82e9b7",
-          "name": "[011102404]Check data",
+          "name": "[011102404FGA]Check data",
           "event": [
             {
               "listen": "test",
@@ -1202,7 +1202,7 @@
         },
         {
           "_postman_id": "be9f712f-bf37-3c4d-84b5-c04409753788",
-          "name": "[011102405]Drop file FGA",
+          "name": "[011102405FGA]Drop file FGA",
           "event": [
             {
               "listen": "test",
@@ -1254,7 +1254,7 @@
         },
         {
           "_postman_id": "9b8b5b3b-7ffb-cf76-39b8-c8a428def5c9",
-          "name": "[011102405]Check process cal end",
+          "name": "[011102405FGA]Check process cal end",
           "event": [
             {
               "listen": "test",
