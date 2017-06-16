@@ -2261,7 +2261,7 @@
         },
         {
           "_postman_id": "c12e331a-37d7-8bd4-47a6-72f46efb6572",
-          "name": "[010100101]Check data copy",
+          "name": "[010100101]Check data",
           "event": [
             {
               "listen": "test",
