@@ -2407,6 +2407,58 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "55b662ba-3917-d78d-23e6-7d9a1e68be8f",
+          "name": "[010100101]Drop file PCE copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[010100101]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[010100101]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[010100101]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170320_PCE_2017032010342_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"10\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
