@@ -2151,7 +2151,7 @@
     },
     {
       "_postman_id": "717dc411-c4da-deec-7a6e-31a3fc9b8f9b",
-      "name": "[010100100]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC",
+      "name": "[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC",
       "description": "o\t0 - ko Case - file stops - the format inside is not correct\r\no\t1 - ko Case - name of the file is not correct\r\no\t2 - ok Case - file go through next step",
       "item": [
         {
