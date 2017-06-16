@@ -79,7 +79,7 @@
     },
     {
       "_postman_id": "3b80dff5-31dc-d5c2-2e3e-83a005602a8c",
-      "name": "[170004601]PRO_ACG_17_PCE_ACG_046",
+      "name": "[170004601PCE]PRO_ACG_17_PCE_ACG_046",
       "description": "Check the presence of PCE alerts :\n-PCE M J should not hve alerts\n-PCE with type point 500, 703 should not have alerts\n-PCE with source_acquisition 8, T should not have alerts",
       "item": [
         {
