@@ -35,7 +35,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "//postman.setNextRequest(\"[011102407]Delete and Update data\");",
+                  "postman.setNextRequest(\"[170004600]Delete and Update data\");",
                   ""
                 ]
               }
