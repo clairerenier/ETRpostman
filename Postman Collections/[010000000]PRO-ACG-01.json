@@ -2241,7 +2241,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[010100100PCE]Drop file PCE\");",
+                  "postman.setNextRequest(\"[010100101PCE]Drop file PCE\");",
                   ""
                 ]
               }
