@@ -2304,7 +2304,7 @@
                   "}",
                   "else {",
                   "    tests[\"Check drop file PCE\"] = false;",
-                  "    postman.setNextRequest(\"[010100100PCE]Check data\");  ",
+                  "    //postman.setNextRequest(null);  ",
                   "}"
                 ]
               }
