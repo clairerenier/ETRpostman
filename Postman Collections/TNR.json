@@ -1000,7 +1000,7 @@
                   "        for(var i= 0; i < sqlResult.length; i++)",
                   "        {",
                   "            console.log(sqlResult.results)",
-                  "            if(sqlResult.results != null){",
+                  "            if(sqlResult[i].results != null){",
                   "                switch (sqlResult[i].requestId) {",
                   "                    case \"CheckStatutOrcProcessus\":",
                   "                        tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
