@@ -1253,7 +1253,7 @@
       "item": [
         {
           "_postman_id": "7ef8276b-ef2d-84e0-b829-ad27152b5f7d",
-          "name": "[00014]Delete data copy",
+          "name": "[00005]Delete data",
           "event": [
             {
               "listen": "test",
