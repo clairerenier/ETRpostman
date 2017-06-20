@@ -1545,7 +1545,7 @@
                   "                case \"CheckStatutOrcProcessusNew\":",
                   "                    tests[\"Check status in ORC_PROCESSUS New\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
-                  "                case \"CheckAcqPceConserveeOld\":",
+                  "                case \"CheckStatutOrcProcessusOld\":",
                   "                    tests[\"Check status in ORC_PROCESSUS Old\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
                   "                } ",
