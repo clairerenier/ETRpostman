@@ -1269,7 +1269,7 @@
                   "        {",
                   "            if(sqlResult[i].results != null){",
                   "               switch (sqlResult[i].requestId) {",
-                  "                case \"CheckAcqPceConserveeOld\":",
+                  "                case \"CheckStatutOrcProcessusOld\":",
                   "                    tests[\"Check status in ORC_PROCESSUS Old way\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
                   "                case \"CheckPointData\":",
