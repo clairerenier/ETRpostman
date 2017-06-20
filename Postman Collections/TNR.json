@@ -149,27 +149,19 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[00001]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
                   "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[00001]Check data\");",
                   "}",
-                  "",
-                  ""
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
                 ]
               }
             }
