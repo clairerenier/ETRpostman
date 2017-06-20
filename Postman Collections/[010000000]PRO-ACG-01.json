@@ -2805,6 +2805,64 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "701444b4-2f88-8b56-1946-01d5bf86c86e",
+      "name": "[010100201PCE]Drop file PCE",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    postman.setEnvironmentVariable(\"[010100201PCE]PRO_ACG_01_PCE_ORC_002_SGPCETVPEC_processid\",jsonData.processId);",
+              "    postman.setEnvironmentVariable(\"[010100201PCE]PRO_ACG_01_PCE_ORC_002_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+              "    ",
+              "    if (jsonData.statusProcess === \"2\"){",
+              "        tests[\"Check drop file PCE\"] = false;",
+              "        //postman.setNextRequest(null);",
+              "    }",
+              "    else if (jsonData.statusProcess === \"4\"){",
+              "       tests[\"Check drop file PCE\"] = true; ",
+              "       postman.setNextRequest(\"[010100201PCE]Check data\");",
+              "    }",
+              "    else {",
+              "        tests[\"Check drop file PCE\"] = false;",
+              "        //postman.setNextRequest(null);  ",
+              "    }",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+            "description": ""
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170321_PCE_20170321103422_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+        },
+        "description": ""
+      },
+      "response": []
     }
   ]
 }
