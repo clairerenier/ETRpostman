@@ -1552,7 +1552,7 @@
                   "                break;",
                   "        }",
                   "    }",
-                  "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"]){",
+                  "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
                   "        postman.setNextRequest(\"[00007]Drop file Avignon]\");",
                   "    }",
