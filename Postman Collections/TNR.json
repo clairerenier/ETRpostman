@@ -2216,7 +2216,7 @@
         },
         {
           "_postman_id": "176b40c1-5bef-e08e-d0b6-1a15c3bf90fc",
-          "name": "[00014]Drop file Avignon",
+          "name": "[00014]Drop file MCI",
           "event": [
             {
               "listen": "test",
