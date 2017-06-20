@@ -1104,8 +1104,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"PRO_ACG_05_PCE_TNR_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"PRO_ACG_05_PCE_TNR_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_PCEVER15_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_PCEVER15_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -1113,7 +1113,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check drop file PCE\"] = true; ",
-                  "       //postman.setNextRequest(\"[00004]Check process cal end\");",
+                  "       postman.setNextRequest(\"[00006]Check data\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -1146,7 +1146,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"PRECO\",\"fileName\":\"PREV_PCE_20170413_20170414_130027.csv\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"TRANSACTION\",\"fileName\":\"\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
