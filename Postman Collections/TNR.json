@@ -1252,8 +1252,8 @@
       "description": "",
       "item": [
         {
-          "_postman_id": "de5d98d9-3a3b-af45-7283-3d568653d231",
-          "name": "[00005]Check data",
+          "_postman_id": "7ef8276b-ef2d-84e0-b829-ad27152b5f7d",
+          "name": "[00014]Delete data copy",
           "event": [
             {
               "listen": "test",
@@ -1264,37 +1264,30 @@
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
                   "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult != null){",
-                  "       for(var i= 0; i < sqlResult.length; i++)",
-                  "        {",
-                  "            if(sqlResult[i].results != null){",
-                  "               switch (sqlResult[i].requestId) {",
-                  "                case \"CheckStatutOrcProcessusOld\":",
-                  "                    tests[\"Check status in ORC_PROCESSUS Old way\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                  "                    break;",
-                  "                case \"CheckPointData\":",
-                  "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT >= \"48\";",
-                  "                    break;",
-                  "                } ",
-                  "            }",
-                  "        } ",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeleteLienGrpCalcul\":",
+                  "                tests[\"Delete Lien Grp_Calcul\"] = true;",
+                  "                break;",
+                  "            case \"DeleteGrpCalcul\":",
+                  "                tests[\"Delete Grp_Calcul\"] = true;",
+                  "                break;",
+                  "        }",
                   "    }",
-                  "    postman.setNextRequest(null);",
+                  "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
                   "}",
                   "",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
                   ""
                 ]
               }
@@ -1317,7 +1310,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus<= (sysdate-1/24/4) and code_technique_processus='PRO_ACG_05' order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('13/04/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/04/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('SGPCETVPEC') and type_grandeur in ('ENEPRV','VOLPRV') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
@@ -1387,8 +1380,8 @@
           "response": []
         },
         {
-          "_postman_id": "7ef8276b-ef2d-84e0-b829-ad27152b5f7d",
-          "name": "[00014]Delete data copy",
+          "_postman_id": "de5d98d9-3a3b-af45-7283-3d568653d231",
+          "name": "[00005]Check data",
           "event": [
             {
               "listen": "test",
@@ -1399,30 +1392,37 @@
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
                   "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeleteLienGrpCalcul\":",
-                  "                tests[\"Delete Lien Grp_Calcul\"] = true;",
-                  "                break;",
-                  "            case \"DeleteGrpCalcul\":",
-                  "                tests[\"Delete Grp_Calcul\"] = true;",
-                  "                break;",
-                  "        }",
+                  "    if(sqlResult != null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results != null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatutOrcProcessusOld\":",
+                  "                    tests[\"Check status in ORC_PROCESSUS Old way\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                    break;",
+                  "                case \"CheckPointData\":",
+                  "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT >= \"48\";",
+                  "                    break;",
+                  "                } ",
+                  "            }",
+                  "        } ",
                   "    }",
-                  "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data Sum up\"] = false; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
+                  "    postman.setNextRequest(null);",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
                   "}",
                   "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
                   ""
                 ]
               }
@@ -1445,7 +1445,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus<= (sysdate-1/24/4) and code_technique_processus='PRO_ACG_05' order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('13/04/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/04/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('SGPCETVPEC') and type_grandeur in ('ENEPRV','VOLPRV') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
