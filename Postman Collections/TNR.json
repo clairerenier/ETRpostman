@@ -1530,7 +1530,7 @@
       "item": [
         {
           "_postman_id": "b5c8ad39-eab8-031a-bc81-03df2b9a26a2",
-          "name": "[00004]Delete data copy",
+          "name": "[00007]Delete data",
           "event": [
             {
               "listen": "test",
