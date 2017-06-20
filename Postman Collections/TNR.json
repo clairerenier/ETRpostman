@@ -1418,7 +1418,7 @@
                   "        tests[\"Check drop file PCE\"] = false;",
                   "        //postman.setNextRequest(null);  ",
                   "    }*/",
-                  "    postman.setNextRequest(\"[00011]Check data\");",
+                  "    postman.setNextRequest(\"[00010]Check data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -1454,7 +1454,7 @@
         },
         {
           "_postman_id": "b243d56e-6d63-02e5-9a37-69420afd9377",
-          "name": "[00011]Check data",
+          "name": "[00010]Check data",
           "event": [
             {
               "listen": "test",
@@ -1530,7 +1530,7 @@
       "item": [
         {
           "_postman_id": "b5c8ad39-eab8-031a-bc81-03df2b9a26a2",
-          "name": "[00007]Delete data",
+          "name": "[00011]Delete data",
           "event": [
             {
               "listen": "test",
@@ -1554,7 +1554,7 @@
                   "    }",
                   "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00007]Drop file Avignon\");",
+                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
