@@ -1267,17 +1267,15 @@
                   "    for(var i= 0; i < sqlResult.length; i++)",
                   "    {",
                   "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeleteLienGrpCalcul\":",
-                  "                tests[\"Delete Lien Grp_Calcul\"] = true;",
+                  "            case \"DeletePoint\":",
+                  "                tests[\"Delete Point\"] = true;",
                   "                break;",
-                  "            case \"DeleteGrpCalcul\":",
-                  "                tests[\"Delete Grp_Calcul\"] = true;",
-                  "                break;",
+                  "",
                   "        }",
                   "    }",
-                  "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
+                  "    if (tests[\"Delete Point\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
+                  "        postman.setNextRequest(\"[00005]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
@@ -1310,7 +1308,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePoint\",\r\n         \"requestContent\":\"delete from POINT where uidpoint in (select uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('13/04/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/04/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('SGPCETVPEC') and type_grandeur in ('ENEPRV','VOLPRV') and po.lstime >= (sysdate-1/24/4)')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
