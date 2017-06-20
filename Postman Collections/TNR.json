@@ -1338,7 +1338,8 @@
                   "    postman.setEnvironmentVariable(\"PRO_ACG_05_PCE_TNR_SGPCETVPEC_processid\",jsonData.processId);",
                   "    postman.setEnvironmentVariable(\"PRO_ACG_05_PCE_TNR_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
+                  "    //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
+                  "    /*if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file PCE\"] = false;",
                   "        //postman.setNextRequest(null);",
                   "    }",
@@ -1349,7 +1350,9 @@
                   "    else {",
                   "        tests[\"Check drop file PCE\"] = false;",
                   "        //postman.setNextRequest(null);  ",
-                  "    }",
+                  "    }*/",
+                  "    postman.setNextRequest(\"[00005]Check data\");",
+                  "    ",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -1554,7 +1557,7 @@
                   "    }",
                   "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00007]Drop file Avignon\");",
+                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
@@ -1595,7 +1598,7 @@
         },
         {
           "_postman_id": "f2737530-07e8-1526-38fb-fc4fbf82d736",
-          "name": "[00007]Drop file Avignon",
+          "name": "[00011]Drop file Avignon",
           "event": [
             {
               "listen": "test",
@@ -1621,7 +1624,7 @@
                   "        tests[\"Check drop file PCE\"] = false;",
                   "        //postman.setNextRequest(null);  ",
                   "    }*/",
-                  "    postman.setNextRequest(\"[00007]Check data\");",
+                  "    postman.setNextRequest(\"[00011]Check data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -1657,7 +1660,7 @@
         },
         {
           "_postman_id": "0f38c4a8-8bdf-0fa4-6117-42057548a224",
-          "name": "[00007]Check data",
+          "name": "[00011]Check data",
           "event": [
             {
               "listen": "test",
