@@ -367,22 +367,29 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
-                  "",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file PCE\"] = false;",
-                  "    //postman.setNextRequest(null);",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file PCE\"] = true; ",
+                  "       postman.setNextRequest(\"[00002]Check process cal end\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);  ",
+                  "    }",
                   "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[00002]Check process cal end\");",
+                  "else{",
+                  "    postman.setNextRequest(null);",
                   "}",
-                  "else {",
-                  "    tests[\"Check drop file PCE\"] = false;",
-                  "    //postman.setNextRequest(null);  ",
-                  "}"
+                  ""
                 ]
               }
             }
