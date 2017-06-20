@@ -1521,7 +1521,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessusNew\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ARF_01_PCE_TNR_PCEVER15_processid}}' and code_technique_processus='PRO_ARF_01'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate-1/24/4) and code_technique_processus='PRO_ARF_01'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessusNew\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ARF_01_PCE_TNR_PCEVER15_processid}}' and code_technique_processus='PRO_ARF_01'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select * from orc_processus where date_lancement_processus>= (sysdate - 1/24/6) and code_technique_processus='PRO_ARF_01' order by date_lancement_processus desc fetch first 1 rows only\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
