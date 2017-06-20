@@ -1385,6 +1385,71 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "7ef8276b-ef2d-84e0-b829-ad27152b5f7d",
+          "name": "[00014]Delete data copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeleteLienGrpCalcul\":",
+                  "                tests[\"Delete Lien Grp_Calcul\"] = true;",
+                  "                break;",
+                  "            case \"DeleteGrpCalcul\":",
+                  "                tests[\"Delete Grp_Calcul\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
@@ -2343,71 +2408,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n        {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate - 1/24/6) and code_technique_processus='PRO_ARF_02' order by date_lancement_processus desc fetch first 1 rows only\"\r\n\t\t},\r\n\t\t{  \r\n        \t\"requestId\":\"CheckGrpCalculCreation\",\r\n        \t\"requestContent\":\"select count(*) as COUNT from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2' and lstime>= (sysdate - 1/24/6)\"\r\n\t\t}\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "7ef8276b-ef2d-84e0-b829-ad27152b5f7d",
-          "name": "[00014]Delete data copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeleteLienGrpCalcul\":",
-                  "                tests[\"Delete Lien Grp_Calcul\"] = true;",
-                  "                break;",
-                  "            case \"DeleteGrpCalcul\":",
-                  "                tests[\"Delete Grp_Calcul\"] = true;",
-                  "                break;",
-                  "        }",
-                  "    }",
-                  "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data Sum up\"] = false; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
