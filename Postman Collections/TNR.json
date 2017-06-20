@@ -1568,15 +1568,6 @@
                   ""
                 ]
               }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "postman.setNextRequest(\"[00003]Drop file PCE\");"
-                ]
-              }
             }
           ],
           "request": {
