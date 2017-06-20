@@ -1558,7 +1558,7 @@
                   "    }",
                   "    else {",
                   "       tests[\"Delete data\"] = fase; ",
-                  "       postman.setNextRequest(\"[00007]Drop file Avignon]);",
+                  "       postman.setNextRequest(\"[00007]Drop file Avignon]\");",
                   "    }",
                   "}",
                   "else{",
