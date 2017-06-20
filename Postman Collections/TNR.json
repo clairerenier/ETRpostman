@@ -1594,6 +1594,68 @@
           "response": []
         },
         {
+          "_postman_id": "f2737530-07e8-1526-38fb-fc4fbf82d736",
+          "name": "[00007]Drop file Avignon",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"PRO_ARF_02_PCE_TNR_PCEVER15_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"PRO_ARF_02_PCE_TNR_PCEVER15_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "   //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
+                  "   /*if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file PCE\"] = true; ",
+                  "       postman.setNextRequest(\"[00007]Check data\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);  ",
+                  "    }*/",
+                  "    postman.setNextRequest(\"[00007]Check data\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"AVIGNON\",\"fileName\":\"M20161201_PAP_20161205144223_REF51_AVI_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "0f38c4a8-8bdf-0fa4-6117-42057548a224",
           "name": "[00007]Check data",
           "event": [
@@ -1660,68 +1722,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n        {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate - 1/24/6) and code_technique_processus='PRO_ARF_02' order by date_lancement_processus desc fetch first 1 rows only\"\r\n\t\t},\r\n\t\t{  \r\n        \t\"requestId\":\"CheckGrpCalculCreation\",\r\n        \t\"requestContent\":\"select count(*) as COUNT from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2' and lstime>= (sysdate - 1/24/6)\"\r\n\t\t}\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "f2737530-07e8-1526-38fb-fc4fbf82d736",
-          "name": "[00007]Drop file Avignon",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"PRO_ARF_02_PCE_TNR_PCEVER15_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"PRO_ARF_02_PCE_TNR_PCEVER15_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "   //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
-                  "   /*if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[00007]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }*/",
-                  "    postman.setNextRequest(\"[00007]Check data\");",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"AVIGNON\",\"fileName\":\"M20161201_PAP_20161205144223_REF51_AVI_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
