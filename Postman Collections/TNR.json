@@ -1533,8 +1533,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_PCEVER15_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_PCEVER15_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "   //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
                   "   /*if (jsonData.statusProcess === \"2\"){",
@@ -1577,7 +1577,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"TRANSACTION\",\"fileName\":\"J20160828_PCR_20160829015703_REF31_CAM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"TRANSACTION\",\"fileName\":\"J20160828_PCR_20160829015704_REF31_CAM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
