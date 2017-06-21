@@ -1482,7 +1482,7 @@
                   "    }",
                   "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00011]Drop file Avignon\");",
+                  "        postman.setNextRequest(\"[00010]Drop file Transaction\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
@@ -1515,7 +1515,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='513TEST90')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='513TEST90')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
