@@ -3355,7 +3355,7 @@
         },
         {
           "_postman_id": "63ba3c66-f5e6-1c5c-ca9d-33d7c89bef2d",
-          "name": "[011021003FGA]Check non avaIlibility",
+          "name": "[011021002FGA]Check non avaIlibility",
           "event": [
             {
               "listen": "test",
