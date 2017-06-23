@@ -3192,7 +3192,7 @@
         },
         {
           "_postman_id": "6fbb8366-7020-47da-c75e-cf488489b340",
-          "name": "[011021001FGA]Delete data copy",
+          "name": "[011021001FGA]Delete data",
           "event": [
             {
               "listen": "test",
