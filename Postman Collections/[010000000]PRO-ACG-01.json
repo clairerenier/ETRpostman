@@ -2908,6 +2908,18 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "bc3e9e66-2610-8f8c-f0c8-8a8511853251",
+          "name": "[010100100FGA]Check the gas day",
+          "request": {
+            "url": "",
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
