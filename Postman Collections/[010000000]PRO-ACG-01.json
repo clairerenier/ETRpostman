@@ -2896,20 +2896,7 @@
       "_postman_id": "72589bb4-884b-7e75-a0a9-977f297f7934",
       "name": "[010100100FGA]PRO_ACG_01_FGA_PRO_ACG_10_ACG_210",
       "description": "",
-      "item": [
-        {
-          "_postman_id": "bc3e9e66-2610-8f8c-f0c8-8a8511853251",
-          "name": "[010100100FGA]Check the gas day",
-          "request": {
-            "url": "",
-            "method": "GET",
-            "header": [],
-            "body": {},
-            "description": ""
-          },
-          "response": []
-        }
-      ]
+      "item": []
     },
     {
       "_postman_id": "701444b4-2f88-8b56-1946-01d5bf86c86e",
