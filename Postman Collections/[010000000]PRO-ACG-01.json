@@ -2991,7 +2991,7 @@
         },
         {
           "_postman_id": "0dc19a02-c488-15eb-227c-44e1346cae24",
-          "name": "[010100100FGA]Check the horodate",
+          "name": "[010100100FGA]Check the horodate copy",
           "event": [
             {
               "listen": "test",
