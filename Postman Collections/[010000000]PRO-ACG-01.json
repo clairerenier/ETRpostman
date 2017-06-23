@@ -2893,7 +2893,7 @@
       "item": [
         {
           "_postman_id": "08b3b346-a9b2-9d62-2c84-9052b49b0ca7",
-          "name": "[011021001FGA]]Delete Data",
+          "name": "[011021001FGA]Delete Data",
           "event": [
             {
               "listen": "test",
@@ -2958,7 +2958,7 @@
         },
         {
           "_postman_id": "ae588e11-aed8-9fc6-d0db-0c255ed406f3",
-          "name": "[011021002FGA]]Drop file FGA",
+          "name": "[011021001FGA]Drop file FGA",
           "event": [
             {
               "listen": "test",
@@ -3010,7 +3010,7 @@
         },
         {
           "_postman_id": "a40a712e-5d9e-f36c-4184-8ae955f3ab71",
-          "name": "[011021003FGA]Check Data",
+          "name": "[011021001FGA]Check Data",
           "event": [
             {
               "listen": "test",
@@ -3097,7 +3097,7 @@
         },
         {
           "_postman_id": "0dc19a02-c488-15eb-227c-44e1346cae24",
-          "name": "[010100100FGA]Check horodate success",
+          "name": "[011021000FGA]Check horodate success",
           "event": [
             {
               "listen": "test",
