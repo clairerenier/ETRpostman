@@ -3538,7 +3538,7 @@
         },
         {
           "_postman_id": "63ba3c66-f5e6-1c5c-ca9d-33d7c89bef2d",
-          "name": "[010100100FGA]Check avalibility copy",
+          "name": "[010100100FGA]Check non avalibility",
           "event": [
             {
               "listen": "test",
