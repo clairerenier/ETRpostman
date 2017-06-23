@@ -3998,6 +3998,52 @@
           "response": []
         },
         {
+          "_postman_id": "d60f44dc-c2be-411f-a527-d8eebd9e5046",
+          "name": "[010100100PCE]Delete data copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    ",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "    ",
+                  "}",
+                  "else {",
+                  "    ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('21/03/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('FGATNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "2a3a5cde-5b0c-43d1-4476-d8c797ca285e",
           "name": "[010100100PCE]Check horodate 2",
           "event": [
@@ -4251,52 +4297,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n                  {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and resultat_etape like '%/Enveloppe_VICTOR_PCE/ :  Child element Publication {} at position 1 is unexpected%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "d60f44dc-c2be-411f-a527-d8eebd9e5046",
-          "name": "[010100100PCE]Delete data copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    ",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "    ",
-                  "}",
-                  "else {",
-                  "    ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('21/03/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('FGATNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
