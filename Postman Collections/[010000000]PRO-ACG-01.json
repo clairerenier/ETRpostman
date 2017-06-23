@@ -3279,7 +3279,7 @@
         },
         {
           "_postman_id": "fb356fa4-2a34-74f0-48e9-9e2ba7af9ad5",
-          "name": "[010100100PCE]Check state copy",
+          "name": "[010100100PCE]Check state 'Locked'",
           "event": [
             {
               "listen": "test",
