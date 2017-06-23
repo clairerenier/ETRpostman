@@ -2896,7 +2896,20 @@
       "_postman_id": "72589bb4-884b-7e75-a0a9-977f297f7934",
       "name": "[010100100FGA]PRO_ACG_01_FGA_PRO_ACG_10_ACG_210",
       "description": "",
-      "item": []
+      "item": [
+        {
+          "_postman_id": "0f836c18-b452-af75-dab0-46b032cc9df7",
+          "name": "[010100100FGA]Drop a file",
+          "request": {
+            "url": "",
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "description": ""
+          },
+          "response": []
+        }
+      ]
     },
     {
       "_postman_id": "701444b4-2f88-8b56-1946-01d5bf86c86e",
