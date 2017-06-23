@@ -3152,13 +3152,16 @@
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
                   "if (jsonData.statusProcess === \"2\"){",
-                  "    ",
+                  "    tests[\"Check availibility\"] = false;",
+                  "    //postman.setNextRequest(null);",
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
-                  "    ",
+                  "   tests[\"Check availibility\"] = true; ",
+                  "   postman.setNextRequest(\"[011102402FGA]Check data\");",
                   "}",
                   "else {",
-                  "    ",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
                   "}"
                 ]
               }
@@ -3181,7 +3184,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAvailabilityFGA\",\r\n         \"requestContent\":\"select date_debut, date_fin from FGA where idFGA='FGATNR1'\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select Motif rejet stockage from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n      \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAvailabilityFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from FGA where idFGA='FGATNR1' and date_debut <= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and date_fin > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select Motif rejet stockage from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[01102100100FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
