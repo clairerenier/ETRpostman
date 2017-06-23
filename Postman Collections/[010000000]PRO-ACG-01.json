@@ -3273,8 +3273,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR2_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR2_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check drop file FGA\"] = false;",
