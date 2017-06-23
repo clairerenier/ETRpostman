@@ -2966,8 +2966,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check drop file FGA\"] = false;",
@@ -3002,7 +3002,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170506_FGA_20170607105000_CHR02_SCALA_1-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170506_FGA_20170507104025_CHR02_SCALA_1-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
