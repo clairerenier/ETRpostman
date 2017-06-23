@@ -3101,7 +3101,7 @@
                   "   postman.setNextRequest(\"[011021001FGA]Check data\");",
                   "}",
                   "else {",
-                  "    tests[\"Check process cal end\"] = false;",
+                  "    tests[\"CheckAcqFgaConservee\"] = false;",
                   "    //postman.setNextRequest(null);  ",
                   "}"
                 ]
