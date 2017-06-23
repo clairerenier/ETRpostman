@@ -2937,7 +2937,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
