@@ -3707,7 +3707,7 @@
     },
     {
       "_postman_id": "4f8a3b30-52d2-6f41-2c50-4ff420d49b24",
-      "name": "[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220 et SGGU2103Z copy",
+      "name": "[011102400FGA]PRO_ACG_11_PCE_ACG_024_C220 et SGGU2103Z copy",
       "description": "o  0 - First file to generate data from scratch\r\n§  Expeted result : all hours set to OUI\r\no  1-First file dropped to generate data\r\n§  Expected result : everything is saved (all hours set to OUI)\r\no  2  Same file dropped with the following changes : \r\n"  METMOY 8h has its value changed (89,63 to 90.63)\r\n"  Nothing changed for 9AM\r\no  3  Same file dropped with the following changes : \r\n"  DENMOY 7h quality will be AF (M before)\r\n"  METMOY 8h has its value changed (90,63 to 91.63)\r\n"  Nothing changed for 9AM\r\n§  Expected result : 7 and 8AM whould be set to OUI , and NON for 9h\r\no  4  Same file dropped where :\r\n"  9AM is changed PCSMOY will be CS (quality = to the previous one)\r\n"  METMOY 8h has its value changed (91,63 to 89.63)\r\n§  Expected result : all set to NON except 8AM\r\no  5 - Same file dropped where only 8AM is changed PCSMOY from AF to CS (quality <)\r\n§  Expected result : all set to NON\r\no  6  Same file dropped but PCSMOY to CS for 8h\r\n§  Expected result : 8AM set to OUI\r\n\r\no  7  Run first file\r\n"  PCSMOY is set to 6/7/8AM AF, rest are set to CS\r\n"  Expected results : everything set to OUI\r\no  8  Run second file\r\n"  PCSMOY is unchanged for 6§7§8, for rest of the hours, they are set to AF\r\n"  Expected results everything set to OUI except 6/7/8AM",
       "item": [
         {
