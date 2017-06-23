@@ -4437,7 +4437,7 @@
         },
         {
           "_postman_id": "3fc8daec-090d-2e9b-877d-ea3a82384cca",
-          "name": "[010100100FGA]Check state 'Cheked' copy",
+          "name": "[010100100PCE]Check state 'Cheked' copy",
           "event": [
             {
               "listen": "test",
