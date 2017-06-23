@@ -2900,16 +2900,35 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    ",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqFgaData\":",
+                  "                tests[\"Delete Acq_Fga Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[010100102PCE]Drop file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = fase; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
                   "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "    ",
+                  "else{",
+                  "    postman.setNextRequest(null);",
                   "}",
-                  "else {",
-                  "    ",
-                  "}"
+                  "",
+                  ""
                 ]
               }
             }
