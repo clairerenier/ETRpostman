@@ -3204,7 +3204,7 @@
         },
         {
           "_postman_id": "d0322f30-0df9-6398-2f10-f2bc28ec9b0e",
-          "name": "[010100100PCE]Check state 'Cheked'",
+          "name": "[010100100FGA]Check state 'Cheked'",
           "event": [
             {
               "listen": "test",
