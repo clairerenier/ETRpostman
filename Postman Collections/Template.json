@@ -155,6 +155,52 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "8f5e6a5a-ae2a-8beb-674a-6f5b105702bd",
+          "name": "Template Check Process copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    ",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "    ",
+                  "}",
+                  "else {",
+                  "    ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     }
