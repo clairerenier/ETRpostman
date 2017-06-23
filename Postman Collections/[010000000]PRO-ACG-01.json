@@ -2990,8 +2990,8 @@
           "response": []
         },
         {
-          "_postman_id": "74a99959-adb5-528b-37eb-312e1f844352",
-          "name": "[010100100FGA]Check the avalibility",
+          "_postman_id": "0dc19a02-c488-15eb-227c-44e1346cae24",
+          "name": "[010100100FGA]Check the horodate copy",
           "event": [
             {
               "listen": "test",
@@ -3036,8 +3036,8 @@
           "response": []
         },
         {
-          "_postman_id": "0dc19a02-c488-15eb-227c-44e1346cae24",
-          "name": "[010100100FGA]Check the horodate copy",
+          "_postman_id": "74a99959-adb5-528b-37eb-312e1f844352",
+          "name": "[010100100FGA]Check the avalibility",
           "event": [
             {
               "listen": "test",
