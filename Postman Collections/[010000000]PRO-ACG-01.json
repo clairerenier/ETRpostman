@@ -3418,7 +3418,7 @@
         },
         {
           "_postman_id": "847a3a4e-ad70-c02d-9ede-0b033823dc85",
-          "name": "[010100100FGA]Drop a file",
+          "name": "[010100100FGA]Drop file FGA",
           "event": [
             {
               "listen": "test",
