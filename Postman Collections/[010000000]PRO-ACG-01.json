@@ -3706,6 +3706,2142 @@
       ]
     },
     {
+      "_postman_id": "4f8a3b30-52d2-6f41-2c50-4ff420d49b24",
+      "name": "[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220 et SGGU2103Z copy",
+      "description": "o  0 - First file to generate data from scratch\r\n§  Expeted result : all hours set to OUI\r\no  1-First file dropped to generate data\r\n§  Expected result : everything is saved (all hours set to OUI)\r\no  2  Same file dropped with the following changes : \r\n"  METMOY 8h has its value changed (89,63 to 90.63)\r\n"  Nothing changed for 9AM\r\no  3  Same file dropped with the following changes : \r\n"  DENMOY 7h quality will be AF (M before)\r\n"  METMOY 8h has its value changed (90,63 to 91.63)\r\n"  Nothing changed for 9AM\r\n§  Expected result : 7 and 8AM whould be set to OUI , and NON for 9h\r\no  4  Same file dropped where :\r\n"  9AM is changed PCSMOY will be CS (quality = to the previous one)\r\n"  METMOY 8h has its value changed (91,63 to 89.63)\r\n§  Expected result : all set to NON except 8AM\r\no  5 - Same file dropped where only 8AM is changed PCSMOY from AF to CS (quality <)\r\n§  Expected result : all set to NON\r\no  6  Same file dropped but PCSMOY to CS for 8h\r\n§  Expected result : 8AM set to OUI\r\n\r\no  7  Run first file\r\n"  PCSMOY is set to 6/7/8AM AF, rest are set to CS\r\n"  Expected results : everything set to OUI\r\no  8  Run second file\r\n"  PCSMOY is unchanged for 6§7§8, for rest of the hours, they are set to AF\r\n"  Expected results everything set to OUI except 6/7/8AM",
+      "item": [
+        {
+          "_postman_id": "aa81aab9-9254-6a5f-650a-465d1f6d2759",
+          "name": "[011102400FGA]Delete and Update data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "for(var i= 0; i < sqlResult.length; i++)",
+                  "{",
+                  "    switch (sqlResult[i].requestId) {",
+                  "        case \"DeletePointData\":",
+                  "            tests[\"Delete Point Data\"] = true;",
+                  "            break;",
+                  "        case \"DeleteAcqFgaData\":",
+                  "            tests[\"Delete Acq_Fga Data\"] = true;",
+                  "            break;",
+                  "        case \"DeletePubPointJmnFgaData\":",
+                  "            tests[\"Delete Pub_Point_Jmn_Fga Data\"] = true;",
+                  "            break;",
+                  "    }",
+                  "}",
+                  "if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
+                  "    tests[\"Delete data Sum up\"] = true; ",
+                  "    postman.setNextRequest(\"[011102400FGA]Drop file FGA\");",
+                  "}",
+                  "else {",
+                  "   tests[\"Delete data Sum up\"] = fase; ",
+                  "   //postman.setNextRequest(null);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('C220'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='C220' and horodate between TO_DATE('2017-02-23 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-24 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "bfe82101-63c1-ab40-7cba-9a35f0252dd6",
+          "name": "[011102400FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102400FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3d56657a-3b67-ef0d-f99c-46b15f49b109",
+          "name": "[011102400FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102400FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e66f2292-f56a-1337-03a6-4e01d2bc48a6",
+          "name": "[011102400FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"OUI\" && sqlResult[i].results[1].STOCKAGE==\"OUI\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"OUI\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102401FGA]Delete and Update data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e5f936d8-5d41-0879-f75c-945743eee12f",
+          "name": "[011102401FGA]Delete and Update data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "for(var i= 0; i < sqlResult.length; i++)",
+                  "{",
+                  "    switch (sqlResult[i].requestId) {",
+                  "        case \"UpdatePointData\":",
+                  "            tests[\"Update Point Data\"] = true;",
+                  "            break;",
+                  "        case \"DeletePointData\":",
+                  "            tests[\"Delete Point Data\"] = true;",
+                  "            break;",
+                  "    }",
+                  "}",
+                  "if (tests[\"Update Point Data\"] && tests[\"Delete Point Data\"] ){",
+                  "    tests[\"Delete data Sum up\"] = true; ",
+                  "    postman.setNextRequest(\"[011102401FGA]Drop file FGA\");",
+                  "}",
+                  "else {",
+                  "   tests[\"Delete data Sum up\"] = fase; ",
+                  "   //postman.setNextRequest(null);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"UpdatePointData\",\r\n         \"requestContent\":\"update point set uidqualite_point='15', valeur='0' where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      },\r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4a5bb478-73da-64eb-8537-38a45077bb55",
+          "name": "[011102401FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102401FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105002_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3c0c76f2-074e-0b54-3650-fe86ddf43504",
+          "name": "[011102401FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102401FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3f16980b-f04c-4db0-8849-1962c076b7cf",
+          "name": "[011102401FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"5\";",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "            case \"CheckPubPointJmnFgaData\":",
+                  "                tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"260\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102402FGA]Drop file FGA\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"SELECT stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') and stockage='OUI' group by nom_source,date_mesure,processid,pas_chr,stockage order by date_mesure, processid desc) group by stockage order by stockage\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointJmnFgaData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT_jmn_fga pp  inner join grandeur on pp.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-02-23 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-24 05:00:00', 'YYYY-MM-DD HH24:MI:SS')  and idgrandeur like '%C220%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102401FGA]PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2c7592f7-0713-1d40-1d3b-2966816d7473",
+          "name": "[011102402FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102402FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105003_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4a0ceacf-6107-14fd-a47d-21b3b0f70cfc",
+          "name": "[011102402FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102402FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6ad24868-0944-269b-13af-361ae2725e4d",
+          "name": "[011102402FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"OUI\" && sqlResult[i].results[1].STOCKAGE==\"OUI\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"NON\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "            case \"CheckPubPointJmnFgaData\":",
+                  "                tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"390\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102403FGA]Update data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointJmnFgaData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT_jmn_fga pp  inner join grandeur on pp.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-02-23 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-24 05:00:00', 'YYYY-MM-DD HH24:MI:SS')  and idgrandeur like '%C220%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102402FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f3d97c92-4504-7ac9-aea1-91e41ff1c021",
+          "name": "[011102403FGA]Update data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "for(var i= 0; i < sqlResult.length; i++)",
+                  "{",
+                  "    switch (sqlResult[i].requestId) {",
+                  "        case \"UpdatePointData\":",
+                  "            tests[\"Update Point Data\"] = true;",
+                  "            break;",
+                  "    }",
+                  "}",
+                  "if (tests[\"Update Point Data\"]){",
+                  "    tests[\"Update data Sum up\"] = true; ",
+                  "    postman.setNextRequest(\"[011102403FGA]Drop file FGA\");",
+                  "}",
+                  "else {",
+                  "   tests[\"Delete data Sum up\"] = fase; ",
+                  "   //postman.setNextRequest(null);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"UpdatePointData\",\r\n         \"requestContent\":\"update point set uidqualite_point='15', valeur='0' where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 07:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 07:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220') and (type_grandeur in ('DENMOY')))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "acc1d1ba-ad7c-3926-c99d-3d73dfcf0cc9",
+          "name": "[011102403FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102403FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105004_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c95c8e8c-f248-6bf6-6e6f-c6d5d1850540",
+          "name": "[011102403FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102403FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a1349cfc-6b4d-7a6a-fb0e-bfdf709bb62b",
+          "name": "[011102403FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"NON\" && sqlResult[i].results[1].STOCKAGE==\"OUI\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"NON\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102404FGA]Drop file FGA\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') and PAS_CHR='3600' group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102403FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1410c197-7199-7b39-f593-ddb722d8f664",
+          "name": "[011102404FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102404FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105014_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7307a68d-309b-dc26-75e3-952e014868b6",
+          "name": "[011102404FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102404FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "09302a52-efc5-773d-c922-05ab2c0c3ae0",
+          "name": "[011102404FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"NON\" && sqlResult[i].results[1].STOCKAGE==\"NON\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"NON\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102405FGA]Drop file FGA\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') and PAS_CHR='3600' group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102404FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d4f48304-993c-4ba2-f575-ab6355e2135f",
+          "name": "[011102405FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102405FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105005_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d3b2f9ea-c393-aa1d-7bdb-f12fafe47a94",
+          "name": "[011102405FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102405FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "df211f61-3a46-b674-1233-420831f7cc1b",
+          "name": "[011102405FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"NON\" && sqlResult[i].results[1].STOCKAGE==\"NON\" && sqlResult[i].results[2].STOCKAGE==\"NON\" && sqlResult[i].results[3].STOCKAGE==\"NON\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102406FGA]Update data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102405FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "bfbd4101-5f12-b23f-c592-e4572e77f5d4",
+          "name": "[011102406FGA]Update data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "for(var i= 0; i < sqlResult.length; i++)",
+                  "{",
+                  "    switch (sqlResult[i].requestId) {",
+                  "        case \"UpdatePointData\":",
+                  "            tests[\"Update Point Data\"] = true;",
+                  "            break;",
+                  "    }",
+                  "}",
+                  "if (tests[\"Update Point Data\"]){",
+                  "    tests[\"Update data Sum up\"] = true; ",
+                  "    postman.setNextRequest(\"[011102406FGA]Drop file FGA\");",
+                  "}",
+                  "else {",
+                  "   tests[\"Delete data Sum up\"] = fase; ",
+                  "   //postman.setNextRequest(null);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"UpdatePointData\",\r\n         \"requestContent\":\"update point set uidqualite_point='15' where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('23/02/2017 08:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/02/2017 08:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('C220'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9a74a35d-4d30-d4ec-f652-e49b734f07aa",
+          "name": "[011102406FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102406FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105006_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "17642d61-649b-05d9-831c-3617c0b4944d",
+          "name": "[011102406FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102406FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "31d38b80-bdd4-7f03-ab07-8c851a55ae1b",
+          "name": "[011102406FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                if (sqlResult[i].results.length ==4){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"NON\" && sqlResult[i].results[1].STOCKAGE==\"NON\" && sqlResult[i].results[2].STOCKAGE==\"OUI\" && sqlResult[i].results[3].STOCKAGE==\"NON\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102407FGA]Delete and Update data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('C220') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}') and pas_chr='3600' group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('24/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('C220') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102406FGA]PRO_ACG_11_FGA_ACG_024_C220_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c17a9aab-cc3b-d58c-604e-a8f6a60f64b7",
+          "name": "[011102407FGA]Delete and Update data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "for(var i= 0; i < sqlResult.length; i++)",
+                  "{",
+                  "    switch (sqlResult[i].requestId) {",
+                  "        case \"DeletePointData\":",
+                  "            tests[\"Delete Point Data\"] = true;",
+                  "            break;",
+                  "        case \"DeleteAcqFgaData\":",
+                  "            tests[\"Delete Acq_Fga Data\"] = true;",
+                  "            break;",
+                  "        case \"DeletePubPointJmnFgaData\":",
+                  "            tests[\"Delete Pub_Point_Jmn_Fga Data\"] = true;",
+                  "            break;",
+                  "    }",
+                  "}",
+                  "if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
+                  "    tests[\"Delete data Sum up\"] = true; ",
+                  "    postman.setNextRequest(\"[011102407FGA]Drop file FGA\");",
+                  "}",
+                  "else {",
+                  "   tests[\"Delete data Sum up\"] = fase; ",
+                  "   //postman.setNextRequest(null);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"Delete from point where uidpoint in (select uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('05/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/03/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and idfga in ('SGGU2103Z'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('SGGU2103Z'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='SGGU2103Z' and horodate between TO_DATE('2017-03-05 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-03-07 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fd4e4aa7-f07d-23bc-1572-09379b7be5c4",
+          "name": "[011102407FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102407FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"J20170306_FGA_20170307062203_CHR02_SCALA_100-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9f78e1cf-a4f1-619d-0866-cfab03b07d23",
+          "name": "[011102407FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102407FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "083c42bf-45d1-0e47-5154-6bb69538cbca",
+          "name": "[011102407FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                tests[\"Check Stock_acquisition2\"]= sqlResult[i].results[0].COUNT == \"24\";",
+                  "",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011102408FGA]Drop file FGA\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('SGGU2103Z') and jour_gazier= TO_DATE('06/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}') and pas_chr='3600' group by date_mesure,stockage order by date_mesure asc) group by stockage\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102407FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "935b169e-3bbb-d6fd-87ae-23d00f1858fa",
+          "name": "[011102408FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file FGA\"] = true; ",
+                  "   postman.setNextRequest(\"[011102408FGA]Check process cal end\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file FGA\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"J20170306_FGA_20170307061702_CHR02_SCALA_101-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "445df195-c237-5fa3-6893-2f5019db3e55",
+          "name": "[011102408FGA]Check process cal end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[011102408FGA]Check data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "96f4b2eb-fe5b-b841-afbb-1fe0d7283654",
+          "name": "[011102408FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                if (sqlResult[i].results.length ==24){",
+                  "                    if (sqlResult[i].results[0].STOCKAGE==\"NON\" ",
+                  "                    && sqlResult[i].results[1].STOCKAGE==\"NON\" ",
+                  "                    && sqlResult[i].results[2].STOCKAGE==\"NON\" ",
+                  "                    && sqlResult[i].results[3].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[4].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[5].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[6].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[7].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[8].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[9].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[10].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[11].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[12].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[13].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[14].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[15].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[16].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[17].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[18].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[19].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[20].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[21].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[22].STOCKAGE==\"OUI\" ",
+                  "                    && sqlResult[i].results[23].STOCKAGE==\"OUI\"){",
+                  "                        tests[\"Check Stock_acquisition2\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check Stock_acquisition2\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check Stock_acquisition2\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            case \"CheckDmdCalcul\":",
+                  "                tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT >= \"1\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckStockAcquisitionForCal\":",
+                  "                tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break; ",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "//postman.setNextRequest(\"[011102407]Delete and Update data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('SGGU2103Z') and jour_gazier= TO_DATE('06/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}') and pas_chr='3600' group by date_mesure,stockage order by date_mesure asc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/03/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('SGGU2103Z') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{[011102408FGA]PRO_ACG_11_FGA_ACG_024_SGGU2103Z_processid}}')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "_postman_id": "701444b4-2f88-8b56-1946-01d5bf86c86e",
       "name": "[010100201PCE]Drop file PCE",
       "event": [
