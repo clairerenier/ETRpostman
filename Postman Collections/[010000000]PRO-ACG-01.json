@@ -3093,11 +3093,11 @@
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
                   "if (jsonData.statusProcess === \"0\"){",
-                  "    tests[\"CheckSIStockAcquisition\"] = false;",
+                  "    tests[\"CheckAcqFgaConservee\"] = false;",
                   "    //postman.setNextRequest(null);",
                   "}",
                   "else if (jsonData.statusProcess === \"1\"){",
-                  "   tests[\"CheckSIStockAcquisition\"] = true; ",
+                  "   tests[\"CheckAcqFgaConservee\"] = true; ",
                   "   postman.setNextRequest(\"[011021001FGA]Check data\");",
                   "}",
                   "else {",
