@@ -3143,7 +3143,7 @@
         },
         {
           "_postman_id": "74a99959-adb5-528b-37eb-312e1f844352",
-          "name": "[010100100FGA]Check availibility",
+          "name": "[011021000FGA]Check availibility",
           "event": [
             {
               "listen": "test",
@@ -3189,7 +3189,7 @@
         },
         {
           "_postman_id": "dbec617c-db0f-d97f-2cb5-4253e8e124a6",
-          "name": "[010100100FGA]Drop file FGA",
+          "name": "[011021002FGA]Drop file FGA",
           "event": [
             {
               "listen": "test",
