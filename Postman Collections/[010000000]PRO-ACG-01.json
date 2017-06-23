@@ -3353,7 +3353,7 @@
         },
         {
           "_postman_id": "38e30779-105f-d150-7261-2d21a065325b",
-          "name": "[010100100FGA]Check horodate",
+          "name": "[010100100FGA]Check horodate up",
           "event": [
             {
               "listen": "test",
