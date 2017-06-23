@@ -3399,7 +3399,7 @@
         },
         {
           "_postman_id": "8a94d0d4-6a38-2c08-b5e3-30fb41c21c53",
-          "name": "[010100100FGA]Check Data copy",
+          "name": "[010100100FGA]Check Data",
           "event": [
             {
               "listen": "test",
