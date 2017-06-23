@@ -3289,52 +3289,6 @@
           "response": []
         },
         {
-          "_postman_id": "38e30779-105f-d150-7261-2d21a065325b",
-          "name": "[011021003FGA]Check horodate fail",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    ",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "    ",
-                  "}",
-                  "else {",
-                  "    ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckHorodateAcqFgaConservee\",\r\n         \"requestContent\":\"select jour_gazier from acq_fga_conservee where id_correlation='{{[010100100FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select Motif rejet stockage from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "847a3a4e-ad70-c02d-9ede-0b033823dc85",
           "name": "[011021004FGA]Drop file FGA",
           "event": [
