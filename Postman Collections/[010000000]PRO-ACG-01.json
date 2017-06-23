@@ -4229,7 +4229,7 @@
         },
         {
           "_postman_id": "8167efa3-7dc2-5af8-7dad-ac8c48c026cb",
-          "name": "[010100100PCE]Check horodate up",
+          "name": "[010100100PCE]Check horodate",
           "event": [
             {
               "listen": "test",
