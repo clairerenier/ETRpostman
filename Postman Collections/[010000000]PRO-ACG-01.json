@@ -3141,16 +3141,16 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check availibility\"] = false;",
+                  "if (jsonData.statusProcess === \"0\"){",
+                  "    tests[\"CheckAcqFgaConservee\"] = false;",
                   "    //postman.setNextRequest(null);",
                   "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check availibility\"] = true; ",
-                  "   postman.setNextRequest(\"[011102402FGA]Check data\");",
+                  "else if (jsonData.statusProcess === \"1\"){",
+                  "   tests[\"CheckSIStockAcquisition\"] = true; ",
+                  "   postman.setNextRequest(\"[011021001FGA]Check data\");",
                   "}",
                   "else {",
-                  "    tests[\"Check process cal end\"] = false;",
+                  "    tests[\"CheckSIStockAcquisition\"] = false;",
                   "    //postman.setNextRequest(null);  ",
                   "}"
                 ]
