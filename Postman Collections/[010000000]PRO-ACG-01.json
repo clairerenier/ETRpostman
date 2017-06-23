@@ -3241,19 +3241,19 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
               },
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSIStockAcquisition\",\r\n         \"requestContent\":\"select SI_SOURCE from Stock_acquisition2 where processid in  ('{{[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
