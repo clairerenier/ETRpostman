@@ -3083,7 +3083,7 @@
         },
         {
           "_postman_id": "74a99959-adb5-528b-37eb-312e1f844352",
-          "name": "[010100100FGA]Check the avalibility",
+          "name": "[010100100FGA]Check avalibility",
           "event": [
             {
               "listen": "test",
