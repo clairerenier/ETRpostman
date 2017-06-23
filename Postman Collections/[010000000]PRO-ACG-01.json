@@ -3999,7 +3999,7 @@
         },
         {
           "_postman_id": "d60f44dc-c2be-411f-a527-d8eebd9e5046",
-          "name": "[010100100PCE]Delete data copy",
+          "name": "[010100100PCE]Delete data",
           "event": [
             {
               "listen": "test",
