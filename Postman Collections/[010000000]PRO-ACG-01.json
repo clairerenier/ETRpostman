@@ -3069,7 +3069,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckHorodateAcqFgaConservee\",\r\n         \"requestContent\":\"select jour_gazier from acq_fga_conservee where id_correlation='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckHorodateAcqFgaConservee\",\r\n         \"requestContent\":\"select jour_gazier from acq_fga_conservee where id_correlation='{{[010100100FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
