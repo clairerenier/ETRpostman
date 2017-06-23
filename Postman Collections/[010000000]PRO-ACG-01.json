@@ -4183,7 +4183,7 @@
         },
         {
           "_postman_id": "9ce47395-101e-67dc-9950-d087720a87cb",
-          "name": "[010100100PCE]Drop a file copy",
+          "name": "[010100100PCE]Check Data",
           "event": [
             {
               "listen": "test",
@@ -4222,6 +4222,52 @@
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8167efa3-7dc2-5af8-7dad-ac8c48c026cb",
+          "name": "[010100100PCE]Check horodate SI copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    ",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "    ",
+                  "}",
+                  "else {",
+                  "    ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "description": "",
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
+              },
+              {
+                "description": "",
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
