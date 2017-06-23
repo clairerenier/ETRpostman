@@ -3129,7 +3129,7 @@
         },
         {
           "_postman_id": "a3f832ab-d7ae-d032-dec3-0797b105eb89",
-          "name": "[010100100PCE]Check data copy",
+          "name": "[010100100PCE]Check state",
           "event": [
             {
               "listen": "test",
