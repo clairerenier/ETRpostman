@@ -2945,7 +2945,7 @@
         },
         {
           "_postman_id": "a40a712e-5d9e-f36c-4184-8ae955f3ab71",
-          "name": "Template Check Process copy copy",
+          "name": "[010100100FGA]Check the horodate",
           "event": [
             {
               "listen": "test",
