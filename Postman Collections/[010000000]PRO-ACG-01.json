@@ -3103,19 +3103,19 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
               },
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAvailabilityFGA\",\r\n         \"requestContent\":\"select date_debut, date_fin from FGA where idFGA='FGATNR1'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
