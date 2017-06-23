@@ -3115,7 +3115,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAvailabilityFGA\",\r\n         \"requestContent\":\"select date_debut, date_fin from FGA where idFGA='FGATNR1'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAvailabilityFGA\",\r\n         \"requestContent\":\"select date_debut, date_fin from FGA where idFGA='FGATNR1'\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select Motif rejet stockage from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
