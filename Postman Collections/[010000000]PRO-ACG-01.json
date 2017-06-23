@@ -3289,58 +3289,6 @@
           "response": []
         },
         {
-          "_postman_id": "47371eef-ff10-99e5-fe76-04a7ddd8cee2",
-          "name": "[011021003FGA]Drop file FGA",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_sourceProcessId\",jsonData.sourceProcessId);",
-                  "",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file FGA\"] = false;",
-                  "    //postman.setNextRequest(null);",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[011102401FGA]Check data\");",
-                  "}",
-                  "else {",
-                  "    tests[\"Check drop file FGA\"] = false;",
-                  "    //postman.setNextRequest(null);  ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "4f5091d3-7c75-11e0-773c-e6053818465e",
           "name": "[011021003FGA]Check Data",
           "event": [
