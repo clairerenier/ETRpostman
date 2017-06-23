@@ -3379,19 +3379,19 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
               },
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckHorodateAcqFgaConservee\",\r\n         \"requestContent\":\"select jour_gazier from acq_fga_conservee where id_correlation='{{[010100100FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select Motif rejet stockage from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011102401FGA]PRO_ACG_01_FGA_ACG_210_FGATNR1_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
