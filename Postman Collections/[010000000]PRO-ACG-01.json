@@ -3151,7 +3151,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSIStockAcquisition\",\r\n         \"requestContent\":\"select count(*) as COUNT from Stock_acquisition2 where processid in  ('{{[01102100100FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}'and SI_SOURCE= 'Scala'\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[01102100100FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}' and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSIStockAcquisition\",\r\n         \"requestContent\":\"select count(*) as COUNT from Stock_acquisition2 where processid in  ('{{[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}'and SI_SOURCE= 'Scala'\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}' and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
