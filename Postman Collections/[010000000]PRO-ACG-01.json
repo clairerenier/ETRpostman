@@ -4186,52 +4186,6 @@
           "response": []
         },
         {
-          "_postman_id": "2a3a5cde-5b0c-43d1-4476-d8c797ca285e",
-          "name": "[010100100PCE]Check SI",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    ",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "    ",
-                  "}",
-                  "else {",
-                  "    ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "description": "",
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
-              },
-              {
-                "description": "",
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "a53f7941-2e3f-edbf-2154-b68118465a80",
           "name": "[010100100PCE]Drop a file",
           "event": [
