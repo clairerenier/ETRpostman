@@ -4648,7 +4648,7 @@
                   "                    tests[\"Check message in ORC_ETAPE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
                   "                case \"CheckAcqPceConservee\":",
-                  "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
                   "                    break;",
                   "                case \"CheckStockAcquisitionForAcq\":",
                   "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
