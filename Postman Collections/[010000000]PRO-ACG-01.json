@@ -5657,7 +5657,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[010100102FGA]Drop file FGA\");",
+                  "        postman.setNextRequest(\"[010100201FGA]Drop file FGA\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
