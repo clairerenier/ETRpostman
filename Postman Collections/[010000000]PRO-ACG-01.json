@@ -4552,7 +4552,7 @@
     },
     {
       "_postman_id": "5acf12b2-f7e9-6ba0-3e41-9b6be60f717a",
-      "name": "[010100100PCE]PRO_ACG_01_PCE_ORC_001_FGACRETNR1",
+      "name": "[010100100FGA]PRO_ACG_01_PCE_ORC_001_FGACRETNR1",
       "description": "o\t0 - ko Case - file stops - the format inside is not correct\r\no\t1 - ko Case - name of the file is not correct\r\no\t2 - ok Case - file go through next step",
       "item": [
         {
