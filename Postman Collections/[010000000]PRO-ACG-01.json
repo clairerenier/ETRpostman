@@ -5586,7 +5586,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100201FGA]Drop file FGA\");",
+                  "    postman.setNextRequest(\"[010100201FGA]Delete data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
