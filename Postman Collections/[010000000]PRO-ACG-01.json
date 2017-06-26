@@ -4337,7 +4337,7 @@
         },
         {
           "_postman_id": "5d91a0a7-a417-5be4-f89d-c1989fccb3b4",
-          "name": "[010100100PCE]Check non avalibility",
+          "name": "[010100101PCE]Check state 'Cheked'",
           "event": [
             {
               "listen": "test",
