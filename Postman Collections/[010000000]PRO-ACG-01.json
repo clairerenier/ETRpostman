@@ -4851,7 +4851,7 @@
         },
         {
           "_postman_id": "cb52a8ff-3c12-0872-c2f0-c3dd6542f9f9",
-          "name": "[010100102PCE]Delete data",
+          "name": "[010100102FGA]Delete data",
           "event": [
             {
               "listen": "test",
