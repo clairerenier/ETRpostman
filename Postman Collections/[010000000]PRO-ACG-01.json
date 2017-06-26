@@ -3758,52 +3758,6 @@
           "response": []
         },
         {
-          "_postman_id": "d7b1d382-4582-637f-8ce9-ac8dde17461f",
-          "name": "[010100100PCE]Check horodate 1",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    ",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "    ",
-                  "}",
-                  "else {",
-                  "    ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "description": "",
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
-              },
-              {
-                "description": "",
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "ff3a7216-a7bc-5c88-decd-fb15f9d7e856",
           "name": "[010100100PCE]Check avalibility",
           "event": [
