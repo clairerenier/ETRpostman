@@ -2387,7 +2387,7 @@
                   "",
                   "}",
                   "else{",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[010100102PCE]Delete data\");",
                   "}",
                   ""
                 ]
