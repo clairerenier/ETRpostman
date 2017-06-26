@@ -4122,7 +4122,7 @@
         },
         {
           "_postman_id": "edd6623a-0200-af7e-d8c8-34cbca97cf6e",
-          "name": "[011021002FGA]Check non avaIlibility copy",
+          "name": "[011021002FGA]Check non avaIlibility",
           "event": [
             {
               "listen": "test",
