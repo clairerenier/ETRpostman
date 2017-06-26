@@ -901,7 +901,7 @@
                   "    postman.setNextRequest(\"[00005]Delete data\");",
                   "}",
                   "else{",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[00005]Delete data\");",
                   "}",
                   "",
                   ""
