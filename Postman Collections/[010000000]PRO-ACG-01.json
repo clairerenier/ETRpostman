@@ -4540,7 +4540,7 @@
         },
         {
           "_postman_id": "27ca9fe2-5694-e36d-76d7-4371fd3af504",
-          "name": "[011021004PCE]Delete data copy",
+          "name": "[011021005PCE]Delete data",
           "event": [
             {
               "listen": "test",
@@ -5092,7 +5092,7 @@
         },
         {
           "_postman_id": "216df435-9dd8-d64a-e3c1-77e9d202af9a",
-          "name": "[010100102PCE]Drop file PCE",
+          "name": "[010100102FGA]Drop file FGA",
           "event": [
             {
               "listen": "test",
