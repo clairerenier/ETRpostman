@@ -4622,7 +4622,7 @@
         },
         {
           "_postman_id": "74fed59b-2187-c54d-16b3-bd8222f7bd26",
-          "name": "[010100100PCE]Check data",
+          "name": "[010100100FGA]Check data",
           "event": [
             {
               "listen": "test",
