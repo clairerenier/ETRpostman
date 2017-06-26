@@ -3528,6 +3528,64 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "edd6623a-0200-af7e-d8c8-34cbca97cf6e",
+          "name": "[011021002FGA]Check non avaIlibility copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckNonAvailabilityFGA\":",
+                  "                    tests[\"Check non availability in FGA\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
+                  "                    break;",
+                  "                case \"CheckAcqFgaConservee\":",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "              ",
+                  "               }",
+                  "            }",
+                  "        }",
+                  "        ",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from FGA where idFGA='FGATNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR2_processid}}'and Motif_rejet_stockage = 'FGA non valide'\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
