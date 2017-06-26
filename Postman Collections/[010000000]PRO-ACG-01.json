@@ -4660,7 +4660,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100101PCE]Drop file PCE\");",
+                  "    postman.setNextRequest(\"[010100101FGA]Drop file FGA\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
