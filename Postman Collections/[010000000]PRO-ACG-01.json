@@ -4493,6 +4493,71 @@
           "response": []
         },
         {
+          "_postman_id": "27ca9fe2-5694-e36d-76d7-4371fd3af504",
+          "name": "[011021004PCE]Delete data copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021001PCE]Drop file FGA\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCETNR2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCETNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "b93000b1-4a5d-f0b9-5d72-537178e2e333",
           "name": "[010100100PCE]Drop a file",
           "event": [
@@ -4614,43 +4679,24 @@
           "response": []
         },
         {
-          "_postman_id": "27ca9fe2-5694-e36d-76d7-4371fd3af504",
-          "name": "[011021004PCE]Delete data copy",
+          "_postman_id": "a0d8d041-da44-68a7-7c56-f2f2b40ee923",
+          "name": "[010100103PCE]Check state 'Cheked' copy",
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointData\":",
-                  "                tests[\"Delete Point Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteAcqPceData\":",
-                  "                tests[\"Delete Acq_Pce Data\"] = true;",
-                  "                break;",
-                  "        }",
-                  "    }",
-                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[011021001PCE]Drop file FGA\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data Sum up\"] = false; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    ",
                   "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "    ",
                   "}",
-                  "",
-                  ""
+                  "else {",
+                  "    ",
+                  "}"
                 ]
               }
             }
@@ -4660,19 +4706,19 @@
             "method": "POST",
             "header": [
               {
+                "description": "",
                 "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
               },
               {
+                "description": "",
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCETNR2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCETNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{processId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
