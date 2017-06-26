@@ -5426,7 +5426,7 @@
                   "                case \"CheckStatutOrcEtape\":",
                   "                    tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_ETAPE == \"3\";",
                   "                    break;",
-                  "                case \"CheckAcqPceConservee\":",
+                  "                case \"CheckAcqFgaConservee\":",
                   "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
                   "                case \"CheckStockAcquisitionForAcq\":",
