@@ -3815,7 +3815,7 @@
         },
         {
           "_postman_id": "391895ec-cd93-b993-26c4-8f230ce76e95",
-          "name": "[010100101PCE]Check state 'Non Cheked'",
+          "name": "[010100101PCE]Check state 'Cheked'",
           "event": [
             {
               "listen": "test",
@@ -3890,7 +3890,7 @@
         },
         {
           "_postman_id": "ff0de092-9d07-6d42-04b4-4fbf6d781541",
-          "name": "[010100101PCE]Check state 'Non Locked'",
+          "name": "[010100101PCE]Check state 'Locked'",
           "event": [
             {
               "listen": "test",
@@ -4829,7 +4829,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[010100102FGA]Drop file FGA\");",
+                  "        postman.setNextRequest(\"[010100102PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
