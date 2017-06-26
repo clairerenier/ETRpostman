@@ -1405,7 +1405,7 @@
                   "            }",
                   "        } ",
                   "    }",
-                  "    postman.setNextRequest(\"[00010]Delete data\");",
+                  "    postman.setNextRequest(null);",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
