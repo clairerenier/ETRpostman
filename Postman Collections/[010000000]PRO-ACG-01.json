@@ -4804,7 +4804,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100102PCE]Delete data\");",
+                  "    postman.setNextRequest(\"[010100102FGA]Delete data\");",
                   "",
                   "}",
                   "else{",
