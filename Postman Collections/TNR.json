@@ -1611,7 +1611,7 @@
                   "            }",
                   "        } ",
                   "    }",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[00011]Delete data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
