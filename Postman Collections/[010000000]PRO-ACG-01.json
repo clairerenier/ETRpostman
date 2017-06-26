@@ -2992,7 +2992,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[011021001FGA]Check data\");",
+                  "   postman.setNextRequest(\"[011021001FGA]Check Data\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file FGA\"] = false;",
@@ -3003,7 +3003,7 @@
             }
           ],
           "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
