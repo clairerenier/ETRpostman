@@ -3326,7 +3326,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170506_FGA_20170607104025_CHR02_SCALA_02-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170506_FGA_20170607104025_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
