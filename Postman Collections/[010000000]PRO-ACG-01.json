@@ -4837,7 +4837,7 @@
         },
         {
           "_postman_id": "8fcbbc25-d3cc-b6cb-c183-17b6a12f1012",
-          "name": "[010100105PCE]Check state 'Cheked' 24H copy",
+          "name": "[010100106PCE]Check state 'Cheked' 24J",
           "event": [
             {
               "listen": "test",
