@@ -6039,7 +6039,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select PAYLOAD from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
