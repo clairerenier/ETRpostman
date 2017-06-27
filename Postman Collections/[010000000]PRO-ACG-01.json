@@ -4335,7 +4335,7 @@
             }
           ],
           "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
