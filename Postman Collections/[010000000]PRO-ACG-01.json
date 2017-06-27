@@ -5981,16 +5981,19 @@
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
                   "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult != null){",
+                  "    if(sqlResult !== null){",
                   "        for(var i= 0; i < sqlResult.length; i++)",
                   "        {",
-                  "            if(sqlResult[i].results != null){",
+                  "            if(sqlResult[i].results !== null){",
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"CheckPayloadPresence\":",
                   "                    tests[\"Check Payload Presence\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
-                  "                case \"CheckStockAcquisitionForAcq\":",
-                  "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                case \"CheckPayloadContent\":",
+                  "                    var jsonObject = xml2Json(sqlResult[i].results[0].PAYLOAD);",
+                  "                    var jsonData = JSON.parse(responseBody);",
+                  "                            tests[\"Your test name\"] = jsonData.value === 100;",
+                  "                    ",
                   "                    break;   ",
                   "                }",
                   "            }",
@@ -6002,6 +6005,12 @@
                   "else{",
                   "    postman.setNextRequest(null);",
                   "}",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
                   "",
                   ""
                 ]
@@ -6036,7 +6045,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select payload from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select PAYLOAD from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
