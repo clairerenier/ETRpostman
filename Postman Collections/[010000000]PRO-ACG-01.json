@@ -5992,7 +5992,7 @@
                   "                case \"CheckPayloadContent\":",
                   "                    console.log(sqlResult[i].results[0].PAYLOAD);",
                   "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD));",
-                  "                    console.log(JSON.parse(xml2Json(sqlResult[i].results[0].PAYLOAD)));",
+                  "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD).value)",
                   "                    //var jsonData = JSON.parse(xml2Json(sqlResult[i].results[0].PAYLOAD));",
                   "                    //        tests[\"Your test name\"] = jsonData.value === 100;",
                   "                    break;   ",
@@ -6006,7 +6006,10 @@
                   "else{",
                   "    postman.setNextRequest(null);",
                   "}",
-                  ""
+                  "",
+                  "",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "tests[\"Your test name\"] = jsonData.value === 100;"
                 ]
               }
             },
@@ -6039,7 +6042,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from icepayloadext where externalid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
