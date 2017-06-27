@@ -3797,7 +3797,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "               switch (sqlResult[i].requestId) {",
                   "                case \"CheckStatutPCE\":",
-                  "                    tests[\"Check Statut PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
+                  "                    tests[\"Check Statut PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"0\";",
                   "                    break;",
                   "                case \"CheckAcqPceConservee\":",
                   "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
@@ -3841,7 +3841,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from statut where uidPCE='' and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCETNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCETNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from statut where UIDPCE='' and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCETNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCETNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
