@@ -5842,7 +5842,7 @@
     },
     {
       "_postman_id": "868ed9a4-3415-25cd-93d5-ac8952254cce",
-      "name": "[014200000PCE]PRO_ACG_42_PCE__SGPCETVPEC",
+      "name": "[014200000PCE]PRO_ACG_42_PCE_SGPCETVPEC",
       "description": "o\t0 - ko Case - file stops here\r\no\t1 - ok Case - file go through next step",
       "item": [
         {
@@ -5970,7 +5970,7 @@
         },
         {
           "_postman_id": "f6f87adb-f0c5-cd65-5de0-e3325f85d703",
-          "name": "[010100201PCE]Check data",
+          "name": "[014200000PCE]Check data",
           "event": [
             {
               "listen": "test",
