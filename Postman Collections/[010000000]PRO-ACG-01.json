@@ -5871,7 +5871,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[010100201PCE]Drop file PCE\");",
+                  "        postman.setNextRequest(\"[014200000PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
