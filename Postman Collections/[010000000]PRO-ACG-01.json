@@ -4178,7 +4178,7 @@
             }
           ],
           "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n",
             "method": "POST",
             "header": [
               {
@@ -4243,7 +4243,7 @@
             }
           ],
           "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
