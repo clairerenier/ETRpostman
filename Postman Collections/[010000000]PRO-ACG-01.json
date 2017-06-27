@@ -5846,65 +5846,6 @@
       "description": "o\t0 - ko Case - file stops here\r\no\t1 - ok Case - file go through next step",
       "item": [
         {
-          "_postman_id": "c468765e-5989-a0f0-dbb7-3aeafb9761da",
-          "name": "[010100200PCE]Drop file PCE",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[010100200PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[010100200PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[010100200PCE]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170320_PCE_20170320103422_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "b3315846-e8c4-0358-827b-4ed0a8872b64",
           "name": "[010100200PCE]Check data",
           "event": [
