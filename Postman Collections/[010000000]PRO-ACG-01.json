@@ -5993,6 +5993,7 @@
                   "                    console.log(sqlResult[i].results[0].PAYLOAD);",
                   "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD));",
                   "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT.CORRELATIONID)",
+                  "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT.INPUTPARAMS.length)",
                   "                    //var jsonData = JSON.parse(xml2Json(sqlResult[i].results[0].PAYLOAD));",
                   "                    //        tests[\"Your test name\"] = jsonData.value === 100;",
                   "                    break;   ",
