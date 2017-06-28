@@ -14,7 +14,7 @@
       "item": [
         {
           "_postman_id": "ad086fac-60a7-ba4a-ed98-92180c391755",
-          "name": "[030301900PCE]PRO-CAL-03 - Generation PRO-CAL-02 and TYPE_GRANDEUR_MODIFIEE=''",
+          "name": "[030301900PCE]Generation PRO-CAL-02 and TYPE_GRANDEUR_MODIFIEE=''",
           "event": [
             {
               "listen": "test",
