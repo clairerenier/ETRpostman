@@ -277,6 +277,7 @@
                   "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
                   "                case \"CheckPayloadContent\":",
+                  "                    console.log(processid);",
                   "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT;",
                   "                    var inputParams = payload.INPUTPARAMS.INPUTPARAM;",
                   "                    tests[\"Check REQUESTID\"] = payload.REQUESTID == processid+\"CAL_03_PRO_CAL_10\";",
