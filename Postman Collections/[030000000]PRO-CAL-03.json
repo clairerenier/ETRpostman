@@ -310,7 +310,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100201FGA]Delete data\");",
+                  "    postman.setNextRequest(\"[030301902PCE]3 fathers and TYPE_GRANDEUR_MODIFIEE='QG'\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
