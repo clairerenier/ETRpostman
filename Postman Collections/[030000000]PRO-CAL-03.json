@@ -123,68 +123,6 @@
             "description": ""
           },
           "response": []
-        },
-        {
-          "_postman_id": "e601ab7d-c55b-f58f-bb34-182e532fb337",
-          "name": "[011102400FGA]Check process cal end copy copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[011102400FGA]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[011102400FGA]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
         }
       ]
     },
