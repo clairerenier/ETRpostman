@@ -4554,7 +4554,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[011021004PCE]Drop file FGA\");",
+                  "        postman.setNextRequest(\"[011021004PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
