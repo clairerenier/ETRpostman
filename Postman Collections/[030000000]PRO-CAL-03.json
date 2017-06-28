@@ -208,6 +208,7 @@
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"GetProcessid\":",
                   "                    postman.setEnvironmentVariable(\"[030301901PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\",sqlResult[i].results[0].ID_CORRELATION);",
+                  "                    console.logsqlResult[i].results[0].ID_CORRELATION();",
                   "                    console.log(\"[030301901PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\");",
                   "                    break;",
                   "                }",
@@ -248,7 +249,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"GetProcessid\",\r\n         \"requestContent\":\"select id_correlation from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"GetProcessid\",\r\n         \"requestContent\":\"select ID_CORRELATION from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
