@@ -135,6 +135,32 @@
         {
           "_postman_id": "5aa99e0a-9500-5f7f-f62b-7d805d595eec",
           "name": "[030301901]PRO-CAL-03 - 22 fathers and TYPE_GRANDEUR_MODIFIEE='PCSMOY'",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    // wait 10 sec before going to the next step",
+                  "    var date = new Date();",
+                  "    var curDate = null;",
+                  "    do {",
+                  "        curDate = new Date();",
+                  "    }",
+                  "    while (curDate - date < 10000);",
+                  "    /*setTimeout(function(){}, 10000); */",
+                  "    postman.setNextRequest(\"[030301901PCE]Check data\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
           "request": {
             "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_CAL_03/ws",
             "method": "POST",
