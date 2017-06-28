@@ -14,7 +14,7 @@
       "item": [
         {
           "_postman_id": "ad086fac-60a7-ba4a-ed98-92180c391755",
-          "name": "[0300000000]PRO-CAL-03 - Generation PRO-CAL-02",
+          "name": "[0300000000PCE]PRO-CAL-03 - Generation PRO-CAL-02",
           "request": {
             "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
             "method": "POST",
