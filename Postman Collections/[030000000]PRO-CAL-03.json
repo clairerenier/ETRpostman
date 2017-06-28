@@ -142,11 +142,6 @@
                 "key": "Content-Type",
                 "value": "application/json",
                 "description": ""
-              },
-              {
-                "key": "authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
               }
             ],
             "body": {
