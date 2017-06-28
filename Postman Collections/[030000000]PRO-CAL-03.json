@@ -137,32 +137,6 @@
           "response": []
         },
         {
-          "_postman_id": "b75a553f-cf90-374f-8ef8-6ca4d8590d3d",
-          "name": "PRO-CAL-03 - Appel PRO-CAL-10",
-          "request": {
-            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              },
-              {
-                "key": "authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"calculImpactDto\":\r\n{\"idObjet\":\"SGRPS1I10A\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2016-08-02 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"QG\"}\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "c2065f62-8a41-8af6-acd0-a97cf2c43b1a",
           "name": "PRO-CAL-03 - 22 pères et type_grandeur='PCSMOY'",
           "request": {
@@ -216,6 +190,236 @@
         },
         {
           "_postman_id": "0b5bca99-884e-427e-ade5-37ac681f2402",
+          "name": "PRO-CAL-03 - Appel PRO-CAL-10 avec Hierarchie",
+          "request": {
+            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":\r\n{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-04-01 06:00:00\",\"listeHoursSt\":\"06\",\"typePeriode\":\"H\",\"typeGrandeur\":\"QG\"}\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "49a12c39-fb02-b0c1-f433-005260a8721c",
+      "name": "[030000000PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A copy",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "aa05471d-994f-e407-23eb-78e8bb084116",
+          "name": "[030000000PCE]PRO-CAL-03 - Generation PRO-CAL-02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "     postman.setNextRequest(\"[010100200PCE]Check data\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":\r\n{\"idObjet\":\"SGRPS1I10A\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2016-08-02 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2bde3d10-ad73-aedb-ce9c-9fe2b0b261ea",
+          "name": "[010100200PCE]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult != null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results != null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatutOrcProcessus\":",
+                  "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                    break;",
+                  "                case \"CheckStatutOrcEtape\":",
+                  "                    tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_ETAPE == \"2\";",
+                  "                    break;",
+                  "                case \"CheckStatutOrcEtapeMessage\":",
+                  "                    tests[\"Check message in ORC_ETAPE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "                case \"CheckAcqPceConservee\":",
+                  "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                case \"CheckStockAcquisitionForAcq\":",
+                  "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;   ",
+                  "                case \"CheckOrcProcessusReport\":",
+                  "                    tests[\"Check Report of ORC_001 in ORC_ETAPES\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break; ",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(\"[010100201FGA]Delete data\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckNumberDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where processid in (select id_correlation from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only) and statut='CM'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c00bd6ab-1341-99b9-80c5-e5846c3d79e5",
+          "name": "PRO-CAL-03 - Appel PRO-CAL-10",
+          "request": {
+            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":\r\n{\"idObjet\":\"SGRPS1I10A\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2016-08-02 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"QG\"}\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5aa99e0a-9500-5f7f-f62b-7d805d595eec",
+          "name": "PRO-CAL-03 - 22 pères et type_grandeur='PCSMOY'",
+          "request": {
+            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"LDPBG024\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2016-02-01 06:00:00\",\"listeHoursSt\":\"06;08;09;10;11;15\",\"typePeriode\":\"H\",\"typeGrandeur\":\"PCSMOY\"}}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f56c6d15-db21-81e4-f312-dade3424bc30",
+          "name": "PRO-CAL-03 - Hiérarchie",
+          "request": {
+            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-03-20 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2c26edf1-9224-0927-cefc-9de77fda561e",
           "name": "PRO-CAL-03 - Appel PRO-CAL-10 avec Hierarchie",
           "request": {
             "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
