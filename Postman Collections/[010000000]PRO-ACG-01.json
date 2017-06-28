@@ -3473,7 +3473,7 @@
                   "                    tests[\"Check non availability in FGA\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
                   "                    break;",
                   "                case \"CheckAcqFgaConservee\":",
-                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    tests[\"Check Motif rejet in ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
                   "              ",
                   "               }",
