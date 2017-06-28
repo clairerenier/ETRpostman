@@ -3728,7 +3728,7 @@
                   "                case \"CheckSIStockAcquisition\":",
                   "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
                   "                    break;",
-                  "                case \"CheckAcqFgaConservee\":",
+                  "                case \"CheckAcqPceConservee\":",
                   "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
                   "              ",
