@@ -3141,6 +3141,15 @@
                   "}"
                 ]
               }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);"
+                ]
+              }
             }
           ],
           "request": {
@@ -6088,65 +6097,6 @@
       "name": "[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR",
       "description": "o\t0 - ok Case - file go through next step",
       "item": [
-        {
-          "_postman_id": "fd11befc-8132-63e9-6e40-c30da629f412",
-          "name": "[010100200FGA]Drop file FGA",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[010100200FGA]PRO_ACG_01_FGA_ORC_002_FGACRETNR1_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[010100200FGA]PRO_ACG_01_FGA_ORC_002_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file FGA\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file FGA\"] = true; ",
-                  "       postman.setNextRequest(\"[010100200FGA]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file FGA\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105012_CHR02_SCALA_19-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
         {
           "_postman_id": "81e03d3f-b15e-8fb4-3ce9-b734d0d8d7f0",
           "name": "[010100200FGA]Check data",
