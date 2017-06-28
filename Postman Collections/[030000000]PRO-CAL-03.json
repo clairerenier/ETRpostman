@@ -190,7 +190,7 @@
         },
         {
           "_postman_id": "bcacc715-d5bc-37c5-939d-b806caafc4a3",
-          "name": "[030301901PCE]Check data copy",
+          "name": "[030301901PCE]Get Processid",
           "event": [
             {
               "listen": "test",
