@@ -6077,7 +6077,7 @@
     {
       "_postman_id": "ffce5645-f23c-d067-d6a6-ceda065f2355",
       "name": "[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR",
-      "description": "o\t0 - ko Case - file stops here\r\no\t1 - ok Case - file go through next step",
+      "description": "o\t0 - ok Case - file go through next step",
       "item": [
         {
           "_postman_id": "fd11befc-8132-63e9-6e40-c30da629f412",
