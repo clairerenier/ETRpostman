@@ -23,7 +23,7 @@
                 "exec": [
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
-                  "     postman.setNextRequest(\"[010100200PCE]Check data\");",
+                  "     postman.setNextRequest(\"[030301900PCE]Check data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
