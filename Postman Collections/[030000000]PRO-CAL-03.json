@@ -40,15 +40,6 @@
                   ""
                 ]
               }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var x = setTimeout(function() { alert(\"bip\"); }, 10000); "
-                ]
-              }
             }
           ],
           "request": {
