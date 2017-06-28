@@ -3591,8 +3591,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCETNR1_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check drop file PCE\"] = false;",
