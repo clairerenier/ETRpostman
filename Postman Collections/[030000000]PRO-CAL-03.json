@@ -30,6 +30,7 @@
                   "        curDate = new Date();",
                   "    }",
                   "    while (curDate - date < 10000);",
+                  "    postman.setNextRequest(\"[030301900PCE]Check data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
