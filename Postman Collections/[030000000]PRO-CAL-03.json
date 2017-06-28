@@ -151,7 +151,7 @@
                   "    }",
                   "    while (curDate - date < 10000);",
                   "    /*setTimeout(function(){}, 10000); */",
-                  "    postman.setNextRequest(\"[030301901PCE]Check data\");",
+                  "    postman.setNextRequest(\"[030301901PCE]Get Processid\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
