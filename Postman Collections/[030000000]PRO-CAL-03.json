@@ -64,6 +64,32 @@
           "response": []
         },
         {
+          "_postman_id": "5aa99e0a-9500-5f7f-f62b-7d805d595eec",
+          "name": "PRO-CAL-03 - 22 pères et type_grandeur='PCSMOY'",
+          "request": {
+            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"LDPBG024\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2016-02-01 06:00:00\",\"listeHoursSt\":\"06;08;09;10;11;15\",\"typePeriode\":\"H\",\"typeGrandeur\":\"PCSMOY\"}}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "84cf964a-d1b6-e0ff-6bfc-f982ffd328a8",
           "name": "[030301900PCE]Check data",
           "event": [
@@ -126,32 +152,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckNumberDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid in (select id_correlation from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only) and statut='CM' and code_objet in ('SGRPS1I10D','SGRPS1I10C','SGRPS1I10B')\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "5aa99e0a-9500-5f7f-f62b-7d805d595eec",
-          "name": "PRO-CAL-03 - 22 pères et type_grandeur='PCSMOY'",
-          "request": {
-            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              },
-              {
-                "key": "authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"calculImpactDto\":{\"idObjet\":\"LDPBG024\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2016-02-01 06:00:00\",\"listeHoursSt\":\"06;08;09;10;11;15\",\"typePeriode\":\"H\",\"typeGrandeur\":\"PCSMOY\"}}"
             },
             "description": ""
           },
