@@ -135,32 +135,6 @@
             "description": ""
           },
           "response": []
-        },
-        {
-          "_postman_id": "0b5bca99-884e-427e-ade5-37ac681f2402",
-          "name": "PRO-CAL-03 - Appel PRO-CAL-10 avec Hierarchie",
-          "request": {
-            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              },
-              {
-                "key": "authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"calculImpactDto\":\r\n{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-04-01 06:00:00\",\"listeHoursSt\":\"06\",\"typePeriode\":\"H\",\"typeGrandeur\":\"QG\"}\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
         }
       ]
     },
