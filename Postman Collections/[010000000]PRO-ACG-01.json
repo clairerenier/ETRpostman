@@ -3074,6 +3074,15 @@
                   ""
                 ]
               }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);"
+                ]
+              }
             }
           ],
           "request": {
