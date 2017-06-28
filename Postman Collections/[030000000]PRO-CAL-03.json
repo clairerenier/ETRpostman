@@ -117,8 +117,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
+                  "var x = setTimeout(function() { alert(\"bip\"); }, 10000); ",
                   ""
                 ]
               }
