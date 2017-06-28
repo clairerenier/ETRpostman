@@ -23,7 +23,7 @@
                 "exec": [
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
-                  "//mm",
+                  "",
                   "    var jsonData = JSON.parse(responseBody);",
                   "    var sqlResult = jsonData.sqlResult;",
                   "    for(var i= 0; i < sqlResult.length; i++)",
