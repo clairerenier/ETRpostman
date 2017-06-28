@@ -24,7 +24,7 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    // wait 10 sec before going to the next step",
-                  "    var date = new Date();",
+                  "    /*var date = new Date();",
                   "    var curDate = null;",
                   "    do {",
                   "        curDate = new Date();",
