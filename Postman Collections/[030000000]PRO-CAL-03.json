@@ -31,7 +31,7 @@
                   "    }",
                   "    while (curDate - date < 10000);*/",
                   "    /*setTimeout(function(){}, 10000); */",
-                  "    var x = setTimeout(function() { alert(\"bip\"); }, 100000); ",
+                  "    var x = setTimeout(function() { alert(\"bip\"); }, 10000); ",
                   "    postman.setNextRequest(\"[030301900PCE]Check data\");",
                   "}",
                   "else{",
