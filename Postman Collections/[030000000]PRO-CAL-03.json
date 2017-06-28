@@ -30,7 +30,7 @@
                   "        curDate = new Date();",
                   "    }",
                   "    while (curDate - date < 20000);",
-                  "    /*setTimeout(function(){}, 10000);",
+                  "    /*setTimeout(function(){}, 10000);*/",
                   "    ",
                   "    postman.setNextRequest(\"[030301900PCE]Check data\");",
                   "}",
