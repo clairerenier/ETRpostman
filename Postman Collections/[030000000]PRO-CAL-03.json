@@ -262,6 +262,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[030301901PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\");",
+                  "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
@@ -274,9 +276,23 @@
                   "                case \"CheckStatutOrcProcessus\":",
                   "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
-                  "                case \"CheckNumberDmdCalcul\":",
-                  "                    tests[\"Check Number DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"3\";",
-                  "                    break;",
+                  "                case \"CheckPayloadContent\":",
+                  "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT;",
+                  "                    var inputParams = payload.INPUTPARAMS.INPUTPARAM;",
+                  "                    tests[\"Check REQUESTID\"] = payload.REQUESTID == processid+\"ACG_01_PRO_ACG_42\";",
+                  "                    tests[\"Check CORRELATIONID\"] = payload.CORRELATIONID == processid;",
+                  "                    tests[\"Check PROCESSID\"] = payload.CORRELATIONID == processid;",
+                  "                    tests[\"Check STEPID\"] = payload.STEPID == \"ACG_01_PRO_ACG_42\";",
+                  "                    tests[\"Check RPTNAME\"] = payload.RPTNAME == \"RS_ACG_011_FIABILISATION_DATA_ACQUISE\";",
+                  "                    tests[\"Check I102STR_DATE_CONSERVATION\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_DATE_CONSERVATION\";}).$.VALUE == \"2017-03-22 10:34:22\"; ",
+                  "                    tests[\"Check I102STR_SOURCE_PROCESSID\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_SOURCE_PROCESSID\";}).$.VALUE == sourceProcessid;",
+                  "                    tests[\"Check I102STR_HORODATE\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_HORODATE\";}).$.VALUE == \"2017-03-22 06:00:00\";",
+                  "                    tests[\"Check I102STR_TYPE_PERIODE\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_TYPE_PERIODE\";}).$.VALUE == \"H\";",
+                  "                    tests[\"Check I102STR_NOMFICHIER\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_NOMFICHIER\";}).$.VALUE == \"H20170322_PCE_20170322103422_CHR02_SCALA_3-1F.xml\";",
+                  "                    tests[\"Check I102STR_TYPE_FIAB\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_TYPE_FIAB\";}).$.VALUE == \"ACQ\";",
+                  "                    tests[\"Check I102STR_ACQ_FORCE\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_ACQ_FORCE\";}).$.VALUE == \"N\";",
+                  "                    tests[\"Check I102STR_MODE_LANCEMENT\"] = inputParams.find(function (d) { return d.$.NAME == \"I102STR_MODE_LANCEMENT\";}).$.VALUE == \"INIT\";",
+                  "                    break;   ",
                   "                }",
                   "            }",
                   "        }",
@@ -315,7 +331,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckNumberDmdCalcul\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from icepayloadext where externalid in (select id_correlation from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from icepayloadext where externalid in (select id_correlation from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
