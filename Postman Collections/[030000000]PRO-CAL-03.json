@@ -93,7 +93,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301901]PRO-CAL-03 - 22 fathers and TYPE_GRANDEUR_MODIFIEE='PCSMOY'\");",
+                  "    postman.setNextRequest(\"[030301901]22 fathers and TYPE_GRANDEUR_MODIFIEE='PCSMOY'\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
