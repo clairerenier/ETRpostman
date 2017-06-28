@@ -108,7 +108,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "sleep(10000);",
+                  "postman.sleep(10000);",
                   ""
                 ]
               }
