@@ -213,7 +213,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301901PCE]Get Processid\");",
+                  "    postman.setNextRequest(\"[030301901PCE]Check data\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
