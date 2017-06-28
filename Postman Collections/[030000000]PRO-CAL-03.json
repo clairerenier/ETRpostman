@@ -189,8 +189,8 @@
           "response": []
         },
         {
-          "_postman_id": "fef6c366-ee18-6952-557f-4cc683c30dc0",
-          "name": "[030301901PCE]Check data",
+          "_postman_id": "bcacc715-d5bc-37c5-939d-b806caafc4a3",
+          "name": "[030301901PCE]Check data copy",
           "event": [
             {
               "listen": "test",
@@ -257,8 +257,8 @@
           "response": []
         },
         {
-          "_postman_id": "bcacc715-d5bc-37c5-939d-b806caafc4a3",
-          "name": "[030301901PCE]Check data copy",
+          "_postman_id": "fef6c366-ee18-6952-557f-4cc683c30dc0",
+          "name": "[030301901PCE]Check data",
           "event": [
             {
               "listen": "test",
