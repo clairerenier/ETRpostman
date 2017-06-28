@@ -108,7 +108,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var x = setTimeout(function() { alert(\"bip\"); }, 10000); ",
+                  "var x = window.setTimeout(function() { alert(\"bip\"); }, 10000); ",
                   ""
                 ]
               }
