@@ -3088,7 +3088,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011021001FGA]Delete and Update data\");",
+                  "postman.setNextRequest(\"[011021001FGA]Check SI\");",
                   ""
                 ]
               }
