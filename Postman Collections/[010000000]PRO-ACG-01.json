@@ -5993,7 +5993,7 @@
                   "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT;",
                   "                    var requestid= payload.REQUESTID;",
                   "                    var inputParams = payload.INPUTPARAMS.INPUTPARAM;",
-                  "                    var test = myArray.find(function (d) { return d.id === 45;}).foo; ",
+                  "                    var test = inputParams.find(function (d) { return d.$.NAME === \"I102STR_DATE_CONSERVATION\";}).NAME; ",
                   "                    console.log(test);",
                   "                    /*for(var j=0; j<xml2Json(sqlResult[i].results[0].PAYLOAD.BPMREQUEST.REPORT.INPUTPARAMS.INPUTPARAM.length;j++)",
                   "                    {",
