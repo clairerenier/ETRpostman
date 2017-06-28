@@ -135,7 +135,7 @@
           "_postman_id": "5aa99e0a-9500-5f7f-f62b-7d805d595eec",
           "name": "[030301901]PRO-CAL-03 - 22 fathers and TYPE_GRANDEUR_MODIFIEE='PCSMOY'",
           "request": {
-            "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_CAL_03/ws",
             "method": "POST",
             "header": [
               {
