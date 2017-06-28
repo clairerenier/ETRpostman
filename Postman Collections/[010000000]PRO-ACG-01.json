@@ -4594,6 +4594,58 @@
           "response": []
         },
         {
+          "_postman_id": "9891c293-923d-3114-72df-12e55e5b4341",
+          "name": "[011021003PCE]Drop file PCE copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021003PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR3_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021003PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR3_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021003PCE]Check Data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "5ef62d0c-88ee-0e0f-f7b8-6ac12d9950f1",
           "name": "[011021004PCE]Check Data",
           "event": [
@@ -5098,58 +5150,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n                  {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and resultat_etape like '%/Enveloppe_VICTOR_PCE/ :  Child element Publication {} at position 1 is unexpected%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "9891c293-923d-3114-72df-12e55e5b4341",
-          "name": "[011021003PCE]Drop file PCE copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011021003PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR3_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011021003PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR3_sourceProcessId\",jsonData.sourceProcessId);",
-                  "",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file PCE\"] = false;",
-                  "    //postman.setNextRequest(null);",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[011021003PCE]Check Data\");",
-                  "}",
-                  "else {",
-                  "    tests[\"Check drop file PCE\"] = false;",
-                  "    //postman.setNextRequest(null);  ",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
