@@ -3101,9 +3101,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3163,9 +3168,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3223,9 +3233,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3270,9 +3285,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3339,9 +3359,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3392,9 +3417,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3459,9 +3489,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3506,9 +3541,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3575,9 +3615,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3628,9 +3673,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3681,9 +3731,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3745,9 +3800,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3809,9 +3869,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3873,9 +3938,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3933,9 +4003,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -3980,9 +4055,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4049,9 +4129,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4102,9 +4187,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4162,9 +4252,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4209,9 +4304,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4278,9 +4378,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4331,9 +4436,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -4391,9 +4501,14 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+                "description": ""
+              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
