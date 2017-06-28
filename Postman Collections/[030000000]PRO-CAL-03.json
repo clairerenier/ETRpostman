@@ -208,7 +208,7 @@
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"GetProcessid\":",
                   "                    postman.setEnvironmentVariable(\"[030301901PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\",sqlResult[i].results[0].ID_CORRELATION);",
-                  "                    console.logsqlResult[i].results[0].ID_CORRELATION();",
+                  "                    console.log(sqlResult[i].results[0].ID_CORRELATION;",
                   "                    console.log(\"[030301901PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\");",
                   "                    break;",
                   "                }",
