@@ -2528,11 +2528,8 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100201PCE]Delete data\");",
                   "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
+                  "//postman.setNextRequest(\"[011102407]Delete and Update data\");",
                   ""
                 ]
               }
