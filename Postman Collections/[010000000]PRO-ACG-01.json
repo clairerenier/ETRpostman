@@ -1209,7 +1209,7 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "url": "http://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
