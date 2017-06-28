@@ -58,7 +58,7 @@
         },
         {
           "_postman_id": "84cf964a-d1b6-e0ff-6bfc-f982ffd328a8",
-          "name": "[010100200PCE]Check data",
+          "name": "[030300200PCE]Check data",
           "event": [
             {
               "listen": "test",
