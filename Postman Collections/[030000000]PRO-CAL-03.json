@@ -15,6 +15,39 @@
         {
           "_postman_id": "ad086fac-60a7-ba4a-ed98-92180c391755",
           "name": "[0300000000PCE]PRO-CAL-03 - Generation PRO-CAL-02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[010100200FGA]PRO_ACG_01_FGA_ORC_002_FGACRETNR1_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[010100200FGA]PRO_ACG_01_FGA_ORC_002_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file FGA\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file FGA\"] = true; ",
+                  "       postman.setNextRequest(\"[010100200FGA]Check data\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file FGA\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "}",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
           "request": {
             "url": "http://172.30.1.60:48030/rest/ETR_PRO_CAL_03/ws",
             "method": "POST",
