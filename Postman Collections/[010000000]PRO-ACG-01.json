@@ -5995,6 +5995,8 @@
                   "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT.CORRELATIONID)",
                   "                    //petit cadeau pour mlle claire ^^",
                   "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT.INPUTPARAMS.INPUTPARAM[0].$.NAME)",
+                  "                    console.log(xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT.INPUTPARAMS.INPUTPARAM.length)",
+                  "                    //for(var j=0; j<;j++)",
                   "                    //var jsonData = JSON.parse(xml2Json(sqlResult[i].results[0].PAYLOAD));",
                   "                    //        tests[\"Your test name\"] = jsonData.value === 100;",
                   "                    break;   ",
@@ -6009,9 +6011,7 @@
                   "    postman.setNextRequest(null);",
                   "}",
                   "",
-                  "",
-                  "var jsonData = JSON.parse(responseBody);",
-                  "tests[\"Your test name\"] = jsonData.value === 100;"
+                  ""
                 ]
               }
             },
