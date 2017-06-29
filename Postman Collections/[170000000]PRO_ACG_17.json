@@ -186,7 +186,7 @@
                   "                    var processid = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_processid\",sqlResult[i].results[0].ID_CORRELATION);",
                   "                    break;",
                   "                case \"CheckDateLancementProcessus\":",
-                  "                    var date_lancement_processus = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_lancement_processus\",sqlResult[i].results[0].ID_CORRELATION);",
+                  "                    var date_lancement_processus = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_lancement_processus\",sqlResult[i].results[0].DATE_LANCEMENT_PROCESSUS);",
                   "                    break;",
                   "                case \"CheckSourceProcessid\":",
                   "                    var source_processid = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_source_processid\",sqlResult[i].results[0].VALEUR_CHAMP_LIBRE_2);",
