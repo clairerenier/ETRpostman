@@ -5956,8 +5956,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid\");",
-                  "var sourceProcessid = postman.getEnvironmentVariable(\"[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_sourceProcessId\");",
+                  "var processid = postman.getEnvironmentVariable(\"[014200000PCE]PRO_ACG_42_PCE_ALL_ALL_SGPCETVPEC_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[014200000PCE]PRO_ACG_42_PCE_ALL_ALL_SGPCETVPEC_sourceProcessId\");",
                   "    ",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
