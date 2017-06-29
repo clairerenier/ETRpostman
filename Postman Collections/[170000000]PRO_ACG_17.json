@@ -211,7 +211,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[170004600ALL]Check data response and dmd_calcul\");",
                   "",
                   "}",
                   "else{",
