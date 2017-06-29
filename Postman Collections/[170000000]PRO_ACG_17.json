@@ -205,7 +205,7 @@
                   "                    tests[\"Check I100STR_HORODATE\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_HORODATE\";}).$.VALUE == date_lancement_processus; ",
                   "                    tests[\"Check I100STR_SOURCE_PROCESSID\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_SOURCE_PROCESSID\";}).$.VALUE == source_processid; ",
                   "                    tests[\"Check I100STR_SI_SOURCE\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_SI_SOURCE\";}).$.VALUE == \"\"; ",
-                  "                    tests[\"Check I100STR_MODE_LANCEMENT\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_MODE_LANCEMENT\";}).$.VALUE == \"INI\"; ",
+                  "                    tests[\"Check I100STR_MODE_LANCEMENT\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_MODE_LANCEMENT\";}).$.VALUE == \"INIT\"; ",
                   "                    break;   ",
                   "                }",
                   "            }",
