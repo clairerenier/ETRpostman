@@ -163,7 +163,7 @@
       "item": [
         {
           "_postman_id": "83a79246-ce21-e3c8-c60f-d0392b2b97a0",
-          "name": "[170004600ALL]Get info",
+          "name": "[170004600ALL]Check data copy",
           "event": [
             {
               "listen": "test",
