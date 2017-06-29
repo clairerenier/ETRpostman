@@ -6241,8 +6241,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_processid\");",
-                  "var sourceProcessid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_sourceProcessId\");",
+                  "var processid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_sourceProcessId\");",
                   "    ",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
