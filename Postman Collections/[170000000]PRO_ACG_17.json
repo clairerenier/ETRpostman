@@ -162,66 +162,6 @@
       "description": "o  0 - ok Case - file go through next step",
       "item": [
         {
-          "_postman_id": "631f90c6-c13b-e827-f427-46e604a6f5e7",
-          "name": "[014200000PCE]Delete data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointData\":",
-                  "                tests[\"Delete Point Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteAcqPceData\":",
-                  "                tests[\"Delete Acq_Pce Data\"] = true;",
-                  "                break;",
-                  "        }",
-                  "    }",
-                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[014200000PCE]Drop file PCE\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data Sum up\"] = fase; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('22/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('23/03/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCETVPEC'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('22/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "8cd20870-24e9-25ff-a690-615febeace45",
           "name": "[014200000PCE]Drop file PCE",
           "event": [
