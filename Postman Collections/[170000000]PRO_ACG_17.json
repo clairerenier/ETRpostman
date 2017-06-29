@@ -184,15 +184,15 @@
                   "                    break;",
                   "                case \"CheckProcessid\":",
                   "                    var processid = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_processid\",sqlResult[i].results[0].ID_CORRELATION);",
+                  "                    console.log(sqlResult[i].results[0].ID_CORRELATION);",
+                  "                    console.log(postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_processid\",sqlResult[i].results[0].ID_CORRELATION));",
                   "                    console.log(processid);",
                   "                    break;",
                   "                case \"CheckDateLancementProcessus\":",
                   "                    var date_lancement_processus = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_lancement_processus\",sqlResult[i].results[0].DATE_LANCEMENT_PROCESSUS);",
-                  "                    console.log(date_lancement_processus);",
                   "                    break;",
                   "                case \"CheckSourceProcessid\":",
                   "                    var source_processid = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_source_processid\",sqlResult[i].results[0].VALEUR_CHAMP_LIBRE_2);",
-                  "                    console.log(source_processid);",
                   "                    break;",
                   "                case \"CheckPayloadContent\":",
                   "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT;",
@@ -325,6 +325,97 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}' and stepid='ACG_01_PRO_ACG_42'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckDmdCalculCreation\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{[014200000PCE]PRO_ACG_42_PCE_XXX_YYY_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "83a79246-ce21-e3c8-c60f-d0392b2b97a0",
+          "name": "[170004600ALL]Check data copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckPayloadPresence\":",
+                  "                    tests[\"Check Payload Presence\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "                case \"CheckProcessid\":",
+                  "                    var processid = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_processid\",sqlResult[i].results[0].ID_CORRELATION);",
+                  "                    console.log(sqlResult[i].results[0].ID_CORRELATION);",
+                  "                    console.log(postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_processid\",sqlResult[i].results[0].ID_CORRELATION));",
+                  "                    console.log(processid);",
+                  "                    break;",
+                  "                case \"CheckDateLancementProcessus\":",
+                  "                    var date_lancement_processus = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_lancement_processus\",sqlResult[i].results[0].DATE_LANCEMENT_PROCESSUS);",
+                  "                    break;",
+                  "                case \"CheckSourceProcessid\":",
+                  "                    var source_processid = postman.setEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_source_processid\",sqlResult[i].results[0].VALEUR_CHAMP_LIBRE_2);",
+                  "                    break;",
+                  "                case \"CheckPayloadContent\":",
+                  "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).BPMREQUEST.REPORT;",
+                  "                    var inputParams = payload.INPUTPARAMS.INPUTPARAM;",
+                  "                    tests[\"Check REQUESTID\"] = payload.REQUESTID == processid+\"ACG_17_PRO_ACG_17\";",
+                  "                    tests[\"Check CORRELATIONID\"] = payload.CORRELATIONID == processid;",
+                  "                    tests[\"Check PROCESSID\"] = payload.CORRELATIONID == processid;",
+                  "                    tests[\"Check STEPID\"] = payload.STEPID == \"ACG_17_PRO_ACG_17\";",
+                  "                    tests[\"Check RPTNAME\"] = payload.RPTNAME == \"RS_ACG_INIT_DATA_COMPTAGE\";",
+                  "                    tests[\"Check I100STR_HORODATE\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_HORODATE\";}).$.VALUE == date_lancement_processus; ",
+                  "                    tests[\"Check I100STR_SOURCE_PROCESSID\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_SOURCE_PROCESSID\";}).$.VALUE == source_processid; ",
+                  "                    tests[\"Check I100STR_SI_SOURCE\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_SI_SOURCE\";}).$.VALUE == \"\"; ",
+                  "                    tests[\"Check I100STR_MODE_LANCEMENT\"] = inputParams.find(function (d) { return d.$.NAME == \"I100STR_MODE_LANCEMENT\";}).$.VALUE == \"INIT\"; ",
+                  "                    break;   ",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(\"[170004600ALL]Check data response and dmd_calcul\");",
+                  "",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid in (select id_correlation from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckProcessid\",\r\n         \"requestContent\":\"select id_correlation as ID_CORRELATION from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckSourceProcessid\",\r\n         \"requestContent\":\"select VALEUR_CHAMP_LIBRE_2 from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDateLancementProcessus\",\r\n         \"requestContent\":\"select DATE_LANCEMENT_PROCESSUS as DATE_LANCEMENT_PROCESSUS from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from icepayloadext where externalid in (select id_correlation from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
