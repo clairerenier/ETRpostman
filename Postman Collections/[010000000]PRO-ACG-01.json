@@ -6104,8 +6104,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file FGA\"] = false;",
@@ -6154,8 +6154,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_processid\");",
-                  "var sourceProcessid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_sourceProcessId\");",
+                  "var processid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_sourceProcessId\");",
                   "    ",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -6226,7 +6226,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from icepayloadext where externalid='{{[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_processid}}'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPayloadPresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid='{{[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from icepayloadext where externalid='{{[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_processid}}'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
