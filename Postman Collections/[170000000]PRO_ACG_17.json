@@ -247,7 +247,7 @@
                   "var processid = postman.getEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_processid\");",
                   "var date_lancement_processus = postman.getEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_lancement_processus\");",
                   "var source_processid = postman.getEnvironmentVariable(\"[170004600ALL]PRO_ACG_17_ALL_ALL_ALL_date_source_processid\");",
-                  "consold.log(date_lancement_processus);",
+                  "console.log(date_lancement_processus);",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
