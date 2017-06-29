@@ -6029,7 +6029,7 @@
     },
     {
       "_postman_id": "ffce5645-f23c-d067-d6a6-ceda065f2355",
-      "name": "[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR",
+      "name": "[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR",
       "description": "o  0 - ok Case - file go through next step",
       "item": [
         {
@@ -6104,8 +6104,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_XXX_YYY_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[014200000FGA]PRO_ACG_42_FGA_ALL_ALL_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file FGA\"] = false;",
