@@ -346,7 +346,7 @@
                   "                    break;",
                   "                case \"CheckEtrpmresponseMasterContent\":",
                   "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).RESPONSE.PARAMS.PARAM;",
-                  "                    tests[\"Check REQUESTID\"] = payload.find(function (d) { return d.$.NAME == \"REQUESTID\";}).$.VALUE == processid+\"ACG_01_PRO_ACG_42\"; ",
+                  "                    tests[\"Check REQUESTID\"] = payload.find(function (d) { return d.$.NAME == \"REQUESTID\";}).$.VALUE == processid+\"ACG_17_PRO_ACG_17\"; ",
                   "                    tests[\"Check RETURNCODE\"] = payload.find(function (d) { return d.$.NAME == \"RETURNCODE\";}).$.VALUE == \"0\";",
                   "                    break; ",
                   "                case \"CheckDmdCalculCreation\":",
