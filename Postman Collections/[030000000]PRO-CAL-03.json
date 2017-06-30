@@ -739,7 +739,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check drop file FGA\"] = true; ",
-                  "       postman.setNextRequest(\"[030302000FGA]Check data\");",
+                  "       postman.setNextRequest(\"[030302000FGA]PRO-CAL-03 FGA\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check drop file FGA\"] = false;",
