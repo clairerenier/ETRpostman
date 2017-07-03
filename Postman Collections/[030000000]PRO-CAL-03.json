@@ -257,7 +257,7 @@
         },
         {
           "_postman_id": "fef6c366-ee18-6952-557f-4cc683c30dc0",
-          "name": "[030301901PCE]Check data",
+          "name": "[030301901PCE]Check data and payload",
           "event": [
             {
               "listen": "test",
