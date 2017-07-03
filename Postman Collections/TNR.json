@@ -2692,7 +2692,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"PRECO\",\"fileName\":\"PREV_PCE_20170413_20170414_130027.csv\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"STM\",\"fileName\":\"STMChronique_20170629T094500_CHR41_METEOH_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
