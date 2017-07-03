@@ -215,7 +215,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301901PCE]Check data\");",
+                  "    postman.setNextRequest(\"[030301901PCE]Check data and payload\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
