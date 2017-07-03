@@ -2710,7 +2710,7 @@
                   "                    tests[\"Check status in ORC_PROCESSUS Old way\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
                   "                case \"CheckPointData\":",
-                  "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT >= \"48\";",
+                  "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT >= \"4\";",
                   "                    break;",
                   "                } ",
                   "            }",
