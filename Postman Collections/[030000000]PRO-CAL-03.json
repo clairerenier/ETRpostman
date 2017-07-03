@@ -431,7 +431,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301902PCE]Check data\");",
+                  "    postman.setNextRequest(\"[030301902PCE]Check data and payload\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
