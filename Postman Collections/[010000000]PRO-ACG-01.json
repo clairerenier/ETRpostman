@@ -2816,6 +2816,15 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "username": "ghitha.ben.chaaboune",
+                "password": "etr",
+                "saveHelperData": true,
+                "showPassword": false
+              }
+            },
             "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
