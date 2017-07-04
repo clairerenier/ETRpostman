@@ -3314,7 +3314,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from FGA where idFGA='FGATNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR2_processid}}'and Motif_rejet_stockage = 'FGA non valide'\"\r\n      }\r\n      \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from FGA where idFGA='FGATNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002FGA]PRO_ACG_10_FGA_ACG_210_FGATNR2_processid}}'and Motif_rejet_traitement = 'FGA non valide'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
