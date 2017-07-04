@@ -1470,7 +1470,7 @@
                   "       postman.setNextRequest(\"[030301500PCE]Check process cal end\");",
                   "    }",
                   "    else {",
-                  "        tests[\"Check drop file FGA\"] = false;",
+                  "        tests[\"Check drop file PCE\"] = false;",
                   "        //postman.setNextRequest(null);",
                   "}",
                   "}",
