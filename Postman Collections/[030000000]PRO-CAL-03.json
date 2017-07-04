@@ -1388,7 +1388,7 @@
       "item": [
         {
           "_postman_id": "4ddc707d-f1f9-2231-30be-e1dacb4faa90",
-          "name": "[030301500FGA]Delete data",
+          "name": "[030301500PCE]Delete data",
           "event": [
             {
               "listen": "test",
