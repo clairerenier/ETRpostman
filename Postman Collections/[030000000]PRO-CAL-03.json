@@ -986,8 +986,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[030302000FGA]PRO_CAL_03_FGA_ORC_020_FGACRETNR1_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[030302000FGA]PRO_CAL_03_FGA_ORC_020_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file FGA\"] = false;",
@@ -1076,7 +1076,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170601_FGA_20170601095001_CHR02_SCALA_18-1.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170601_FGA_20170601095001_CHR02_SCALA_18-1.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
