@@ -1191,60 +1191,8 @@
           "response": []
         },
         {
-          "_postman_id": "4ab30d96-447a-b8ef-a41f-c40fcd5b7b66",
-          "name": "[030301500FGA]Check process cal end PRO-CAL-03",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[030301500FGA]PRO-CAL-03 FGA\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "61d6e55a-6736-4f08-8917-07ffb1ae84f1",
-          "name": "[030301902PCE]Get Processid copy",
+          "name": "[030301502FGA]Get Processid",
           "event": [
             {
               "listen": "test",
@@ -1302,6 +1250,58 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"GetProcessid\",\r\n         \"requestContent\":\"select ID_CORRELATION from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4ab30d96-447a-b8ef-a41f-c40fcd5b7b66",
+          "name": "[030301500FGA]Check process cal end PRO-CAL-03",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check process cal end\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check process cal end\"] = true; ",
+                  "       postman.setNextRequest(\"[030301500FGA]PRO-CAL-03 FGA\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check process cal end\"] = false;",
+                  "        //postman.setNextRequest(null);  ",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
