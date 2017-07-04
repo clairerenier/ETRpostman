@@ -1264,6 +1264,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[030301502PCE]PRO_CAL_03_FGA_ORC_015_NSTOUEN\");",
+                  "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
