@@ -907,7 +907,7 @@
       "item": [
         {
           "_postman_id": "fa3c47dd-3632-0521-cac4-89103a802dc4",
-          "name": "[030302000FGA]Delete data",
+          "name": "[030301500FGA]Delete data",
           "event": [
             {
               "listen": "test",
