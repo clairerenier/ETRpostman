@@ -899,6 +899,256 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "0e9cbe03-b4c6-a722-7a71-d92aed198a80",
+      "name": "[030302000FGA]PRO_CAL_03_FGA_ORC_020_FGACRETNR1 copy",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "fa3c47dd-3632-0521-cac4-89103a802dc4",
+          "name": "[030302000FGA]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqFgaData\":",
+                  "                tests[\"Delete Acq_Fga Data\"] = true;",
+                  "                break;",
+                  "            case \"DeletePubPointJmnFgaData\":",
+                  "                tests[\"Delete Pub_Pont_Jmn Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[030302000FGA]Drop file FGA\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = fase; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('25/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('26/02/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('FGACRETNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('FGACRETNR1') and jour_gazier= TO_DATE('25/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='FGACRETNR1' and horodate between TO_DATE('2017-02-25 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-26 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f2a57ed0-a1d0-85d5-8048-38b6a7866dca",
+          "name": "[030302000FGA]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[030302000FGA]PRO_CAL_03_FGA_ORC_020_FGACRETNR1_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[030302000FGA]PRO_CAL_03_FGA_ORC_020_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file FGA\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file FGA\"] = true; ",
+                  "       postman.setNextRequest(\"[030302000FGA]PRO-CAL-03 FGA\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file FGA\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "}",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170225_FGA_20170225105010_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "24ed61c0-c0a7-dbef-4399-7e7cfa9495ea",
+          "name": "[030302000FGA]PRO-CAL-03 FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    // wait 10 sec before going to the next step",
+                  "    var date = new Date();",
+                  "    var curDate = null;",
+                  "    do {",
+                  "        curDate = new Date();",
+                  "    }",
+                  "    while (curDate - date < 10000);",
+                  "    /*setTimeout(function(){}, 10000); */",
+                  "    postman.setNextRequest(\"[030302000FGA]Check data\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//Another PCE LDPBG024 having 22 fathers"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_CAL_03/ws",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGRPS1I10A\",\"typeObjet\":\"FGA\",\"typeGestion\":\"\",\"horodate\":\"2017-02-25 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"QG\"}}\n"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "46cf5b97-a500-9d50-6aba-74e440c26fec",
+          "name": "[030302000FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[030301902PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\");",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatutOrcProcessus\":",
+                  "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                    break;",
+                  "                case \"CheckPubJmnFga\":",
+                  "                    tests[\"Check data in pub_point_jmn_fga\"] = sqlResult[i].results[0].COUNT == \"130\";",
+                  "                    break;",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >=(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckPubJmnFga\",\r\n         \"requestContent\":\"select count(*) as COUNT from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='FGACRETNR1' and horodate between TO_DATE('2017-02-25 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-26 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and  date_modif>=(sysdate -1/24/4)\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
