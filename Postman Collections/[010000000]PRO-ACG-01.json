@@ -2986,7 +2986,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "               switch (sqlResult[i].requestId) {",
                   "                case \"CheckSIStockAcquisition\":",
-                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
+                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"520\";",
                   "                    break;",
                   "                case \"CheckAcqFgaConservee\":",
                   "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
@@ -3023,7 +3023,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSIStockAcquisition\",\r\n         \"requestContent\":\"select count(*) as COUNT from Stock_acquisition2 where processid in  ('{{[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}')and SI_SOURCE= 'Scala'\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid in ('{{[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}') and MOTIF_REJET_TRAITEMENT is null  \"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSIStockAcquisition\",\r\n         \"requestContent\":\"select count(*) as COUNT from Stock_acquisition2 where date_mesure = to_date('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and SI_SOURCE like ('Scala')and processid in ('{{[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGATNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid in ('{{[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid}}') and MOTIF_REJET_TRAITEMENT is null  \"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
