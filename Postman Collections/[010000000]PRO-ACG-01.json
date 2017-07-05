@@ -2986,7 +2986,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "               switch (sqlResult[i].requestId) {",
                   "                case \"CheckSIStockAcquisition\":",
-                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"520\";",
+                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"650\";",
                   "                    break;",
                   "                case \"CheckAcqFgaConservee\":",
                   "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
