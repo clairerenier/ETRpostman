@@ -3170,7 +3170,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[011021002FGA]Check data\");",
+                  "   postman.setNextRequest(\"[011021002FGA]Check Data\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file FGA\"] = false;",
