@@ -3910,7 +3910,7 @@
         },
         {
           "_postman_id": "edd6623a-0200-af7e-d8c8-34cbca97cf6e",
-          "name": "[011021002PCE]Check non avaIlibility",
+          "name": "[011021002PCE]Check non availibility",
           "event": [
             {
               "listen": "test",
@@ -3927,7 +3927,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "               switch (sqlResult[i].requestId) {",
                   "                case \"CheckNonAvailabilityPCE\":",
-                  "                    tests[\"Check non availability in PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
+                  "                    tests[\"Check non availability in PCE\"] = sqlResult[i].results[0].COUNT== \"1\";",
                   "                    break;",
                   "                case \"CheckAcqPCEConservee\":",
                   "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
