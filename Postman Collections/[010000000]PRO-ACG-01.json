@@ -4455,20 +4455,14 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011021005PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR5_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011021005PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR5_sourceProcessId\",jsonData.sourceProcessId);",
-                  "",
                   "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file PCE\"] = false;",
-                  "    //postman.setNextRequest(null);",
+                  "    ",
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[011021005PCE]Check state 'Cheked' 24H\");",
+                  "    ",
                   "}",
                   "else {",
-                  "    tests[\"Check drop file PCE\"] = false;",
-                  "    //postman.setNextRequest(null);  ",
+                  "    ",
                   "}"
                 ]
               }
@@ -4486,7 +4480,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_5-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"140\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_5-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
