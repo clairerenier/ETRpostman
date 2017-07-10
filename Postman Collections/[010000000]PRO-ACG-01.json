@@ -3926,7 +3926,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011021002PCE]Delete and Update data\");",
+                  "postman.setNextRequest(\"[011021003PCE]Delete data\");",
                   ""
                 ]
               }
