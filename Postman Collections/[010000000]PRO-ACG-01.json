@@ -4246,7 +4246,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[011021004PCE]Check Data\");",
+                  "   postman.setNextRequest(\"[011021004PCE]Check state 'Locked' J\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file PCE\"] = false;",
@@ -4268,7 +4268,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20170506_PCE_20170507104025_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":140\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20170506_PCE_20170507104025_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"140\"}"
             },
             "description": ""
           },
