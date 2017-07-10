@@ -4246,7 +4246,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[011021004PCE]Check Data\");",
+                  "   postman.setNextRequest(\"[011021004PCE]Check state 'Locked' J\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file PCE\"] = false;",
@@ -4321,7 +4321,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatetPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from VERROU_ACQUISITION where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR4') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR4') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021004PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR4_processid}}'and Motif_rejet_Traitement = 'Etat PCE verrouillé '\"\r\n      }\r\n      \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatetPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from VERROU_ACQUISITION where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR4') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR4') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021004PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR4_processid}}'and Motif_rejet_Traitement = 'Etat PCE verrouillé'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
