@@ -3886,7 +3886,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE where idPCE='PCEGBTNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_processid}}'and Motif_rejet_stockage = 'PCE non valide'\"\r\n      }\r\n      \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE where idPCE='PCEGBTNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_processid}}'and Motif_rejet_traitement Like '%PCE non valide%'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
