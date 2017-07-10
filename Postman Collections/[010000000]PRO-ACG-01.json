@@ -4359,7 +4359,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011021004PCE]Delete and Update data\");",
+                  "postman.setNextRequest(\"[011021005PCE]Delete data\");",
                   ""
                 ]
               }
