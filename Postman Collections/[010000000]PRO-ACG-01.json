@@ -3875,7 +3875,7 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n\n[010100101PCE]Check avalibility\nExamples (0)\nPOST\nhttp://{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/\nParams\nSend\nSave\nAuthorization\nHeaders(2)\nBody\nPre-request Script\nTests\nCookies\nCode\nform-datax-www-form-urlencodedrawbinary\nJSON (application/json)\n",
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
@@ -3886,7 +3886,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE where idPCE='PCEGBTNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_processid}}'and Motif_rejet_traitement Like '%PCE non valide%'\"\r\n      }\r\n      \r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE where idPCE='PCEGBTNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_processid}}'and Motif_rejet_traitement= 'PCE non valide'\"\r\n      }\r\n      \r\n   ]\r\n}"
             },
             "description": ""
           },
