@@ -3453,7 +3453,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "               switch (sqlResult[i].requestId) {",
                   "                case \"CheckSIStockAcquisition\":",
-                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
+                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].COUNT == \"325\";",
                   "                    break;",
                   "                case \"CheckAcqPceConservee\":",
                   "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
