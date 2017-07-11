@@ -8513,7 +8513,7 @@
         },
         {
           "_postman_id": "6f60731d-c77f-e41b-aab6-743061d713c8",
-          "name": "[010100201PCE]Delete data",
+          "name": "[010700101PCE]Delete data",
           "event": [
             {
               "listen": "test",
