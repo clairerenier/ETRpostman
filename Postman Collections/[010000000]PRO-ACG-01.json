@@ -7354,7 +7354,7 @@
         },
         {
           "_postman_id": "80f6e7aa-cc92-577c-b062-e36e0ef86ac3",
-          "name": "[011000700PCE]Drop file PCE T",
+          "name": "[011000700PCE]Drop file PCE T Full",
           "event": [
             {
               "listen": "test",
@@ -7401,7 +7401,7 @@
         },
         {
           "_postman_id": "fbef20ea-bc7e-c15a-6f03-ed1b5b1f9d60",
-          "name": "[011000700PCE]Check Data PCE T",
+          "name": "[011000700PCE]Check Data PCE T Full",
           "event": [
             {
               "listen": "test",
