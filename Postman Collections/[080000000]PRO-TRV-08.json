@@ -1,0 +1,132 @@
+{
+  "variables": [],
+  "info": {
+    "name": "[080000000]PRO-TRV-08",
+    "_postman_id": "8b32e95f-c2fe-5b0e-95d2-613eba3f2aef",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "5268784e-0f08-72b9-3ba3-b8432178b55b",
+      "name": "[080001801]PRO_TRV_08_TRV_018",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "a27eee85-5610-369b-56b3-85d7eddb3c3a",
+          "name": "[080100100]Launch process",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function pausecomp(millis)",
+                  "         {",
+                  "          var date = new Date();",
+                  "          var curDate = null;",
+                  "          do { curDate = new Date(); }",
+                  "          while(curDate-date < millis);",
+                  "        }",
+                  "pausecomp(13000);",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "if (tests[\"Status code is 200\"]){",
+                  "        ",
+                  "        ",
+                  "        ",
+                  "       postman.setNextRequest(\"[080100100]Check data\");",
+                  "    }",
+                  "",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_TRV_08_IMPL/webservice/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c9bb8852-76df-7ff9-ce89-d1c80ac2f9f1",
+          "name": "[080100100]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "            if(sqlResult[0].results !== null){",
+                  "                    tests[\"Check Somme VOLPEC\"] = (sqlResult[0].results[0].SUMVOLPEC == sqlResult[1].results[0].SUMPOINT);",
+                  "                    console.log (sqlResult[1].results[0].SUMPOINT);",
+                  "                    console.log (sqlResult[0].results[0].SUMVOLPEC);",
+                  "                }",
+                  "            }",
+                  "        ",
+                  "    ",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSumVolpec\",\r\n         \"requestContent\":\"select sum(SUM) AS SUMVOLPEC from sum_volpec\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckSumPoint\",\r\n         \"requestContent\":\"select sum(P.VALEUR) AS SUMPOINT from POINT P inner join grandeur G on G.UIDGRANDEUR = P.UIDGRANDEUR INNER JOIN PCE ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET WHERE G.TYPE_GRANDEUR = 'VOLPEC' AND G.PAS = '86400' AND P.HORODATE >= TRUNC(sysdate-1/4)+1/4-(select val from factor inner join factorvalue on factor.uidfactor = factorvalue.uidfactor where factor.factorcode = 'NbJSumVolpec') AND P.HORODATE < TRUNC(sysdate-1/4)+1/4\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
