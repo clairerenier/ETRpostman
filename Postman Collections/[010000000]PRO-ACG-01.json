@@ -7401,7 +7401,7 @@
         },
         {
           "_postman_id": "fbef20ea-bc7e-c15a-6f03-ed1b5b1f9d60",
-          "name": "[011000701PCE]Check Data PCE T copy",
+          "name": "[011000700PCE]Check Data PCE T",
           "event": [
             {
               "listen": "test",
