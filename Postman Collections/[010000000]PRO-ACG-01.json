@@ -2441,8 +2441,8 @@
           "response": []
         },
         {
-          "_postman_id": "b8fdcea4-31c9-feac-4a8e-0321fe47dbf9",
-          "name": "[010100102PCE]Delete data copy",
+          "_postman_id": "ed1a4b8d-89da-7d33-58bd-c83a75a89379",
+          "name": "[010100102PCE]Drop file PCE copy",
           "event": [
             {
               "listen": "test",
@@ -2452,38 +2452,31 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointData\":",
-                  "                tests[\"Delete Point Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteAcqFgaData\":",
-                  "                tests[\"Delete Acq_Pce Data\"] = true;",
-                  "                break;",
-                  "        }",
+                  "    postman.setEnvironmentVariable(\"[010100102]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[010100102]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);",
                   "    }",
-                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[010100102PCE]Drop file PCE\");",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file PCE\"] = true; ",
+                  "       postman.setNextRequest(\"[010100101]Check data\");",
                   "    }",
                   "    else {",
-                  "       tests[\"Delete data Sum up\"] = fase; ",
-                  "       //postman.setNextRequest(null);",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);  ",
                   "    }",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
+                  "}"
                 ]
               }
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
@@ -2494,7 +2487,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('21/03/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCETVPEC'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170320_PCE_20170320103420_CHR02_SCALA_5-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"10\"}"
             },
             "description": ""
           },
