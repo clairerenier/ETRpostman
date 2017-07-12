@@ -124,7 +124,7 @@
         },
         {
           "_postman_id": "718feda2-df6d-61e2-5efa-0261a0922eb4",
-          "name": "[158501PCE]Check data - to do",
+          "name": "[158501PCE]Check data",
           "event": [
             {
               "listen": "test",
