@@ -7234,6 +7234,63 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "4517e480-a71a-e6c4-d1ca-6e7bd3d64436",
+          "name": "[011000702PCE]Check Data second file copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckAcqPceConservee\":",
+                  "                tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisitionForAcq\":",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;   ",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"25\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[0110210731PCE]Check SI\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011000701PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR7') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011000702PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition2 where lstime >=(sysdate-1/24) and processid='{{[011000702PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_processid}}'and Type_CHR in ('VOLSYS','PREINS') and VALEUR_MESURE_ACQ is null and QUALITE_MESURE_ACQ is null and A_calculer = 'OUI'\"\r\n      },\r\n\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEGBTNR7') and g.TYPE_GRANDEUR= 'VOLCCU' and po.valeur = '0' and po.Uidqualite_point = '15' and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
