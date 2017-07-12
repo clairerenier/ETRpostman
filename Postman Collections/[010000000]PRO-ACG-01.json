@@ -6869,7 +6869,7 @@
         },
         {
           "_postman_id": "fa21cc56-3a13-ac85-7ac2-27a6a7c6410d",
-          "name": "[011000701PCE]Drop file PCE T partial",
+          "name": "[011000701PCE]Drop file PCE",
           "event": [
             {
               "listen": "test",
@@ -6916,7 +6916,7 @@
         },
         {
           "_postman_id": "ff3c3144-9f00-aeb6-a3f4-eea2262d3375",
-          "name": "[011000701PCE]Check Data PCE T partial",
+          "name": "[011000701PCE]Check Data",
           "event": [
             {
               "listen": "test",
@@ -7086,7 +7086,7 @@
         },
         {
           "_postman_id": "5f787b19-bf8d-de62-fa5a-7484ce181ead",
-          "name": "[011000703PCE]Drop file PCE E Full",
+          "name": "[011000703PCE]Drop file PCE E",
           "event": [
             {
               "listen": "test",
@@ -7401,7 +7401,7 @@
         },
         {
           "_postman_id": "fbef20ea-bc7e-c15a-6f03-ed1b5b1f9d60",
-          "name": "[011000700PCE]Check Data PCE T Full",
+          "name": "[011000700PCE]Check Data PCE T",
           "event": [
             {
               "listen": "test",
