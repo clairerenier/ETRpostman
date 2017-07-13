@@ -1682,7 +1682,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[030301502PCE]PRO_CAL_03_FGA_ORC_015_NSTOUEN\");",
+                  "var processid = postman.getEnvironmentVariable(\"[030301500PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\");",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
@@ -1693,7 +1693,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[030301500FGA]PRO-CAL-03 FGA\");",
+                  "       postman.setNextRequest(\"[030301500PCE]Check data\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
