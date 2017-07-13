@@ -1275,7 +1275,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[030301500FGA]PRO-CAL-03 FGA\");",
+                  "       postman.setNextRequest(\"[030301500FGA]Check data\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
