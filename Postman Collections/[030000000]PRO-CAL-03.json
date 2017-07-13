@@ -1986,8 +1986,6 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[030301901PCE]PRO_CAL_03_PCE_ORC_019_SGRPS1I10A\");",
-                  "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
