@@ -1570,7 +1570,7 @@
                   "        curDate = new Date();",
                   "    }",
                   "    while (curDate - date < 10000);",
-                  "    /*setTimeout(function(){}, 10000); ",
+                  "    /*setTimeout(function(){}, 10000); */",
                   "    postman.setNextRequest(\"[030301500PCE]Get Processid\");",
                   "}",
                   "else{",
@@ -1729,7 +1729,7 @@
         },
         {
           "_postman_id": "54ddbe9c-dc48-c3e1-9af9-5fcefed5b648",
-          "name": "[030301500FGA]Check data",
+          "name": "[030301500PCE]Check data",
           "event": [
             {
               "listen": "test",
