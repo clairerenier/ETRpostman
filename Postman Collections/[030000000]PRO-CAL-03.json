@@ -2695,14 +2695,14 @@
         },
         {
           "_postman_id": "900392b0-1b5c-91e8-bbfd-00a7c9e9a120",
-          "name": "[030301501PCE]Check process cal end PRO-CAL-03",
+          "name": "[030301601PCE]Check process cal end PRO-CAL-03",
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[030301501PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\");",
+                  "var processid = postman.getEnvironmentVariable(\"[030301601PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC\");",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
@@ -2710,16 +2710,16 @@
                   "    /* 13-07-2017 - as of now the PRO-CAL-02 id_correlation doesn't contain the source_processid of PRO-CAL-03, hence the test is always ko */",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check process cal end\"] = false;",
-                  "        postman.setNextRequest(\"[030301501PCE]Check data\");",
+                  "        postman.setNextRequest(\"[030301601PCE]Check data\");",
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
                   "",
-                  "       postman.setNextRequest(\"[030301501PCE]Check data\");",
+                  "       postman.setNextRequest(\"[030301601PCE]Check data\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
-                  "        postman.setNextRequest(\"[030301501PCE]Check data\");  ",
+                  "        postman.setNextRequest(\"[030301601PCE]Check data\");  ",
                   "    }",
                   "}",
                   "else{",
@@ -2743,7 +2743,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301501PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301601PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
