@@ -2049,7 +2049,7 @@
     },
     {
       "_postman_id": "51224ae3-bd87-65f8-1a0f-f6e01771771e",
-      "name": "[030301500PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC copy",
+      "name": "[030301600PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC",
       "description": "0 - Check that the proper number of dmd_calcul is generated due to PCE and process are ok\n1 - Check that the proper number of dmd_calcul is generated due to APIL and GDC and process are ok",
       "item": [
         {
