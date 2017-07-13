@@ -1751,7 +1751,7 @@
                   "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
                   "                case \"CheckDmdCalcul\":",
-                  "                    tests[\"Check Dmd_calcul creation\"] = sqlResult[i].results[0].COUNT == \"3\";",
+                  "                    tests[\"Check Dmd_calcul creation\"] = sqlResult[i].results[0].COUNT == \"13\";",
                   "                    break;",
                   "                }",
                   "            }",
