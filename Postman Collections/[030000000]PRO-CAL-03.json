@@ -903,7 +903,7 @@
     {
       "_postman_id": "0e9cbe03-b4c6-a722-7a71-d92aed198a80",
       "name": "[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN",
-      "description": "Check that the proper number of dmd_calcul is generated and process are ok",
+      "description": "Check that the proper number of dmd_calcul is generated (due to ZQG and FGA) and process are ok",
       "item": [
         {
           "_postman_id": "fa3c47dd-3632-0521-cac4-89103a802dc4",
