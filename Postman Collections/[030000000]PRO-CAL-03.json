@@ -2426,7 +2426,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301601PCE]PRO-CAL-03 PCE\");",
+                  "    postman.setNextRequest(\"[030301601PCE]Drop file PCE\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
