@@ -2367,7 +2367,7 @@
                   "       postman.setNextRequest(\"[030301600PCE]Check data\");",
                   "    }",
                   "    else {",
-                  "        tests[\"Check process cal end\"] = false;",
+                  "        tests[\"Check process cal end\"] = true;",
                   "        postman.setNextRequest(\"[030301600PCE]Check data\");  ",
                   "    }",
                   "}",
