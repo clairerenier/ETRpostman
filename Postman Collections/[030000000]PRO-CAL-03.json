@@ -2522,7 +2522,7 @@
         },
         {
           "_postman_id": "f39a7e93-a597-0fd8-6e2d-f9c765f35a9c",
-          "name": "[030301601PCE]Check process cal end copy",
+          "name": "[030301601PCE]Check process cal end",
           "event": [
             {
               "listen": "test",
