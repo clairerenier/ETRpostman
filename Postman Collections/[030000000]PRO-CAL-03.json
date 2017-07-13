@@ -1518,7 +1518,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[030301500FGA]PRO-CAL-03 FGA\");",
+                  "       postman.setNextRequest(\"[030301500PCE]PRO-CAL-03 PCE\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
@@ -1546,7 +1546,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301500PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
