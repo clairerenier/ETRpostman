@@ -1857,6 +1857,71 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "b25764f5-e07a-1487-8188-7e984ad80825",
+          "name": "[030301500PCE]Get Processid copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"GetSourceProcessid\":",
+                  "                    postman.setEnvironmentVariable(\"[030301500PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
+                  "                    break;",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(\"[030301500PCE]Check process cal end PRO-CAL-03\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"GetSourceProcessid\",\r\n         \"requestContent\":\"select distinct SOURCE_PROCESSID from dmd_calcul where prec_processid in ( select ID_CORRELATION from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     }
