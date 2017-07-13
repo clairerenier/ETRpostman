@@ -1693,6 +1693,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
+                  "       /* 13-07-2017 - as of now the PRO-CAL-02 id_correlation doesn't contain the source_processid of PRO-CAL-03, hence the test is always ko */",
                   "       postman.setNextRequest(\"[030301500PCE]Check data\");",
                   "    }",
                   "    else {",
