@@ -1633,7 +1633,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301500PCE]Check process cal en PRO-CAL-03\");",
+                  "    postman.setNextRequest(\"[030301500PCE]Check process cal end PRO-CAL-03\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
