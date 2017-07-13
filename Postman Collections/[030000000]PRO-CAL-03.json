@@ -1554,7 +1554,7 @@
         },
         {
           "_postman_id": "bb9c213f-7b3e-1d2c-4c67-30604397faf0",
-          "name": "[030301500FGA]PRO-CAL-03 FGA",
+          "name": "[030301500FGA]PRO-CAL-03 PCE",
           "event": [
             {
               "listen": "test",
