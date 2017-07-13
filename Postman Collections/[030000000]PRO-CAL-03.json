@@ -1762,7 +1762,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[030301501PCE]PRO-CAL-03 PCE\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
