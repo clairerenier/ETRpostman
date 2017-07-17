@@ -4528,7 +4528,7 @@
                   "                case \"CheckStatutOrcProcessus\":",
                   "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
-                  "                case \"CheckPubPoint\tAZOMOY\";\ttests[\"Check PubPoint\tAZOMOY\t\"] = sqlResult[i].results[0].COUNT == \"3\";                    break;",
+                  "                case \"CheckPubPoint\tAZOMOY\":\ttests[\"Check PubPoint\tAZOMOY\t\"] = sqlResult[i].results[0].COUNT == \"3\";                    break;",
                   "                }",
                   "            }",
                   "        }",
