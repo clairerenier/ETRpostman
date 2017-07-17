@@ -3872,7 +3872,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301701PCE]PRO-CAL-03 PCE\");",
+                  "    postman.setNextRequest(\"[030300101PCE]PRO-CAL-03 PCE\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
