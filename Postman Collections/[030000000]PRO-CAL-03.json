@@ -4161,8 +4161,8 @@
     },
     {
       "_postman_id": "efa7a696-497e-7fb4-b68d-4869e8cc5b8f",
-      "name": "[030301500PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC copy",
-      "description": "0 - Check that the proper number of dmd_calcul is generated due to PCE and process are ok\n1 - Check that the proper number of dmd_calcul is generated due to APIL and GDC and process are ok",
+      "name": "[030301800PCE]PRO_CAL_03_PCE_ORC_018_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_SGPCEMVPEC_??",
+      "description": "0 - Check that the proper number of dmd_calcul is generated due to PCE and process are ok\n1 - Check that the proper number of unit type for PCE T are published\n2 - Check that the proper number of unit type for PCE E are published\n3 - Check that the proper number of unit type for PCE C are published\n3 - Check that the proper number of unit type for PCE M M are published\n3 - Check that the proper number of unit type for PCE M J are published",
       "item": [
         {
           "_postman_id": "cc80b428-9003-a5f8-5292-e7fbe1c02850",
