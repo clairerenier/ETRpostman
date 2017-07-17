@@ -3524,7 +3524,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data Pce\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete WM_Calcul Data\"]){",
                   "        tests[\"Delete data Sum up\"]  = true; ",
-                  "        postman.setNextRequest(\"[030301700PCE]Drop file PCE\");",
+                  "        postman.setNextRequest(\"[0303000100PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
