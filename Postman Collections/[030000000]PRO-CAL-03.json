@@ -3913,62 +3913,6 @@
           "response": []
         },
         {
-          "_postman_id": "8811ed01-41ec-f145-4408-28c43862b32d",
-          "name": "[030301701PCE]PRO-CAL-03 PCE",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    // wait 10 sec before going to the next step",
-                  "    var date = new Date();",
-                  "    var curDate = null;",
-                  "    do {",
-                  "        curDate = new Date();",
-                  "    }",
-                  "    while (curDate - date < 10000);",
-                  "    /*setTimeout(function(){}, 10000); */",
-                  "    postman.setNextRequest(\"[030301701PCE]Get Processid\");",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//Another PCE LDPBG024 having 22 fathers"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_CAL_03/ws",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCEEVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-04 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "ef88b462-5452-860c-3f4b-7b1da2f3fae9",
           "name": "[030301701PCE]Get Processid",
           "event": [
