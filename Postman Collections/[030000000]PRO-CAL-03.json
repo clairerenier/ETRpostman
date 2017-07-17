@@ -4296,7 +4296,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[030301800PCE]PRO-CAL-03 PCE\");",
+                  "       postman.setNextRequest(\"[030301800PCE]PRO-CAL-03 PCE T SGPCETVPEC\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
