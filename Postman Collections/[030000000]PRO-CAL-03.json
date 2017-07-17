@@ -2296,7 +2296,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"GetSourceProcessid\":",
-                  "                    postman.setEnvironmentVariable(\"[030301600PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
+                  "                    postman.setEnvironmentVariable(\"[030301600PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
                   "                    break;",
                   "                }",
                   "            }",
