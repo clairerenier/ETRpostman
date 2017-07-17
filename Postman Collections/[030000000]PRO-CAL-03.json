@@ -3250,8 +3250,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[030301601PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[030301601PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[030301701PCE]PRO_CAL_03_PCE_ORC_017_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[030301701PCE]PRO_CAL_03_PCE_ORC_017_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -3259,7 +3259,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[030301601PCE]Check process cal end\");",
+                  "       postman.setNextRequest(\"[030301701PCE]Check process cal end\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -3286,7 +3286,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170603_PCE_20170603103425_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170604_PCE_20170604103425_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
