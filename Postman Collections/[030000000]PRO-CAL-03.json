@@ -3195,7 +3195,7 @@
                   "                    tests[\"Check Dmd_calcul creation\"] = sqlResult[i].results[0].COUNT == \"4\";",
                   "                    break;",
                   "                case \"CheckWMCalcul\":",
-                  "                    tests[\"Check WM_Calcul creation\"] = sqlResult[i].results[0].COUNT == \"3\";",
+                  "                    tests[\"Check WM_Calcul creation\"] = sqlResult[i].results[0].COUNT == \"4\";",
                   "                    break;",
                   "                }",
                   "            }",
