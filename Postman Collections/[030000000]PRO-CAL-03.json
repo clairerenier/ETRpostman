@@ -3630,7 +3630,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[030301700PCE]PRO-CAL-03 PCE\");",
+                  "       postman.setNextRequest(\"[030300100PCE]PRO-CAL-03 PCE\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
@@ -3658,7 +3658,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301700PCE]PRO_CAL_03_PCE_ORC_017_SGPCETVPEC_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030300100PCE]PRO_CAL_03_PCE_TRV_001_SGPCETVPEC_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
