@@ -2296,7 +2296,7 @@
                   "            if(sqlResult[i].results !== null){",
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"GetSourceProcessid\":",
-                  "                    postman.setEnvironmentVariable(\"[030301600PCE]PRO_CAL_03_PCE_ORC_016_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
+                  "                    postman.setEnvironmentVariable(\"[030301600PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
                   "                    break;",
                   "                }",
                   "            }",
@@ -2943,7 +2943,7 @@
         },
         {
           "_postman_id": "66e2af6b-bfcf-4497-ca52-f9c9949ba285",
-          "name": "[030301700PCE]Check process cal end",
+          "name": "[030301600PCE]Check process cal end",
           "event": [
             {
               "listen": "test",
@@ -2995,7 +2995,7 @@
         },
         {
           "_postman_id": "5be275c5-cf32-425e-f541-096554e0e534",
-          "name": "[030301700PCE]PRO-CAL-03 PCE",
+          "name": "[030301600PCE]PRO-CAL-03 PCE",
           "event": [
             {
               "listen": "test",
@@ -3012,7 +3012,7 @@
                   "    }",
                   "    while (curDate - date < 10000);",
                   "    /*setTimeout(function(){}, 10000); */",
-                  "    postman.setNextRequest(\"[030301700PCE]Get Processid\");",
+                  "    postman.setNextRequest(\"[030301600PCE]Get Processid\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -3043,7 +3043,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-04 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-03 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
             },
             "description": ""
           },
@@ -3051,7 +3051,7 @@
         },
         {
           "_postman_id": "9736b06b-391e-44e0-aa9e-60010bd0fa6b",
-          "name": "[030301700PCE]Get Processid",
+          "name": "[030301600PCE]Get Processid",
           "event": [
             {
               "listen": "test",
@@ -3068,13 +3068,13 @@
                   "            if(sqlResult[i].results !== null){",
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"GetSourceProcessid\":",
-                  "                    postman.setEnvironmentVariable(\"[030301700PCE]PRO_CAL_03_PCE_ORC_017_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
+                  "                    postman.setEnvironmentVariable(\"[030301600PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\",sqlResult[i].results[0].SOURCE_PROCESSID);",
                   "                    break;",
                   "                }",
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301700PCE]Check process cal end PRO-CAL-03\");",
+                  "    postman.setNextRequest(\"[030301600PCE]Check process cal end PRO-CAL-03\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
