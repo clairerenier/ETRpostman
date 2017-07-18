@@ -74,7 +74,7 @@
         },
         {
           "_postman_id": "8426c06b-5d1b-4bf3-7017-c23f94826cfd",
-          "name": "[030301800PCE]Drop file PCE",
+          "name": "[0101TNR00PCE]Drop file PCE",
           "event": [
             {
               "listen": "test",
@@ -84,8 +84,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[030301800PCE]PRO_CAL_03_PCE_ORC_018_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[030301800PCE]PRO_CAL_03_PCE_ORC_018_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[0101TNR00PCE]PRO_CAL_03_PCE_TNR_TNR_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[0101TNR00PCE]PRO_CAL_03_PCE_TNR_TNR_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -93,7 +93,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[030301800PCE]Check process cal end\");",
+                  "       postman.setNextRequest(\"[0101TNR00PCE]Check process cal end\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -120,7 +120,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170606_PCE_20170606103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170607_PCE_20170607103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
