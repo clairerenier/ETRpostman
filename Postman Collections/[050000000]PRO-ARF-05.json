@@ -24,8 +24,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[030300100PCE]PRO_CAL_03_PCE_TRV_001_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[030300100PCE]PRO_CAL_03_PCE_TRV_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -60,7 +60,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170605_PCE_20170605103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20151222_BASET_20151222093500_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
