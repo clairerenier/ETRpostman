@@ -580,7 +580,7 @@
         },
         {
           "_postman_id": "b059627e-6810-4021-e001-292b3071cac4",
-          "name": "[051001500FGA]Delete data copy",
+          "name": "[051001500FGA]Delete data",
           "event": [
             {
               "listen": "test",
