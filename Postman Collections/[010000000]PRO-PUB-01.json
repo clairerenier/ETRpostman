@@ -203,7 +203,7 @@
                   "                    tests[\"Check Dmd_calcul creation\"] = sqlResult[i].results[0].COUNT >= \"1\";",
                   "                    break;",
                   "                case \"CheckEtrMeteringData\":\t",
-                  "                    tests[\"Check EtrMeteringData CHR75\"] = sqlResult[i].results[0].COUNT == \"30\";                    ",
+                  "                    tests[\"Check EtrMeteringData CHR82\"] = sqlResult[i].results[0].COUNT == \"30\";                    ",
                   "                    break;",
                   "                }",
                   "            }",
