@@ -180,7 +180,7 @@
         },
         {
           "_postman_id": "fdd4fbee-b3af-6d73-beea-2415b1d10a02",
-          "name": "[030301800PCE]Check data PCE T SGPCETVPEC",
+          "name": "[0101TNR00PCE]Check data PCE T SGPCETVPEC",
           "event": [
             {
               "listen": "test",
