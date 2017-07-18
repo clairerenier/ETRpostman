@@ -269,7 +269,7 @@
                   "    }",
                   "    while (curDate - date < 10000);",
                   "    /*setTimeout(function(){}, 10000); */",
-                  "    postman.setNextRequest(\"[0101TNR00PCE]Get Processid\");",
+                  "    postman.setNextRequest(\"[0101TNR01PCE]Get Processid\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -308,7 +308,7 @@
         },
         {
           "_postman_id": "ff4cf3d0-8d5c-3cd6-7bea-93580c178545",
-          "name": "[0101TNR00PCE]Get Processid",
+          "name": "[0101TNR01PCE]Get Processid",
           "event": [
             {
               "listen": "test",
@@ -331,7 +331,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[0101TNR00PCE]Check process cal end PRO-CAL-03\");",
+                  "    postman.setNextRequest(\"[0101TNR01PCE]Check process cal end PRO-CAL-03\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
