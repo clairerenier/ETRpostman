@@ -429,7 +429,7 @@
         },
         {
           "_postman_id": "f1c1a5e1-5bb4-3591-cb9c-720d48373965",
-          "name": "[0101TNR01PCE]Check data PCE T SGPCETVPEC copy",
+          "name": "[0101TNR01PCE]Check data PCE T SGPCETVPEC CHR75",
           "event": [
             {
               "listen": "test",
