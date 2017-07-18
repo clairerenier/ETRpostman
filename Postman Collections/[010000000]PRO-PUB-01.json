@@ -269,7 +269,7 @@
                   "    }",
                   "    while (curDate - date < 10000);",
                   "    /*setTimeout(function(){}, 10000); */",
-                  "    postman.setNextRequest(\"[0101TNR00PCE]Get Processid\");",
+                  "    postman.setNextRequest(\"[0101TNR01PCE]Get Processid\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -331,7 +331,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[0101TNR00PCE]Check process cal end PRO-CAL-03\");",
+                  "    postman.setNextRequest(\"[0101TNR01PCE]Check process cal end PRO-CAL-03\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -380,7 +380,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[030301501PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\");",
+                  "var processid = postman.getEnvironmentVariable(\"[0101TNR01PCE]PRO_PUB_01_PCE_TNR_TNR_SGPCETVPEC\");",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
