@@ -133,6 +133,60 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "f3d600cd-6d03-265a-9726-c1cd2d6251fa",
+          "name": "[051001500FGA]Drop file BT_Fiche FGA Add",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[051001500FGA]PRO_ARF_10_FGA_ARF_015_BMOBILE2_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[051001500FGA]PRO_ARF_10_FGA_ARF_015_BMOBILE2_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file BT_fiche 1\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file BT_fiche 2\"] = true; ",
+                  "       postman.setNextRequest(\"[051001500FGA]Check data BT_Fiche FGA Add\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file BT_fiche 3\"] = true;",
+                  "        postman.setNextRequest(\"[051001500FGA]Check data BT_Fiche FGA Add\");",
+                  "}",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093501_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
@@ -508,60 +562,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteBTFiche\",\r\n         \"requestContent\":\"delete from bt_fiche where UIDFICHE like 'P-FGA2'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "f3d600cd-6d03-265a-9726-c1cd2d6251fa",
-          "name": "[051001500FGA]Drop file BT_Fiche FGA Add",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[051001500FGA]PRO_ARF_10_FGA_ARF_015_BMOBILE2_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[051001500FGA]PRO_ARF_10_FGA_ARF_015_BMOBILE2_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file BT_fiche 1\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file BT_fiche 2\"] = true; ",
-                  "       postman.setNextRequest(\"[051001500FGA]Check data BT_Fiche FGA Add\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file BT_fiche 3\"] = true;",
-                  "        postman.setNextRequest(\"[051001500FGA]Check data BT_Fiche FGA Add\");",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093501_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
