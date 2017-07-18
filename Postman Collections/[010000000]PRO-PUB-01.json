@@ -38,7 +38,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data Pce\"] && tests[\"Delete Acq_Pce Data\"]){",
                   "        tests[\"Delete data Sum up\"]  = true; ",
-                  "        postman.setNextRequest(\"[030301800PCE]Drop file PCE\");",
+                  "        postman.setNextRequest(\"[0101TNR00PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
@@ -74,7 +74,7 @@
         },
         {
           "_postman_id": "8426c06b-5d1b-4bf3-7017-c23f94826cfd",
-          "name": "[030301800PCE]Drop file PCE",
+          "name": "[0101TNR00PCE]Drop file PCE",
           "event": [
             {
               "listen": "test",
@@ -120,7 +120,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170606_PCE_20170606103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170607_PCE_20170607103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
