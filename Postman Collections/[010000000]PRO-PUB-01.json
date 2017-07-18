@@ -421,7 +421,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0101TNR01PCE]PRO_PUB_01_PCE_TNR_TNR_SGPCETVPEC}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0101TNR01PCE]PRO_PUB_01_PCE_TNR_TNR_SGPCETVPEC_processid}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
