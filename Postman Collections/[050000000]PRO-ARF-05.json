@@ -507,7 +507,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteBTFiche\",\r\n         \"requestContent\":\"delete from bt_fiche where UIDFICHE like 'PJR-F03'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteBTFiche\",\r\n         \"requestContent\":\"delete from bt_fiche where UIDFICHE like 'P-FGA2'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
