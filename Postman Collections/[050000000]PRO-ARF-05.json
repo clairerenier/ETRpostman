@@ -765,6 +765,135 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "d61e431e-2dd7-28a7-8efd-9f1fb0bba423",
+      "name": "[051001300PCE]PRO_ARF_10_ARF_013_PCE_SGPCEEVPEC copy",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "3b20d75d-f26a-0fa5-13dd-0a2125c021ae",
+          "name": "[051001300PCE]Drop file BT_Fiche PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[051001300PCE]PRO_ARF_10_PCE_ARF_013_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[051001300PCE]PRO_ARF_10_PCE_ARF_013_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file BT_fiche 1\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file BT_fiche 2\"] = true; ",
+                  "       postman.setNextRequest(\"[051001300PCE]Check data BT_Fiche Update\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file BT_fiche 3\"] = true;",
+                  "        postman.setNextRequest(\"[051001300PCE]Check data BT_Fiche Update\");",
+                  "}",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20151222_BASET_20151222093500_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a0ee8a17-f615-675a-77d7-9c0b1d41ab2d",
+          "name": "[051001300PCE]Check data BT_Fiche Update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatutOrcProcessus\":",
+                  "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                    break;",
+                  "                case \"CheckBTFicheUpdate\":",
+                  "                    tests[\"Check BT_Fiche Update\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_ARF_05' and date_lancement_processus >=(sysdate-1/24/10) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckBTFicheUpdate\",\r\n         \"requestContent\":\"select count(*) as COUNT from PWRLINE.BT_FICHE where BT_FICHE.UIDFICHE='PJR-F02' and BT_FICHE.DATE_DE_MODIFICATION>(sysdate-1/24/10)\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
