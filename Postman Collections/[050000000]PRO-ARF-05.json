@@ -164,7 +164,7 @@
                   "    }",
                   "    if ( tests[\"Delete BT Fiche\"] ){",
                   "        tests[\"Delete data Sum up\"]  = true; ",
-                  "        postman.setNextRequest(\"[050501500PCE]Drop file BT_Fiche Add\");",
+                  "        postman.setNextRequest(\"[051001500PCE]Drop file BT_Fiche Add\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
