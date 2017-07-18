@@ -157,20 +157,14 @@
                   "    for(var i= 0; i < sqlResult.length; i++)",
                   "    {",
                   "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointDataPce\":",
-                  "                tests[\"Delete Point Data Pce\"] = true;",
-                  "                break;",
-                  "            case \"DeleteAcqPceData\":",
-                  "                tests[\"Delete Acq_Pce Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteWmCalcul\":",
-                  "                tests[\"Delete WM_Calcul Data\"] = true;",
+                  "            case \"DeleteBTFiche\":",
+                  "                tests[\"Delete BT Fiche\"] = true;",
                   "                break;",
                   "        }",
                   "    }",
-                  "    if ( tests[\"Delete Point Data Pce\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete WM_Calcul Data\"]){",
+                  "    if ( tests[\"Delete BT Fiche\"] ){",
                   "        tests[\"Delete data Sum up\"]  = true; ",
-                  "        postman.setNextRequest(\"[030300100PCE]Drop file PCE\");",
+                  "        postman.setNextRequest(\"[050501300PCE]Drop file BT_Fiche Add\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
@@ -191,14 +185,14 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePointDataPce\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('05/06/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('06/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCETVPEC','SGPCEEVPEC','SGPCETPIL'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalcul\",\r\n         \"requestContent\":\"delete from wm_calcul where wm_calcul.IDOBJECT in ('SGPCECPEC','SGPCECVOL0','SGPCECNEG','SGPCEZPEC','SGPCECZZZ','SGPCECAAZ','MASTER','BIGMASTER','SGPCECORC19') and HORODATE >= TO_DATE('05/06/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and HORODATE <= TO_DATE('06/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCETVPEC','SGPCEEVPEC','SGPCETPIL') and jour_gazier= TO_DATE('05/06/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteBTFiche\",\r\n         \"requestContent\":\"delete from bt_fiche where UIDFICHE like 'PJR-F03'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
