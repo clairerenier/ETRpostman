@@ -4854,6 +4854,62 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "e30167fe-c2e7-86b4-cb5e-b299c2963273",
+          "name": "[030301501PCE]Check process cal end PRO-CAL-03 copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[030301501PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC\");",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    /* 13-07-2017 - as of now the PRO-CAL-02 id_correlation doesn't contain the source_processid of PRO-CAL-03, hence the test is always ko */",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check process cal end\"] = false;",
+                  "        postman.setNextRequest(\"[030301501PCE]Check data\");",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check process cal end\"] = true; ",
+                  "",
+                  "       postman.setNextRequest(\"[030301501PCE]Check data\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check process cal end\"] = false;",
+                  "        postman.setNextRequest(\"[030301501PCE]Check data\");  ",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301501PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC}}\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     }
