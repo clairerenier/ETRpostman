@@ -388,16 +388,16 @@
                   "    /* 13-07-2017 - as of now the PRO-CAL-02 id_correlation doesn't contain the source_processid of PRO-CAL-03, hence the test is always ko */",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check process cal end\"] = false;",
-                  "        postman.setNextRequest(\"[030301501PCE]Check data\");",
+                  "        postman.setNextRequest(\"[0101TNR01PCE]Check data PCE T SGPCETVPEC CHR75\");",
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
                   "",
-                  "       postman.setNextRequest(\"[030301501PCE]Check data\");",
+                  "       postman.setNextRequest(\"[0101TNR01PCE]Check data PCE T SGPCETVPEC CHR75\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
-                  "        postman.setNextRequest(\"[030301501PCE]Check data\");  ",
+                  "        postman.setNextRequest(\"[0101TNR01PCE]Check data PCE T SGPCETVPEC CHR75\");  ",
                   "    }",
                   "}",
                   "else{",
@@ -421,7 +421,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[030301501PCE]PRO_CAL_03_PCE_ORC_015_SGPCETVPEC}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0101TNR01PCE]PRO_PUB_01_PCE_TNR_TNR_SGPCETVPEC}}\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
