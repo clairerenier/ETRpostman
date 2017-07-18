@@ -88,7 +88,7 @@
                   "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
                   "                case \"CheckBTFicheUpdate\":",
-                  "                    tests[\"Check BT_Fiche Update\"] = sqlResult[i].results[0].COUNT == \"2\";",
+                  "                    tests[\"Check BT_Fiche Update\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
                   "                }",
                   "            }",
