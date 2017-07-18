@@ -28,15 +28,15 @@
                   "    postman.setEnvironmentVariable(\"[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        tests[\"Check drop file BT_fiche\"] = false;",
                   "        //postman.setNextRequest(null);",
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
+                  "       tests[\"Check drop file BT_fiche\"] = true; ",
                   "       postman.setNextRequest(\"[050501300PCE]Check data BT_Fiche Update\");",
                   "    }",
                   "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        tests[\"Check drop file BT_fiche\"] = false;",
                   "        //postman.setNextRequest(null);",
                   "}",
                   "}",
@@ -87,8 +87,8 @@
                   "                case \"CheckStatutOrcProcessus\":",
                   "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                    break;",
-                  "                case \"CheckDmdCalcul\":",
-                  "                    tests[\"Check Dmd_calcul creation\"] = sqlResult[i].results[0].COUNT == \"2\";",
+                  "                case \"CheckBTFicheUpdate\":",
+                  "                    tests[\"Check BT_Fiche Update\"] = sqlResult[i].results[0].COUNT == \"2\";",
                   "                    break;",
                   "                }",
                   "            }",
@@ -128,7 +128,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >=(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid in (select ID_CORRELATION from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correation='{{[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckBTFicheUpdate\",\r\n         \"requestContent\":\"select count(*) as COUNT from PWRLINE.BT_FICHE where BT_FICHE.UIDFICHE like 'PJR-F02%' and BT_FICHE.DATE_DE_MODIFICATION>(sysdate-1/24/10)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
