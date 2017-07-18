@@ -144,7 +144,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[0101TNR00PCE]PRO-CAL-03 PCE T SGPCETVPEC\");",
+                  "       postman.setNextRequest(\"[0101TNR00PCE]Check data PCE T SGPCETVPEC\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
