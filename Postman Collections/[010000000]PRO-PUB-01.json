@@ -300,7 +300,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-07 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCETVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-07 06:00:00\",\"listeHoursSt\":\"08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
             },
             "description": ""
           },
