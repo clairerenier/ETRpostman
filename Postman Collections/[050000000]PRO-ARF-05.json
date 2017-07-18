@@ -28,16 +28,16 @@
                   "    postman.setEnvironmentVariable(\"[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file BT_fiche\"] = false;",
+                  "        tests[\"Check drop file BT_fiche 1\"] = false;",
                   "        //postman.setNextRequest(null);",
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file BT_fiche\"] = true; ",
+                  "       tests[\"Check drop file BT_fiche 2\"] = true; ",
                   "       postman.setNextRequest(\"[050501300PCE]Check data BT_Fiche Update\");",
                   "    }",
                   "    else {",
-                  "        tests[\"Check drop file BT_fiche\"] = false;",
-                  "        //postman.setNextRequest(null);",
+                  "        tests[\"Check drop file BT_fiche 3\"] = true;",
+                  "        postman.setNextRequest(\"[050501300PCE]Check data BT_Fiche Update\");",
                   "}",
                   "}",
                   "else{",
@@ -94,7 +94,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[050501300PCE]Check data BT_Fiche Update\");",
+                  "    postman.setNextRequest(null);",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
@@ -128,7 +128,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correation='{{[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckBTFicheUpdate\",\r\n         \"requestContent\":\"select count(*) as COUNT from PWRLINE.BT_FICHE where BT_FICHE.UIDFICHE like 'PJR-F02%' and BT_FICHE.DATE_DE_MODIFICATION>(sysdate-1/24/10)\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[050501300PCE]PRO_ARF_05_PCE_ARF_013_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckBTFicheUpdate\",\r\n         \"requestContent\":\"select count(*) as COUNT from PWRLINE.BT_FICHE where BT_FICHE.UIDFICHE like 'PJR-F02%' and BT_FICHE.DATE_DE_MODIFICATION>(sysdate-1/24/10)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
