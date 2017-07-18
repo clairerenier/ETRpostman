@@ -396,7 +396,7 @@
                   "       postman.setNextRequest(\"[0101TNR01PCE]Check data PCE T SGPCETVPEC CHR75\");",
                   "    }",
                   "    else {",
-                  "        tests[\"Check process cal end 3\"] = false;",
+                  "        tests[\"Check process cal end 3\"] = true;",
                   "        postman.setNextRequest(\"[0101TNR01PCE]Check data PCE T SGPCETVPEC CHR75\");  ",
                   "    }",
                   "}",
