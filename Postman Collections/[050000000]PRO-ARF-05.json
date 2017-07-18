@@ -479,7 +479,7 @@
                   "    }",
                   "    if ( tests[\"Delete BT Fiche\"] ){",
                   "        tests[\"Delete data Sum up\"]  = true; ",
-                  "        postman.setNextRequest(\"[051001300FGA]Drop file BT_Fiche FGA Add\");",
+                  "        postman.setNextRequest(\"[051001500FGA]Drop file BT_Fiche FGA Add\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
