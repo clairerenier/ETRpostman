@@ -210,20 +210,20 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[030300100PCE]PRO_CAL_03_PCE_TRV_001_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[030300100PCE]PRO_CAL_03_PCE_TRV_001_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[050501500PCE]PRO_ARF_05_PCE_ARF_015_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[050501500PCE]PRO_ARF_05_PCE_ARF_015_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        tests[\"Check drop file BTFiche\"] = false;",
                   "        //postman.setNextRequest(null);",
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[030300100PCE]Check process cal end\");",
+                  "       tests[\"Check drop file BTFiche\"] = true; ",
+                  "       postman.setNextRequest(\"[050501500PCE]Check data BT_Fiche Add\");",
                   "    }",
                   "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
+                  "        tests[\"Check drop file BTFiche\"] = true;",
+                  "        postman.setNextRequest(\"[050501500PCE]Check data BT_Fiche Add\");",
                   "}",
                   "}",
                   "else{",
@@ -239,9 +239,9 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
