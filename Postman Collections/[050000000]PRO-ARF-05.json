@@ -569,7 +569,7 @@
         },
         {
           "_postman_id": "76e71d05-6b50-c07c-565d-2ea022ba433b",
-          "name": "[051001500FGA]Check data BT_Fiche FGA Update",
+          "name": "[051001500FGA]Check data BT_Fiche FGA Add",
           "event": [
             {
               "listen": "test",
