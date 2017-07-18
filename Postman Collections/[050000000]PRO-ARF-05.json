@@ -94,7 +94,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[050501300PCE]Check data BT_Fiche Update\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
