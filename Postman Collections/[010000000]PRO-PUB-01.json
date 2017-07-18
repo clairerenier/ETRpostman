@@ -373,7 +373,7 @@
         },
         {
           "_postman_id": "baf138bc-3ace-7c9f-637f-9b23b50d9a03",
-          "name": "[0101TNR00PCE]Check process cal end PRO-CAL-03 copy",
+          "name": "[0101TNR00PCE]Check process cal end PRO-CAL-03",
           "event": [
             {
               "listen": "test",
