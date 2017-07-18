@@ -10,7 +10,7 @@
     {
       "_postman_id": "eeffa9a5-8246-9114-e631-d4060837e338",
       "name": "[0101TNR00PCE]PRO_PUB_01_PCE_TNR_TNR_SGPCETVPEC",
-      "description": "0 - Check that we generated CHR75",
+      "description": "0 - Check that we generated chroniques in ETR_METERING_DATA difFerent than CHR75\n1 - Check that we generated chroniques in ETR_METERING_DATA that are CHR75",
       "item": [
         {
           "_postman_id": "3862a52b-29d9-ae5b-9a72-b6db8cc1805a",
