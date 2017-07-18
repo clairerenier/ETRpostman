@@ -331,7 +331,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[030301501PCE]Check process cal end PRO-CAL-03\");",
+                  "    postman.setNextRequest(\"[0101TNR00PCE]Check process cal end PRO-CAL-03\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
