@@ -316,7 +316,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[051001501PCE]Drop file BT_Fiche PCE Add\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
