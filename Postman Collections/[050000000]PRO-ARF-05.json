@@ -355,6 +355,60 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "29280a34-c4e0-8c86-17f4-d13266fcc0f3",
+          "name": "[051001500PCE]Drop file BT_Fiche PCE Add copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[051001500PCE]PRO_ARF_10_PCE_ARF_015_SGPCETVPEC_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[051001500PCE]PRO_ARF_10_PCE_ARF_015_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file BTFiche\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file BTFiche\"] = true; ",
+                  "       postman.setNextRequest(\"[051001500PCE]Check data BT_Fiche Add\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file BTFiche\"] = true;",
+                  "        postman.setNextRequest(\"[051001500PCE]Check data BT_Fiche Add\");",
+                  "}",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093500_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
