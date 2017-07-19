@@ -139,7 +139,7 @@
     {
       "_postman_id": "781dba56-451c-61b2-5be0-6e182a690dcb",
       "name": "[051001500PCE]PRO_ARF_10_ARF_015_PCE_SGPCEEVPEC",
-      "description": "",
+      "description": "0 - Add object where ARF-015/Date_debut condition 3, Date_fin condition 3\n1- Add object where ARF-015/Date_debut condition 2, Date_fin condition 2\n1- Add object where ARF-015/Date_debut condition 1, Date_fin condition 1",
       "item": [
         {
           "_postman_id": "78954b4b-edc5-cb66-da1c-8d78e6c53e4e",
