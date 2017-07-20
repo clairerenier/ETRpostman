@@ -1254,6 +1254,12 @@
       "item": []
     },
     {
+      "_postman_id": "e409062e-6adb-f3dc-0a25-330189f680cf",
+      "name": "[050500200ALL]PRO_ARF_05_ORC_002_ALL_KART",
+      "description": "0 - File is rejected\nWorking case and report is tested throug ARF-015",
+      "item": []
+    },
+    {
       "_postman_id": "f75455d7-b3a3-d15b-73ae-f23416109d44",
       "name": "[050500100ALL]Drop file BT_Fiche",
       "event": [
@@ -1376,6 +1382,188 @@
         "body": {
           "mode": "raw",
           "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_ARF_05' and date_lancement_processus >=(sysdate-1/24/10) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_ref_etape='ARF_05_ORC_001' order by date_lancement_etape desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where resultat_etape like '%Le nom du fichier n'est pas conforme%' order by date_lancement_etape desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckOrcProcessusReport\",\r\n         \"requestContent\":\"select count(*) AS COUNT from orc_etapes where ( resultat_etape like '%Contrôler la validité du fichier en entrée%' /*Entête*/ and (resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate-1/24,'DD/MM/YYYY HH24')||'%') /*heure de début de traitement*/ and ( resultat_etape like '%Heure de fin de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de fin de traitement : '||TO_char((sysdate+1/24),'DD/MM/YYYY HH24')||'%') /*heure de fin de traitement*/ and resultat_etape like '%Fichier : J20161222_BASET_20161222093505_REF22_ETR.xml%' /* nom fichier*/ and resultat_etape like '%Statut : KO%' /*statut*/ and resultat_etape like '%Le nom du fichier n%' and resultat_etape like '%est pas conforme%' /*error message*/) and id_processus =(select id_processus from orc_etapes order by date_lancement_etape desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "3fcc94cf-49e4-e9c1-7da9-fdbd4b6404d2",
+      "name": "[050500101ALL]Drop file BT_Fiche",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "if (tests[\"Status code is 200\"]){\r",
+              "    var jsonData = JSON.parse(responseBody);\r",
+              "    postman.setEnvironmentVariable(\"[051000200ALL]PRO_ARF_10_ALL_ARF_002_MARIO_processid\",jsonData.processId);\r",
+              "    postman.setEnvironmentVariable(\"[051000200ALL]PRO_ARF_10_ALL_ARF_002_MARIO_sourceProcessId\",jsonData.sourceProcessId);\r",
+              "    \r",
+              "    if (jsonData.statusProcess === \"2\"){\r",
+              "        tests[\"Check drop file BT_fiche 1\"] = false;\r",
+              "        //postman.setNextRequest(null);\r",
+              "    }\r",
+              "    else if (jsonData.statusProcess === \"4\"){\r",
+              "       tests[\"Check drop file BT_fiche 2\"] = true; \r",
+              "       postman.setNextRequest(\"[051000200ALL]Check data BT_Fiche Misssing\");\r",
+              "    }\r",
+              "    else {\r",
+              "        tests[\"Check drop file BT_fiche 3\"] = true;\r",
+              "        postman.setNextRequest(\"[051000200ALL]Check data BT_Fiche Missing\");\r",
+              "}\r",
+              "}\r",
+              "else{\r",
+              "    postman.setNextRequest(null);\r",
+              "}\r",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093507_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"60\"}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "2f4ba7f1-6b18-2f56-134c-b7073c273af7",
+      "name": "[050500101ALL]Check data BT_Fiche File Content",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "        for(var i= 0; i < sqlResult.length; i++)",
+              "        {",
+              "            if(sqlResult[i].results !== null){",
+              "                switch (sqlResult[i].requestId) {",
+              "                case \"CheckStatutOrcProcessus\":",
+              "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"2\";",
+              "                    break;",
+              "                case \"CheckStatutOrcEtape\":",
+              "                    tests[\"Check ORC Etapes\"] = sqlResult[i].results[0].COUNT == \"2\";",
+              "                    break;",
+              "                case \"CheckStatutOrcEtapeMessage\":",
+              "                    tests[\"Check Statut Orc EtapeMessage\"] = sqlResult[i].results[0].COUNT == \"1\";",
+              "                    break;",
+              "                case \"CheckOrcProcessusReport\":",
+              "                    tests[\"Check Orc ProcessusReport\"] = sqlResult[i].results[0].COUNT == \"1\";",
+              "                    break;",
+              "                                }",
+              "            }",
+              "        }",
+              "    }",
+              "    postman.setNextRequest(null);",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//postman.setNextRequest(null);",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_ARF_05' and date_lancement_processus >=(sysdate-1/24/10) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where  id_ref_etape='ARF_05_ORC_001' order by date_lancement_etape desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where  resultat_etape like '%Le nom du fichier n'est pas conforme%' order by date_lancement_etape desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckOrcProcessusReport\",\r\n         \"requestContent\":\"select count(*) AS COUNT from orc_etapes where  ( resultat_etape like '%Contrôler la validité du fichier en entrée%' /*Entête*/ and (resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate-1/24,'DD/MM/YYYY HH24')||'%') /*heure de début de traitement*/ and ( resultat_etape like '%Heure de fin de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de fin de traitement : '||TO_char((sysdate+1/24),'DD/MM/YYYY HH24')||'%') /*heure de fin de traitement*/ and resultat_etape like '%Fichier : J20161222_BASET_20161222093507_REF21_ETR.xml%' /* nom fichier*/ and resultat_etape like '%Statut : KO%' /*statut*/ and resultat_etape like '%/Enveloppe_ETR_BASET/ :  Child element Publication {} at position 1 is unexpected%' /*error message*/) and id_processus =(select id_processus from orc_etapes order by date_lancement_etape desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "be7b9528-c53d-55fb-654f-8350ffdd305e",
+      "name": "[051000200ALL]Drop file BT_Fiche",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "if (tests[\"Status code is 200\"]){\r",
+              "    var jsonData = JSON.parse(responseBody);\r",
+              "    postman.setEnvironmentVariable(\"[050500200ALL]PRO_ARF_05_ALL_ORC_002_KART_processid\",jsonData.processId);\r",
+              "    postman.setEnvironmentVariable(\"[050500200ALL]PRO_ARF_05_ALL_ORC_002_KART_sourceProcessId\",jsonData.sourceProcessId);\r",
+              "    \r",
+              "    if (jsonData.statusProcess === \"2\"){\r",
+              "        tests[\"Check drop file BT_fiche 1\"] = false;\r",
+              "        //postman.setNextRequest(null);\r",
+              "    }\r",
+              "    else if (jsonData.statusProcess === \"4\"){\r",
+              "       tests[\"Check drop file BT_fiche 2\"] = true; \r",
+              "       postman.setNextRequest(\"[050500200ALL]Check data BT_Fiche Misssing\");\r",
+              "    }\r",
+              "    else {\r",
+              "        tests[\"Check drop file BT_fiche 3\"] = true;\r",
+              "        postman.setNextRequest(\"[050500200ALL]Check data BT_Fiche Missing\");\r",
+              "}\r",
+              "}\r",
+              "else{\r",
+              "    postman.setNextRequest(null);\r",
+              "}\r",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093508_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
         },
         "description": ""
       },
