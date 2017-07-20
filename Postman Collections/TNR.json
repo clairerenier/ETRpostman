@@ -785,7 +785,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{PRO_ACG_39_PCE_TNR_VERTEST2A_sourceProcessId}}\",\"waitTimeout\":\"10\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{PRO_ACG_39_PCE_TNR_VERTEST2A_sourceProcessId}}\",\"waitTimeout\":\"60\"}"
             },
             "description": ""
           },
