@@ -7802,7 +7802,7 @@
         },
         {
           "_postman_id": "abdce6c4-a45e-b028-b824-21dac68cab25",
-          "name": "[011000706PCE]Drop file FGA Full",
+          "name": "[011000706FGA]Drop file FGA Full",
           "event": [
             {
               "listen": "test",
