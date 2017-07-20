@@ -6937,17 +6937,17 @@
                   "                tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                break;",
                   "            case \"CheckStockAcquisitionForAcq\":",
-                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"150\";",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"50\";",
                   "                break;   ",
                   "            case \"CheckPointData\":",
-                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"325\";",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"25\";",
                   "                break;",
                   "",
                   "            }",
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011021001PCE]Check SI\");",
+                  "postman.setNextRequest(\"[011000701PCE]Check Data PCE T partial\");",
                   ""
                 ]
               }
