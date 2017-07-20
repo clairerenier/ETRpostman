@@ -7906,7 +7906,7 @@
         },
         {
           "_postman_id": "be841777-709e-a1cf-0c43-e6ad3ada847f",
-          "name": "[011000706FGA]Delete data",
+          "name": "[011000707FGA]Delete data",
           "event": [
             {
               "listen": "test",
@@ -7966,7 +7966,7 @@
         },
         {
           "_postman_id": "0d70f654-c167-efa2-d242-6106da867fb8",
-          "name": "[011000701PCE]Drop file PCE T partial copy",
+          "name": "[011000707FGA]Drop file FGA partial",
           "event": [
             {
               "listen": "test",
