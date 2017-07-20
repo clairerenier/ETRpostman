@@ -7589,7 +7589,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[011000701PCE]Drop file PCE T\");",
+                  "        postman.setNextRequest(\"[011000704PCE]Drop file PCE E partial\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
@@ -7685,7 +7685,7 @@
         },
         {
           "_postman_id": "a704ad5e-4c24-3994-c1ea-76c0a4126998",
-          "name": "[011000704PCE]Check Data PCE partial",
+          "name": "[011000704PCE]Check Data PCE E partial",
           "event": [
             {
               "listen": "test",
