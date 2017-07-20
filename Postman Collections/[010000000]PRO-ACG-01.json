@@ -7103,7 +7103,7 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check drop file PCE\"] = true; ",
-                  "   postman.setNextRequest(\"[011000701PCE]Check Data PCE E Full\");",
+                  "   postman.setNextRequest(\"[011000703PCE]Check Data PCE E Full\");",
                   "}",
                   "else {",
                   "    tests[\"Check drop file PCE\"] = false;",
