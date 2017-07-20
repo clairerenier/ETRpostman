@@ -1009,11 +1009,6 @@
                 "key": "Authorization",
                 "value": "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=",
                 "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
               }
             ],
             "body": {
