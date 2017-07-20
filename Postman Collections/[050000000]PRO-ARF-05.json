@@ -1246,6 +1246,66 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "63b47f94-d2ff-4777-246d-2794b4250d1e",
+      "name": "[050500200ALL]PRO_ARF_05_ORC_001_ALL_MARIO",
+      "description": "0 - File name is ko\n1 - File content is ko\n\nWorking case is tested through ARF_002",
+      "item": []
+    },
+    {
+      "_postman_id": "f75455d7-b3a3-d15b-73ae-f23416109d44",
+      "name": "[050500100ALL]Drop file BT_Fiche",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "if (tests[\"Status code is 200\"]){\r",
+              "    var jsonData = JSON.parse(responseBody);\r",
+              "    postman.setEnvironmentVariable(\"[050500100ALL]PRO_ARF_05_ALL_ORC_001_MARIO_processid\",jsonData.processId);\r",
+              "    postman.setEnvironmentVariable(\"[050500100ALL]PRO_ARF_05_ALL_ORC_001_MARIO_sourceProcessId\",jsonData.sourceProcessId);\r",
+              "    \r",
+              "    if (jsonData.statusProcess === \"2\"){\r",
+              "        tests[\"Check drop file BT_fiche 1\"] = false;\r",
+              "        //postman.setNextRequest(null);\r",
+              "    }\r",
+              "    else if (jsonData.statusProcess === \"4\"){\r",
+              "       tests[\"Check drop file BT_fiche 2\"] = true; \r",
+              "       postman.setNextRequest(\"[050500100ALL]Check data BT_Fiche File Name\");\r",
+              "    }\r",
+              "    else {\r",
+              "        tests[\"Check drop file BT_fiche 3\"] = true;\r",
+              "        postman.setNextRequest(\"[050500100ALL]Check data BT_Fiche File Name\");\r",
+              "}\r",
+              "}\r",
+              "else{\r",
+              "    postman.setNextRequest(null);\r",
+              "}\r",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093505_REF22_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"60\"}"
+        },
+        "description": ""
+      },
+      "response": []
     }
   ]
 }
