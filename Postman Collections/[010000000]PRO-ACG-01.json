@@ -7198,8 +7198,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011000701PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011000701PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_sourceProcessId\",jsonData.sourceProcessId);",
+                  "postman.setEnvironmentVariable(\"[011000705PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011000705PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR7_sourceProcessId\",jsonData.sourceProcessId);",
                   "",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check drop file PCE\"] = false;",
