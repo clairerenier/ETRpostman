@@ -1266,12 +1266,6 @@
       "item": []
     },
     {
-      "_postman_id": "07e31c5b-05da-3fb5-fae3-798ef0cfc079",
-      "name": "[051001400ALL]PRO_ARF_10_ARF_014_ALL_ACHAZ600_SGPCETPIL",
-      "description": "working case of ARF-014 are tested in ARF-015\n0 - we are testing the case where the same idouvrage is used for PCE and FGA",
-      "item": []
-    },
-    {
       "_postman_id": "f75455d7-b3a3-d15b-73ae-f23416109d44",
       "name": "[050500100ALL]Drop file BT_Fiche",
       "event": [
