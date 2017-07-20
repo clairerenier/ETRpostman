@@ -6947,7 +6947,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011000701PCE]Check Data PCE T partial\");",
+                  "postman.setNextRequest(\"[011000702PCE]Delete data\");",
                   ""
                 ]
               }
