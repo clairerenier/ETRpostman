@@ -2756,6 +2756,63 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "279a4619-a6ee-166f-9a7f-d31bde295203",
+      "name": "[00015]Delete data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    for(var i= 0; i < sqlResult.length; i++)",
+              "    {",
+              "        switch (sqlResult[i].requestId) {",
+              "            case \"DeleteBTFiche\":",
+              "                tests[\"Delete BT Fiche\"] = true;",
+              "                break;",
+              "        }",
+              "    }",
+              "    if ( tests[\"Delete BT Fiche\"] ){",
+              "        tests[\"Delete data Sum up\"]  = true; ",
+              "        postman.setNextRequest(\"[00015]Drop file BT_Fiche PCE Add\");",
+              "    }",
+              "    else {",
+              "       tests[\"Delete data Sum up\"] = fase; ",
+              "       //postman.setNextRequest(null);",
+              "    }",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteBTFiche\",\r\n         \"requestContent\":\"delete from bt_fiche where UIDFICHE in ('PJR-F03')\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
     }
   ]
 }
