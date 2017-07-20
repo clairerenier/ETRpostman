@@ -7432,7 +7432,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011000702PCE]Drop second file PCE T \");",
+                  "postman.setNextRequest(\"[011000701PCE]Delete data\");",
                   ""
                 ]
               }
