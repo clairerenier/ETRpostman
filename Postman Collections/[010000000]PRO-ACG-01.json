@@ -7505,7 +7505,7 @@
         },
         {
           "_postman_id": "35b6e459-77b2-f685-d6b4-65ef317d33c9",
-          "name": "[011000705PCE]Delete data copy",
+          "name": "[011000705PCE]Delete data",
           "event": [
             {
               "listen": "test",
@@ -7716,7 +7716,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011000702PCE]Drop second file PCE T \");",
+                  "postman.setNextRequest(\"[011000705PCE]Delete data\");",
                   ""
                 ]
               }
