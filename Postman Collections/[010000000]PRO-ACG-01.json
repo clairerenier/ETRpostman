@@ -7745,7 +7745,7 @@
         },
         {
           "_postman_id": "a704ad5e-4c24-3994-c1ea-76c0a4126998",
-          "name": "[011000704PCE]Check Data PCE partial",
+          "name": "[011000703PCE]Check Data PCE E Full copy",
           "event": [
             {
               "listen": "test",
