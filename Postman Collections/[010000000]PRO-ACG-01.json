@@ -7849,7 +7849,7 @@
         },
         {
           "_postman_id": "66b72c07-dbc2-b2af-53c2-f22d5a193f6f",
-          "name": "[011000700PCE]Check Data PCE T Full copy",
+          "name": "[011000706FGA]Check Data FGA Full",
           "event": [
             {
               "listen": "test",
