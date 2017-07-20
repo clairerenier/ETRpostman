@@ -7966,7 +7966,7 @@
         },
         {
           "_postman_id": "0d70f654-c167-efa2-d242-6106da867fb8",
-          "name": "[011000701PCE]Drop file PCE T partial copy",
+          "name": "[011000707FGA]Drop file FGA partial",
           "event": [
             {
               "listen": "test",
@@ -8013,7 +8013,7 @@
         },
         {
           "_postman_id": "eb113821-566f-461d-3410-9eafb0de4ede",
-          "name": "[011000701PCE]Check Data PCE T partial copy",
+          "name": "[011000707FGA]Check Data FGA partial",
           "event": [
             {
               "listen": "test",
@@ -8070,7 +8070,7 @@
         },
         {
           "_postman_id": "e3f6bf30-d9b2-f376-4a7f-e5723b8b735f",
-          "name": "[011000702PCE]Delete data copy",
+          "name": "[011000708FGA]Delete data",
           "event": [
             {
               "listen": "test",
