@@ -8013,7 +8013,7 @@
         },
         {
           "_postman_id": "eb113821-566f-461d-3410-9eafb0de4ede",
-          "name": "[011000701PCE]Check Data PCE T partial copy",
+          "name": "[011000707FGA]Check Data FGA partial",
           "event": [
             {
               "listen": "test",
