@@ -229,7 +229,7 @@
               "                    break;",
               "                case \"CheckEtrpmresponseMasterContentPCE\":",
               "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).RESPONSE.PARAMS.PARAM;",
-              "                    //var inputParams = payload.PARAMS;",
+              "                    var inputParams = payload.PARAMS;",
               "                    console.log(payload);",
               "                    tests[\"Check REQUESTID\"] = payload.find(function (d) { return d.$.NAME == \"REQUESTID\";}).$.VALUE == processid; ",
               "                    tests[\"Check RETURNCODE\"] = payload.find(function (d) { return d.$.NAME == \"RETURNCODE\";}).$.VALUE == \"0\";",
