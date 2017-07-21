@@ -136,7 +136,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170701_PCE_20170701103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+          "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170701_PCE_20170701103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
         },
         "description": ""
       },
