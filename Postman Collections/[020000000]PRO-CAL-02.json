@@ -162,7 +162,7 @@
               "}",
               "else {",
               "    tests[\"Check process cal end\"] = false;",
-              "    //postman.setNextRequest(null);  ",
+              "    postman.setNextRequest(\"[0204ALL00ALL]Check data\"); ",
               "}"
             ]
           }
