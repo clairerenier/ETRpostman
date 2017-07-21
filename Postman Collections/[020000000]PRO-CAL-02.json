@@ -245,7 +245,7 @@
               "                    tests[\"Check PLR\"] = payload.find(function (d) { return d.$.NAME == \"PLR\";}).$.VALUE == \"0\";",
               "                    tests[\"Check PILE\"] = payload.find(function (d) { return d.$.NAME == \"PILE\";}).$.VALUE == \"PS_DP\";",
               "                    tests[\"Check NUMBLOCK\"] == payload.find(function (d) { return d.$.NAME == \"NUMBLOCK\";}).$.VALUE ;",
-              "                    tests[\"Check PREC_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"PREC_PROCESSID\";}).$.VALUE==SourceProcessid;",
+              "                    tests[\"Check PREC_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"PREC_PROCESSID\";}).$.VALUE==sourceProcessid;",
               "                    tests[\"Check DATE_DEBUT_TRAITEMENT\"] == payload.find(function (d) { return d.$.NAME == \"DATE_DEBUT_TRAITEMENT\";}).$.VALUE;",
               "                    tests[\"Check TYPE_GESTION\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_GESTION\";}).$.VALUE == \"T\";",
               "                    tests[\"Check UIDDMD_CALCUL\"] == payload.find(function (d) { return d.$.NAME == \"UIDDMD_CALCUL\";}).$.VALUE ;",
