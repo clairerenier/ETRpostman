@@ -10,7 +10,7 @@
     {
       "_postman_id": "8b9c5060-9de6-c218-d983-9a3f9d8b03d6",
       "name": "[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016",
-      "description": "Aim : Check the payload and response of dmd_calcul (Oracle/WM exchanges)\r\no  0 - \r\no  1 -\r\no  2 -\r\n\r\nFGA : NSTOUEN\r\nZQG : PRC16\r\nPCE : SGPCETVPEC\r\nAPIL : SGAPIL2\r\nGDC : GDCORC16\r\n",
+      "description": "Aim : Check the payload and response of dmd_calcul (Oracle/WM exchanges)\r\no  0 - Check of PCE, APIL and GDC\r\no  1 - Check of FGA(no paylod created for FGA) and ZQG\r\n\r\n\r\nPCE : SGPCETVPEC\r\nAPIL : SGAPIL2\r\nGDC : GDCORC16\r\nFGA : NSTOUEN\r\nZQG : PRC16\r\n\r\n",
       "item": [
         {
           "_postman_id": "a583047c-79d1-40fa-6c53-8e0153cf1c19",
