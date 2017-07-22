@@ -582,7 +582,7 @@
         },
         {
           "_postman_id": "593adc0c-9031-bdb5-d13e-2dd18f5adc88",
-          "name": "[0204ALL00ALL]Check data PCE copy",
+          "name": "[0204ALL00ALL]Check data GDC",
           "event": [
             {
               "listen": "test",
