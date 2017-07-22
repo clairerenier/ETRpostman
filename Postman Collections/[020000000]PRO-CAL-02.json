@@ -393,60 +393,6 @@
           "response": []
         },
         {
-          "_postman_id": "31f75ac5-3c6a-cf38-d8b9-637186231ba1",
-          "name": "[0204ALL01ALL]Drop file FGA",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC0161_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[0204ALL01ALL]Check process cal end\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_2017022310501_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "593adc0c-9031-bdb5-d13e-2dd18f5adc88",
           "name": "[0204ALL00ALL]Check data GDC",
           "event": [
@@ -540,6 +486,60 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_0' from dmd_calcul where code_objet='SGPCETVPEC' and source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='0') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresencePCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentPCE\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "31f75ac5-3c6a-cf38-d8b9-637186231ba1",
+          "name": "[0204ALL01ALL]Drop file FGA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC0161_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file PCE\"] = true; ",
+                  "       postman.setNextRequest(\"[0204ALL01ALL]Check process cal end\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "}",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_2017022310501_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
