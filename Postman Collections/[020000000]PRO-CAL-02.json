@@ -293,295 +293,295 @@
             "description": ""
           },
           "response": []
-        },
-        {
-          "_postman_id": "b8b00b85-270f-a72e-b8ad-81f438116f12",
-          "name": "[0204ALL00ALL]Check data PCE",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\");",
-                  "var sourceProcessid = postman.getEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid\");",
-                  "    ",
-                  "",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult !== null){",
-                  "        for(var i= 0; i < sqlResult.length; i++)",
-                  "        {",
-                  "            if(sqlResult[i].results !== null){",
-                  "                switch (sqlResult[i].requestId) {",
-                  "                case \"CheckDmdCalculCreationPCE\":",
-                  "                    tests[\"Check DMD_CALCUL Creation PCE\"] = sqlResult[i].results[0].COUNT >= \"1\";",
-                  "                    break;",
-                  "                case \"CheckPayloadContentPCE\":",
-                  "                    tests[\"Check Payload Content PCE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                    break;",
-                  "                case \"CheckEtrpmresponsePresencePCE\":",
-                  "                    tests[\"Check Payload Presence PCE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                    break;",
-                  "                case \"CheckEtrpmresponseMasterContentPCE\":",
-                  "                    console.log(sourceProcessid)",
-                  "                    console.log(processid)",
-                  "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).RESPONSE.PARAMS.PARAM;",
-                  "                    ",
-                  "                    tests[\"Check REQUESTID\"] == payload.find(function (d) { return d.$.NAME == \"REQUESTID\";}).$.VALUE; ",
-                  "                    tests[\"Check RETURNCODE\"] = payload.find(function (d) { return d.$.NAME == \"RETURNCODE\";}).$.VALUE == \"0\";",
-                  "                    tests[\"Check CODE_OBJET\"] = payload.find(function (d) { return d.$.NAME == \"CODE_OBJET\";}).$.VALUE == \"SGPCETVPEC\";",
-                  "                    tests[\"Check HORODATE\"] = payload.find(function (d) { return d.$.NAME == \"HORODATE\";}).$.VALUE == \"2017-07-01 06:00:00\";",
-                  "                    tests[\"Check LISTE_HEURES\"] = payload.find(function (d) { return d.$.NAME == \"LISTE_HEURES\";}).$.VALUE == \"06;07;08;09\";",
-                  "                    tests[\"Check TYPE_OBJET\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_OBJET\";}).$.VALUE == \"PCE\";",
-                  "                    tests[\"Check ACQ_FORCEE\"] = payload.find(function (d) { return d.$.NAME == \"ACQ_FORCEE\";}).$.VALUE == \"N\";",
-                  "                    tests[\"Check SOURCE_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"SOURCE_PROCESSID\";}).$.VALUE == sourceProcessid;",
-                  "                    tests[\"Check PLR\"] = payload.find(function (d) { return d.$.NAME == \"PLR\";}).$.VALUE == \"0\";",
-                  "                    tests[\"Check PILE\"] = payload.find(function (d) { return d.$.NAME == \"PILE\";}).$.VALUE == \"PS_DP\";",
-                  "                    tests[\"Check NUMBLOCK\"] == payload.find(function (d) { return d.$.NAME == \"NUMBLOCK\";}).$.VALUE ;",
-                  "                    tests[\"Check PREC_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"PREC_PROCESSID\";}).$.VALUE==processid;",
-                  "                    tests[\"Check DATE_DEBUT_TRAITEMENT\"] == payload.find(function (d) { return d.$.NAME == \"DATE_DEBUT_TRAITEMENT\";}).$.VALUE;",
-                  "                    tests[\"Check TYPE_GESTION\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_GESTION\";}).$.VALUE == \"T\";",
-                  "                    tests[\"Check UIDDMD_CALCUL\"] == payload.find(function (d) { return d.$.NAME == \"UIDDMD_CALCUL\";}).$.VALUE ;",
-                  "                    tests[\"Check TYPE_PERIODE\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_PERIODE\";}).$.VALUE == \"J\";",
-                  "                    break; ",
-                  "                ",
-                  "                }",
-                  "            }",
-                  "        }",
-                  "    }",
-                  "    postman.setNextRequest(null);",
-                  "",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_0' from dmd_calcul where code_objet='SGPCETVPEC' and source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='0') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresencePCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentPCE\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "bff60f93-cbc3-ad61-13f0-217b106a1ec4",
-          "name": "[0204ALL00ALL]Drop file PCE",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[0204ALL00ALL]Check process cal end\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170701_PCE_20170701103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "c209a3ee-d8b3-f0e7-a97f-54ae8b792871",
-          "name": "[0204ALL01ALL]Check data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult !== null){",
-                  "        for(var i= 0; i < sqlResult.length; i++)",
-                  "        {",
-                  "            if(sqlResult[i].results !== null){",
-                  "                switch (sqlResult[i].requestId) {",
-                  "                case \"CheckStatutOrcProcessus\":",
-                  "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                  "                    break;",
-                  "                case \"CheckStatutOrcEtape\":",
-                  "                    tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_ETAPE == \"2\";",
-                  "                    break;",
-                  "                case \"CheckStatutOrcEtapeMessage\":",
-                  "                    tests[\"Check message in ORC_ETAPE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                    break;",
-                  "                case \"CheckAcqPceConservee\":",
-                  "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                    break;",
-                  "                case \"CheckStockAcquisitionForAcq\":",
-                  "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                    break;   ",
-                  "                case \"CheckOrcProcessusReport\":",
-                  "                    tests[\"Check Report of ORC_001 in ORC_ETAPES\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                    break; ",
-                  "                 }",
-                  "            }",
-                  "        }",
-                  "    }",
-                  "    postman.setNextRequest(null);",
-                  "",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n                  {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where id_processus='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}' and resultat_etape like '%nom du fichier%' and resultat_etape like '%est pas conforme%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGACRETNR1') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckOrcProcessusReport\",\r\n         \"requestContent\":\"select count(*) AS COUNT from orc_etapes where id_processus='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}' and ( resultat_etape like '%Contrôler la validité du fichier en entrée%' /*Entête*/ and (resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate-1/24,'DD/MM/YYYY HH24')||'%') /*heure de début de traitement*/ and ( resultat_etape like '%Heure de fin de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de fin de traitement : '||TO_char((sysdate+1/24),'DD/MM/YYYY HH24')||'%') /*heure de fin de traitement*/ and resultat_etape like '%Fichier : H20170223_FGA_2017022310501_CHR02_SCALA_18-1F.xml%' /* nom fichier*/ and resultat_etape like '%Statut : KO%' /*statut*/ and resultat_etape like '%/Le nom du fichier n'est pas conforme%' /*error message*/)\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "f0946a6a-a291-a726-3af4-3f7570e2c05a",
-          "name": "[0204ALL00ALL]Check process cal end",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check process cal end\"] = false;",
-                  "    //postman.setNextRequest(null);",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[0204ALL00ALL]Check data PCE\");",
-                  "}",
-                  "else {",
-                  "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"[0204ALL00ALL]Check data PCE\"); ",
-                  "}"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "bff60f93-cbc3-ad61-13f0-217b106a1ec4",
+      "name": "[0204ALL00ALL]Drop file PCE",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    postman.setEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\",jsonData.processId);",
+              "    postman.setEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid\",jsonData.sourceProcessId);",
+              "    ",
+              "    if (jsonData.statusProcess === \"2\"){",
+              "        tests[\"Check drop file PCE\"] = false;",
+              "        //postman.setNextRequest(null);",
+              "    }",
+              "    else if (jsonData.statusProcess === \"4\"){",
+              "       tests[\"Check drop file PCE\"] = true; ",
+              "       postman.setNextRequest(\"[0204ALL00ALL]Check process cal end\");",
+              "    }",
+              "    else {",
+              "        tests[\"Check drop file PCE\"] = false;",
+              "        //postman.setNextRequest(null);",
+              "}",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170701_PCE_20170701103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "f0946a6a-a291-a726-3af4-3f7570e2c05a",
+      "name": "[0204ALL00ALL]Check process cal end",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);",
+              "if (jsonData.statusProcess === \"2\"){",
+              "    tests[\"Check process cal end\"] = false;",
+              "    //postman.setNextRequest(null);",
+              "}",
+              "else if (jsonData.statusProcess === \"4\"){",
+              "   tests[\"Check process cal end\"] = true; ",
+              "   postman.setNextRequest(\"[0204ALL00ALL]Check data PCE\");",
+              "}",
+              "else {",
+              "    tests[\"Check process cal end\"] = false;",
+              "    postman.setNextRequest(\"[0204ALL00ALL]Check data PCE\"); ",
+              "}"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+              "console.log(sourcprocessid);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}\",\"waitTimeout\":\"90\"}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "b8b00b85-270f-a72e-b8ad-81f438116f12",
+      "name": "[0204ALL00ALL]Check data PCE",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var processid = postman.getEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\");",
+              "var sourceProcessid = postman.getEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid\");",
+              "    ",
+              "",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "        for(var i= 0; i < sqlResult.length; i++)",
+              "        {",
+              "            if(sqlResult[i].results !== null){",
+              "                switch (sqlResult[i].requestId) {",
+              "                case \"CheckDmdCalculCreationPCE\":",
+              "                    tests[\"Check DMD_CALCUL Creation PCE\"] = sqlResult[i].results[0].COUNT >= \"1\";",
+              "                    break;",
+              "                case \"CheckPayloadContentPCE\":",
+              "                    tests[\"Check Payload Content PCE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+              "                    break;",
+              "                case \"CheckEtrpmresponsePresencePCE\":",
+              "                    tests[\"Check Payload Presence PCE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+              "                    break;",
+              "                case \"CheckEtrpmresponseMasterContentPCE\":",
+              "                    console.log(sourceProcessid)",
+              "                    console.log(processid)",
+              "                    var payload = xml2Json(sqlResult[i].results[0].PAYLOAD).RESPONSE.PARAMS.PARAM;",
+              "                    ",
+              "                    tests[\"Check REQUESTID\"] == payload.find(function (d) { return d.$.NAME == \"REQUESTID\";}).$.VALUE; ",
+              "                    tests[\"Check RETURNCODE\"] = payload.find(function (d) { return d.$.NAME == \"RETURNCODE\";}).$.VALUE == \"0\";",
+              "                    tests[\"Check CODE_OBJET\"] = payload.find(function (d) { return d.$.NAME == \"CODE_OBJET\";}).$.VALUE == \"SGPCETVPEC\";",
+              "                    tests[\"Check HORODATE\"] = payload.find(function (d) { return d.$.NAME == \"HORODATE\";}).$.VALUE == \"2017-07-01 06:00:00\";",
+              "                    tests[\"Check LISTE_HEURES\"] = payload.find(function (d) { return d.$.NAME == \"LISTE_HEURES\";}).$.VALUE == \"06;07;08;09\";",
+              "                    tests[\"Check TYPE_OBJET\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_OBJET\";}).$.VALUE == \"PCE\";",
+              "                    tests[\"Check ACQ_FORCEE\"] = payload.find(function (d) { return d.$.NAME == \"ACQ_FORCEE\";}).$.VALUE == \"N\";",
+              "                    tests[\"Check SOURCE_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"SOURCE_PROCESSID\";}).$.VALUE == sourceProcessid;",
+              "                    tests[\"Check PLR\"] = payload.find(function (d) { return d.$.NAME == \"PLR\";}).$.VALUE == \"0\";",
+              "                    tests[\"Check PILE\"] = payload.find(function (d) { return d.$.NAME == \"PILE\";}).$.VALUE == \"PS_DP\";",
+              "                    tests[\"Check NUMBLOCK\"] == payload.find(function (d) { return d.$.NAME == \"NUMBLOCK\";}).$.VALUE ;",
+              "                    tests[\"Check PREC_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"PREC_PROCESSID\";}).$.VALUE==processid;",
+              "                    tests[\"Check DATE_DEBUT_TRAITEMENT\"] == payload.find(function (d) { return d.$.NAME == \"DATE_DEBUT_TRAITEMENT\";}).$.VALUE;",
+              "                    tests[\"Check TYPE_GESTION\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_GESTION\";}).$.VALUE == \"T\";",
+              "                    tests[\"Check UIDDMD_CALCUL\"] == payload.find(function (d) { return d.$.NAME == \"UIDDMD_CALCUL\";}).$.VALUE ;",
+              "                    tests[\"Check TYPE_PERIODE\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_PERIODE\";}).$.VALUE == \"J\";",
+              "                    break; ",
+              "                ",
+              "                }",
+              "            }",
+              "        }",
+              "    }",
+              "    postman.setNextRequest(null);",
+              "",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//postman.setNextRequest(null);",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_0' from dmd_calcul where code_objet='SGPCETVPEC' and source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='0') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresencePCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentPCE\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "c209a3ee-d8b3-f0e7-a97f-54ae8b792871",
+      "name": "[0204ALL01ALL]Check data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "        for(var i= 0; i < sqlResult.length; i++)",
+              "        {",
+              "            if(sqlResult[i].results !== null){",
+              "                switch (sqlResult[i].requestId) {",
+              "                case \"CheckStatutOrcProcessus\":",
+              "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+              "                    break;",
+              "                case \"CheckStatutOrcEtape\":",
+              "                    tests[\"Check status in ORC_ETAPE\"] = sqlResult[i].results[0].ID_STATUT_ETAPE == \"2\";",
+              "                    break;",
+              "                case \"CheckStatutOrcEtapeMessage\":",
+              "                    tests[\"Check message in ORC_ETAPE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+              "                    break;",
+              "                case \"CheckAcqPceConservee\":",
+              "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
+              "                    break;",
+              "                case \"CheckStockAcquisitionForAcq\":",
+              "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+              "                    break;   ",
+              "                case \"CheckOrcProcessusReport\":",
+              "                    tests[\"Check Report of ORC_001 in ORC_ETAPES\"] = sqlResult[i].results[0].COUNT == \"1\";",
+              "                    break; ",
+              "                 }",
+              "            }",
+              "        }",
+              "    }",
+              "    postman.setNextRequest(null);",
+              "",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//postman.setNextRequest(null);",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n                  {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where id_processus='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}' and resultat_etape like '%nom du fichier%' and resultat_etape like '%est pas conforme%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('FGACRETNR1') and jour_gazier= TO_DATE('23/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckOrcProcessusReport\",\r\n         \"requestContent\":\"select count(*) AS COUNT from orc_etapes where id_processus='{{[010100101FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid}}' and ( resultat_etape like '%Contrôler la validité du fichier en entrée%' /*Entête*/ and (resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de début de traitement : '||TO_char(sysdate-1/24,'DD/MM/YYYY HH24')||'%') /*heure de début de traitement*/ and ( resultat_etape like '%Heure de fin de traitement : '||TO_char(sysdate,'DD/MM/YYYY HH24')||'%' or resultat_etape like '%Heure de fin de traitement : '||TO_char((sysdate+1/24),'DD/MM/YYYY HH24')||'%') /*heure de fin de traitement*/ and resultat_etape like '%Fichier : H20170223_FGA_2017022310501_CHR02_SCALA_18-1F.xml%' /* nom fichier*/ and resultat_etape like '%Statut : KO%' /*statut*/ and resultat_etape like '%/Le nom du fichier n'est pas conforme%' /*error message*/)\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
     }
   ]
 }
