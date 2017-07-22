@@ -449,7 +449,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[0204ALL00ALL]Check data APIL\");",
+                  "    postman.setNextRequest(null);",
                   "",
                   "}",
                   "else{",
