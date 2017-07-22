@@ -14,7 +14,7 @@
       "item": [
         {
           "_postman_id": "e5a6b41d-a75b-299f-4290-1ef6f8d1b60b",
-          "name": "[0204ALL00ALL]Check data PCE copy",
+          "name": "[0204ALL00ALL]Check data APIL",
           "event": [
             {
               "listen": "test",
