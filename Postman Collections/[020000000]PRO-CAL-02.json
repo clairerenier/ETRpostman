@@ -676,7 +676,7 @@
         },
         {
           "_postman_id": "aa258d02-5fbe-002b-6489-92c225d98698",
-          "name": "[0204ALL01ALL]Check data FGA copy",
+          "name": "[0204ALL01ALL]Check data ZQG",
           "event": [
             {
               "listen": "test",
