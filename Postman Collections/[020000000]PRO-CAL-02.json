@@ -341,7 +341,7 @@
                   "                    tests[\"Check PLR\"] = payload.find(function (d) { return d.$.NAME == \"PLR\";}).$.VALUE == \"1\";",
                   "                    tests[\"Check PILE\"] = payload.find(function (d) { return d.$.NAME == \"PILE\";}).$.VALUE == \"PC_AU\";",
                   "                    tests[\"Check NUMBLOCK\"] == payload.find(function (d) { return d.$.NAME == \"NUMBLOCK\";}).$.VALUE ;",
-                  "                    tests[\"Check PREC_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"PREC_PROCESSID\";}).$.VALUE==processid;",
+                  "                    tests[\"Check PREC_PROCESSID\"] == payload.find(function (d) { return d.$.NAME == \"PREC_PROCESSID\";}).$.VALUE;",
                   "                    tests[\"Check DATE_DEBUT_TRAITEMENT\"] == payload.find(function (d) { return d.$.NAME == \"DATE_DEBUT_TRAITEMENT\";}).$.VALUE;",
                   "                    tests[\"Check UIDDMD_CALCUL\"] == payload.find(function (d) { return d.$.NAME == \"UIDDMD_CALCUL\";}).$.VALUE ;",
                   "                    tests[\"Check TYPE_PERIODE\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_PERIODE\";}).$.VALUE == \"J\";",
