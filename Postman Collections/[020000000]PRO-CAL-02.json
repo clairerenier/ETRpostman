@@ -503,7 +503,7 @@
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
                   "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC0161_sourceProcessid\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC0161_sourceProcessid\",jsonData.sourceProcessid);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file FGA\"] = false;",
