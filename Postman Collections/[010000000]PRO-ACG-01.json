@@ -7761,7 +7761,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[011000701PCE]Delete data\");",
+                  "//postman.setNextRequest(\"[011000701PCE]Delete data\");",
                   ""
                 ]
               }
