@@ -560,11 +560,11 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[0204ALL01ALL]Check data PCE\");",
+                  "   postman.setNextRequest(\"[0204ALL01ALL]Check data FGA\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"[0204ALL01ALL]Check data PCE\"); ",
+                  "    postman.setNextRequest(\"[0204ALL01ALL]Check data FGA\"); ",
                   "}"
                 ]
               }
