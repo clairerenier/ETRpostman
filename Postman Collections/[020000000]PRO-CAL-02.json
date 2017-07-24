@@ -714,7 +714,7 @@
                   "                    tests[\"Check RETURNCODE\"] = payload.find(function (d) { return d.$.NAME == \"RETURNCODE\";}).$.VALUE == \"0\";",
                   "                    tests[\"Check CODE_OBJET\"] = payload.find(function (d) { return d.$.NAME == \"CODE_OBJET\";}).$.VALUE == \"PRC16\";",
                   "                    tests[\"Check HORODATE\"] = payload.find(function (d) { return d.$.NAME == \"HORODATE\";}).$.VALUE == \"2017-07-01 06:00:00\";",
-                  "                    tests[\"Check LISTE_HEURES\"] = payload.find(function (d) { return d.$.NAME == \"LISTE_HEURES\";}).$.VALUE == \"06;07;08;09\";",
+                  "                    tests[\"Check LISTE_HEURES\"] = payload.find(function (d) { return d.$.NAME == \"LISTE_HEURES\";}).$.VALUE == \"06;07;08\";",
                   "                    tests[\"Check TYPE_OBJET\"] = payload.find(function (d) { return d.$.NAME == \"TYPE_OBJET\";}).$.VALUE == \"ZQG\";",
                   "                    tests[\"Check ACQ_FORCEE\"] = payload.find(function (d) { return d.$.NAME == \"ACQ_FORCEE\";}).$.VALUE == \"N\";",
                   "                    tests[\"Check SOURCE_PROCESSID\"] = payload.find(function (d) { return d.$.NAME == \"SOURCE_PROCESSID\";}).$.VALUE == sourceProcessid;",
