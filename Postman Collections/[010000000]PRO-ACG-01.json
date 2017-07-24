@@ -8016,11 +8016,11 @@
                   "            case \"CheckStatutOrcProcessus\":",
                   "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
                   "                break;",
-                  "            case \"CheckAcqPceConservee\":",
-                  "                tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "            case \"CheckAcqFgaConservee\":",
+                  "                tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                break;",
                   "            case \"CheckStockAcquisitionForAcq\":",
-                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"50\";",
                   "                break;   ",
                   "            case \"CheckPointData\":",
                   "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"25\";",
@@ -8030,7 +8030,7 @@
                   "        }",
                   "    }",
                   "}",
-                  "postman.setNextRequest(\"[0110210731PCE]Check SI\");",
+                  "//postman.setNextRequest(\"[011000701PCE]Delete data\");",
                   ""
                 ]
               }
