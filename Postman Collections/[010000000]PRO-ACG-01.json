@@ -8265,6 +8265,53 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "87c8b57a-3345-7475-e1b0-8e778e59b31e",
+          "name": "[011000703PCE]Drop file PCE E Full copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011000703PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR9_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011000703PCE]PRO_ACG_10_PCE_ACG_007_PCEGBTNR9_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011000703PCE]Check Data PCE E Full\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507061704_CHR02_SCALA_9-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"140\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
