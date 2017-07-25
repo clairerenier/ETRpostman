@@ -8151,7 +8151,7 @@
         },
         {
           "_postman_id": "67b95c81-656e-23e6-f3b5-530a532a5b75",
-          "name": "[011000700PCE]Check Data PCE T Full copy",
+          "name": "[011000700PCE]Check Data PCE T Forcage",
           "event": [
             {
               "listen": "test",
