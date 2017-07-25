@@ -7693,7 +7693,7 @@
         },
         {
           "_postman_id": "66b72c07-dbc2-b2af-53c2-f22d5a193f6f",
-          "name": "[011000706FGA]Check Data FGA Full",
+          "name": "[011000703FGA]Check Data FGA Full",
           "event": [
             {
               "listen": "test",
@@ -7750,7 +7750,7 @@
         },
         {
           "_postman_id": "be841777-709e-a1cf-0c43-e6ad3ada847f",
-          "name": "[011000707FGA]Delete data",
+          "name": "[011000702FGA]Delete data",
           "event": [
             {
               "listen": "test",
