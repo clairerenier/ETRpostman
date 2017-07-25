@@ -6234,62 +6234,6 @@
       "description": "",
       "item": [
         {
-          "_postman_id": "12557a07-d214-8ea4-38f2-e7a2e9c53ebd",
-          "name": "[011021001FGA]Drop file FGA",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_processid\",jsonData.processId);",
-                  "postman.setEnvironmentVariable(\"[011021001FGA]PRO_ACG_10_FGA_ACG_210_FGATNR1_sourceProcessId\",jsonData.sourceProcessId);",
-                  "",
-                  "if (jsonData.statusProcess === \"2\"){",
-                  "    tests[\"Check drop file FGA\"] = false;",
-                  "    //postman.setNextRequest(null);",
-                  "}",
-                  "else if (jsonData.statusProcess === \"4\"){",
-                  "   tests[\"Check drop file FGA\"] = true; ",
-                  "   postman.setNextRequest(\"[011021001FGA]Check Data\");",
-                  "}",
-                  "else {",
-                  "    tests[\"Check drop file FGA\"] = false;",
-                  "    //postman.setNextRequest(null);  ",
-                  "}"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"J20170506_FGA_20170507104025_CHR02_SCALA_1-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"160\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "bd127b7a-afec-d61e-beda-1813bedbaf4c",
           "name": "[011021001FGA]Check Data",
           "event": [
