@@ -1099,7 +1099,7 @@
                   "                        tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                        break;",
                   "                    case \"CheckStockAcquisition2\":",
-                  "                        tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"554\";",
+                  "                        tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT >= \"478\";",
                   "                        break;",
                   "                    case \"CheckDmdCalcul\":",
                   "                        tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
