@@ -2753,6 +2753,39 @@
       ]
     },
     {
+      "_postman_id": "f758d5d0-2d7e-9c7c-aef7-3eaba310539a",
+      "name": "[00007]PRO_ACG_15_SGGU0707A",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "ca1aacdb-7341-a228-c92c-4dca3d122515",
+          "name": "[00007] Call of PRO_ACG_15",
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15_IMPL/webservice ",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"historiqueAcquisitionsDetailsFichierDto\": {\"code\":\"SGGU0707A\",\"typeObject\":\"PCE\",\"uidacq\":\"98516899\"}}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "_postman_id": "279a4619-a6ee-166f-9a7f-d31bde295203",
       "name": "[00015]Delete data",
       "event": [
@@ -2927,32 +2960,6 @@
         "body": {
           "mode": "raw",
           "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_ARF_05' and date_lancement_processus >=(sysdate-1/24/10) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckBTFicheUpdate\",\r\n         \"requestContent\":\"select count(*) as COUNT from PWRLINE.BT_FICHE where BT_FICHE.UIDFICHE='PJR-F03' and BT_FICHE.DATE_DE_MODIFICATION>(sysdate-1/24/10)\"\r\n      }\r\n   ]\r\n}"
-        },
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "_postman_id": "ca1aacdb-7341-a228-c92c-4dca3d122515",
-      "name": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15_IMPL/webservice ",
-      "request": {
-        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15_IMPL/webservice ",
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content",
-            "value": "application/json",
-            "description": ""
-          },
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "description": ""
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\"historiqueAcquisitionsDetailsFichierDto\": {\"code\":\"SGGU0707A\",\"typeObject\":\"PCE\",\"uidacq\":\"98516899\"}}"
         },
         "description": ""
       },
