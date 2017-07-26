@@ -831,7 +831,7 @@
                   "                    tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT == \"341\";",
                   "                    break;",
                   "                case \"CheckEtrMeteringDataData\":",
-                  "                    tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT == \"96\";",
+                  "                    tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT == \"48\";",
                   "                    break;",
                   "                case \"CheckStockAcquisitionForAcq\":",
                   "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
