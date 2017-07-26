@@ -1013,7 +1013,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"PI-SEC\",\"fileName\":\"H20170119_PISEC_20170119711406_CHR09_DH.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"alias\":\"EDHOUARD\",\"fileName\":\"H20170119_PISEC_20170119711406_CHR09_DH.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
@@ -2759,7 +2759,7 @@
       "item": [
         {
           "_postman_id": "ca1aacdb-7341-a228-c92c-4dca3d122515",
-          "name": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15_IMPL/webservice ",
+          "name": "[00007] Call of PRO_ACG_15",
           "request": {
             "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15_IMPL/webservice ",
             "method": "POST",
