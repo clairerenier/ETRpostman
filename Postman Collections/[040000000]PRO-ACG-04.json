@@ -130,7 +130,7 @@
         },
         {
           "_postman_id": "9a5e7158-0e09-60c4-f475-7494b3ab8942",
-          "name": "[041303000STM]Check data copy",
+          "name": "[041303000STM]Check data",
           "event": [
             {
               "listen": "test",
