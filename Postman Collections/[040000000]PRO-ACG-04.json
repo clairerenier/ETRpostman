@@ -10,7 +10,7 @@
     {
       "_postman_id": "6bffd7e2-f1c8-3665-c978-e9a4a3d5d523",
       "name": "[041303000STM]PRO_ACG_13_ACG_030_9009_2_5_9_10_11",
-      "description": "",
+      "description": "0 - STM are all rejected\nid : 9009 - STM doesnt exist in ETR\nid : 2 - TEMMIN condition not respected\nid : 5 - TEMMAX condition not respected\nid : 9 - TEMMOY condition not respected\nid : 10 - PREVJ condition not respected\nid : 11 - PREVJ1 condition not respected",
       "item": [
         {
           "_postman_id": "87d38b06-b4fb-6386-3bca-01a1d3e9d220",
