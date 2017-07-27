@@ -2591,7 +2591,7 @@
                   "    }",
                   "    if (tests[\"Delete Point\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00006]Drop file PCE\");",
+                  "        postman.setNextRequest(\"[00006]Drop file STM\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
