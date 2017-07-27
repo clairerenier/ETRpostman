@@ -446,7 +446,7 @@
                   "    }",
                   "    if (tests[\"Delete Point\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[041303000STM]Drop file STM\");",
+                  "        postman.setNextRequest(\"[041302900STM]Drop file STM\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = false; ",
