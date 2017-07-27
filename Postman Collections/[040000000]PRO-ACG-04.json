@@ -72,7 +72,7 @@
         },
         {
           "_postman_id": "a30bd494-bd01-4579-6f6f-ce8b52c7441c",
-          "name": "[00006]Drop file STM copy",
+          "name": "[041303000STM]Drop file STM",
           "event": [
             {
               "listen": "test",
