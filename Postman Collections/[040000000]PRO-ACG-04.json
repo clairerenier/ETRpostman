@@ -419,8 +419,8 @@
     },
     {
       "_postman_id": "ca67ed38-1aea-c314-8d4f-7aff761a2137",
-      "name": "[041302900STM]PRO_ACG_13_ACG_029_",
-      "description": "0 - STM are all rejected\nid : 9009 - STM doesnt exist in ETR\nid : 2 - TEMMIN condition not respected\nid : 5 - TEMMAX condition not respected\nid : 9 - TEMMOY condition not respected\nid : 10 - PREVJ condition not respected\nid : 11 - PREVJ1 condition not respected",
+      "name": "[041302900STM]PRO_ACG_13_ACG_029_12_14_19_20_22_23_26_28_29_34_36",
+      "description": "0 - STM are all taken\nid : 12 - <!-- Cas 1 JG  = J : || T = TEMMOY ; T1 = PREVJ ; T2 = PREVJ1 || -->\nid : 14 - <!-- Cas 2 JG  = J : || T = PREVJ1 ; T1 = TEMMOY ; T2 = PREVJ || -->\nid : 19 - <!-- Cas 3 JG  = J : || T = PREVJ ; T1 = PREVJ1 ; T2 = TEMMOY || -->\nid : 20 - <!-- Cas 4 JG  = J : || T = null ||  -->\nid : 22 - <!-- Cas 5 JG  = J : || T1 = null || -->\nid : 23 - <!-- Cas 6 JG  = J : || T2 = null || -->\nid : 26 - <!-- Cas 7 JG  = J+1 : || T = TEMMOY ; T1 = PREVJ ; T2 = PREVJ1 || -->\nid : 28 - <!-- Cas 8 JG  = J+1 : || T = PREVJ1 ; T1 = TEMMOY ; T2 = PREVJ || -->\nid : 29 - <!-- Cas 9 JG  = J+1 : || T = PREVJ ; T1 = PREVJ1 ; T2 = TEMMOY || -->\nid : 32 - <!-- Cas 10 JG  = J+1 : || T = null || -->\nid : 34 - <!-- Cas 11 JG  = J+1 : || T1 = null || -->\nid : 36 - <!-- Cas 12 JG  = J+1 : || T2 = null || -->",
       "item": [
         {
           "_postman_id": "c21cd3a1-3520-a368-90f4-ea94974c006d",
