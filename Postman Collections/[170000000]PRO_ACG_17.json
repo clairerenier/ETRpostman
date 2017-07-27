@@ -8,155 +8,6 @@
   },
   "item": [
     {
-      "_postman_id": "b94de221-6537-ef84-f271-3f0ed9f2a0d1",
-      "name": "[170004600FGA]PRO_ACG_17_FGA_ACG_046_0709JLU10",
-      "description": "Check the presence of alerts for FGA",
-      "item": [
-        {
-          "_postman_id": "b7556c28-571f-780d-c94e-c8a8bea652bc",
-          "name": "[170004600FGA]Check data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "var sqlResult = jsonData.sqlResult;",
-                  "if(sqlResult != null){",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        if(sqlResult[i].results != null){",
-                  "            switch (sqlResult[i].requestId) {",
-                  "            case \"CheckAlerte\":",
-                  "                tests[\"Check FGA Alertes in Alertes\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                break;",
-                  "            }",
-                  "        }",
-                  "    }",
-                  "}",
-                  "//postman.setNextRequest(\"[170004600]Check data\");",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlerte\",\r\n         \"requestContent\":\"select count(*) as COUNT from alerte, fga where alerte.horodate>=(sysdate-3/24) and alerte.uidgrandeurs_objet=fga.uidgrandeurs_objet and IDfga='0709JLU10' and code_test='INIT' and alerte.lstime>=(sysdate-1/24) order by alerte.horodate desc, alerte.uidtest_ref desc,alerte.LSTIME DESC\"\r\n      }\r\n           \r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "_postman_id": "3b80dff5-31dc-d5c2-2e3e-83a005602a8c",
-      "name": "[170004601PCE]PRO_ACG_17_PCE_ACG_046",
-      "description": "Check the presence of PCE alerts :\n-PCE M J should not hve alerts\n-PCE with type point 500, 703 should not have alerts\n-PCE with source_acquisition 8, T should not have alerts",
-      "item": [
-        {
-          "_postman_id": "bd42dabf-28a6-9af2-8ce8-211ca6138699",
-          "name": "[170004601PCE]Check data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "var sqlResult = jsonData.sqlResult;",
-                  "if(sqlResult != null){",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        if(sqlResult[i].results != null){",
-                  "            switch (sqlResult[i].requestId) {",
-                  "            case \"CheckAlertePCEMJ\":",
-                  "                tests[\"Check PCE M J in Alertes\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break;",
-                  "            case \"CheckAlertePCEPoint\":",
-                  "                tests[\"Check PCE Type Point in Alertes\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break;",
-                  "            case \"CheckAlertePCESourceAcquisition\":",
-                  "                tests[\"Check PCE Source Acquisition in Alertes\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                break;",
-                  "            case \"CheckAlertePCE\":",
-                  "                 if (sqlResult[i].results.length ==2){",
-                  "                    if (sqlResult[i].results[0].COUNT>=\"1000\" && sqlResult[i].results[1].COUNT>=\"1000\"){",
-                  "                        tests[\"Check PCE T and E in Alertes\"]=true;",
-                  "                    }",
-                  "                    else{",
-                  "                        tests[\"Check PCE T and E in Alertes\"]=false;",
-                  "                    }",
-                  "                }",
-                  "                else{",
-                  "                     tests[\"Check PCE T and E in Alertes\"]=false;",
-                  "                }",
-                  "                break;",
-                  "            }",
-                  "        }",
-                  "    }",
-                  "}",
-                  "//postman.setNextRequest(\"[011102407]Delete and Update data\");",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlertePCEMJ\",\r\n         \"requestContent\":\"select coalesce( (select count(*) as COUNT from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate and type_pce='M' and sous_type='J'),0) as count from dual\"\r\n      },\r\n     {  \r\n         \"requestId\":\"CheckAlertePCEPoint\",\r\n         \"requestContent\":\"select coalesce ((select count(*) COUNT from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and source_acquisition in ('500','703') and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate ),0) as count from dual\"\r\n      },     \r\n\t  {  \r\n         \"requestId\":\"CheckAlertePCESourceAcquisition\",\r\n         \"requestContent\":\"select coalesce ((select count(*) COUNT from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and type_point in ('T','8') and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate),0) as count from dual\"\r\n      },   \r\n  \t  {  \r\n         \"requestId\":\"CheckAlertePCE\",\r\n         \"requestContent\":\"select type_pce,sous_type, count(*) as count from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and ( source_acquisition  not in ('T','8') or type_point in ('500','703') or (type_pce='M' and sous_type='J')) and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate group by type_pce,sous_type\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        }
-      ]
-    },
-    {
       "_postman_id": "bed625c6-377c-1aa7-3ec8-a3159dfef204",
       "name": "[170004600ALL]PRO_ACG_17_ALL_ALL_ALL",
       "description": "o  0 - ",
@@ -237,7 +88,7 @@
         },
         {
           "_postman_id": "177681d6-08ba-20e5-acd5-5dcd90091cb8",
-          "name": "[014200000PCE]Check data",
+          "name": "[170004600ALL]Check data",
           "event": [
             {
               "listen": "test",
@@ -393,6 +244,155 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresence\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid in (select id_correlation from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContent\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid in (select id_correlation from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only) and stepid='ACG_17_PRO_ACG_17'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckDmdCalculCreation\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid in (select id_correlation from orc_processus where code_technique_processus='PRO_ACG_17' and date_lancement_processus >(sysdate-1/24) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "b94de221-6537-ef84-f271-3f0ed9f2a0d1",
+      "name": "[170004600FGA]PRO_ACG_17_FGA_ACG_046_0709JLU10",
+      "description": "Check the presence of alerts for FGA",
+      "item": [
+        {
+          "_postman_id": "b7556c28-571f-780d-c94e-c8a8bea652bc",
+          "name": "[170004600FGA]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckAlerte\":",
+                  "                tests[\"Check FGA Alertes in Alertes\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                break;",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "//postman.setNextRequest(\"[170004600]Check data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlerte\",\r\n         \"requestContent\":\"select count(*) as COUNT from alerte, fga where alerte.horodate>=(sysdate-3/24) and alerte.uidgrandeurs_objet=fga.uidgrandeurs_objet and IDfga='0709JLU10' and code_test='INIT' and alerte.lstime>=(sysdate-1/24) order by alerte.horodate desc, alerte.uidtest_ref desc,alerte.LSTIME DESC\"\r\n      }\r\n           \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "3b80dff5-31dc-d5c2-2e3e-83a005602a8c",
+      "name": "[170004601PCE]PRO_ACG_17_PCE_ACG_046",
+      "description": "Check the presence of PCE alerts :\n-PCE M J should not hve alerts\n-PCE with type point 500, 703 should not have alerts\n-PCE with source_acquisition 8, T should not have alerts",
+      "item": [
+        {
+          "_postman_id": "bd42dabf-28a6-9af2-8ce8-211ca6138699",
+          "name": "[170004601PCE]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult != null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results != null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckAlertePCEMJ\":",
+                  "                tests[\"Check PCE M J in Alertes\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckAlertePCEPoint\":",
+                  "                tests[\"Check PCE Type Point in Alertes\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckAlertePCESourceAcquisition\":",
+                  "                tests[\"Check PCE Source Acquisition in Alertes\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "            case \"CheckAlertePCE\":",
+                  "                 if (sqlResult[i].results.length ==2){",
+                  "                    if (sqlResult[i].results[0].COUNT>=\"1000\" && sqlResult[i].results[1].COUNT>=\"1000\"){",
+                  "                        tests[\"Check PCE T and E in Alertes\"]=true;",
+                  "                    }",
+                  "                    else{",
+                  "                        tests[\"Check PCE T and E in Alertes\"]=false;",
+                  "                    }",
+                  "                }",
+                  "                else{",
+                  "                     tests[\"Check PCE T and E in Alertes\"]=false;",
+                  "                }",
+                  "                break;",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "//postman.setNextRequest(\"[011102407]Delete and Update data\");",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlertePCEMJ\",\r\n         \"requestContent\":\"select coalesce( (select count(*) as COUNT from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate and type_pce='M' and sous_type='J'),0) as count from dual\"\r\n      },\r\n     {  \r\n         \"requestId\":\"CheckAlertePCEPoint\",\r\n         \"requestContent\":\"select coalesce ((select count(*) COUNT from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and source_acquisition in ('500','703') and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate ),0) as count from dual\"\r\n      },     \r\n\t  {  \r\n         \"requestId\":\"CheckAlertePCESourceAcquisition\",\r\n         \"requestContent\":\"select coalesce ((select count(*) COUNT from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and type_point in ('T','8') and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate),0) as count from dual\"\r\n      },   \r\n  \t  {  \r\n         \"requestId\":\"CheckAlertePCE\",\r\n         \"requestContent\":\"select type_pce,sous_type, count(*) as count from alerte, pce,vpce,test_ref where alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and alerte.uidtest_ref=test_ref.uidtest_ref and pce.uidpce=vpce.uidpce AND vpce.DATE_FIN_AFFICHEE is null and code_test='INIT' and ( source_acquisition  not in ('T','8') or type_point in ('500','703') or (type_pce='M' and sous_type='J')) and alerte.lstime>=(sysdate-1) and alerte.lstime<=sysdate group by type_pce,sous_type\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
