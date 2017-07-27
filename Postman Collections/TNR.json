@@ -2761,7 +2761,7 @@
           "_postman_id": "ca1aacdb-7341-a228-c92c-4dca3d122515",
           "name": "[00007] Call of PRO_ACG_15",
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15_IMPL/webservice ",
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15/ws ",
             "method": "POST",
             "header": [
               {
