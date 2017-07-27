@@ -416,6 +416,211 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "ca67ed38-1aea-c314-8d4f-7aff761a2137",
+      "name": "[041303000STM]PRO_ACG_13_ACG_030_9009_2_5_9_10_11 copy",
+      "description": "0 - STM are all rejected\nid : 9009 - STM doesnt exist in ETR\nid : 2 - TEMMIN condition not respected\nid : 5 - TEMMAX condition not respected\nid : 9 - TEMMOY condition not respected\nid : 10 - PREVJ condition not respected\nid : 11 - PREVJ1 condition not respected",
+      "item": [
+        {
+          "_postman_id": "c21cd3a1-3520-a368-90f4-ea94974c006d",
+          "name": "[041303000STM]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePoint\":",
+                  "                tests[\"Delete Point\"] = true;",
+                  "                break;",
+                  "",
+                  "        }",
+                  "    }",
+                  "    if (tests[\"Delete Point\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[041303000STM]Drop file STM\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePoint\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select uidpoint from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('9009','2','5','9','10','11')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "eaaa8a27-48f2-d710-c023-09034053aa9c",
+          "name": "[041303000STM]Drop file STM",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    postman.setEnvironmentVariable(\"[041303000STM]PRO_ACG_13_ACG_030_9009_2_5_9_10_11_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[041303000STM]PRO_ACG_13_ACG_030_9009_2_5_9_10_11_sourceProcessId\",jsonData.sourceProcessId);",
+                  "    ",
+                  "    //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
+                  "    /*if (jsonData.statusProcess === \"2\"){",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);",
+                  "    }",
+                  "    else if (jsonData.statusProcess === \"4\"){",
+                  "       tests[\"Check drop file PCE\"] = true; ",
+                  "       postman.setNextRequest(\"[00005]Check data\");",
+                  "    }",
+                  "    else {",
+                  "        tests[\"Check drop file PCE\"] = false;",
+                  "        //postman.setNextRequest(null);  ",
+                  "    }*/",
+                  "    postman.setNextRequest(\"[041303000STM]Check data\");",
+                  "    ",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"STM\",\"fileName\":\"STMChronique_20151217T114557_CHR41_METEOH_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4dcd49d8-185f-6de8-b9fd-280d0b066200",
+          "name": "[041303000STM]Check data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult != null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results != null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatutOrcProcessus\":",
+                  "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                    break;",
+                  "                case \"CheckPointData9009\":",
+                  "                    tests[\"Check POINT data STM Rejected\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                case \"CheckPointData2\":",
+                  "                    tests[\"Check POINT data STM TEMMIN\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                case \"CheckPointData5\":",
+                  "                    tests[\"Check POINT data STM TEMMAX\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                case \"CheckPointData9\":",
+                  "                    tests[\"Check POINT data STM TEMMOY\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                case \"CheckPointData10\":",
+                  "                    tests[\"Check POINT data STM PRVJ\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                case \"CheckPointData11\":",
+                  "                    tests[\"Check POINT data STM PRVJ1\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                    break;",
+                  "                } ",
+                  "            }",
+                  "        } ",
+                  "    }",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate-1/24/4) and code_technique_processus='PRO_ACG_04' and id_correlation='{{PRO_ACG_05_PCE_TNR_SGPCETVPEC_processid}}'order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData9009\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('9009') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData2\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('2') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData5\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('5') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData9\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('2') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData10\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('2') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData11\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('2') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
