@@ -171,7 +171,7 @@
                   "            }",
                   "        } ",
                   "    }",
-                  "    postman.setNextRequest(\"[041303001STM]Check data reports\");",
+                  "    postman.setNextRequest(null);",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
