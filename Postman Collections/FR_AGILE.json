@@ -860,7 +860,7 @@
             "showPassword": false
           }
         },
-        "url": "http://172.30.4.60:48020/rest/ETR_PRO_SOC_04_IMPL/ws/",
+        "url": "http://172.30.4.60:48020/rest/ETR_PRO_SOC_04/ws/",
         "method": "POST",
         "header": [
           {
@@ -876,7 +876,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{ \r\n\"ProSoc04Request\" : {\r\n\"uidpce\":\"26583\",\r\n\"debutPeriode1\":\"2017-01-03T06:00:00.000+0000\",\r\n\"finPeriode1\":\"2099-12-31T06:00:00.000+0000\",\r\n\"debutPeriode2\":\"2017-04-03T06:00:00.000+0000\",\r\n\"finPeriode2\":\"2017-07-04T06:00:00.000+0000\"\r\n      }\r\n}"
+          "raw": "{ \r\n\"ProSoc04Request\" : {\r\n\"uidpce\":\"29130\",\r\n\"debutPeriode1\":\"2017-07-01T06:00:00.000+0000\",\r\n\"finPeriode1\":\"2099-12-31T06:00:00.000+0000\",\r\n\"debutPeriode2\":\"2017-07-02T06:00:00.000+0000\",\r\n\"finPeriode2\":\"2099-12-31T06:00:00.000+0000\"\r\n      }\r\n}"
         },
         "description": ""
       },
