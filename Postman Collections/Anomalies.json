@@ -246,7 +246,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"historiqueAcquisitionsDetailsFichierDto\": {\"code\":\"SGGU0707A\",\"typeObject\":\"PCE\",\"uidacq\":\"98516899\"}}"
+              "raw": "{\"historiqueAcquisitionsDetailsFichierDto\": {\"code\":\"SGGU0707A\",\"typeObject\":\"PCE\",\"uidacq\":\"98516898\"}}"
             },
             "description": ""
           },
