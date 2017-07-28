@@ -581,7 +581,7 @@
                   "        tests[\"Check drop file PCE\"] = false;",
                   "        //postman.setNextRequest(null);  ",
                   "    }*/",
-                  "    postman.setNextRequest(\"[041293000STM]Check data\");",
+                  "    postman.setNextRequest(\"[041302900STM]Check data\");",
                   "    ",
                   "}",
                   "else{",
