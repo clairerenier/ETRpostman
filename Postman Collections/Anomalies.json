@@ -227,39 +227,6 @@
           "response": []
         }
       ]
-    },
-    {
-      "_postman_id": "aa6276bc-cbcb-21a2-240c-cb4f2e9daa36",
-      "name": "ETRSP2_1588_SGGU0707A_0607 copy",
-      "description": "",
-      "item": [
-        {
-          "_postman_id": "abd4535b-48f3-b172-b12b-8b623418324b",
-          "name": "ETRSP2_1588_SGGU0707A_0607 Call of PRO_ACG_15",
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_ACG_15/ws ",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content",
-                "value": "application/json",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"historiqueAcquisitionsDetailsFichierDto\": {\"code\":\"SGGU0707A\",\"typeObject\":\"PCE\",\"uidacq\":\"98516899\"}}"
-            },
-            "description": ""
-          },
-          "response": []
-        }
-      ]
     }
   ]
 }
