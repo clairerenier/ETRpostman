@@ -860,7 +860,7 @@
             "showPassword": false
           }
         },
-        "url": "http://172.30.4.60:48020/rest/ETR_PRO_SOC_04/ws/",
+        "url": "http://172.30.5.87:32555 /rest/ETR_PRO_SOC_04/ws/",
         "method": "POST",
         "header": [
           {
