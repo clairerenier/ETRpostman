@@ -8208,6 +8208,1579 @@
       ]
     },
     {
+      "_postman_id": "5f567a67-1fa7-ed2f-8ef5-86a511ec56d8",
+      "name": "[011021000PCE]PRO_ACG_10_PCE_ACG_210_PCETNR1 et PCETNR2 copy",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "60d3c1a2-e62b-c4ab-f8bb-8aa668d35af1",
+          "name": "[011021001PCE]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021001PCE]Drop file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCEGBTNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1cff2f73-4a44-8815-13ce-47b788e53998",
+          "name": "[011021001PCE]Drop file PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021001PCE]Check Data\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_1-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7bf054d5-bb30-b084-b027-e9e475e17968",
+          "name": "[011021001PCE]Check Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                tests[\"Check Stock Acquisition2\"] = sqlResult[i].results[0].COUNT == \"259\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"325\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011021001PCE]Check SI\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011021001PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR1_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021001PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR1_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"SELECT stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011021001PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR1_processid}}') and stockage='OUI' group by nom_source,date_mesure,processid,pas_chr,stockage order by date_mesure, processid desc) group by stockage order by stockage\"\r\n      },\r\n\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEGBTNR1') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "67ac1fcf-7ecd-4e5f-326a-9e6dfed9726c",
+          "name": "[011021001PCE]Check SI",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckSIStockAcquisition\":",
+                  "                    tests[\"Check SI in Stock Acquisition\"] = sqlResult[i].results[0].COUNT == \"325\";",
+                  "                    break;",
+                  "                case \"CheckAcqPceConservee\":",
+                  "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "              ",
+                  "               }",
+                  "            }",
+                  "        }",
+                  "        ",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckSIStockAcquisition\",\r\n         \"requestContent\":\"select count(*) as COUNT from Stock_acquisition2 where processid in  ('{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid}}'and SI_SOURCE= 'Scala'\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid}}' and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "64848c27-bf2e-2424-be20-576dfd43b1c8",
+          "name": "[010100101PCE]Check avalibility",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckAvailabilityPCE\":",
+                  "                    tests[\"Check availability in PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";",
+                  "                    break;",
+                  "                case \"CheckAcqPceConservee\":",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "              ",
+                  "               }",
+                  "            }",
+                  "        }",
+                  "        ",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAvailabilityPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE where idPCE='PCETNR1' and date_debut <= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and date_fin > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCETNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCETNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c576858a-d87e-6746-c810-b0f22051d05b",
+          "name": "[010100101PCE]Check statut",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatutPCE\":",
+                  "                    tests[\"Check Statut PCE\"] =sqlResult[i].results[0].COUNT  == \"0\";",
+                  "                    break;",
+                  "                case \"CheckAcqPceConservee\":",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "              ",
+                  "               }",
+                  "            }",
+                  "        }",
+                  "        ",
+                  "    }",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from statut where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR1') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "926b5d60-688f-daaa-fa3c-2244acbc7ca8",
+          "name": "[010100101PCE]Check state 'Non Cheked'",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckStatePCE\":",
+                  "                    tests[\"Check State PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"0\";",
+                  "                    break;",
+                  "                case \"CheckAcqPceConservee\":",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "              ",
+                  "               }",
+                  "            }",
+                  "        }",
+                  "        ",
+                  "    }",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatetPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE_VERIFIE where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR1') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7ca55f5f-0fed-b4f0-d9c2-2b0055a409e9",
+          "name": "[010100101PCE]Check state 'Non Locked'",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+                  "if (tests[\"Status code is 200\"]){\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var sqlResult = jsonData.sqlResult;\r",
+                  "    if(sqlResult !== null){\r",
+                  "       for(var i= 0; i < sqlResult.length; i++)\r",
+                  "        {\r",
+                  "            if(sqlResult[i].results !== null){\r",
+                  "               switch (sqlResult[i].requestId) {\r",
+                  "                case \"CheckStatePCE\":\r",
+                  "                    tests[\"Check State PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"0\";\r",
+                  "                    break;\r",
+                  "                case \"CheckAcqPceConservee\":\r",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";\r",
+                  "                    break;\r",
+                  "              \r",
+                  "               }\r",
+                  "            }\r",
+                  "        }\r",
+                  "        \r",
+                  "    }\r",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatetPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from VERROU_ACQUISITION where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR1') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid}}'and Motif_rejet_stockage = '(null)'\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "29230edc-e288-426c-de8a-6e5f61324fe8",
+          "name": "[011021002PCE]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021002PCE]Drop file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCEGBTNR2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f77e4c15-35c6-f3c0-c4f8-a6107d6afd54",
+          "name": "[010100102PCE]Drop file PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021002PCE]Check non availibility\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1c483ff5-d853-9c2c-b6b9-ddd42dc9fdf7",
+          "name": "[011021002PCE]Check non availibility",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "       for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "               switch (sqlResult[i].requestId) {",
+                  "                case \"CheckNonAvailabilityPCE\":",
+                  "                    tests[\"Check non availability in PCE\"] = sqlResult[i].results[0].COUNT== \"1\";",
+                  "                    break;",
+                  "                case \"CheckAcqPCEConservee\":",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
+                  "              ",
+                  "               }",
+                  "            }",
+                  "        }",
+                  "        ",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckNonAvailabilityFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE where idPCE='PCEGBTNR2' and date_debut > TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021002PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR2_processid}}'and Motif_rejet_stockage = 'PCE non valide'\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "dbacf562-a1d2-1515-9f52-e449e2f57713",
+          "name": "[010100102PCE]Check Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisition2\":",
+                  "            tests[\"Check Stock Acquisition2 data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "  ",
+                  "              ",
+                  "",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011021003PCE]Delete data\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011021002PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR2_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021002PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR2_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"SELECT stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011021002PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR2_processid}}') and stockage='OUI' group by nom_source,date_mesure,processid,pas_chr,stockage order by date_mesure, processid desc) group by stockage order by stockage\"\r\n      },\r\n\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEGBTNR2') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9d37cbc1-d87a-fd63-c123-4a324b87c3c4",
+          "name": "[011021003PCE]Delete data ",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021003PCE]Drop file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCEGBTNR3'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEGBTNR3') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "37d3e98d-be91-c942-8619-b9ed9a5a8907",
+          "name": "[011021003PCE]Drop file PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021003PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR3_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021003PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR3_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021003PCE]Check state 'Checked'\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1e1716e7-534b-c36d-88b6-e4b8748e3c57",
+          "name": "[010100103PCE]Check state 'Cheked'",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+                  "if (tests[\"Status code is 200\"]){\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var sqlResult = jsonData.sqlResult;\r",
+                  "    if(sqlResult !== null){\r",
+                  "       for(var i= 0; i < sqlResult.length; i++)\r",
+                  "        {\r",
+                  "            if(sqlResult[i].results !== null){\r",
+                  "               switch (sqlResult[i].requestId) {\r",
+                  "                case \"CheckStatePCE\":\r",
+                  "                    tests[\"Check State PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";\r",
+                  "                    break;\r",
+                  "                case \"CheckAcqPceConservee\":\r",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";\r",
+                  "                    break;\r",
+                  "              \r",
+                  "               }\r",
+                  "            }\r",
+                  "        }\r",
+                  "        \r",
+                  "    }\r",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatetPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from PCE_VERIFIE where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR1') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR1') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021001PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR1_processid}}'and Motif_rejet_stockage = 'Etat PCE vérifié '\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "312958bd-f1c3-bac2-457a-a29fc7970b6d",
+          "name": "[011021003PCE]Check Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                tests[\"Check Stock Acquisition2 data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011021004PCE]Delete data\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011021003PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR3_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR3') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021003PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR3_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"SELECT stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011021003PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR3_processid}}') and stockage='OUI' group by nom_source,date_mesure,processid,pas_chr,stockage order by date_mesure, processid desc) group by stockage order by stockage\"\r\n      },\r\n\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEGBTNR3') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b9992b3e-7d7d-358c-4f64-782f22bc48ca",
+          "name": "[011021004PCE]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021004PCE]Drop file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCEGBTNR4'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEGBTNR4') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b477053c-757c-84c2-78d1-763e0c30f284",
+          "name": "[011021004PCE]Drop file PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021004PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR4_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021004PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR4_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021004PCE]Check state 'Locked' J\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9dca7c1e-b931-76f0-9489-192f00c4b76c",
+          "name": "[010100104PCE]Check state 'Locked' J",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+                  "if (tests[\"Status code is 200\"]){\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var sqlResult = jsonData.sqlResult;\r",
+                  "    if(sqlResult !== null){\r",
+                  "       for(var i= 0; i < sqlResult.length; i++)\r",
+                  "        {\r",
+                  "            if(sqlResult[i].results !== null){\r",
+                  "               switch (sqlResult[i].requestId) {\r",
+                  "                case \"CheckStatePCE2\":\r",
+                  "                    tests[\"Check State2 PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"1\";\r",
+                  "                    break;\r",
+                  "                case \"CheckAcqPceConservee\":\r",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";\r",
+                  "                    break;\r",
+                  "              \r",
+                  "               }\r",
+                  "            }\r",
+                  "        }\r",
+                  "        \r",
+                  "    }\r",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatetPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from VERROU_ACQUISITION where UIDPCE = (select UIDPCE from PCE where idpce= PCEGBTNR4') and hotodate= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n                {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR4') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[011021004PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR4_processid}}'and Motif_rejet_stockage = 'Etat PCE verrouillé '\"\r\n      }\r\n      \r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c07ab351-87a9-295f-4665-27069de87917",
+          "name": "[011021004PCE]Check Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                tests[\"Check Stock Acquisition2 data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "                ",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "postman.setNextRequest(\"[011021005PCE]Delete data\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011021004PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR4_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR4') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021004PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR4_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"SELECT stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011021004PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR4_processid}}') and stockage='OUI' group by nom_source,date_mesure,processid,pas_chr,stockage order by date_mesure, processid desc) group by stockage order by stockage\"\r\n      },\r\n\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEGBTNR4') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b41ca6f1-0168-f30a-8df4-7b21e291470d",
+          "name": "[011021005PCE]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021005PCE]Drop  file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCEGBTNR5'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEGBTNR5') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b972d97d-b40f-62da-f9a2-b4a9dc189245",
+          "name": "[010100105PCE]Drop  file PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021005PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR5_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021005PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR5_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021005PCE]Check state 'Cheked' 24H\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170506_PCE_20170507104025_CHR02_SCALA_5-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "52cdeb47-1024-3d07-a748-ff0bccb1efdb",
+          "name": "[010100105PCE]Check state 'Cheked' 24H",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+                  "if (tests[\"Status code is 200\"]){\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var sqlResult = jsonData.sqlResult;\r",
+                  "    if(sqlResult !== null){\r",
+                  "       for(var i= 0; i < sqlResult.length; i++)\r",
+                  "        {\r",
+                  "            if(sqlResult[i].results !== null){\r",
+                  "               switch (sqlResult[i].requestId) {\r",
+                  "                case \"CheckStatePCE2\":\r",
+                  "                    tests[\"Check State2 PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"24\";\r",
+                  "                    break;\r",
+                  "                case \"CheckAcqPceConservee\":\r",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";\r",
+                  "                    break;\r",
+                  "              \r",
+                  "               }\r",
+                  "            }\r",
+                  "        }\r",
+                  "        \r",
+                  "    }\r",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n                  {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and resultat_etape like '%/Enveloppe_VICTOR_PCE/ :  Child element Publication {} at position 1 is unexpected%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "efe25a06-c421-2d65-87d8-f76c2b8cd15e",
+          "name": "[011021005PCE]Check Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                tests[\"Check Stock Acquisition2 data\"] = sqlResult[i].results[0].COUNT  == \"0\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  "//postman.setNextRequest(\"[011021006PCE]Delete data\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[011021004PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR4_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEGBTNR4') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and  processid='{{[011021004PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR4_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"SELECT stockage,count(*) as COUNT from (select date_mesure,stockage from stock_acquisition2 where processid in ('{{[011021004PCE]PRO_ACG_01_PCE_ACG_210_PCEGBTNR4_processid}}') and stockage='OUI' group by nom_source,date_mesure,processid,pas_chr,stockage order by date_mesure, processid desc) group by stockage order by stockage\"\r\n      },\r\n\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/06/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEGBTNR4') and po.lstime >= (sysdate-1/24/4)\"\r\n      }\r\n\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e9e9ccfa-2b9b-0302-b05f-86506ecdc0d8",
+          "name": "[011021006PCE]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[011021006PCE]Drop  file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = false; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('07/05/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('PCETNR2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCETNR2') and jour_gazier= TO_DATE('06/05/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a7620b3b-6e2a-4a63-23d9-cc5d84ee770a",
+          "name": "[010100106PCE]Drop  file PCE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"[011021006PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR6_processid\",jsonData.processId);",
+                  "postman.setEnvironmentVariable(\"[011021006PCE]PRO_ACG_10_PCE_ACG_210_PCEGBTNR6_sourceProcessId\",jsonData.sourceProcessId);",
+                  "",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check drop file PCE\"] = true; ",
+                  "   postman.setNextRequest(\"[011021006PCE]Check state 'Cheked' 24J\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check drop file PCE\"] = false;",
+                  "    //postman.setNextRequest(null);  ",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "71072b45-d79b-6911-85dc-5d78a6864663",
+          "name": "[010100106PCE]Check state 'Cheked' 24J",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+                  "if (tests[\"Status code is 200\"]){\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var sqlResult = jsonData.sqlResult;\r",
+                  "    if(sqlResult !== null){\r",
+                  "       for(var i= 0; i < sqlResult.length; i++)\r",
+                  "        {\r",
+                  "            if(sqlResult[i].results !== null){\r",
+                  "               switch (sqlResult[i].requestId) {\r",
+                  "                case \"CheckStatePCE2\":\r",
+                  "                    tests[\"Check State2 PCE\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"21\";\r",
+                  "                    break;\r",
+                  "                case \"CheckAcqPceConservee\":\r",
+                  "                    tests[\"Check Motif rejet in ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";\r",
+                  "                    break;\r",
+                  "              \r",
+                  "               }\r",
+                  "            }\r",
+                  "        }\r",
+                  "        \r",
+                  "    }\r",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckStatutOrcEtape\",\r\n         \"requestContent\":\"select id_statut_etape from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and id_ref_etape='ACG_01_ORC_001'\"\r\n      },\r\n                  {  \r\n         \"requestId\":\"CheckStatutOrcEtapeMessage\",\r\n         \"requestContent\":\"select count(*) as COUNT from orc_etapes where id_processus='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}' and resultat_etape like '%/Enveloppe_VICTOR_PCE/ :  Child element Publication {} at position 1 is unexpected%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('SGPCETVPEC') and jour_gazier= TO_DATE('20/03/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{[010100100PCE]PRO_ACG_01_PCE_ORC_001_SGPCETVPEC_processid}}'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e9b7f6cd-b6bb-bb64-7dc3-d65bb681cf33",
+          "name": "[011021006PCE]Check Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var sqlResult = jsonData.sqlResult;",
+                  "if(sqlResult !== null){",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        if(sqlResult[i].results !== null){",
+                  "            switch (sqlResult[i].requestId) {",
+                  "            case \"CheckStatutOrcProcessus\":",
+                  "                tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckStockAcquisition2\":",
+                  "                ",
+                  "                tests[\"Check Stock Acquisition2 data\"] = sqlResult[i].results[0].COUNT  == \"0\";",
+                  "                break;",
+                  "",
+                  "            case \"CheckPointData\":",
+                  "                tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                  "                break;",
+                  "",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105000_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "_postman_id": "93ad5c31-ee10-2c9c-653f-aa8a638932b1",
       "name": "[011000702PCE]Check Data second file",
       "event": [
