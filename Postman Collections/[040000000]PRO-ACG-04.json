@@ -292,7 +292,7 @@
       "item": [
         {
           "_postman_id": "80bcc26b-3aa0-75c6-f4b3-4cd86faf9d97",
-          "name": "[041303000STM]Delete data",
+          "name": "[040400100STM]Delete data",
           "event": [
             {
               "listen": "test",
