@@ -294,7 +294,7 @@
         }
       ],
       "request": {
-        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ ETR_FRMK_ADMIN/ws/tests/multipleFiles/",
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/process/",
         "method": "POST",
         "header": [
           {
@@ -305,7 +305,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"fileRequest\":[{\"fileId\":\"fichier1\",\"alias\":\"PRO_ACG_01\",\"fileName\":\"fichier1.xml\"},{\"fileId\":\"fichier2\",\"alias\":\"PRO_ACG_01\",\"fileName\":\"fichier2.xml\"}],\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+          "raw": "{\"alias\":\"PRO_ACG_17\",\"params\":[{\"ATT_NAME\":\"HORODATE\",\"ATT_VALUE\":\"2017-08-02 06:00:00\",\"ATT_TYPE\":\"S\"},{\"ATT_NAME\":\"TYPE\",\"ATT_VALUE\":\"PCE\",\"ATT_TYPE\":\"S\"}]}"
         },
         "description": ""
       },
