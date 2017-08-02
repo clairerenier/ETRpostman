@@ -912,7 +912,7 @@
     },
     {
       "_postman_id": "a9f71b51-c229-537b-e236-69591b486f24",
-      "name": "[040400100STM]PRO_ACG_04_ORC_001_12 copy",
+      "name": "[040400200STM]PRO_ACG_04_ORC_002_12",
       "description": "o  0 - ko Case - file stops - the format inside is not correct\r\no  1 - ko Case - name of the file is not correct\r\no  2 - ok Case - tested through ACG_030 and ACG_029",
       "item": [
         {
