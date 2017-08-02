@@ -1066,7 +1066,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[040400101STM]Drop file STM\");",
+                  "    postman.setNextRequest(\"[040400201STM]Drop file STM\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
