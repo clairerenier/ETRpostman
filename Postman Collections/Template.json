@@ -215,8 +215,8 @@
               "tests[\"Status code is 200\"] = responseCode.code === 200;",
               "if (tests[\"Status code is 200\"]){",
               "    var jsonData = JSON.parse(responseBody);",
-              "    postman.setEnvironmentVariable(\"[010100100FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid\",jsonData.processId);",
-              "    postman.setEnvironmentVariable(\"[010100100FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
+              "    //postman.setEnvironmentVariable(\"[010100100FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid\",jsonData.processId);",
+              "    //postman.setEnvironmentVariable(\"[010100100FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
               "    ",
               "    if (jsonData.statusProcess === \"2\"){",
               "        tests[\"Check drop file FGA\"] = false;",
@@ -240,7 +240,7 @@
         }
       ],
       "request": {
-        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ ETR_FRMK_ADMIN/ws/tests/multipleFiles/",
         "method": "POST",
         "header": [
           {
@@ -251,7 +251,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170223_FGA_20170223105012_CHR02_SCALA_19-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+          "raw": "{\"fileRequest\":[{\"fileId\":\"fichier1\",\"alias\":\"PRO_ACG_01\",\"fileName\":\"fichier1.xml\"},{\"fileId\":\"fichier2\",\"alias\":\"PRO_ACG_01\",\"fileName\":\"fichier2.xml\"}],\"wait\":\"true\",\"waitTimeout\":\"90\"}"
         },
         "description": ""
       },
