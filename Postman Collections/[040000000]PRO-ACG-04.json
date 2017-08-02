@@ -288,7 +288,7 @@
     {
       "_postman_id": "faf968ab-ee63-f8fe-c920-7289de36d44c",
       "name": "[040400100STM]PRO_ACG_04_ORC_001_12",
-      "description": "0 - STM are all rejected\nid : 9009 - STM doesnt exist in ETR\nid : 2 - TEMMIN condition not respected\nid : 5 - TEMMAX condition not respected\nid : 9 - TEMMOY condition not respected\nid : 10 - PREVJ condition not respected\nid : 11 - PREVJ1 condition not respected",
+      "description": "o  0 - ko Case - file stops - the format inside is not correct\r\no  1 - ko Case - name of the file is not correct\r\no  2 - ok Case - tested through ACG_030 and ACG_029",
       "item": [
         {
           "_postman_id": "80bcc26b-3aa0-75c6-f4b3-4cd86faf9d97",
