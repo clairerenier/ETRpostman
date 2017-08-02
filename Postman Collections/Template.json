@@ -9,7 +9,7 @@
   "item": [
     {
       "_postman_id": "419d5ec1-fa9d-d4e9-c60f-8abeb071dd00",
-      "name": "[011102400FGA]Check process cal end copy",
+      "name": "Check process cal end",
       "event": [
         {
           "listen": "test",
