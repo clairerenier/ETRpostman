@@ -441,7 +441,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100101FGA]Drop file FGA\");",
+                  "    postman.setNextRequest(\"[040400101STM]Drop file STM\");",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
