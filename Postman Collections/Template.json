@@ -205,7 +205,7 @@
     },
     {
       "_postman_id": "54a64d4c-103d-6a75-a855-7f947f59f4c9",
-      "name": "[010100100FGA]",
+      "name": "Drop multiple files",
       "event": [
         {
           "listen": "test",
