@@ -573,7 +573,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[010100101FGA]Drop file FGA\");",
+                  "    postman.setNextRequest(null);",
                   "}",
                   "else{",
                   "    postman.setNextRequest(null);",
