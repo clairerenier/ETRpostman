@@ -782,7 +782,7 @@
                   "        postman.setNextRequest(\"[010100102PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
-                  "       tests[\"Delete data Sum up\"] = fase; ",
+                  "       tests[\"Delete data Sum up\"] = false; ",
                   "       //postman.setNextRequest(null);",
                   "    }",
                   "}",
