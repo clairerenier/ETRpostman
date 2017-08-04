@@ -773,7 +773,7 @@
                   "                tests[\"Delete Point Data\"] = true;",
                   "                break;",
                   "            case \"DeleteAcqFgaData\":",
-                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                tests[\"Delete Acq_Fga Data\"] = true;",
                   "                break;",
                   "        }",
                   "    }",
