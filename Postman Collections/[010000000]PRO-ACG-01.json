@@ -314,7 +314,7 @@
                   "        postman.setNextRequest(\"[010100102FGA]Drop file FGA\");",
                   "    }",
                   "    else {",
-                  "       tests[\"Delete data Sum up\"] = fase; ",
+                  "       tests[\"Delete data Sum up\"] = false; ",
                   "       //postman.setNextRequest(null);",
                   "    }",
                   "}",
