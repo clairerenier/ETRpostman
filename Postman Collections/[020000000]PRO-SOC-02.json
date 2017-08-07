@@ -170,7 +170,7 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_SOC_02_IMPL/webservice/",
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_SOC_02/ws",
             "method": "POST",
             "header": [
               {
