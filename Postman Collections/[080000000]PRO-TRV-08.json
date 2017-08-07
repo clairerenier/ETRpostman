@@ -48,7 +48,7 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_TRV_08_IMPL/webservice/",
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/process/",
             "method": "POST",
             "header": [
               {
@@ -59,7 +59,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{}"
+              "raw": "{\"alias\":\"PRO_TRV_08\"}"
             },
             "description": ""
           },
