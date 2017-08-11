@@ -1879,66 +1879,7 @@
       "_postman_id": "31918c2d-6d24-5b3a-db74-a1f836a8b832",
       "name": "[00005]PRO_ACG_05_PCE_TNR_SGPCETVPEC",
       "description": "",
-      "item": [
-        {
-          "_postman_id": "148b4d25-0166-128a-3e4f-c61d984edc72",
-          "name": "[00005]Drop file PCE",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"PRO_ACG_05_PCE_TNR_SGPCETVPEC_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"PRO_ACG_05_PCE_TNR_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
-                  "    /*if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[00005]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }*/",
-                  "    postman.setNextRequest(\"[00005]Check data\");",
-                  "    ",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"PRECO\",\"fileName\":\"PREV_PCE_20170413_20170414_130027.csv\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        }
-      ]
+      "item": []
     },
     {
       "_postman_id": "93169307-447a-59a2-e552-d7f663f8aa3c",
