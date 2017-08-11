@@ -564,7 +564,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCEEVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-05 06:00:00\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\"}}"
+              "raw": "{\"calculImpactDto\":{\"idObjet\":\"SGPCEEVPEC\",\"typeObjet\":\"PCE\",\"typeGestion\":\"T\",\"horodate\":\"2017-06-05T06:00:00.000+0000\",\"listeHoursSt\":\"06;08;09\",\"typePeriode\":\"H\",\"typeGrandeur\":\"\",\"commentaireRedressement\":\"\",\"dateRedressement\":\"\",\"lsuserRedress \":\"\"}}"
             },
             "description": ""
           },
