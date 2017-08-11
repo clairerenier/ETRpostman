@@ -4907,7 +4907,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where code_technique_processus='PRO_ARF_05' and date_lancement_processus >=(sysdate-1/24/10) order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n            {  \r\n         \"requestId\":\"CheckBTFicheUpdate\",\r\n         \"requestContent\":\"select count(*) as COUNT from PWRLINE.BT_FICHE where BT_FICHE.UIDFICHE='PJR-F03' and BT_FICHE.DATE_DE_MODIFICATION>(sysdate-1/24/10)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
