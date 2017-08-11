@@ -4595,7 +4595,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
