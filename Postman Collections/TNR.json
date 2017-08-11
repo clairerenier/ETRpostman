@@ -3129,6 +3129,194 @@
             }
           ],
           "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "b0911cb4-dc59-d930-f579-16a3ec26fee8",
+          "name": "[00015]PRO_ARF_05_PCE_TNR_SGPCETVPEC",
+          "description": "",
+          "item": [
+            {
+              "_postman_id": "298897e2-6749-ccb0-2a2b-7059cbe3a67e",
+              "name": "[00015]Delete data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"DeleteBTFiche\":",
+                      "                tests[\"Delete BT Fiche\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if ( tests[\"Delete BT Fiche\"] ){",
+                      "        tests[\"Delete data Sum up\"]  = true; ",
+                      "        postman.setNextRequest(\"[00015]Drop file BT_Fiche PCE Add\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data Sum up\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "7e813eb3-6312-bcf7-d312-40fbc88ccaeb",
+              "name": "[00015]Drop file BT_Fiche PCE Add",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"[00015]PRO_ARF_10_PCE_ARF_015_SGPCETVPEC_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"[00015]PRO_ARF_10_PCE_ARF_015_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file BTFiche\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file BTFiche\"] = true; ",
+                      "       postman.setNextRequest(\"[00015]Check data BT_Fiche Add\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file BTFiche\"] = true;",
+                      "        postman.setNextRequest(\"[00015]Check data BT_Fiche Add\");",
+                      "}",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "963c059a-a2fa-c775-fd07-0f5529b554ca",
+              "name": "[00015]Check data BT_Fiche Add",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult !== null){",
+                      "        for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results !== null){",
+                      "                switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessus\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckBTFicheUpdate\":",
+                      "                    tests[\"Check BT_Fiche Update\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                ",
+                      "                }",
+                      "            }",
+                      "        }",
+                      "    }",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "//postman.setNextRequest(null);",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "description": ""
+              },
+              "response": []
+            }
+          ],
+          "_postman_isSubFolder": true
         }
       ]
     },
@@ -5299,194 +5487,6 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{  \r\n   \"sqlRequest\":[  \r\n        {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate - 1/24/6) and code_technique_processus='PRO_ARF_02' order by date_lancement_processus desc fetch first 1 rows only\"\r\n\t\t},\r\n\t\t{  \r\n        \t\"requestId\":\"CheckGrpCalculCreation\",\r\n        \t\"requestContent\":\"select count(*) as COUNT from GRP_CALCUL where IDGRP_CALCUL='TSTCACHE2' and lstime>= (sysdate - 1/24/6)\"\r\n\t\t}\r\n   ]\r\n}"
-                },
-                "description": ""
-              },
-              "response": []
-            }
-          ],
-          "_postman_isSubFolder": true
-        },
-        {
-          "_postman_id": "b0911cb4-dc59-d930-f579-16a3ec26fee8",
-          "name": "[00015]PRO_ARF_05_PCE_TNR_SGPCETVPEC copy",
-          "description": "",
-          "item": [
-            {
-              "_postman_id": "298897e2-6749-ccb0-2a2b-7059cbe3a67e",
-              "name": "[00015]Delete data",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    var sqlResult = jsonData.sqlResult;",
-                      "    for(var i= 0; i < sqlResult.length; i++)",
-                      "    {",
-                      "        switch (sqlResult[i].requestId) {",
-                      "            case \"DeleteBTFiche\":",
-                      "                tests[\"Delete BT Fiche\"] = true;",
-                      "                break;",
-                      "        }",
-                      "    }",
-                      "    if ( tests[\"Delete BT Fiche\"] ){",
-                      "        tests[\"Delete data Sum up\"]  = true; ",
-                      "        postman.setNextRequest(\"[00015]Drop file BT_Fiche PCE Add\");",
-                      "    }",
-                      "    else {",
-                      "       tests[\"Delete data Sum up\"] = fase; ",
-                      "       //postman.setNextRequest(null);",
-                      "    }",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "",
-                      ""
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                "method": "POST",
-                "header": [
-                  {
-                    "description": "",
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "7e813eb3-6312-bcf7-d312-40fbc88ccaeb",
-              "name": "[00015]Drop file BT_Fiche PCE Add",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    postman.setEnvironmentVariable(\"[00015]PRO_ARF_10_PCE_ARF_015_SGPCETVPEC_processid\",jsonData.processId);",
-                      "    postman.setEnvironmentVariable(\"[00015]PRO_ARF_10_PCE_ARF_015_SGPCETVPEC_sourceProcessId\",jsonData.sourceProcessId);",
-                      "    ",
-                      "    if (jsonData.statusProcess === \"2\"){",
-                      "        tests[\"Check drop file BTFiche\"] = false;",
-                      "        //postman.setNextRequest(null);",
-                      "    }",
-                      "    else if (jsonData.statusProcess === \"4\"){",
-                      "       tests[\"Check drop file BTFiche\"] = true; ",
-                      "       postman.setNextRequest(\"[00015]Check data BT_Fiche Add\");",
-                      "    }",
-                      "    else {",
-                      "        tests[\"Check drop file BTFiche\"] = true;",
-                      "        postman.setNextRequest(\"[00015]Check data BT_Fiche Add\");",
-                      "}",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      ""
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-                "method": "POST",
-                "header": [
-                  {
-                    "description": "",
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "963c059a-a2fa-c775-fd07-0f5529b554ca",
-              "name": "[00015]Check data BT_Fiche Add",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    var sqlResult = jsonData.sqlResult;",
-                      "    if(sqlResult !== null){",
-                      "        for(var i= 0; i < sqlResult.length; i++)",
-                      "        {",
-                      "            if(sqlResult[i].results !== null){",
-                      "                switch (sqlResult[i].requestId) {",
-                      "                case \"CheckStatutOrcProcessus\":",
-                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                      "                    break;",
-                      "                case \"CheckBTFicheUpdate\":",
-                      "                    tests[\"Check BT_Fiche Update\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                      "                    break;",
-                      "                ",
-                      "                }",
-                      "            }",
-                      "        }",
-                      "    }",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "",
-                      ""
-                    ]
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "//postman.setNextRequest(null);",
-                      "",
-                      ""
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                "method": "POST",
-                "header": [
-                  {
-                    "description": "",
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
                 },
                 "description": ""
               },
