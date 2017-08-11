@@ -1802,6 +1802,12 @@
       ]
     },
     {
+      "_postman_id": "d1862db7-282a-45d8-d3c7-2b758fc30440",
+      "name": "[00001]PRO_ACG_01_FGA_TNR_SGTUH97A",
+      "description": "",
+      "item": []
+    },
+    {
       "_postman_id": "279a4619-a6ee-166f-9a7f-d31bde295203",
       "name": "[00015]Delete data",
       "event": [
