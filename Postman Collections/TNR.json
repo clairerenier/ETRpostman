@@ -4784,7 +4784,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteBTFiche\",\r\n         \"requestContent\":\"delete from bt_fiche where UIDFICHE in ('PJR-F03')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
@@ -4838,7 +4838,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "{\"alias\":\"BASET\",\"fileName\":\"J20161222_BASET_20161222093500_REF21_ETR.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
