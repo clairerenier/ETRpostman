@@ -4261,7 +4261,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"STM\",\"fileName\":\"STMChronique_20151217T114559_CHR41_METEOH_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+              "raw": ""
             },
             "description": ""
           },
