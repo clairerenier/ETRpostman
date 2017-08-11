@@ -3803,7 +3803,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "{\"alias\":\"EDHOUARD_PCE\",\"fileName\":\"H20160616_PCE_20160616163547_CHR01_EDHOUARD_240-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
             "description": ""
           },
