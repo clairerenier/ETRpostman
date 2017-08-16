@@ -2298,7 +2298,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"alias\":\"TRANSACTION\",\"fileName\":\"J20160828_PCR_20160829015704_REF31_CAM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                  "raw": "{\"alias\":\"TRANSACTION\",\"fileName\":\"J20160828_PCR_20160829015704_REF31_CAM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
                 },
                 "description": ""
               },
