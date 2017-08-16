@@ -2325,7 +2325,7 @@
                       "       postman.setNextRequest(\"[00010]Check data\");",
                       "    }",
                       "    else {",
-                      "        tests[\"Check process cal end\"] = false;",
+                      "        tests[\"Check process cal end\"] = true;",
                       "        postman.setNextRequest(\"[00010]Check data\");  ",
                       "    }",
                       "}",
