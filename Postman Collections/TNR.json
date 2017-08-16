@@ -2275,7 +2275,7 @@
                       "        tests[\"Check drop file PCE\"] = false;",
                       "        //postman.setNextRequest(null);  ",
                       "    }*/",
-                      "    postman.setNextRequest(\"[00010]Check data\");",
+                      "    postman.setNextRequest(\"[00010]Check process cal end\");",
                       "}",
                       "else{",
                       "    postman.setNextRequest(null);",
