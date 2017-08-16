@@ -2322,11 +2322,11 @@
                       "    }",
                       "    else if (jsonData.statusProcess === \"4\"){",
                       "       tests[\"Check process cal end\"] = true; ",
-                      "       postman.setNextRequest(\"[00001]Check data\");",
+                      "       postman.setNextRequest(\"[00010]Check data\");",
                       "    }",
                       "    else {",
                       "        tests[\"Check process cal end\"] = false;",
-                      "        //postman.setNextRequest(null);  ",
+                      "        postman.setNextRequest(\"[00010]Check data\");  ",
                       "    }",
                       "}",
                       "else{",
@@ -2343,9 +2343,9 @@
                 "method": "POST",
                 "header": [
                   {
-                    "description": "",
                     "key": "Content-Type",
-                    "value": "application/json"
+                    "value": "application/json",
+                    "description": ""
                   }
                 ],
                 "body": {
