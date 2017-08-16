@@ -2291,9 +2291,9 @@
                 "method": "POST",
                 "header": [
                   {
-                    "description": "",
                     "key": "Content-Type",
-                    "value": "application/json"
+                    "value": "application/json",
+                    "description": ""
                   }
                 ],
                 "body": {
