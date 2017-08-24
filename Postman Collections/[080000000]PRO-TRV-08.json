@@ -28,7 +28,7 @@
                   "          do { curDate = new Date(); }",
                   "          while(curDate-date < millis);",
                   "        }",
-                  "pausecomp(60000);",
+                  "pausecomp(20000);",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "",
                   "if (tests[\"Status code is 200\"]){",
