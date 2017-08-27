@@ -2379,6 +2379,60 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "945b2678-6cbb-6ddd-a3c3-33b4621f2756",
+              "name": "[00007]Drop file REL 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file REL\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file REL\"] = true; ",
+                      "       postman.setNextRequest(\"[00007]Check data REL 2\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file REL\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165922_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
