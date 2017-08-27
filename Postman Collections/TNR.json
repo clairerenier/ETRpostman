@@ -2174,6 +2174,13 @@
             }
           ],
           "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "f5c7a9f7-b48a-9cb4-be9c-4069040cf846",
+          "name": "[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2",
+          "description": "0 - Meter reading is rejected\n1 - Meter reading is saved",
+          "item": [],
+          "_postman_isSubFolder": true
         }
       ]
     },
