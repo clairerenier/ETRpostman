@@ -837,7 +837,7 @@
                       "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                       "                    break;",
                       "                case \"CheckStockAcquisition2\":",
-                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"338\";",
+                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"341\";",
                       "                    break;",
                       "                case \"CheckDmdCalcul\":",
                       "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
