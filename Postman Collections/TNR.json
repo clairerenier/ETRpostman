@@ -806,7 +806,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+                  "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
                 },
                 "description": ""
               },
