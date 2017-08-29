@@ -1119,7 +1119,7 @@
                       "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                       "                    break;",
                       "                case \"CheckStockAcquisition2\":",
-                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"104\";",
+                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"107\";",
                       "                    break;",
                       "                case \"CheckDmdCalcul\":",
                       "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
@@ -1220,9 +1220,9 @@
                 "method": "POST",
                 "header": [
                   {
-                    "description": "",
                     "key": "Content-Type",
-                    "value": "application/json"
+                    "value": "application/json",
+                    "description": ""
                   }
                 ],
                 "body": {
