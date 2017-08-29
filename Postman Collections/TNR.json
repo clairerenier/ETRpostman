@@ -633,277 +633,278 @@
       ]
     },
     {
-      "_postman_id": "c63572e6-7c2a-95ae-833e-9fff5180c84d",
-      "name": "[00001]PRO_ACG_01_FGA_TNR_SGTUH97A",
-      "description": "",
-      "item": [
-        {
-          "_postman_id": "f073997d-7283-dc99-b964-07564066a943",
-          "name": "[00001]Delete data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointData\":",
-                  "                tests[\"Delete Point Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteAcqFgaData\":",
-                  "                tests[\"Delete Acq_Fga Data\"] = true;",
-                  "                break;",
-                  "            case \"DeletePubPointJmnFgaData\":",
-                  "                tests[\"Delete Pub_Point_Jmn_Fga Data\"] = true;",
-                  "                break;",
-                  "        }",
-                  "    }",
-                  "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[00001]Drop file FGA\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data\"] = fase; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('20/01/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('SGTUH97A'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('SGTUH97A') and jour_gazier= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='SGTUH97A' and horodate between TO_DATE('2017-01-19 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-01-20 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "e6545e6f-c178-8a7a-6d3f-9e47748a0e6e",
-          "name": "[00001]Drop file FGA",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"PRO_ACG_01_FGA_TNR_SGTUH97A_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file FGA\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file FGA\"] = true; ",
-                  "       postman.setNextRequest(\"[00001]Check process cal end\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file FGA\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170119_FGA_20170119185806_CHR02_SCALA_5-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "3d8130c3-77eb-cc94-22d1-f7d0e4ebdf2d",
-          "name": "[00001]Check process cal end",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check process cal end\"] = true; ",
-                  "       postman.setNextRequest(\"[00001]Check data\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "98d2e7e2-ab2a-c654-6fd2-f7572880ec76",
-          "name": "[00001]Check data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult !== null){",
-                  "        for(var i= 0; i < sqlResult.length; i++)",
-                  "        {",
-                  "            if(sqlResult[i].results !== null){",
-                  "                switch (sqlResult[i].requestId) {",
-                  "                case \"CheckStatutOrcProcessus\":",
-                  "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                  "                    break;",
-                  "                case \"CheckAcqFgaConservee\":",
-                  "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                    break;",
-                  "                case \"CheckStockAcquisition2\":",
-                  "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"338\";",
-                  "                    break;",
-                  "                case \"CheckDmdCalcul\":",
-                  "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                  "                    break;",
-                  "                case \"CheckStockAcquisitionCal\":",
-                  "                    tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                    break;",
-                  "                case \"CheckPointData\":",
-                  "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"338\";",
-                  "                    break;",
-                  "                case \"CheckPubPointJmnFgaData\":",
-                  "                    tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"338\";",
-                  "                    break;",
-                  "                case \"CheckStockAcquisitionForAcq\":",
-                  "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                    break;   ",
-                  "                case \"CheckStockAcquisitionForCal\":",
-                  "                    tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                  "                    break; ",
-                  "                }",
-                  "            }",
-                  "        }",
-                  "    }",
-                  "    postman.setNextRequest(\"[00002]Delete data\");",
-                  "",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('SGTUH97A') and jour_gazier= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition2 where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('20/01/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('SGTUH97A') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointJmnFgaData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT_jmn_fga pp  inner join grandeur on pp.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-01-19 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-01-20 05:00:00', 'YYYY-MM-DD HH24:MI:SS')  and idgrandeur like '%SGTUH97A%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}')\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        }
-      ]
-    },
-    {
       "_postman_id": "af17dbf6-b7a9-e710-607f-b229fd5ab1e5",
       "name": "ACG",
       "description": "",
       "item": [
+        {
+          "_postman_id": "c63572e6-7c2a-95ae-833e-9fff5180c84d",
+          "name": "[00001]PRO_ACG_01_FGA_TNR_SGTUH97A",
+          "description": "",
+          "item": [
+            {
+              "_postman_id": "f073997d-7283-dc99-b964-07564066a943",
+              "name": "[00001]Delete data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"DeletePointData\":",
+                      "                tests[\"Delete Point Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteAcqFgaData\":",
+                      "                tests[\"Delete Acq_Fga Data\"] = true;",
+                      "                break;",
+                      "            case \"DeletePubPointJmnFgaData\":",
+                      "                tests[\"Delete Pub_Point_Jmn_Fga Data\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Fga Data\"] && tests[\"Delete Pub_Point_Jmn_Fga Data\"]){",
+                      "        tests[\"Delete data Sum up\"] = true; ",
+                      "        postman.setNextRequest(\"[00001]Drop file FGA\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('20/01/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('SGTUH97A'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('SGTUH97A') and jour_gazier= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointJmnFgaData\",\r\n         \"requestContent\":\"delete from pub_point_jmn_fga where uidgrandeur in (select pp.uidgrandeur from pub_point_jmn_fga pp, fga p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idfga='SGTUH97A' and horodate between TO_DATE('2017-01-19 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-01-20 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "e6545e6f-c178-8a7a-6d3f-9e47748a0e6e",
+              "name": "[00001]Drop file FGA",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_FGA_TNR_SGTUH97A_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file FGA\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file FGA\"] = true; ",
+                      "       postman.setNextRequest(\"[00001]Check process cal end\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file FGA\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170119_FGA_20170119185806_CHR02_SCALA_5-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "3d8130c3-77eb-cc94-22d1-f7d0e4ebdf2d",
+              "name": "[00001]Check process cal end",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check process cal end\"] = true; ",
+                      "       postman.setNextRequest(\"[00001]Check data\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{PRO_ACG_01_FGA_TNR_SGTUH97A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "98d2e7e2-ab2a-c654-6fd2-f7572880ec76",
+              "name": "[00001]Check data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult !== null){",
+                      "        for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results !== null){",
+                      "                switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessus\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckAcqFgaConservee\":",
+                      "                    tests[\"Check ACQ_FGA_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisition2\":",
+                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"338\";",
+                      "                    break;",
+                      "                case \"CheckDmdCalcul\":",
+                      "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisitionCal\":",
+                      "                    tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break;",
+                      "                case \"CheckPointData\":",
+                      "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"338\";",
+                      "                    break;",
+                      "                case \"CheckPubPointJmnFgaData\":",
+                      "                    tests[\"Check PUB_POINT_JMN_FGA data\"] = sqlResult[i].results[0].COUNT == \"338\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisitionForAcq\":",
+                      "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break;   ",
+                      "                case \"CheckStockAcquisitionForCal\":",
+                      "                    tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break; ",
+                      "                }",
+                      "            }",
+                      "        }",
+                      "    }",
+                      "    postman.setNextRequest(\"[00002]Delete data\");",
+                      "",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "//postman.setNextRequest(null);",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqFgaConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_fga_conservee where code_acquisition in ('SGTUH97A') and jour_gazier= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition2 where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where prec_processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('19/01/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('20/01/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idfga in ('SGTUH97A') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointJmnFgaData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT_jmn_fga pp  inner join grandeur on pp.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-01-19 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-01-20 05:00:00', 'YYYY-MM-DD HH24:MI:SS')  and idgrandeur like '%SGTUH97A%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_FGA_TNR_SGTUH97A_processid}}')\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
         {
           "_postman_id": "47cf9466-6b4b-7dff-c925-a77f827cb95c",
           "name": "[00002]PRO_ACG_01_PCE_TNR_SGGUR1133A",
@@ -1227,6 +1228,331 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('SGGUR1133A') and jour_gazier= TO_DATE('27/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition2 where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where lstime >=(sysdate-1/24/4) and prec_processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('27/02/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('28/02/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('SGGUR1133A') and type_grandeur in ('VOLPEC','ENEPEC','PCSMOY') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT  inner join grandeur on pub_point.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-02-27 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-28 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and date_modif >= (sysdate-1/24/4) and idgrandeur like '%SGGUR1133A%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrMeteringDataData\",\r\n         \"requestContent\":\"select count(*) as COUNT from ETR_METERING_DATA  where  gas_day between TO_DATE('2017-02-27 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-02-28 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and insertion_date >= (sysdate-1/24/4) and pce_code like '%SGGUR1133A%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}')\"\r\n         \r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAlerte\",\r\n         \"requestContent\":\"select count(*) as count from alerte, pce where  alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and IDPCE='SGGUR1133A'and alerte.lstime>=(sysdate-1/24/4) order by horodate desc, uidtest_ref desc,alerte.LSTIME DESC \"\r\n         \r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "f5c7a9f7-b48a-9cb4-be9c-4069040cf846",
+          "name": "[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2",
+          "description": "0 - Meter reading is rejected\n1 - Meter reading is saved",
+          "item": [
+            {
+              "_postman_id": "61ad37b3-2285-e8ac-2024-52f79f73760d",
+              "name": "[00007]Delete data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"DeleteCaractComptageData\":",
+                      "                tests[\"Delete CaractComptage Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteReleveData\":",
+                      "                tests[\"Delete Releve Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteReleveRejeteeData\":",
+                      "                tests[\"Delete Releve_Rejetee Data\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if (tests[\"Delete CaractComptage Data\"] && tests[\"Delete Releve Data\"] && tests[\"Delete Releve_Rejetee Data\"] ){",
+                      "        tests[\"Delete data Sum up\"] = true; ",
+                      "        postman.setNextRequest(\"[00007]Drop file REL 1\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "postman.setNextRequest(\"[00002]Drop file PCE\");"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteCaractComptageData\",\r\n         \"requestContent\":\"delete from CARACT_COMPTAGE where uidcaract_comptage in (select CARACT_COMPTAGE.uidcaract_comptage from releve r, pce p, CARACT_COMPTAGE c where r.UIDPCE=p.uidpce and c.uidreleve=r.uidreleve and p.idpce in ('SGPCETPEC2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveData\",\r\n         \"requestContent\":\"delete from releve where uidreleve in (select uidreleve from releve r, pce p where r.UIDPCE=p.uidpce and idpce in ('SGPCETPEC2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveRejeteeData\",\r\n         \"requestContent\":\"delete from RELEVE_REJETEE where uidreleve_rejetee in (select uidreleve_rejetee  from RELEVE_REJETEE rr, pce p where p.UIDPCE=rr.uidpce and idpce in ('SGPCETPEC2'))\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "80e211bf-5067-4b15-23f6-5e1c58dd0fb1",
+              "name": "[00007]Drop file REL 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file REL\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file REL\"] = true; ",
+                      "       postman.setNextRequest(\"[00007]Check data REL 1\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file REL\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165921_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "b472356d-b114-ed36-baa1-6829f0d926e1",
+              "name": "[00007]Check data REL 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult != null){",
+                      "       for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results != null){",
+                      "               switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessus\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckReleveRejeteeData\":",
+                      "                    tests[\"Check RELEVE REJETEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                } ",
+                      "            }",
+                      "        } ",
+                      "    }",
+                      "    postman.setNextRequest(\"[00007]Drop file REL 2\");",
+                      "    ",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "//postman.setNextRequest(null);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckReleveRejeteeData\",\r\n         \"requestContent\":\"select count(*) as count from RELEVE_REJETEE RR, pce P where RR.UIDPCE=p.uidpce and p.idpce in ('SGPCETPEC2') and rr.lstime >= sysdate-1/24\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "945b2678-6cbb-6ddd-a3c3-33b4621f2756",
+              "name": "[00007]Drop file REL 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file REL\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file REL\"] = true; ",
+                      "       postman.setNextRequest(\"[00007]Check data REL 2\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file REL\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165922_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "7cdc9d30-bb37-4301-f41b-e20617fc7bdf",
+              "name": "[00007]Check data REL 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult != null){",
+                      "       for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results != null){",
+                      "               switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessus\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckReleveData\":",
+                      "                    tests[\"Check RELEVE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckCaractComptageData\":",
+                      "                    tests[\"Check CARACT COMPTAGE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                } ",
+                      "            }",
+                      "        } ",
+                      "    }",
+                      "    postman.setNextRequest(null);",
+                      "    ",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "//postman.setNextRequest(null);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckReleveData\",\r\n         \"requestContent\":\"select count(*) as count from releve, pce where releve.UIDPCE=pce.uidpce and idpce in ('SGPCETPEC2') and releve.lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckCaractComptageData\",\r\n         \"requestContent\":\"select count(*) as count from releve, pce, CARACT_COMPTAGE where releve.UIDPCE=pce.uidpce and caract_comptage.uidreleve=releve.uidreleve and idpce in ('SGPCETPEC2') and CARACT_COMPTAGE.lstime >= sysdate-1/24\"\r\n      }\r\n   ]\r\n}"
                 },
                 "description": ""
               },
@@ -2173,331 +2499,6 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate-1/24/4) and code_technique_processus='PRO_ACG_04' and id_correlation='{{[00006]PRO_ACG_04_STM_TNR_12_processid}}'order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from STATION_METEO p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/12/2015 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/12/2015 05:00:00','DD/MM/YYYY HH24:MI:SS') and IDSTATION in ('12') and po.lstime >=(sysdate-1/24/4) order by g.idgrandeur, po.horodate asc,po.lstime desc\"\r\n      }\r\n   ]\r\n}"
-                },
-                "description": ""
-              },
-              "response": []
-            }
-          ],
-          "_postman_isSubFolder": true
-        },
-        {
-          "_postman_id": "f5c7a9f7-b48a-9cb4-be9c-4069040cf846",
-          "name": "[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2",
-          "description": "0 - Meter reading is rejected\n1 - Meter reading is saved",
-          "item": [
-            {
-              "_postman_id": "61ad37b3-2285-e8ac-2024-52f79f73760d",
-              "name": "[00007]Delete data",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    var sqlResult = jsonData.sqlResult;",
-                      "    for(var i= 0; i < sqlResult.length; i++)",
-                      "    {",
-                      "        switch (sqlResult[i].requestId) {",
-                      "            case \"DeleteCaractComptageData\":",
-                      "                tests[\"Delete CaractComptage Data\"] = true;",
-                      "                break;",
-                      "            case \"DeleteReleveData\":",
-                      "                tests[\"Delete Releve Data\"] = true;",
-                      "                break;",
-                      "            case \"DeleteReleveRejeteeData\":",
-                      "                tests[\"Delete Releve_Rejetee Data\"] = true;",
-                      "                break;",
-                      "        }",
-                      "    }",
-                      "    if (tests[\"Delete CaractComptage Data\"] && tests[\"Delete Releve Data\"] && tests[\"Delete Releve_Rejetee Data\"] ){",
-                      "        tests[\"Delete data Sum up\"] = true; ",
-                      "        postman.setNextRequest(\"[00007]Drop file REL 1\");",
-                      "    }",
-                      "    else {",
-                      "       tests[\"Delete data\"] = fase; ",
-                      "       //postman.setNextRequest(null);",
-                      "    }",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "",
-                      ""
-                    ]
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "postman.setNextRequest(\"[00002]Drop file PCE\");"
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "description": ""
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteCaractComptageData\",\r\n         \"requestContent\":\"delete from CARACT_COMPTAGE where uidcaract_comptage in (select CARACT_COMPTAGE.uidcaract_comptage from releve r, pce p, CARACT_COMPTAGE c where r.UIDPCE=p.uidpce and c.uidreleve=r.uidreleve and p.idpce in ('SGPCETPEC2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveData\",\r\n         \"requestContent\":\"delete from releve where uidreleve in (select uidreleve from releve r, pce p where r.UIDPCE=p.uidpce and idpce in ('SGPCETPEC2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveRejeteeData\",\r\n         \"requestContent\":\"delete from RELEVE_REJETEE where uidreleve_rejetee in (select uidreleve_rejetee  from RELEVE_REJETEE rr, pce p where p.UIDPCE=rr.uidpce and idpce in ('SGPCETPEC2'))\"\r\n      }\r\n   ]\r\n}"
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "80e211bf-5067-4b15-23f6-5e1c58dd0fb1",
-              "name": "[00007]Drop file REL 1",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_processid\",jsonData.processId);",
-                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_sourceProcessId\",jsonData.sourceProcessId);",
-                      "    ",
-                      "    if (jsonData.statusProcess === \"2\"){",
-                      "        tests[\"Check drop file REL\"] = false;",
-                      "        //postman.setNextRequest(null);",
-                      "    }",
-                      "    else if (jsonData.statusProcess === \"4\"){",
-                      "       tests[\"Check drop file REL\"] = true; ",
-                      "       postman.setNextRequest(\"[00007]Check data REL 1\");",
-                      "    }",
-                      "    else {",
-                      "        tests[\"Check drop file REL\"] = false;",
-                      "        //postman.setNextRequest(null);  ",
-                      "    }",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      ""
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-                "method": "POST",
-                "header": [
-                  {
-                    "description": "",
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165921_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "b472356d-b114-ed36-baa1-6829f0d926e1",
-              "name": "[00007]Check data REL 1",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    var sqlResult = jsonData.sqlResult;",
-                      "    if(sqlResult != null){",
-                      "       for(var i= 0; i < sqlResult.length; i++)",
-                      "        {",
-                      "            if(sqlResult[i].results != null){",
-                      "               switch (sqlResult[i].requestId) {",
-                      "                case \"CheckStatutOrcProcessus\":",
-                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                      "                    break;",
-                      "                case \"CheckReleveRejeteeData\":",
-                      "                    tests[\"Check RELEVE REJETEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                      "                    break;",
-                      "                } ",
-                      "            }",
-                      "        } ",
-                      "    }",
-                      "    postman.setNextRequest(\"[00007]Drop file REL 2\");",
-                      "    ",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "",
-                      ""
-                    ]
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "//postman.setNextRequest(null);"
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "description": ""
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckReleveRejeteeData\",\r\n         \"requestContent\":\"select count(*) as count from RELEVE_REJETEE RR, pce P where RR.UIDPCE=p.uidpce and p.idpce in ('SGPCETPEC2') and rr.lstime >= sysdate-1/24\"\r\n      }\r\n   ]\r\n}"
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "945b2678-6cbb-6ddd-a3c3-33b4621f2756",
-              "name": "[00007]Drop file REL 2",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_processid\",jsonData.processId);",
-                      "    postman.setEnvironmentVariable(\"[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_sourceProcessId\",jsonData.sourceProcessId);",
-                      "    ",
-                      "    if (jsonData.statusProcess === \"2\"){",
-                      "        tests[\"Check drop file REL\"] = false;",
-                      "        //postman.setNextRequest(null);",
-                      "    }",
-                      "    else if (jsonData.statusProcess === \"4\"){",
-                      "       tests[\"Check drop file REL\"] = true; ",
-                      "       postman.setNextRequest(\"[00007]Check data REL 2\");",
-                      "    }",
-                      "    else {",
-                      "        tests[\"Check drop file REL\"] = false;",
-                      "        //postman.setNextRequest(null);  ",
-                      "    }",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      ""
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "description": ""
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165922_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "7cdc9d30-bb37-4301-f41b-e20617fc7bdf",
-              "name": "[00007]Check data REL 2",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "if (tests[\"Status code is 200\"]){",
-                      "    var jsonData = JSON.parse(responseBody);",
-                      "    var sqlResult = jsonData.sqlResult;",
-                      "    if(sqlResult != null){",
-                      "       for(var i= 0; i < sqlResult.length; i++)",
-                      "        {",
-                      "            if(sqlResult[i].results != null){",
-                      "               switch (sqlResult[i].requestId) {",
-                      "                case \"CheckStatutOrcProcessus\":",
-                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                      "                    break;",
-                      "                case \"CheckReleveData\":",
-                      "                    tests[\"Check RELEVE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                      "                    break;",
-                      "                case \"CheckCaractComptageData\":",
-                      "                    tests[\"Check CARACT COMPTAGE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                      "                    break;",
-                      "                } ",
-                      "            }",
-                      "        } ",
-                      "    }",
-                      "    postman.setNextRequest(null);",
-                      "    ",
-                      "}",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "",
-                      ""
-                    ]
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "//postman.setNextRequest(null);"
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "description": ""
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{[00007]PRO_ACG_20_REL_TNR_SGPCETPEC2_2_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckReleveData\",\r\n         \"requestContent\":\"select count(*) as count from releve, pce where releve.UIDPCE=pce.uidpce and idpce in ('SGPCETPEC2') and releve.lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckCaractComptageData\",\r\n         \"requestContent\":\"select count(*) as count from releve, pce, CARACT_COMPTAGE where releve.UIDPCE=pce.uidpce and caract_comptage.uidreleve=releve.uidreleve and idpce in ('SGPCETPEC2') and CARACT_COMPTAGE.lstime >= sysdate-1/24\"\r\n      }\r\n   ]\r\n}"
                 },
                 "description": ""
               },
