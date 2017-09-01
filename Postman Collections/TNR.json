@@ -1029,14 +1029,14 @@
                 "method": "POST",
                 "header": [
                   {
-                    "description": "",
                     "key": "Content-Type",
-                    "value": "application/json"
+                    "value": "application/json",
+                    "description": ""
                   }
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170227_PCE_20170227131828_CHR02_SCALA_12-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170227_PCE_20170227131828_CHR02_SCALA_12-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
                 },
                 "description": ""
               },
