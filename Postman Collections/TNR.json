@@ -1361,7 +1361,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165921_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                  "raw": "{\"alias\":\"NOMADE\",\"fileName\":\"J20170515_IDX_20170515165921_CHR15_NOM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
                 },
                 "description": ""
               },
