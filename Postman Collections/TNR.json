@@ -1966,14 +1966,14 @@
                 "method": "POST",
                 "header": [
                   {
-                    "description": "",
                     "key": "Content-Type",
-                    "value": "application/json"
+                    "value": "application/json",
+                    "description": ""
                   }
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"alias\":\"EDHOUARD_PCE\",\"fileName\":\"H20160616_PCE_20160616163547_CHR01_EDHOUARD_240-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
+                  "raw": "{\"alias\":\"EDHOUARD_PCE\",\"fileName\":\"H20160616_PCE_20160616163547_CHR01_EDHOUARD_240-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
                 },
                 "description": ""
               },
