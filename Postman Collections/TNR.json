@@ -6194,6 +6194,67 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "7079b47e-d64d-908f-8ed0-2636ce4243a3",
+              "name": "[00018]Check data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult !== null){",
+                      "            if(sqlResult[0].results !== null){",
+                      "                    tests[\"Check Alertes multi JG\"] = (sqlResult[0].results[0].NB_ALERTE_CODE >0 & sqlResult[1].results[0].NB_ALERTE_CODE_GDC >0);",
+                      "                    console.log (sqlResult[1].results[0].NB_ALERTE_CODE);",
+                      "                    console.log (sqlResult[0].results[0].NB_ALERTE_CODE_GDC);",
+                      "                }",
+                      "            }",
+                      "        ",
+                      "    ",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckAlerteCode\",\r\n         \"requestContent\":\"select count(*) as NB_ALERTE_CODE from ALERTE_CODE where lstime > sysdate -1/96\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckObjetsMultiAlertes\",\r\n         \"requestContent\":\"select count(*) as NB_ALERTE_CODE_GDC from ALERTE_CODE_GDC where lstime > sysdate -1/96\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
