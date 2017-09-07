@@ -6165,7 +6165,7 @@
                       "        ",
                       "        ",
                       "        ",
-                      "       postman.setNextRequest(\"[100100100]Check data\");",
+                      "       postman.setNextRequest(\"[00018]Check data\");",
                       "    }",
                       "",
                       "else{",
