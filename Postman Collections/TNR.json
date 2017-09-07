@@ -6141,7 +6141,61 @@
           "_postman_id": "124bbe43-2036-93c8-7f99-88ffbf348d36",
           "name": "[00018]PRO_TRV_10",
           "description": "",
-          "item": [],
+          "item": [
+            {
+              "_postman_id": "ec980b64-2638-7360-8a05-d08ad835dd1b",
+              "name": "[00018]Launch process",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "function pausecomp(millis)",
+                      "         {",
+                      "          var date = new Date();",
+                      "          var curDate = null;",
+                      "          do { curDate = new Date(); }",
+                      "          while(curDate-date < millis);",
+                      "        }",
+                      "pausecomp(20000);",
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "",
+                      "if (tests[\"Status code is 200\"]){",
+                      "        ",
+                      "        ",
+                      "        ",
+                      "       postman.setNextRequest(\"[100100100]Check data\");",
+                      "    }",
+                      "",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/process/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"TRV_10\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            }
+          ],
           "_postman_isSubFolder": true
         }
       ]
