@@ -1776,7 +1776,7 @@
                       "                        tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                       "                        break;",
                       "                    case \"CheckStockAcquisition2\":",
-                      "                        tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"554\";",
+                      "                        tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT >= \"554\";",
                       "                        break;",
                       "                    case \"CheckDmdCalcul\":",
                       "                        tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
@@ -1785,10 +1785,10 @@
                       "                        tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"525\";",
                       "                        break;",
                       "                    case \"CheckPointData\":",
-                      "                        tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"75\";",
+                      "                        tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT >= \"75\";",
                       "                        break;",
                       "                    case \"CheckPubPointData\":",
-                      "                        tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT == \"623\";",
+                      "                        tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT >= \"623\";",
                       "                        break;",
                       "                    case \"CheckEtrMeteringDataData\":",
                       "                        tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT == \"90\";",
@@ -1828,9 +1828,9 @@
                 "method": "POST",
                 "header": [
                   {
-                    "description": "",
                     "key": "Content-Type",
-                    "value": "application/json"
+                    "value": "application/json",
+                    "description": ""
                   }
                 ],
                 "body": {
