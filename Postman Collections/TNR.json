@@ -6093,7 +6093,7 @@
                       "                    console.log (sqlResult[0].results[0].NB_ALERTE_MULTI_JG);",
                       "                }",
                       "            }",
-                      "        ",
+                      "    postman.setNextRequest(\"[00018]Launch process\");    ",
                       "    ",
                       "}",
                       "else{",
