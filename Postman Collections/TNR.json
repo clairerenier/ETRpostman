@@ -5971,7 +5971,7 @@
                       "                    console.log (sqlResult[0].results[0].SUMVOLPEC);",
                       "                }",
                       "            }",
-                      "        ",
+                      "    postman.setNextRequest(\"[00017]Launch process\");    ",
                       "    ",
                       "}",
                       "else{",
