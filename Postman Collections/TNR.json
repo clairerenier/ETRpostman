@@ -6275,7 +6275,15 @@
                   "",
                   "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
                   "        ",
+                  "    if(sqlResult !== null){",
+                  "            if(sqlResult[0].results !== null){",
+                  "                    postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[0].results[0].UIDPCE);",
+                  "                    console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidPce\"));",
+                  "                    //console.log (sqlResult[0].results[0].NBRELEVE);",
+                  "                }",
+                  "            }",
                   "    ",
+                  "    //console.log (postman.getEnvironmentVariable(\"uidReleveS\"));",
                   "       postman.setNextRequest(\"[00019]Launch process 2\");",
                   "    }",
                   "",
@@ -6286,6 +6294,22 @@
                   "",
                   "",
                   ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "{  \r",
+                  "   \"sqlRequest\":[  \r",
+                  "            {  \r",
+                  "         \"requestId\":\"UidPce\",\r",
+                  "         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r",
+                  "      }\r",
+                  "   ]\r",
+                  "}"
                 ]
               }
             }
