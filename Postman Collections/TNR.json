@@ -6307,6 +6307,57 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "e75cb5d7-8c1f-1264-698d-b3cbce4ba574",
+          "name": "[00019]Launch process 2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var Response = JSON.parse(responseBody);",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "tests[\"Response valide\"] = Response.ProRel017Result.valide === true;",
+                  "",
+                  "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
+                  "        ",
+                  "    //postman.setEnvironmentVariable(\"uidReleveS\", Response.ProRel017Result.uidReleve);",
+                  "    //console.log (postman.getEnvironmentVariable(\"uidReleveS\"));",
+                  "       postman.setNextRequest(\"[00019]Launch process 3\");",
+                  "    ",
+                  "    }",
+                  "",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL017",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR2\",\"typeReleve\":\"S\",\"vpe\":false,\"typeAppareil\":\"T\",\"nouveauTypeApp\":\"T\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T07:00:00.000+0000\",\"indDebBrutCompt\":1300,\"indDebBrutCorr\":1300,\"indDebCorrigeCorr\":3000,\"indDebBrutAlarme\":1300,\"indDebCorrigeAlarme\":1300,\"dateFinInter\":\"2017-09-01T07:00:00.000+0000\",\"indFinBrutCompt\":1300,\"indFinBrutCorr\":1300,\"indFinCorrigeCorr\":3000,\"indFinBrutAlarme\":1300,\"indFinCorrigeAlarme\":1300,\"poidsFinBrutCompt\":3.0,\"poidsFinBrutCorrecteur\":3.0,\"poidsFinCorrigeCorr\":3.0,\"poidsFinBrutAlarme\":3.0,\"poidsFinCorrigeAlarme\":3.0,\"nbChFinBrutCompt\":5,\"nbChFinBrutCorr\":5,\"nbChFinCorrigeCorr\":5,\"nbChFinBrutAlarme\":5,\"nbChFinCorrigeAlarme\":5,\"deltaBrutCompt\":300,\"deltaBrutCorr\":300,\"deltaCorrigeCorr\":5400,\"deltaBrutAlarme\":300,\"deltaCorrigeAlarme\":300,\"temperature\":12.0,\"coeffCorrTheo\":11.619273877318085,\"coeffCorrReel\":18.0,\"test1\":{},\"test2\":{\"value\":35.45},\"test3\":{},\"test4\":{},\"volTerP\":1000,\"volPecP\":1000,\"typeForcage\":0,\"volumePeriode\":5400,\"uidPce\":\"29377\",\"uidVpce\":\"181140\"},\"dateFinInterventionRelevePrecedente\":\"2017-09-01T06:00:00.000+0000\"}}\r\n"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
