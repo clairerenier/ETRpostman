@@ -6437,6 +6437,8 @@
                   "        tests[\"Insert data Sum up\"] = true; ",
                   "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[2].results[0].UIDPCE);",
                   "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[2].results[0].UIDVPCE);",
+                  "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidPce\", sqlResult[3].results[0].UIDPCE);",
+                  "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidVpce\", sqlResult[3].results[0].UIDVPCE);",
                   "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidPce\"));",
                   "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidVpce\"));",
                   "        postman.setNextRequest(\"[00019]Launch process 1\");",
