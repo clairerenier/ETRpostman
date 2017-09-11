@@ -6639,6 +6639,75 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "6632f87c-6abb-8ca2-26a7-4e22383e2763",
+          "name": "[00019]Delete data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointData\":",
+                  "                tests[\"Delete Point Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteReleve\":",
+                  "                tests[\"Delete Releve Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteReleveRejetee\":",
+                  "                tests[\"Delete ReleveRejetee Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteReleveSupprimee\":",
+                  "                tests[\"Delete ReleveSupprimee Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteDmdCalcul\":",
+                  "                tests[\"Delete DmdCalcul Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data\"]  && tests[\"Delete Releve Data\"] && tests[\"Delete ReleveRejetee Data\"] && tests[\"Delete ReleveSupprimee Data\"] && tests[\"Delete DmdCalcul Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[00019]Insert data\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = fase; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from POINT where uidpoint in (select P.UIDPOINT from PWRLINE.POINT P INNER JOIN PWRLINE.GRANDEUR G ON G.UIDGRANDEUR = P.UIDGRANDEUR INNER JOIN PWRLINE.PCE ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1') and P.HORODATE >= TO_DATE('01/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and P.HORODATE < TO_DATE('02/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleve\",\r\n         \"requestContent\":\"delete from releve where uidreleve in (select uidreleve from releve r inner join pce on r.uidpce = pce.UIDPCE where pce.idpce in('PCEPROTNR2', 'PCEPROTNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveRejetee\",\r\n         \"requestContent\":\"delete from releve_rejetee where uidreleve_rejetee in (select uidreleve_rejetee from releve_rejetee r inner join pce on r.uidpce = pce.UIDPCE where pce.idpce in('PCEPROTNR2', 'PCEPROTNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveSupprimee\",\r\n         \"requestContent\":\"delete from releve_supprimee where uidreleve_supprimee in (select uidreleve_supprimee from releve_supprimee r inner join pce on r.uidpce = pce.UIDPCE where pce.idpce in('PCEPROTNR2', 'PCEPROTNR1'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteDmdCalcul\",\r\n         \"requestContent\":\"delete from dmd_calcul where CODE_OBJET in('PCEPROTNR2', 'PCEPROTNR1')\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
