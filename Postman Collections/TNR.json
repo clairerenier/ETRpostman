@@ -6258,7 +6258,57 @@
       "_postman_id": "aaabc762-cde5-4a50-a196-5232bacf97e1",
       "name": "REL",
       "description": "",
-      "item": []
+      "item": [
+        {
+          "_postman_id": "22390ae8-d8c5-749d-d24b-dbca33964548",
+          "name": "[00019]Launch process 1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var Response = JSON.parse(responseBody);",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "tests[\"Response valide\"] = Response.ProRel017Result.valide === true;",
+                  "",
+                  "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
+                  "        ",
+                  "    ",
+                  "       postman.setNextRequest(\"[00019]Launch process 2\");",
+                  "    }",
+                  "",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL017",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR2\",\"typeReleve\":\"1\",\"vpe\":false,\"typeAppareil\":\"T\",\"nouveauTypeApp\":\"T\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T06:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T06:00:00.000+0000\",\"indFinBrutCompt\":1200,\"indFinBrutCorr\":1200,\"indFinCorrigeCorr\":1200,\"indFinBrutAlarme\":1200,\"indFinCorrigeAlarme\":1200,\"poidsFinBrutCompt\":3.0,\"poidsFinBrutCorrecteur\":3.0,\"poidsFinCorrigeCorr\":3.0,\"poidsFinBrutAlarme\":3.0,\"poidsFinCorrigeAlarme\":3.0,\"nbChFinBrutCompt\":5,\"nbChFinBrutCorr\":5,\"nbChFinCorrigeCorr\":5,\"nbChFinBrutAlarme\":5,\"nbChFinCorrigeAlarme\":5,\"temperature\":12.0,\"test2\":{},\"typeForcage\":0,\"uidPce\":\"29377\",\"uidVpce\":\"181140\"}}}\r\n\r\n"
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
     },
     {
       "_postman_id": "279a4619-a6ee-166f-9a7f-d31bde295203",
