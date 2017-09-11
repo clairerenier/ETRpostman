@@ -6473,6 +6473,57 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "fc501a65-0eae-48af-c431-35080a542393",
+          "name": "[00019]Launch process 4",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var Response = JSON.parse(responseBody);",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "tests[\"Response valide\"] = Response.ProRel017Result.valide === true;",
+                  "",
+                  "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
+                  "        ",
+                  "    //postman.setEnvironmentVariable(\"uidReleveS\", Response.ProRel017Result.uidReleve);",
+                  "    //console.log (postman.getEnvironmentVariable(\"uidReleveS\"));",
+                  "       postman.setNextRequest(\"[00019]Launch process 5\");",
+                  "    ",
+                  "    }",
+                  "",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL017",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR1\",\"typeReleve\":\"1\",\"vpe\":false,\"typeAppareil\":\"A\",\"nouveauTypeApp\":\"A\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T06:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T06:00:00.000+0000\",\"indFinCalculatrice\":1200,\"poidsFinIndexCalc\":3.0,\"nbChFinIndCalc\":5,\"pression\":12.0,\"temperature\":13.0,\"test2\":{},\"typeForcage\":0,\"uidPce\":{{PCEPROTNR1_uidPce}},\"uidVpce\":{{PCEPROTNR1_uidVpce}}}}}\r\n\r\n"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     },
