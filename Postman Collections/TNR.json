@@ -6296,22 +6296,6 @@
                   ""
                 ]
               }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "{  \r",
-                  "   \"sqlRequest\":[  \r",
-                  "            {  \r",
-                  "         \"requestId\":\"UidPce\",\r",
-                  "         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r",
-                  "      }\r",
-                  "   ]\r",
-                  "}"
-                ]
-              }
             }
           ],
           "request": {
