@@ -6575,7 +6575,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR1\",\"typeReleve\":\"R\",\"vpe\":false,\"typeAppareil\":\"A\",\"nouveauTypeApp\":\"A\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T09:00:00.000+0000\",\"indDebCalculatrice\":1300,\"dateFinInter\":\"2017-09-01T10:00:00.000+0000\",\"indFinCalculatrice\":1400,\"poidsFinIndexCalc\":3.0,\"nbChFinIndCalc\":5,\"deltaIndCalc\":300,\"pression\":12.0,\"temperature\":13.0,\"coeffCorrTheo\":11.57481,\"byPass\":200,\"volumeSimule\":300,\"test2\":{},\"test3\":{},\"test4\":{},\"typeForcage\":0,\"volumePeriode\":300,\"uidPce\":{{PCEPROTNR1_uidPce}},\"uidVpce\":{{PCEPROTNR1_uidVpce}}},\"dateFinInterventionRelevePrecedente\":\"2017-09-01T06:00:00.000+0000\"}}\r\n"
+              "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR1\",\"typeReleve\":\"S\",\"vpe\":false,\"typeAppareil\":\"A\",\"nouveauTypeApp\":\"A\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T09:00:00.000+0000\",\"indDebCalculatrice\":1300,\"dateFinInter\":\"2017-09-01T09:00:00.000+0000\",\"indFinCalculatrice\":1400,\"poidsFinIndexCalc\":3.0,\"nbChFinIndCalc\":5,\"deltaIndCalc\":300,\"pression\":12.0,\"temperature\":13.0,\"coeffCorrTheo\":11.57481,\"byPass\":200,\"volumeSimule\":300,\"test2\":{},\"test3\":{},\"test4\":{},\"typeForcage\":0,\"volumePeriode\":300,\"uidPce\":{{PCEPROTNR1_uidPce}},\"uidVpce\":{{PCEPROTNR1_uidVpce}}},\"dateFinInterventionRelevePrecedente\":\"2017-09-01T06:00:00.000+0000\"}}\r\n"
             },
             "description": ""
           },
