@@ -6611,9 +6611,10 @@
                   "}",
                   "",
                   "pm.environment.unset(\"PCEPROTNR2_uidPce\");",
-                  "pm.environment.unset(\"PCEPROTNR2_uidPce\");",
+                  "pm.environment.unset(\"PCEPROTNR1_uidPce\");",
                   "pm.environment.unset(\"PCEPROTNR1_uidVpce\");",
-                  "pm.environment.unset(\"PCEPROTNR2_uidVpce\");"
+                  "pm.environment.unset(\"PCEPROTNR2_uidVpce\");",
+                  "pm.environment.unset(\"uidReleveS\");"
                 ]
               }
             },
