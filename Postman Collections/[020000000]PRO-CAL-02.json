@@ -958,7 +958,7 @@
         },
         {
           "_postman_id": "fd4d3655-941e-b55e-0126-f139e4eb3bc2",
-          "name": "[0204ALL00ALL]Check data PCE copy",
+          "name": "[0204ALL00ALL]Check data PCE",
           "event": [
             {
               "listen": "test",
