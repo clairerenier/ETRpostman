@@ -776,7 +776,7 @@
     },
     {
       "_postman_id": "8b87f0ee-ed3b-43af-8538-ccb56694c5bc",
-      "name": "[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC",
+      "name": "[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET",
       "description": "0 - one son calculated from 6AM to 9AM (SGPCETVPEC) only\n    Expected result : no father triggered\n1 - other son calculated from 6AM to 10 AM (SGPCEEVPEC)\n    Expected result : father is triggered from 6 to 9 AM\n2 - change on list of hours (first son SGPCETVPEC calculated from 10AM to 11AM )\n    Expected result : father is calculated on 6AM to 10AM\n3 - both children calculated triggered :\nSGPCETVPEC calculated from 12AM to 5AM\nSGPCEEVPEC calculated from 11AM to 5AM\n    Expected result : father is calculated from 11AM to 5AM and dmd_calcul on 10 to 11 AM and dmd_calcul on 12AM to 5AM\n4 - Test on APIL on first day of link (ETRSP2-1752)",
       "item": []
     }
