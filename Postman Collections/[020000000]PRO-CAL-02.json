@@ -781,7 +781,7 @@
       "item": [
         {
           "_postman_id": "294e3848-8ae4-78ae-70c0-5191bf70fc86",
-          "name": "[0204ALL00ALL]Delete data copy",
+          "name": "[020201600PCE]Delete data",
           "event": [
             {
               "listen": "test",
