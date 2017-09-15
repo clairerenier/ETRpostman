@@ -965,8 +965,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_processid\");",
-                  "var sourceProcessid = postman.getEnvironmentVariable(\"[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid\");",
+                  "var processid = postman.getEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\");",
                   "    ",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -1042,9 +1042,9 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
