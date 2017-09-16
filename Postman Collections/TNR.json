@@ -965,7 +965,8 @@
                   "script": {
                     "type": "text/javascript",
                     "exec": [
-                      "postman.setNextRequest(\"[00002]Drop file PCE\");"
+                      "postman.setNextRequest(\"[00002]Drop file PCE\");",
+                      ""
                     ]
                   }
                 }
