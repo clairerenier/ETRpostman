@@ -1167,7 +1167,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[020201602PCE]Drop file PCE\");",
+                  "    postman.setNextRequest(\"[020201601PCE]Drop file PCE\");",
                   "",
                   "}",
                   "else{",
