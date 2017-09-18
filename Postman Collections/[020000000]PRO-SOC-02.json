@@ -203,7 +203,7 @@
                   "    if(sqlResult !== null){",
                   "            if(sqlResult[0].results !== null){",
                   "                    tests[\"Check status in COEFF_A_CALCULE\"] = sqlResult[0].results[0].COUNT == 7;",
-                  "                    //console.log (sqlResult[0].results[0].COUNT)",
+                  "                    console.log (sqlResult[0].results[0].COUNT)",
                   "                }",
                   "            }",
                   "        ",
