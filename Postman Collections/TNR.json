@@ -7136,7 +7136,7 @@
                 }
               ],
               "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL017",
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL018",
                 "method": "POST",
                 "header": [
                   {
