@@ -1075,7 +1075,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913113424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
             "description": ""
           },
@@ -1144,8 +1144,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "var processid = postman.getEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\");",
-                  "var sourceProcessid = postman.getEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\");",
+                  "var processid = postman.getEnvironmentVariable(\"[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\");",
                   "    ",
                   "",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -1157,15 +1157,17 @@
                   "        {",
                   "            if(sqlResult[i].results !== null){",
                   "                switch (sqlResult[i].requestId) {",
-                  "                case \"CheckDmdCalculCreationPCE\":",
-                  "                    tests[\"Check DMD_CALCUL Creation PCE\"] = sqlResult[i].results[0].COUNT = \"1\";",
+                  "                case \"CheckDmdCalculCreationPCESon\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Son\"] = sqlResult[i].results[0].COUNT = \"1\";",
                   "                    break;",
-                  "               ",
+                  "               case \"CheckDmdCalculCreationPCEFather\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Father\"] = sqlResult[i].results[0].COUNT = \"1\";",
+                  "                    break;",
                   "                }",
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[020201601PCE]Drop file PCE\");",
+                  "    postman.setNextRequest(\"[020201602PCE]Drop file PCE\");",
                   "",
                   "}",
                   "else{",
@@ -1193,14 +1195,14 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGEPCEEVPEC','SGPCECPEC') and liste_heures='06;07;08;09'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGEPCEEVPEC','SGPCECPEC') and liste_heures='06;07;08;09'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGEPCEEVPEC','SGPCECPEC') and liste_heures='06;07;08;09;10'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
