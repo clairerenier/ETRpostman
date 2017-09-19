@@ -512,6 +512,303 @@
         "description": ""
       },
       "response": []
+    },
+    {
+      "_postman_id": "9d349c05-7922-4c51-f8cf-9326fecf15b3",
+      "name": "[00019]Check data 3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "            if(sqlResult[0].results !== null){",
+              "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1 && sqlResult[2].results[0].NBDMDCALCUL == 1);",
+              "                    console.log (sqlResult[0].results[0].NBRELEVE);",
+              "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
+              "                    console.log (sqlResult[2].results[0].NBDMDCALCUL);",
+              "                }",
+              "            }",
+              "        ",
+              "    ",
+              "    postman.setNextRequest(\"[00019]Check data 4\");",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckCreationDmdCalcul\",\r\n         \"requestContent\":\"select count(1) as nbDmdCalcul from dmd_calcul where CODE_OBJET = 'PCEPROTNR2'\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "c77727dd-065c-09fa-0cd3-7d4f5af78959",
+      "name": "[00019]Check data 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "            if(sqlResult[0].results !== null){",
+              "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1);",
+              "                    console.log (sqlResult[0].results[0].NBRELEVE);",
+              "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
+              "                }",
+              "            }",
+              "        ",
+              "    ",
+              "   // postman.setNextRequest(\"[010100101FGA]Drop file FGA\");",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "c954da9a-cf41-1430-7dc8-3f000ba2c250",
+      "name": "[00019]Check data 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "            if(sqlResult[0].results !== null){",
+              "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1);",
+              "                    console.log (sqlResult[0].results[0].NBRELEVE);",
+              "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
+              "                }",
+              "            }",
+              "        ",
+              "    ",
+              "    postman.setNextRequest(\"[00019]Check data 2\");",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = '1'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = '1'\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "d00264ce-4e96-b5dc-28b9-4a4423fe2fc8",
+      "name": "[00019]Check data 4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "if (tests[\"Status code is 200\"]){",
+              "    var jsonData = JSON.parse(responseBody);",
+              "    var sqlResult = jsonData.sqlResult;",
+              "    if(sqlResult !== null){",
+              "            if(sqlResult[0].results !== null){",
+              "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1);",
+              "                    console.log (sqlResult[0].results[0].NBRELEVE);",
+              "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
+              "                }",
+              "            }",
+              "        ",
+              "    ",
+              "    postman.setNextRequest(\"[00019]Check data 5\");",
+              "}",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = '1'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = '1'\"\r\n      }\r\n   ]\r\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "efb8c61d-a453-67e9-02d6-d7cfb9eae171",
+      "name": "[00019]Launch process 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var Response = JSON.parse(responseBody);",
+              "",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response valide\"] = Response.ProRel017Result.valide === true;",
+              "",
+              "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
+              "        ",
+              "       postman.setNextRequest(\"[00019]Launch process 2\");",
+              "    }",
+              "",
+              "else{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL017",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR2\",\"typeReleve\":\"1\",\"vpe\":false,\"typeAppareil\":\"T\",\"nouveauTypeApp\":\"T\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T06:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T06:00:00.000+0000\",\"indFinBrutCompt\":1200,\"indFinBrutCorr\":1200,\"indFinCorrigeCorr\":1200,\"indFinBrutAlarme\":1200,\"indFinCorrigeAlarme\":1200,\"poidsFinBrutCompt\":3.0,\"poidsFinBrutCorrecteur\":3.0,\"poidsFinCorrigeCorr\":3.0,\"poidsFinBrutAlarme\":3.0,\"poidsFinCorrigeAlarme\":3.0,\"nbChFinBrutCompt\":5,\"nbChFinBrutCorr\":5,\"nbChFinCorrigeCorr\":5,\"nbChFinBrutAlarme\":5,\"nbChFinCorrigeAlarme\":5,\"temperature\":12.0,\"test2\":{},\"typeForcage\":0,\"uidPce\":{{PCEPROTNR2_uidPce}},\"uidVpce\":{{PCEPROTNR2_uidVpce}}}}}\r\n\r\n"
+        },
+        "description": ""
+      },
+      "response": []
     }
   ]
 }
