@@ -7121,7 +7121,7 @@
                       "",
                       "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
                       "        ",
-                      "       postman.setNextRequest(\"[00020]Launch process 2\");",
+                      "       //postman.setNextRequest(\"[00020]Launch process 2\");",
                       "    }",
                       "",
                       "else{",
