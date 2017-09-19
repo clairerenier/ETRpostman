@@ -7060,7 +7060,7 @@
                       "        }",
                       "    }",
                       "    if ( tests[\"Get PCEPROTNR2_uidReleveR\"] && tests[\"Delete DmdCalcul Data\"]){",
-                      "        tests[\"Get data Sum up\"] = true; ",
+                      "        tests[\"Delete data Sum up\"] = true; ",
                       "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidReleveR\", sqlResult[0].results[0].UIDRELEVER);",
                       "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[1].results[0].UIDPCE);",
                       "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[1].results[0].UIDVPCE);",
