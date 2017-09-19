@@ -1709,11 +1709,11 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[020201603PCE]Check data PCE\");",
+                  "   postman.setNextRequest(\"[020201604PCE]Check data PCE\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"[020201603PCE]Check data PCE\"); ",
+                  "    postman.setNextRequest(\"[020201604PCE]Check data PCE\"); ",
                   "}"
                 ]
               }
@@ -1734,14 +1734,14 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
             },
             "description": ""
           },
