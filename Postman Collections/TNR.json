@@ -7083,6 +7083,22 @@
                       ""
                     ]
                   }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "{  \r",
+                      "   \"sqlRequest\":[  \r",
+                      "            {  \r",
+                      "         \"requestId\":\"uidReleveR\",\r",
+                      "         \"requestContent\":\"select uidreleve AS UIDRELEVER from RELEVE inner join pce on RELEVE.uidpce = pce.uidpce where idpce = 'PCEPROTNR2' and RELEVE.type_releve = 'R'\"\r",
+                      "      }\r",
+                      "   ]\r",
+                      "}"
+                    ]
+                  }
                 }
               ],
               "request": {
