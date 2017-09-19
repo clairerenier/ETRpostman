@@ -7037,7 +7037,7 @@
             },
             {
               "_postman_id": "e7c0883f-f72e-fef2-e251-0b219d2702d8",
-              "name": "[00019]Insert data copy",
+              "name": "[00020]Delete data",
               "event": [
                 {
                   "listen": "test",
