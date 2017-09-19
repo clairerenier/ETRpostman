@@ -1256,7 +1256,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913113424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913123424_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
             "description": ""
           },
