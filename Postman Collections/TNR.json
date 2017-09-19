@@ -6333,6 +6333,74 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "fc21f852-8448-ec2f-f2f2-1614c34b0ffc",
+              "name": "[00019]Insert data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"InsertPointh1\":",
+                      "                tests[\"Insert Point Datah1\"] = true;",
+                      "                break;",
+                      "            case \"InsertPointj1\":",
+                      "                tests[\"Insert Point Dataj1\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if ( tests[\"Insert Point Datah1\"] && tests[\"Insert Point Dataj1\"]){",
+                      "        tests[\"Insert data Sum up\"] = true; ",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[2].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[2].results[0].UIDVPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidPce\", sqlResult[3].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidVpce\", sqlResult[3].results[0].UIDVPCE);",
+                      "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidPce\"));",
+                      "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidVpce\"));",
+                      "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidPce\"));",
+                      "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidVpce\"));",
+                      "        postman.setNextRequest(\"[00019]Launch process 1\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data Sum up\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"InsertPointh1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) select ls_seq_point.nextval,QP.UIDQUALITE_POINT,G.uidgrandeur,CAL.JOUR_GAZIER + HJG.HOURS/24,1000 FROM CALENDRIER CAL CROSS JOIN HJG CROSS JOIN PCE CROSS JOIN QUALITE_POINT QP INNER JOIN GRANDEUR G ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET AND G.PAS = 3600 WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1')AND CAL.JOUR_GAZIER + HJG.HOURS/24  >= to_date('2017-09-01 06:00:00', 'YYYY-MM-DD HH24:MI:SS') AND CAL.JOUR_GAZIER + HJG.HOURS/24  < to_date('2017-09-02 06:00:00', 'YYYY-MM-DD HH24:MI:SS') AND QP.libelle = 'AF'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"InsertPointj1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) select ls_seq_point.nextval, QP.UIDQUALITE_POINT, G.uidgrandeur, to_date('2017-09-01 06:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1000 FROM PCE CROSS JOIN QUALITE_POINT QP INNER JOIN GRANDEUR G ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET AND G.PAS = 86400 WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1') AND QP.libelle = 'AF'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
@@ -6488,74 +6556,6 @@
           "response": []
         },
         {
-          "_postman_id": "fc21f852-8448-ec2f-f2f2-1614c34b0ffc",
-          "name": "[00019]Insert data",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"InsertPointh1\":",
-                  "                tests[\"Insert Point Datah1\"] = true;",
-                  "                break;",
-                  "            case \"InsertPointj1\":",
-                  "                tests[\"Insert Point Dataj1\"] = true;",
-                  "                break;",
-                  "        }",
-                  "    }",
-                  "    if ( tests[\"Insert Point Datah1\"] && tests[\"Insert Point Dataj1\"]){",
-                  "        tests[\"Insert data Sum up\"] = true; ",
-                  "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[2].results[0].UIDPCE);",
-                  "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[2].results[0].UIDVPCE);",
-                  "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidPce\", sqlResult[3].results[0].UIDPCE);",
-                  "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidVpce\", sqlResult[3].results[0].UIDVPCE);",
-                  "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidPce\"));",
-                  "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidVpce\"));",
-                  "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidPce\"));",
-                  "        console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidVpce\"));",
-                  "        postman.setNextRequest(\"[00019]Launch process 1\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data Sum up\"] = fase; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"InsertPointh1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) select ls_seq_point.nextval,QP.UIDQUALITE_POINT,G.uidgrandeur,CAL.JOUR_GAZIER + HJG.HOURS/24,1000 FROM CALENDRIER CAL CROSS JOIN HJG CROSS JOIN PCE CROSS JOIN QUALITE_POINT QP INNER JOIN GRANDEUR G ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET AND G.PAS = 3600 WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1')AND CAL.JOUR_GAZIER + HJG.HOURS/24  >= to_date('2017-09-01 06:00:00', 'YYYY-MM-DD HH24:MI:SS') AND CAL.JOUR_GAZIER + HJG.HOURS/24  < to_date('2017-09-02 06:00:00', 'YYYY-MM-DD HH24:MI:SS') AND QP.libelle = 'AF'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"InsertPointj1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) select ls_seq_point.nextval, QP.UIDQUALITE_POINT, G.uidgrandeur, to_date('2017-09-01 06:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1000 FROM PCE CROSS JOIN QUALITE_POINT QP INNER JOIN GRANDEUR G ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET AND G.PAS = 86400 WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1') AND QP.libelle = 'AF'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "fc501a65-0eae-48af-c431-35080a542393",
           "name": "[00019]Launch process 4",
           "event": [
@@ -6654,73 +6654,6 @@
             "body": {
               "mode": "raw",
               "raw": "{\"ProRel017Request\":{\"releve\":{\"code\":\"PCEPROTNR1\",\"typeReleve\":\"S\",\"vpe\":false,\"typeAppareil\":\"A\",\"nouveauTypeApp\":\"A\",\"utilisateurModif\":\"mourad.minsys@external.grtgaz.com\",\"dateDebInter\":\"2017-09-01T09:00:00.000+0000\",\"indDebCalculatrice\":1300,\"dateFinInter\":\"2017-09-01T09:00:00.000+0000\",\"indFinCalculatrice\":1400,\"poidsFinIndexCalc\":3.0,\"nbChFinIndCalc\":5,\"deltaIndCalc\":300,\"pression\":12.0,\"temperature\":13.0,\"coeffCorrTheo\":11.57481,\"byPass\":200,\"volumeSimule\":300,\"test2\":{},\"test3\":{},\"test4\":{},\"typeForcage\":0,\"volumePeriode\":300,\"uidPce\":{{PCEPROTNR1_uidPce}},\"uidVpce\":{{PCEPROTNR1_uidVpce}}},\"dateFinInterventionRelevePrecedente\":\"2017-09-01T06:00:00.000+0000\"}}\r\n"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "1b4e8209-7dc6-5bc4-1476-35befa0d2fea",
-          "name": "[00019]Check data 5",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult !== null){",
-                  "            if(sqlResult[0].results !== null){",
-                  "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1 && sqlResult[2].results[0].NBDMDCALCUL == 1);",
-                  "                    console.log (sqlResult[0].results[0].NBRELEVE);",
-                  "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
-                  "                    console.log (sqlResult[2].results[0].NBDMDCALCUL);",
-                  "                }",
-                  "            }",
-                  "        ",
-                  "    ",
-                  "    //postman.setNextRequest(\"[00019]Check data 4\");",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  "pm.environment.unset(\"PCEPROTNR2_uidPce\");",
-                  "pm.environment.unset(\"PCEPROTNR1_uidPce\");",
-                  "pm.environment.unset(\"PCEPROTNR1_uidVpce\");",
-                  "pm.environment.unset(\"PCEPROTNR2_uidVpce\");",
-                  "pm.environment.unset(\"uidReleveS\");"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckCreationDmdCalcul\",\r\n         \"requestContent\":\"select count(1) as nbDmdCalcul from dmd_calcul where CODE_OBJET = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
@@ -6970,6 +6903,73 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = '1'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = '1'\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1b4e8209-7dc6-5bc4-1476-35befa0d2fea",
+          "name": "[00019]Check data 5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "            if(sqlResult[0].results !== null){",
+                  "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1 && sqlResult[2].results[0].NBDMDCALCUL == 1);",
+                  "                    console.log (sqlResult[0].results[0].NBRELEVE);",
+                  "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
+                  "                    console.log (sqlResult[2].results[0].NBDMDCALCUL);",
+                  "                }",
+                  "            }",
+                  "        ",
+                  "    ",
+                  "    //postman.setNextRequest(\"[00019]Check data 4\");",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  "pm.environment.unset(\"PCEPROTNR2_uidPce\");",
+                  "pm.environment.unset(\"PCEPROTNR1_uidPce\");",
+                  "pm.environment.unset(\"PCEPROTNR1_uidVpce\");",
+                  "pm.environment.unset(\"PCEPROTNR2_uidVpce\");",
+                  "pm.environment.unset(\"uidReleveS\");"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR1' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckCreationDmdCalcul\",\r\n         \"requestContent\":\"select count(1) as nbDmdCalcul from dmd_calcul where CODE_OBJET = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
