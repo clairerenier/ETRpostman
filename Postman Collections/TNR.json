@@ -7059,10 +7059,10 @@
                       "    if ( tests[\"Get PCEPROTNR2_uidReleveR\"]){",
                       "        tests[\"Get data Sum up\"] = true; ",
                       "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidReleveR\", sqlResult[0].results[0].UIDPCE);",
-                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidPce\"));",
-                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidVpce\"));",
-                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidPce\"));",
-                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidVpce\"));",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[2].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[2].results[0].UIDVPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidPce\", sqlResult[3].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidVpce\", sqlResult[3].results[0].UIDVPCE);",
                       "        postman.setNextRequest(\"[00020]Launch process 1\");",
                       "    }",
                       "    else {",
@@ -7091,7 +7091,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"PCEPROTNR2_uidReleveR\",\r\n         \"requestContent\":\"select uidreleve AS UIDRELEVER from RELEVE inner join pce on RELEVE.uidpce = pce.uidpce where idpce = 'PCEPROTNR2' and RELEVE.type_releve = 'R'\"\r\n      }\r\n   ]\r\n}"
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"PCEPROTNR2_uidReleveR\",\r\n         \"requestContent\":\"select uidreleve AS UIDRELEVER from RELEVE inner join pce on RELEVE.uidpce = pce.uidpce where idpce = 'PCEPROTNR2' and RELEVE.type_releve = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
                 },
                 "description": ""
               },
