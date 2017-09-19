@@ -6258,7 +6258,7 @@
     {
       "_postman_id": "aaabc762-cde5-4a50-a196-5232bacf97e1",
       "name": "REL",
-      "description": "",
+      "description": "Pour le moment uniquement PRO-REL-017 implémenté (pour PCE M et T)\nL'étape Launch Process 4 est KO c'est normal.\n\n",
       "item": [
         {
           "_postman_id": "22390ae8-d8c5-749d-d24b-dbca33964548",
