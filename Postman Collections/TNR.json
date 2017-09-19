@@ -7063,7 +7063,7 @@
                       "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidVpce\"));",
                       "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidPce\"));",
                       "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidVpce\"));",
-                      "        postman.setNextRequest(\"[00019]Launch process 1\");",
+                      "        postman.setNextRequest(\"[00020]Launch process 1\");",
                       "    }",
                       "    else {",
                       "       tests[\"Delete data Sum up\"] = fase; ",
