@@ -6971,7 +6971,15 @@
                 "description": ""
               },
               "response": []
-            },
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "d9712bcd-09ae-9099-f7b5-2538cb08118a",
+          "name": "[00020]PRO_REL_018_TNR_To do",
+          "description": "",
+          "item": [
             {
               "_postman_id": "413e45bd-d59c-e61b-2d78-50133f6d93eb",
               "name": "[00019]Launch process 1 copy",
@@ -7021,13 +7029,6 @@
               "response": []
             }
           ],
-          "_postman_isSubFolder": true
-        },
-        {
-          "_postman_id": "d9712bcd-09ae-9099-f7b5-2538cb08118a",
-          "name": "[00020]PRO_REL_018_TNR_To do",
-          "description": "",
-          "item": [],
           "_postman_isSubFolder": true
         },
         {
