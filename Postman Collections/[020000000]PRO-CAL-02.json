@@ -1278,11 +1278,11 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[020201601PCE]Check data PCE\");",
+                  "   postman.setNextRequest(\"[020201602PCE]Check data PCE\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"[020201601PCE]Check data PCE\"); ",
+                  "    postman.setNextRequest(\"[020201602PCE]Check data PCE\"); ",
                   "}"
                 ]
               }
@@ -1303,9 +1303,9 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
