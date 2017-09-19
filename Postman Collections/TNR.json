@@ -6971,6 +6971,74 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "e7c0883f-f72e-fef2-e251-0b219d2702d8",
+              "name": "[00019]Insert data copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"InsertPointh1\":",
+                      "                tests[\"Insert Point Datah1\"] = true;",
+                      "                break;",
+                      "            case \"InsertPointj1\":",
+                      "                tests[\"Insert Point Dataj1\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if ( tests[\"Insert Point Datah1\"] && tests[\"Insert Point Dataj1\"]){",
+                      "        tests[\"Insert data Sum up\"] = true; ",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[2].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[2].results[0].UIDVPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidPce\", sqlResult[3].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidVpce\", sqlResult[3].results[0].UIDVPCE);",
+                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidPce\"));",
+                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR2_uidVpce\"));",
+                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidPce\"));",
+                      "        //console.log (postman.getEnvironmentVariable(\"PCEPROTNR1_uidVpce\"));",
+                      "        postman.setNextRequest(\"[00019]Launch process 1\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data Sum up\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"InsertPointh1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) select ls_seq_point.nextval,QP.UIDQUALITE_POINT,G.uidgrandeur,CAL.JOUR_GAZIER + HJG.HOURS/24,1000 FROM CALENDRIER CAL CROSS JOIN HJG CROSS JOIN PCE CROSS JOIN QUALITE_POINT QP INNER JOIN GRANDEUR G ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET AND G.PAS = 3600 WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1')AND CAL.JOUR_GAZIER + HJG.HOURS/24  >= to_date('2017-09-01 06:00:00', 'YYYY-MM-DD HH24:MI:SS') AND CAL.JOUR_GAZIER + HJG.HOURS/24  < to_date('2017-09-02 06:00:00', 'YYYY-MM-DD HH24:MI:SS') AND QP.libelle = 'AF'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"InsertPointj1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) select ls_seq_point.nextval, QP.UIDQUALITE_POINT, G.uidgrandeur, to_date('2017-09-01 06:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1000 FROM PCE CROSS JOIN QUALITE_POINT QP INNER JOIN GRANDEUR G ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET AND G.PAS = 86400 WHERE PCE.IDPCE in('PCEPROTNR2', 'PCEPROTNR1') AND QP.libelle = 'AF'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
