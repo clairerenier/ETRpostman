@@ -1520,10 +1520,10 @@
                   "            if(sqlResult[i].results !== null){",
                   "                switch (sqlResult[i].requestId) {",
                   "                case \"CheckDmdCalculCreationPCESon\":",
-                  "                    tests[\"Check DMD_CALCUL Creation PCE Son\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Son\"] = sqlResult[i].results[0].COUNT == \"2\";",
                   "                    break;",
                   "               case \"CheckDmdCalculCreationPCEFather\":",
-                  "                    tests[\"Check DMD_CALCUL Creation PCE Father\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Father\"] = sqlResult[i].results[0].COUNT == \"3\";",
                   "                    break;",
                   "                }",
                   "            }",
@@ -1564,7 +1564,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGEPCEEVPEC') and liste_heures='10;11'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures='06;07;08;09;10'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGEPCEEVPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','10;11')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
