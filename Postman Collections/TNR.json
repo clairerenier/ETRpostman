@@ -7171,7 +7171,7 @@
                       "    var sqlResult = jsonData.sqlResult;",
                       "    if(sqlResult !== null){",
                       "            if(sqlResult[0].results !== null){",
-                      "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1 && sqlResult[2].results[0].NBDMDCALCUL == 3);",
+                      "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1 && sqlResult[2].results[0].NBDMDCALCUL == 2);",
                       "                    console.log (sqlResult[0].results[0].NBRELEVE);",
                       "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
                       "                    console.log (sqlResult[2].results[0].NBDMDCALCUL);",
