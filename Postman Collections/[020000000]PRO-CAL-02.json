@@ -1529,7 +1529,7 @@
                   "            }",
                   "        }",
                   "    }",
-                  "    postman.setNextRequest(\"[020201604PCE]Drop file PCE\");",
+                  "    postman.setNextRequest(\"[020201604PCE]Delete data\");",
                   "",
                   "}",
                   "else{",
