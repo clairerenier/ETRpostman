@@ -1499,7 +1499,7 @@
         },
         {
           "_postman_id": "4d6f1005-4a6e-9cb6-ca4f-d9b556fd2ecf",
-          "name": "[020201602PCE]Check data PCE copy",
+          "name": "[020201603PCE]Check data PCE",
           "event": [
             {
               "listen": "test",
