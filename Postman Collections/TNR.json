@@ -6717,71 +6717,71 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "d1328a1f-6bb4-ef7d-760f-03155f6c4c7c",
+              "name": "[00019]Check data 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult !== null){",
+                      "            if(sqlResult[0].results !== null){",
+                      "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1);",
+                      "                    console.log (sqlResult[0].results[0].NBRELEVE);",
+                      "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
+                      "                }",
+                      "            }",
+                      "        ",
+                      "    ",
+                      "   postman.setNextRequest(\"[00019]Check data 3\");",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
-        },
-        {
-          "_postman_id": "d1328a1f-6bb4-ef7d-760f-03155f6c4c7c",
-          "name": "[00019]Check data 2",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    if(sqlResult !== null){",
-                  "            if(sqlResult[0].results !== null){",
-                  "                    tests[\"Check Creation Releve\"] = (sqlResult[0].results[0].NBRELEVE == 1 && sqlResult[1].results[0].NBCARACTCOMPTAGE == 1);",
-                  "                    console.log (sqlResult[0].results[0].NBRELEVE);",
-                  "                    console.log (sqlResult[1].results[0].NBCARACTCOMPTAGE);",
-                  "                }",
-                  "            }",
-                  "        ",
-                  "    ",
-                  "   postman.setNextRequest(\"[00019]Check data 3\");",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
         },
         {
           "_postman_id": "1953a9ca-ad52-fd7b-0025-90893c8267f4",
