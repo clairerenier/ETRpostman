@@ -310,60 +310,6 @@
         "description": "param table is optional, but can be sued to trigger  PRO_ACG_17 on a specific date for example"
       },
       "response": []
-    },
-    {
-      "_postman_id": "aebf787f-3649-fd91-54ef-90e94374387c",
-      "name": "Call unique processes copy",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "tests[\"Status code is 200\"] = responseCode.code === 200;",
-              "if (tests[\"Status code is 200\"]){",
-              "    var jsonData = JSON.parse(responseBody);",
-              "    //postman.setEnvironmentVariable(\"[010100100FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_processid\",jsonData.processId);",
-              "    //postman.setEnvironmentVariable(\"[010100100FGA]PRO_ACG_01_FGA_ORC_001_FGACRETNR1_sourceProcessId\",jsonData.sourceProcessId);",
-              "    ",
-              "    if (jsonData.statusProcess === \"2\"){",
-              "        tests[\"Check drop file FGA\"] = false;",
-              "        //postman.setNextRequest(null);",
-              "    }",
-              "    else if (jsonData.statusProcess === \"4\"){",
-              "       tests[\"Check drop file FGA\"] = true; ",
-              "       postman.setNextRequest(\"[010100100FGA]Check data\");",
-              "    }",
-              "    else {",
-              "        tests[\"Check drop file FGA\"] = false;",
-              "        //postman.setNextRequest(null);",
-              "}",
-              "}",
-              "else{",
-              "    postman.setNextRequest(null);",
-              "}",
-              ""
-            ]
-          }
-        }
-      ],
-      "request": {
-        "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/process/",
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "description": ""
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\"alias\":\"PRO_ACG_17\",\"params\":[{\"ATT_NAME\":\"HORODATE\",\"ATT_VALUE\":\"2017-08-02 06:00:00\",\"ATT_TYPE\":\"S\"},{\"ATT_NAME\":\"TYPE\",\"ATT_VALUE\":\"PCE\",\"ATT_TYPE\":\"S\"}]}"
-        },
-        "description": "param table is optional, but can be sued to trigger  PRO_ACG_17 on a specific date for example"
-      },
-      "response": []
     }
   ]
 }
