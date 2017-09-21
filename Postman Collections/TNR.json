@@ -6301,7 +6301,7 @@
                       "                break;",
                       "        }",
                       "    }",
-                      "    if ( tests[\"Delete Point Data\"]  && tests[\"Delete Releve Data\"] && tests[\"Delete ReleveRejetee Data\"] && tests[\"Delete ReleveSupprimee Data\"] && tests[\"Delete DmdCalcul Data\"]){",
+                      "    if ( tests[\"Delete Point Data\"]  && tests[\"Delete Releve Data\"] && tests[\"Delete ReleveRejetee Data\"] && tests[\"Delete ReleveSupprimee Data\"] && tests[\"Delete DmdCalcul Data\"] && tests[\"Delete Caract Comptage Data\"]){",
                       "        tests[\"Delete data Sum up\"] = true; ",
                       "        postman.setNextRequest(\"[00019]Insert data\");",
                       "    }",
