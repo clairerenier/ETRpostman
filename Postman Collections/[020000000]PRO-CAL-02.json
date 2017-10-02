@@ -914,7 +914,7 @@
                   "var jsonData = JSON.parse(responseBody);",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    //postman.setNextRequest(null);",
+                  "    postman.setNextRequest(\"[020201600PCE]Check data PCE\");",
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
