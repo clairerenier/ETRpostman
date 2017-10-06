@@ -1640,6 +1640,75 @@
           "response": []
         },
         {
+          "_postman_id": "62e7180c-c342-49ba-bac3-3ba85412a1ad",
+          "name": "[020201604PCE]Delete data copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    for(var i= 0; i < sqlResult.length; i++)",
+                  "    {",
+                  "        switch (sqlResult[i].requestId) {",
+                  "            case \"DeletePointDataPCE\":",
+                  "                tests[\"Delete Point Data PCE\"] = true;",
+                  "                break;",
+                  "            case \"DeleteAcqPceData\":",
+                  "                tests[\"Delete Acq_Pce Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteStatutPceData\":",
+                  "                tests[\"Delete Statut_PCE Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteWmCalculData\":",
+                  "                tests[\"Delete WM_Calcul Data\"] = true;",
+                  "                break;",
+                  "            case \"DeleteWmCalculListData\":",
+                  "                tests[\"Delete WM_Calcul_List Data\"] = true;",
+                  "                break;",
+                  "        }",
+                  "    }",
+                  "    if ( tests[\"Delete Point Data PCE\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Statut_PCE Data\"] && tests[\"Delete WM_Calcul Data\"] && tests[\"Delete WM_Calcul_List Data\"]){",
+                  "        tests[\"Delete data Sum up\"] = true; ",
+                  "        postman.setNextRequest(\"[020201604PCE]Drop file PCE\");",
+                  "    }",
+                  "    else {",
+                  "       tests[\"Delete data Sum up\"] = fase; ",
+                  "       //postman.setNextRequest(null);",
+                  "    }",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('09/08/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('MEVPCET'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('MEVPCET') and jour_gazier= TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('MEVPCET'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculData\",\r\n         \"requestContent\":\"delete from wm_calcul where uidcalcul in (select uidcalcul from wm_calcul where idobject in ( 'MEVPCET','VAPIL') and horodate between TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('09/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculListData\",\r\n         \"requestContent\":\"delete from wm_calcul_list where uidcalcullist in (select uidcalcullist from wm_calcul_list where idobject in ( 'MEVPCET','VAPIL') and horodate between TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('09/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
           "_postman_id": "c3e3249c-6c1f-00fc-b605-24c6546aae7e",
           "name": "[020201604PCE]Drop file PCE",
           "event": [
@@ -1815,75 +1884,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('MEVPCET') and liste_heures in ('06;07;08;09;10;11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('VAPIL') and liste_heures in ('06;07;08;09;10;11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "62e7180c-c342-49ba-bac3-3ba85412a1ad",
-          "name": "[020201604PCE]Delete data copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    var sqlResult = jsonData.sqlResult;",
-                  "    for(var i= 0; i < sqlResult.length; i++)",
-                  "    {",
-                  "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointDataPCE\":",
-                  "                tests[\"Delete Point Data PCE\"] = true;",
-                  "                break;",
-                  "            case \"DeleteAcqPceData\":",
-                  "                tests[\"Delete Acq_Pce Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteStatutPceData\":",
-                  "                tests[\"Delete Statut_PCE Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteWmCalculData\":",
-                  "                tests[\"Delete WM_Calcul Data\"] = true;",
-                  "                break;",
-                  "            case \"DeleteWmCalculListData\":",
-                  "                tests[\"Delete WM_Calcul_List Data\"] = true;",
-                  "                break;",
-                  "        }",
-                  "    }",
-                  "    if ( tests[\"Delete Point Data PCE\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Statut_PCE Data\"] && tests[\"Delete WM_Calcul Data\"] && tests[\"Delete WM_Calcul_List Data\"]){",
-                  "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[020201604PCE]Drop file PCE\");",
-                  "    }",
-                  "    else {",
-                  "       tests[\"Delete data Sum up\"] = fase; ",
-                  "       //postman.setNextRequest(null);",
-                  "    }",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  "",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('09/08/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('MEVPCET'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('MEVPCET') and jour_gazier= TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('MEVPCET'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculData\",\r\n         \"requestContent\":\"delete from wm_calcul where uidcalcul in (select uidcalcul from wm_calcul where idobject in ( 'MEVPCET','VAPIL') and horodate between TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('09/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculListData\",\r\n         \"requestContent\":\"delete from wm_calcul_list where uidcalcullist in (select uidcalcullist from wm_calcul_list where idobject in ( 'MEVPCET','VAPIL') and horodate between TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('09/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
