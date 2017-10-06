@@ -1821,60 +1821,6 @@
           "response": []
         },
         {
-          "_postman_id": "45facc86-b231-bcef-6568-33231f156a8b",
-          "name": "[020201605PCE]Drop file PCE",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[020201604PCE]Check process cal end\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "description": "",
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20170808_PCE_20170809060430_CHR01_SCALA_241-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
           "_postman_id": "20fdd0cb-9b98-2982-fefc-70260564554c",
           "name": "[020201605PCE]Check process cal end",
           "event": [
