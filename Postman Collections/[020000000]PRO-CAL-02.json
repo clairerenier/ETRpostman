@@ -1822,7 +1822,7 @@
         },
         {
           "_postman_id": "577762c6-0e82-fa1d-76cb-a49324a1f683",
-          "name": "[020201600PCE]Delete data copy",
+          "name": "[020201605PCE]Delete data",
           "event": [
             {
               "listen": "test",
