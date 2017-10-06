@@ -1895,8 +1895,8 @@
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "if (tests[\"Status code is 200\"]){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\",jsonData.sourceProcessId);",
+                  "    postman.setEnvironmentVariable(\"[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\",jsonData.processId);",
+                  "    postman.setEnvironmentVariable(\"[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\",jsonData.sourceProcessId);",
                   "    ",
                   "    if (jsonData.statusProcess === \"2\"){",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -1904,7 +1904,7 @@
                   "    }",
                   "    else if (jsonData.statusProcess === \"4\"){",
                   "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[020201600PCE]Check process cal end\");",
+                  "       postman.setNextRequest(\"[020201605PCE]Check process cal end\");",
                   "    }",
                   "    else {",
                   "        tests[\"Check drop file PCE\"] = false;",
@@ -1924,9 +1924,9 @@
             "method": "POST",
             "header": [
               {
-                "description": "",
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               }
             ],
             "body": {
