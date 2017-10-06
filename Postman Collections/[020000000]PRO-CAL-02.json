@@ -1953,11 +1953,11 @@
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"[020201603PCE]Check data PCE\");",
+                  "   postman.setNextRequest(\"[020201605PCE]Check data PCE\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"[020201603PCE]Check data PCE\"); ",
+                  "    postman.setNextRequest(\"[020201605PCE]Check data PCE\"); ",
                   "}"
                 ]
               }
@@ -1978,6 +1978,79 @@
             "method": "POST",
             "header": [
               {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3547e31e-8d9d-4a26-3811-085845120a4b",
+          "name": "[020201603PCE]Check data PCE copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\");",
+                  "    ",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckDmdCalculCreationPCESon\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Son\"] = sqlResult[i].results[0].COUNT == \"2\";",
+                  "                    break;",
+                  "               case \"CheckDmdCalculCreationPCEFather\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Father\"] = sqlResult[i].results[0].COUNT == \"3\";",
+                  "                    break;",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(\"[020201604PCE]Delete data\");",
+                  "",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
                 "description": "",
                 "key": "Content-Type",
                 "value": "application/json"
@@ -1985,7 +2058,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','10;11')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
