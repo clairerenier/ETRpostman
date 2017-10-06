@@ -1942,6 +1942,60 @@
             "description": ""
           },
           "response": []
+        },
+        {
+          "_postman_id": "20fdd0cb-9b98-2982-fefc-70260564554c",
+          "name": "[020201604PCE]Check process cal end copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "if (jsonData.statusProcess === \"2\"){",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    //postman.setNextRequest(null);",
+                  "}",
+                  "else if (jsonData.statusProcess === \"4\"){",
+                  "   tests[\"Check process cal end\"] = true; ",
+                  "   postman.setNextRequest(\"[020201604PCE]Check data PCE\");",
+                  "}",
+                  "else {",
+                  "    tests[\"Check process cal end\"] = false;",
+                  "    postman.setNextRequest(\"[020201604PCE]Check data PCE\"); ",
+                  "}"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+            "method": "POST",
+            "header": [
+              {
+                "description": "",
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
+            },
+            "description": ""
+          },
+          "response": []
         }
       ]
     }
