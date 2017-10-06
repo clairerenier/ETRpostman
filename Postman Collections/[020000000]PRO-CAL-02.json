@@ -777,7 +777,7 @@
     {
       "_postman_id": "8b87f0ee-ed3b-43af-8538-ccb56694c5bc",
       "name": "[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET",
-      "description": "0 - one son calculated from 6AM to 9AM (SGPCETVPEC) only\n    Expected result : no father triggered\n1 - other son calculated from 6AM to 10 AM (SGPCEEVPEC)\n    Expected result : father is triggered from 6 to 9 AM\n2 - change on list of hours (first son SGPCETVPEC calculated from 10AM to 11AM )\n    Expected result : father is calculated on 6AM to 10AM\n3 - both children calculated triggered :\nSGPCETVPEC calculated from 12AM to 5AM\nSGPCEEVPEC calculated from 11AM to 5AM\n    Expected result : father is calculated from 11AM to 5AM and dmd_calcul on 10 to 11 AM and dmd_calcul on 12AM to 5AM\n4 - Test on APIL on first day of link (ETRSP2-1752)\n\n\nData set (case 0,1,2,3) :\nSons : SGPCETVPEC and SGPCEEVPEC\nFather : SGPCECPEC\nData set (case 4) :\nSon : MEVPCET\nFather : VAPIL",
+      "description": "0 - one son calculated from 6AM to 9AM (SGPCETVPEC) only\n    Expected result : no father triggered\n1 - other son calculated from 6AM to 10 AM (SGPCEEVPEC)\n    Expected result : father is triggered from 6 to 9 AM\n2 - change on list of hours (first son SGPCETVPEC calculated from 10AM to 11AM )\n    Expected result : father is calculated on 6AM to 10AM\n3 - both children calculated triggered :\nSGPCETVPEC calculated from 12AM to 5AM\nSGPCEEVPEC calculated from 11AM to 5AM\n    Expected result : father is calculated from 11AM to 5AM and dmd_calcul on 10 to 11 AM and dmd_calcul on 12AM to 5AM\n4 - Test on APIL on first day of link (ETRSP2-1752)\n5 - Delete acq and point of data of test case 3 and then drop file again\n    Expected result : father is calculated from 11AM to 5AM and dmd_calcul on 10 to 11 AM and dmd_calcul on 12AM to 5AM\n\n\nData set (case 0,1,2,3) :\nSons : SGPCETVPEC and SGPCEEVPEC\nFather : SGPCECPEC\nData set (case 4) :\nSon : MEVPCET\nFather : VAPIL",
       "item": [
         {
           "_postman_id": "294e3848-8ae4-78ae-70c0-5191bf70fc86",
@@ -1986,6 +1986,79 @@
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3547e31e-8d9d-4a26-3811-085845120a4b",
+          "name": "[020201603PCE]Check data PCE copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\");",
+                  "    ",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckDmdCalculCreationPCESon\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Son\"] = sqlResult[i].results[0].COUNT == \"2\";",
+                  "                    break;",
+                  "               case \"CheckDmdCalculCreationPCEFather\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE Father\"] = sqlResult[i].results[0].COUNT == \"3\";",
+                  "                    break;",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(\"[020201606PCE]Delete data\");",
+                  "",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','10;11')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
