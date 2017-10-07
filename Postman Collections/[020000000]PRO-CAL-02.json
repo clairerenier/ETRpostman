@@ -1836,8 +1836,11 @@
                   "    for(var i= 0; i < sqlResult.length; i++)",
                   "    {",
                   "        switch (sqlResult[i].requestId) {",
-                  "            case \"DeletePointDataPCE\":",
-                  "                tests[\"Delete Point Data PCE\"] = true;",
+                  "            case \"DeletePointDataPCET\":",
+                  "                tests[\"Delete Point Data PCE T\"] = true;",
+                  "                break;",
+                  "            case \"DeletePointDataPCEE\":",
+                  "                tests[\"Delete Point Data PCE E\"] = true;",
                   "                break;",
                   "            case \"DeleteAcqPceData\":",
                   "                tests[\"Delete Acq_Pce Data\"] = true;",
@@ -1847,7 +1850,7 @@
                   "                break;",
                   "        }",
                   "    }",
-                  "    if ( tests[\"Delete Point Data PCE\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Statut_PCE Data\"] ){",
+                  "    if ( tests[\"Delete Point Data PCE T\"] && tests[\"Delete Point Data PCE E\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Statut_PCE Data\"] ){",
                   "        tests[\"Delete data Sum up\"] = true; ",
                   "        postman.setNextRequest(\"[020201605PCE]Drop file PCE\");",
                   "    }",
@@ -1877,7 +1880,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/09/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCECPEC ','SGPCETVPEC','SGPCEEVPEC'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC') and jour_gazier= TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC'))\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCET\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('13/09/2017 12:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/09/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCETVPEC'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePointDataPCEE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('13/09/2017 11:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/09/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCEEVPEC'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC') and jour_gazier= TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC'))\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
