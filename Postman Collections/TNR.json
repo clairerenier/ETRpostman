@@ -2664,7 +2664,7 @@
                       "    }",
                       "    else if (jsonData.statusProcess === \"4\"){",
                       "       tests[\"Check process cal end\"] = true; ",
-                      "       postman.setNextRequest(\"[00002]Check data\");",
+                      "       postman.setNextRequest(\"[00007]Check data\");",
                       "    }",
                       "    else {",
                       "        tests[\"Check process cal end\"] = false;",
@@ -2692,7 +2692,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+                  "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_30_PCE_TNR_PCEGB012_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
                 },
                 "description": ""
               },
