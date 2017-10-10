@@ -5903,7 +5903,7 @@
                       "tests[\"Status code is 200\"] = responseCode.code === 200;",
                       "tests[\"Réponse valide\"] = Response.ProRel017Result.valide === true;",
                       "",
-                      "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
+                      "if (tests[\"Status code is 200\"] && tests[\"Réponse valide\"]){",
                       "        ",
                       "    //postman.setEnvironmentVariable(\"uidReleveS\", Response.ProRel017Result.uidReleve);",
                       "    //console.log (postman.getEnvironmentVariable(\"uidReleveS\"));",
