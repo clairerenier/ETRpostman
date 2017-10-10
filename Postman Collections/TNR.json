@@ -6737,7 +6737,6 @@
                       "        }",
                       "    }",
                       "    ",
-                      "    postman.setNextRequest(\"[00020]Check data 2\");",
                       "}",
                       "else{",
                       "    postman.setNextRequest(null);",
