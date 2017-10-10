@@ -5855,7 +5855,7 @@
                       "tests[\"Status code is 200\"] = responseCode.code === 200;",
                       "tests[\"Réponse valide\"] = Response.ProRel017Result.valide === true;",
                       "",
-                      "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
+                      "if (tests[\"Status code is 200\"] && tests[\"Réponse valide\"]){",
                       "        ",
                       "       postman.setNextRequest(\"[00019]Launch process 2\");",
                       "    }",
