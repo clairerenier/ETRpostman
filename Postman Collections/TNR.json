@@ -6729,7 +6729,7 @@
                       "                case \"CheckPresenceReleveSupprimeM\":",
                       "                    tests[\"Check presence RELEVE_SUPPRIMEE\"] = sqlResult[i].results[0].NBRELEVESUPPRIMEE == 1;",
                       "                    break;",
-                      "                case \"CheckCreationDmdCalcuMT\":",
+                      "                case \"CheckCreationDmdCalculM\":",
                       "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].NBDMDCALCUL == 2;",
                       "                    break;",
                       "                }",
