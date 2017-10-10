@@ -965,7 +965,7 @@
                   "    }",
                   "    else {",
                   "        tests[\"Check process cal end\"] = false;",
-                  "        //postman.setNextRequest(null);  ",
+                  "        postman.setNextRequest(\"[030301500FGA]PRO-CAL-03 FGA\");  ",
                   "    }",
                   "}",
                   "else{",
