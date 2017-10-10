@@ -6497,7 +6497,7 @@
                       "        ",
                       "    //postman.setEnvironmentVariable(\"uidReleveS\", Response.ProRel017Result.uidReleve);",
                       "    //console.log (postman.getEnvironmentVariable(\"uidReleveS\"));",
-                      "       ",
+                      "       postman.setNextRequest(\"[00020]Check data 1\");",
                       "    ",
                       "    }",
                       "    ",
