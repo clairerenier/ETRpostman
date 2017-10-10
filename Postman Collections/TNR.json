@@ -5952,7 +5952,7 @@
                       "var Response = JSON.parse(responseBody);",
                       "",
                       "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "tests[\"Response valide\"] = Response.ProRel017Result.valide === true;",
+                      "tests[\"Réponse valide\"] = Response.ProRel017Result.valide === true;",
                       "",
                       "if (tests[\"Status code is 200\"] && tests[\"Response valide\"]){",
                       "        ",
