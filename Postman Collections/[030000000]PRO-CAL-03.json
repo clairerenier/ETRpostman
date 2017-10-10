@@ -3689,7 +3689,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"GetSourceProcessid\",\r\n         \"requestContent\":\"select distinct SOURCE_PROCESSID from dmd_calcul where prec_processid in ( select ID_CORRELATION from orc_processus where code_technique_processus='PRO_CAL_03' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"GetSourceProcessid\",\r\n         \"requestContent\":\"select distinct SOURCE_PROCESSID from dmd_calcul where prec_processid in ( select valeur_champ_libre_2 from orc_processus where code_technique_processus='PRO_CAL_01' and date_lancement_processus >(sysdate-1/24/4) order by date_lancement_processus desc fetch first 1 rows only)\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
