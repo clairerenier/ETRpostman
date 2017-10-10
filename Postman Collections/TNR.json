@@ -6622,7 +6622,7 @@
                       "        }",
                       "    }",
                       "    ",
-                      "    postman.setNextRequest(\"[00019]Check data 4\");",
+                      "    postman.setNextRequest(\"[00020]Check data 2\");",
                       "}",
                       "else{",
                       "    postman.setNextRequest(null);",
