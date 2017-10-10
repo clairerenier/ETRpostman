@@ -2640,7 +2640,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170227_PCE_20170227131828_CHR02_SCALA_12-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20171008_PCE_20171009063205_CHR61_LUC_02.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
                 },
                 "description": ""
               },
