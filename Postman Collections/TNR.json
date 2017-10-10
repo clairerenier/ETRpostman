@@ -2541,14 +2541,11 @@
                       "            case \"DeleteEtrMeteringDataData\":",
                       "                tests[\"Delete Etr_Metering_Data Data\"] = true;",
                       "                break;",
-                      "            case \"DeleteAlerte\":",
-                      "                tests[\"Delete Alerte\"] = true;",
-                      "                break;",
                       "        }",
                       "    }",
-                      "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"] && tests[\"Delete Alerte\"]){",
+                      "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"] ){",
                       "        tests[\"Delete data Sum up\"] = true; ",
-                      "        postman.setNextRequest(\"[00002]Drop file PCE\");",
+                      "        postman.setNextRequest(\"[00007]Drop file PCE\");",
                       "    }",
                       "    else {",
                       "       tests[\"Delete data\"] = fase; ",
@@ -2575,6 +2572,14 @@
                 }
               ],
               "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": {
+                    "username": "ghitha.ben.chaaboune",
+                    "password": "etr",
+                    "showPassword": false
+                  }
+                },
                 "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
                 "method": "POST",
                 "header": [
