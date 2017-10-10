@@ -6653,7 +6653,7 @@
             },
             {
               "_postman_id": "6420dc48-22b5-c94b-75f1-2224eb2659c9",
-              "name": "[00020]Check data 1 copy",
+              "name": "[00020]Check data 2",
               "event": [
                 {
                   "listen": "test",
