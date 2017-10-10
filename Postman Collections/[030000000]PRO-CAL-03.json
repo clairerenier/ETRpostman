@@ -891,7 +891,7 @@
         },
         {
           "_postman_id": "a73bc925-bc4e-1512-2818-0ccdfb2ad687",
-          "name": "[030301500FGA]Check process cal end copy",
+          "name": "[030301500FGA]Check process cal end PCE",
           "event": [
             {
               "listen": "test",
