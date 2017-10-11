@@ -1310,7 +1310,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201602PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"120\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201602PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"240\"}"
             },
             "description": ""
           },
