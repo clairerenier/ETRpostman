@@ -4020,6 +4020,250 @@
       "description": "",
       "item": [
         {
+          "_postman_id": "12f90fba-ea51-b52b-8081-72bc852fa53d",
+          "name": "[00010]PRO_ARF_01_PCE_TNR_SGGUR1133A",
+          "description": "",
+          "item": [
+            {
+              "_postman_id": "04b7d2d7-60c1-1c06-6fea-b39f45a4b508",
+              "name": "[00010]Delete data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"DeleteLienGrpCalcul\":",
+                      "                tests[\"Delete Lien Grp_Calcul\"] = true;",
+                      "                break;",
+                      "            case \"DeleteGrpCalcul\":",
+                      "                tests[\"Delete Grp_Calcul\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if (tests[\"Delete Lien Grp_Calcul\"] && tests[\"Delete Grp_Calcul\"]){",
+                      "        tests[\"Delete data Sum up\"] = true; ",
+                      "        postman.setNextRequest(\"[00010]Drop file Transaction\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data Sum up\"] = false; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeleteLienGrpCalcul\",\r\n         \"requestContent\":\"delete from  LIEN_GRC_PCE where uidgrp_calcul_pere in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='513TEST90')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteGrpCalcul\",\r\n         \"requestContent\":\"delete from grp_calcul where uidgrp_calcul in (select uidgrp_calcul from GRP_CALCUL where IDGRP_CALCUL='513TEST90')\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "bcbf3084-1699-d624-0960-0c13a64663ea",
+              "name": "[00010]Drop file Transaction",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"PRO_ARF_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "   //Waiting that the status,processid and source_processid are given for this type of file. So we are direcly moving to the next step.",
+                      "   /*if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file PCE\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file PCE\"] = true; ",
+                      "       postman.setNextRequest(\"[00006]Check data\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file PCE\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }*/",
+                      "    postman.setNextRequest(\"[00010]Check process cal end\");",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"TRANSACTION\",\"fileName\":\"J20160828_PCR_20160829015704_REF31_CAM_01.xml\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "a690340c-d0ff-b3da-5fd6-91f79987439f",
+              "name": "[00010]Check process cal end",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check process cal end\"] = true; ",
+                      "       postman.setNextRequest(\"[00010]Check data\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check process cal end\"] = true;",
+                      "        postman.setNextRequest(\"[00010]Check data\");  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ARF_01_PCE_TNR_SGGUR1133A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "fe689a35-6511-f279-1f9f-b1c425d1327c",
+              "name": "[00010]Check data",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult != null){",
+                      "       for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results != null){",
+                      "               switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessusOld\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS Old way\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckGrpCalculCreation\":",
+                      "                     tests[\"Check status in GRP_CALCUL Creation\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                break;",
+                      "                } ",
+                      "            }",
+                      "        } ",
+                      "    }",
+                      "    postman.setNextRequest(\"[00011]Delete data\");",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "//postman.setNextRequest(null);",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"CheckStatutOrcProcessusOld\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where date_lancement_processus>= (sysdate - 1/24/6) and code_technique_processus='PRO_ARF_01' order by date_lancement_processus desc fetch first 1 rows only\"\r\n      },\r\n    {  \r\n          \"requestId\":\"CheckGrpCalculCreation\",\r\n          \"requestContent\":\"select count(*) as COUNT from GRP_CALCUL where IDGRP_CALCUL='513TEST90' and lstime>= (sysdate - 1/24/4)\"\r\n    }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
           "_postman_id": "17fc8131-c6d5-893a-9c9d-f02cbf8516ce",
           "name": "[00011]PRO_ARF_02_PCE_TNR_PCEVER15_TSTCACHE2",
           "description": "",
