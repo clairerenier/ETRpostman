@@ -1041,7 +1041,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_sourceProcessId}}\",\"waitTimeout\":\"120\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[030301500FGA]PRO_CAL_03_FGA_ORC_015_NSTOUEN_sourceProcessId}}\",\"waitTimeout\":\"240\"}"
             },
             "description": ""
           },
