@@ -7995,7 +7995,15 @@
                 "description": ""
               },
               "response": []
-            },
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "c7b997e2-4ec1-cdf7-380c-92ed3f86e5bb",
+          "name": "[00021]PRO_REL_016_TNR_To do",
+          "description": "",
+          "item": [
             {
               "_postman_id": "078977ed-1009-b2f0-e8c4-643ecb81f9af",
               "name": "[00020]Delete data copy",
@@ -8069,13 +8077,6 @@
               "response": []
             }
           ],
-          "_postman_isSubFolder": true
-        },
-        {
-          "_postman_id": "c7b997e2-4ec1-cdf7-380c-92ed3f86e5bb",
-          "name": "[00021]PRO_REL_016_TNR_To do",
-          "description": "",
-          "item": [],
           "_postman_isSubFolder": true
         }
       ]
