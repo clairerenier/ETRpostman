@@ -8092,7 +8092,7 @@
                       "",
                       "if (tests[\"Status code is 200\"] && tests[\"Réponse valide\"]){",
                       "        ",
-                      "       postman.setNextRequest(\"[00021]Launch process 2\");",
+                      "       postman.setNextRequest(\"[00021]Check data 1);",
                       "    }",
                       "",
                       "else{",
