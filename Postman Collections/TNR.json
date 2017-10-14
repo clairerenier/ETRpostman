@@ -8152,7 +8152,7 @@
                       "                    tests[\"Check presence RELEVE_SUPPRIMEE R (PCE T)\"] = sqlResult[i].results[0].NBRELEVESUPPRIMEE == 1;",
                       "                    break;",
                       "                case \"CheckCreationDmdCalculT\":",
-                      "                    tests[\"Check DMD_CALCUL R (PCE T)\"] = sqlResult[i].results[0].NBDMDCALCUL == 2;",
+                      "                    tests[\"Check DMD_CALCUL R (PCE T)\"] = sqlResult[i].results[0].NBDMDCALCUL == 1;",
                       "                    break;",
                       "                }",
                       "            }",
