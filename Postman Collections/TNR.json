@@ -7995,6 +7995,78 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "078977ed-1009-b2f0-e8c4-643ecb81f9af",
+              "name": "[00020]Delete data copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"PCEPROTNR2_uidReleveR\":",
+                      "                tests[\"Get PCEPROTNR2_uidReleveR\"] = true;",
+                      "                break;",
+                      "            case \"PCEPROTNR1_uidReleveS\":",
+                      "                tests[\"Get PCEPROTNR1_uidReleveS\"] = true;",
+                      "                break;",
+                      "            case \"DeleteDmdCalcul\":",
+                      "                tests[\"Delete DmdCalcul Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteReleveSupprimee\":",
+                      "                tests[\"Delete ReleveSupprimee Data\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if ( tests[\"Get PCEPROTNR2_uidReleveR\"] && tests[\"Get PCEPROTNR1_uidReleveS\"] && tests[\"Delete DmdCalcul Data\"] && tests[\"Delete ReleveSupprimee Data\"]){",
+                      "        tests[\"Delete data Sum up\"] = true; ",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidReleveR\", sqlResult[0].results[0].UIDRELEVER);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidReleveS\", sqlResult[1].results[0].UIDRELEVES);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidPce\", sqlResult[2].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR2_uidVpce\", sqlResult[2].results[0].UIDVPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidPce\", sqlResult[3].results[0].UIDPCE);",
+                      "        postman.setEnvironmentVariable(\"PCEPROTNR1_uidVpce\", sqlResult[3].results[0].UIDVPCE);",
+                      "        postman.setNextRequest(\"[00020]Launch process 1\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data Sum up\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"PCEPROTNR2_uidReleveR\",\r\n         \"requestContent\":\"select uidreleve AS UIDRELEVER from RELEVE inner join pce on RELEVE.uidpce = pce.uidpce where idpce = 'PCEPROTNR2' and RELEVE.type_releve = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"PCEPROTNR1_uidReleveS\",\r\n         \"requestContent\":\"select uidreleve AS UIDRELEVES from RELEVE inner join pce on RELEVE.uidpce = pce.uidpce where idpce = 'PCEPROTNR1' and RELEVE.type_releve = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR2'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"GetInfo\",\r\n         \"requestContent\":\"select pce.uidpce as uidpce, uidvpce from pce inner join vpce on pce.uidpce = vpce.uidpce where pce.idpce = 'PCEPROTNR1'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteDmdCalcul\",\r\n         \"requestContent\":\"delete from dmd_calcul where CODE_OBJET in('PCEPROTNR2', 'PCEPROTNR1')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteReleveSupprimee\",\r\n         \"requestContent\":\"delete from releve_supprimee where uidreleve_supprimee in (select uidreleve_supprimee from releve_supprimee r inner join pce on r.uidpce = pce.UIDPCE where pce.idpce in('PCEPROTNR2', 'PCEPROTNR1'))\"\r\n      }\r\n   ]\r\n}"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
