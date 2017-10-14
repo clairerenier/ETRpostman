@@ -7621,7 +7621,7 @@
                       "                    tests[\"Check presence CARACT_COMPTAGE S (M)\"] = sqlResult[i].results[0].NBCARACTCOMPTAGE == 1;",
                       "                    break;",
                       "                case \"CheckCreationDmdCalculM\":",
-                      "                    tests[\"Check DMD_CALCUL S\"] = sqlResult[i].results[0].NBDMDCALCUL == 1;",
+                      "                    tests[\"Check DMD_CALCUL S (M)\"] = sqlResult[i].results[0].NBDMDCALCUL == 1;",
                       "                    break;",
                       "                }",
                       "            }",
