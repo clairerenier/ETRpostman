@@ -7995,6 +7995,54 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "1d09b4a7-26be-20a3-acac-ff89805bafae",
+              "name": "[00021]Launch process 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "var Response = JSON.parse(responseBody);",
+                      "",
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "tests[\"Réponse valide\"] = Response.ProRel016Result.valide === true;",
+                      "",
+                      "if (tests[\"Status code is 200\"] && tests[\"Réponse valide\"]){",
+                      "        ",
+                      "       postman.setNextRequest(\"[00021]Check data 1\");",
+                      "    }",
+                      "",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      "",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL016",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ProRel016Request\":{\"toCheck\":false,\"userModification\":\"mourad.minsys@external.grtgaz.com\",\"uidReleve\":{{PCEPROTNR2_uidReleveR}},\"dateDebInter\":\"2017-09-01T08:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T12:00:00.000+0000\",\"uidPce\":{{PCEPROTNR2_uidPce}},\"idPce\":\"PCEPROTNR2\",\"typeReleve\":\"R\",\"dateFinInterventionRelevePrecedente\":\"2017-09-01T07:00:00.000+0000\"}}\r\n"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
@@ -8194,54 +8242,6 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleveT\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptageT\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceReleveSupprimeT\",\r\n         \"requestContent\":\"select count(1) as nbReleveSupprimee from releve_supprimee inner join pce on releve_supprimee.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve_supprimee.TYPE_RELEVE = 'R'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckCreationDmdCalculT\",\r\n         \"requestContent\":\"select count(1) as nbDmdCalcul from dmd_calcul where CODE_OBJET = 'PCEPROTNR2'\"\r\n      }\r\n   ]\r\n}"
-                },
-                "description": ""
-              },
-              "response": []
-            },
-            {
-              "_postman_id": "1d09b4a7-26be-20a3-acac-ff89805bafae",
-              "name": "[00021]Launch process 2",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "var Response = JSON.parse(responseBody);",
-                      "",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "tests[\"Réponse valide\"] = Response.ProRel016Result.valide === true;",
-                      "",
-                      "if (tests[\"Status code is 200\"] && tests[\"Réponse valide\"]){",
-                      "        ",
-                      "       postman.setNextRequest(\"[00021]Check data 1\");",
-                      "    }",
-                      "",
-                      "else{",
-                      "    postman.setNextRequest(null);",
-                      "}",
-                      "",
-                      "",
-                      "",
-                      ""
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL016",
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "description": ""
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"ProRel016Request\":{\"toCheck\":false,\"userModification\":\"mourad.minsys@external.grtgaz.com\",\"uidReleve\":{{PCEPROTNR2_uidReleveR}},\"dateDebInter\":\"2017-09-01T08:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T12:00:00.000+0000\",\"uidPce\":{{PCEPROTNR2_uidPce}},\"idPce\":\"PCEPROTNR2\",\"typeReleve\":\"R\",\"dateFinInterventionRelevePrecedente\":\"2017-09-01T07:00:00.000+0000\"}}\r\n"
                 },
                 "description": ""
               },
