@@ -8166,7 +8166,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"toCheck\":false,\"userModification\":\"mourad.minsys@external.grtgaz.com\",\"uidReleve\":{{PCEPROTNR1_uidReleveS}},\"dateDebInter\":\"2017-09-01T10:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T10:00:00.000+0000\",\"uidPce\":{{PCEPROTNR1_uidPce}},\"idPce\":\"PCEPROTNR1\",\"typeReleve\":\"S\",\"dateFinInterventionRelevePrecedente\":\"2017-09-01T06:00:00.000+0000\"}}\r\n"
+                  "raw": "{\"ProRel016Request\":{\"toCheck\":false,\"userModification\":\"mourad.minsys@external.grtgaz.com\",\"uidReleve\":{{PCEPROTNR1_uidReleveS}},\"dateDebInter\":\"2017-09-01T10:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T10:00:00.000+0000\",\"uidPce\":{{PCEPROTNR1_uidPce}},\"idPce\":\"PCEPROTNR1\",\"typeReleve\":\"S\",\"dateFinInterventionRelevePrecedente\":\"2017-09-01T06:00:00.000+0000\"}}\r\n"
                 },
                 "description": ""
               },
