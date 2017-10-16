@@ -8246,6 +8246,54 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "_postman_id": "34db1bd8-0d17-cbc1-9a6a-13a732d0002e",
+              "name": "[00021]Launch process 1 copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "var Response = JSON.parse(responseBody);",
+                      "",
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "tests[\"Réponse valide\"] = Response.ProRel016Result.valide === true;",
+                      "",
+                      "if (tests[\"Status code is 200\"] && tests[\"Réponse valide\"]){",
+                      "        ",
+                      "       postman.setNextRequest(\"[00021]Check data 1\");",
+                      "    }",
+                      "",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      "",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_COMMON_REL/ws/PROREL016",
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ProRel016Request\":{\"toCheck\":false,\"userModification\":\"mourad.minsys@external.grtgaz.com\",\"uidReleve\":{{PCEPROTNR2_uidReleveR}},\"dateDebInter\":\"2017-09-01T08:00:00.000+0000\",\"dateFinInter\":\"2017-09-01T12:00:00.000+0000\",\"uidPce\":{{PCEPROTNR2_uidPce}},\"idPce\":\"PCEPROTNR2\",\"typeReleve\":\"R\",\"dateFinInterventionRelevePrecedente\":\"2017-09-01T07:00:00.000+0000\"}}\r\n"
+                },
+                "description": ""
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
