@@ -268,7 +268,7 @@
       "item": [
         {
           "_postman_id": "e3d02473-32e2-98c0-58af-ef47c6f21c7a",
-          "name": "[020201600PCE]Delete data copy",
+          "name": "ETRSP2_2036_Delete data",
           "event": [
             {
               "listen": "test",
