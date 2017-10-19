@@ -981,7 +981,9 @@
                   "                case \"CheckDmdCalculCreationPCE\":",
                   "                    tests[\"Check DMD_CALCUL Creation PCE\"] = sqlResult[i].results[0].COUNT == \"1\";",
                   "                    break;",
-                  "               ",
+                  "               case \"CheckWMCalculCreationPCE\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                  "                    break;",
                   "                }",
                   "            }",
                   "        }",
@@ -1021,7 +1023,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC','SGPCECPEC') and liste_heures='06;07;08;09'\"\r\n      }\r\n   ]\r\n}"
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC','SGPCECPEC') and liste_heures='06;07;08;09'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckWMCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from wm_calcul_list where idobject in ('SGPCECPEC') and horodate between TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('14/09/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and hour_list='06;07;08;09;'\"\r\n      }\r\n   ]\r\n}"
             },
             "description": ""
           },
