@@ -631,7 +631,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"ProRel019Request\":\r\n  {\r\n    \"uidVpce\":12345,\r\n    \"valueTest\":999.99\r\n  }\r\n}"
+          "raw": "{\r\n\t\"ProRel019Request\": {\r\n\t\t\"uidVpce\": \"182361\",\r\n\t\t\"valueTest\": 93.28,\r\n\t\t\"indexTest\": 3\r\n\t}\r\n}"
         },
         "description": ""
       },
