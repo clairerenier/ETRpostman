@@ -545,7 +545,7 @@
             "showPassword": false
           }
         },
-        "url": "http://172.30.3.60:48020/rest/ETR_PRO_COMMON_REL/ws/REL084REL085REL086/",
+        "url": "http://172.30.5.87:32555/rest/ETR_PRO_COMMON_REL/ws/REL084REL085REL086",
         "method": "POST",
         "header": [
           {
@@ -561,7 +561,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"ProRel019Request\": {\r\n    \"uidPce\": \"1234\",\r\n    \"dateDebInter\": \"2016-01-02T06:00:00.000+0000\",\r\n    \"dateFinInterventionRelevePrecedente\": \"2016-10-11T06:00:00.000+0000\",\r\n    \"typeReleve\": \"S\",\r\n    \"volumePeriode\": 1234\r\n  }\r\n}"
+          "raw": "{\r\n\t\"ProRel019Request\": {\r\n\t\t\"valueTest\": 0.0,\r\n\t\t\"indexTest\": 0,\r\n\t\t\"uidPce\": \"30564\",\r\n\t\t\"dateDebInter\": \"2017-10-10T10:00:00.000+0000\",\r\n\t\t\"typeReleve\": \"S\",\r\n\t\t\"volumePeriode\": 16005,\r\n\t\t\"dateFinInterventionRelevePrecedente\": \"2017-10-10T09:54:00.000+0000\"\r\n\t}\r\n}"
         },
         "description": ""
       },
