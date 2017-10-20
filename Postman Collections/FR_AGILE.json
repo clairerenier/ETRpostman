@@ -609,8 +609,8 @@
         "auth": {
           "type": "basic",
           "basic": {
-            "username": "Administrator",
-            "password": "manage",
+            "username": "etr.sam",
+            "password": "etr",
             "saveHelperData": true,
             "showPassword": false
           }
