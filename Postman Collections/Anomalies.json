@@ -553,7 +553,7 @@
         },
         {
           "_postman_id": "e6cad866-41a7-02ae-5599-d6c0ccf347cd",
-          "name": "ETRSP2_2036_1_Check process cal end 1 copy copy",
+          "name": "ETRSP2_2036_2_Check process cal end 2",
           "event": [
             {
               "listen": "test",
