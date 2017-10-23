@@ -301,7 +301,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data PCE\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Statut_PCE Data\"] && tests[\"Delete WM_Calcul Data\"] && tests[\"Delete WM_Calcul_List Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"ETRSP2_2036_1_Drop file PCE 1\");",
+                  "        postman.setNextRequest(\"[020201600PCE]Drop file PCE\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
@@ -330,60 +330,6 @@
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('17/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('18/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('LPCEINIT'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('LPCEINIT')\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('LPCEINIT'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculData\",\r\n         \"requestContent\":\"delete from wm_calcul where uidcalcul in (select uidcalcul from wm_calcul where idobject in ( 'LCILE2G4','LCILE2G5','LCILE2G3','LPCEINIT') and horodate between TO_DATE('17/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('18/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculListData\",\r\n         \"requestContent\":\"delete from wm_calcul_list where uidcalcullist in (select uidcalcullist from wm_calcul_list where idobject in ( 'LCILE2G4','LCILE2G5','LCILE2G3','LPCEINIT') and horodate between TO_DATE('17/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('18/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "1a97ded2-63fa-c5aa-c653-82a466026448",
-          "name": "ETRSP2_2036_1_Drop file PCE 1",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "if (tests[\"Status code is 200\"]){",
-                  "    var jsonData = JSON.parse(responseBody);",
-                  "    postman.setEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\",jsonData.processId);",
-                  "    postman.setEnvironmentVariable(\"[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\",jsonData.sourceProcessId);",
-                  "    ",
-                  "    if (jsonData.statusProcess === \"2\"){",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "    }",
-                  "    else if (jsonData.statusProcess === \"4\"){",
-                  "       tests[\"Check drop file PCE\"] = true; ",
-                  "       postman.setNextRequest(\"[020201600PCE]Check process cal end\");",
-                  "    }",
-                  "    else {",
-                  "        tests[\"Check drop file PCE\"] = false;",
-                  "        //postman.setNextRequest(null);",
-                  "}",
-                  "}",
-                  "else{",
-                  "    postman.setNextRequest(null);",
-                  "}",
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913103424_CHR02_SCALA_1-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
             "description": ""
           },
