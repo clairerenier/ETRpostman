@@ -617,15 +617,15 @@
                   "var jsonData = JSON.parse(responseBody);",
                   "if (jsonData.statusProcess === \"2\"){",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"ETRSP2_2036_2_Drop file PCE 2\");",
+                  "    postman.setNextRequest(\"ETRSP2_2036_4_Check data PCE 4\");",
                   "}",
                   "else if (jsonData.statusProcess === \"4\"){",
                   "   tests[\"Check process cal end\"] = true; ",
-                  "   postman.setNextRequest(\"ETRSP2_2036_2_Drop file PCE 2\");",
+                  "   postman.setNextRequest(\"ETRSP2_2036_4_Check data PCE 4\");",
                   "}",
                   "else {",
                   "    tests[\"Check process cal end\"] = false;",
-                  "    postman.setNextRequest(\"ETRSP2_2036_2_Drop file PCE 2\"); ",
+                  "    postman.setNextRequest(\"ETRSP2_2036_4_Check data PCE 4\"); ",
                   "}"
                 ]
               }
