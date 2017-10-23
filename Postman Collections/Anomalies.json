@@ -662,13 +662,63 @@
         {
           "_postman_id": "14ce3a51-4b44-481a-c359-f25a1cf989a7",
           "name": "ETRSP2_2036_4_Check data PCE 4",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var processid = postman.getEnvironmentVariable(\"[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_processid\");",
+                  "var sourceProcessid = postman.getEnvironmentVariable(\"[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid\");",
+                  "    ",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "if (tests[\"Status code is 200\"]){",
+                  "    var jsonData = JSON.parse(responseBody);",
+                  "    var sqlResult = jsonData.sqlResult;",
+                  "    if(sqlResult !== null){",
+                  "        for(var i= 0; i < sqlResult.length; i++)",
+                  "        {",
+                  "            if(sqlResult[i].results !== null){",
+                  "                switch (sqlResult[i].requestId) {",
+                  "                case \"CheckDmdCalculCreationPCEFile1\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE File 1\"] = sqlResult[i].results[0].COUNT == \"4\";",
+                  "                    break;",
+                  "                case \"CheckDmdCalculCreationPCEFile2\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE File 2\"] = sqlResult[i].results[0].COUNT == \"4\";",
+                  "                    break;",
+                  "                case \"CheckDmdCalculCreationPCEFile3\":",
+                  "                    tests[\"Check DMD_CALCUL Creation PCE File 3\"] = sqlResult[i].results[0].COUNT == \"4\";",
+                  "                    break;",
+                  "               case \"CheckWmCalculCreationPCE\":",
+                  "                    tests[\"Check WM_CALCUL Creation PCE\"] = sqlResult[i].results[0].COUNT == \"20\";",
+                  "                    break;",
+                  "                case \"CheckWmCalculListCreationPCE\":",
+                  "                    tests[\"Check WM_CALCUL_LIST Creation PCE\"] = sqlResult[i].results[0].COUNT == \"9\";",
+                  "                    break;",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "    postman.setNextRequest(\"[020201606PCE]Delete data\");",
+                  "",
+                  "}",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
           "request": {
             "url": null,
             "method": null,
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFile1\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid in ('{{ETRSP2_2036_1_LCPEINIT_LCILE2G5_LCILE2G4_LCILE2G4_sourceProcessid}}') and code_objet in ('LCILE2G5','LCILE2G4','LPCEINIT') and liste_heures='06;07'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFile2\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid in ('{{ETRSP2_2036_2_LCPEINIT_LCILE2G5_LCILE2G4_LCILE2G4_sourceProcessid}}') and code_objet in ('LCILE2G5','LCILE2G4','LPCEINIT') and liste_heures='08'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFile3\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid in ('{{ETRSP2_2036_3_LCPEINIT_LCILE2G5_LCILE2G4_LCILE2G4_sourceProcessid}}') and code_objet in ('LCILE2G5','LCILE2G4','LPCEINIT') and liste_heures='09;10'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckWmCalculCreationPCE\",\r\n         \"requestContent\":\"select * from wm_calcul where idobject in ( 'LCILE2G4','LCILE2G5','LPCEINIT') and horodate between TO_DATE('17/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('18/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckWmCalculListCreationPCE\",\r\n         \"requestContent\":\"select * from wm_calcul_list where idobject in ( 'LCILE2G4','LCILE2G5','LPCEINIT') and horodate between TO_DATE('17/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('18/10/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n      }\r\n   ]\r\n}"
             },
             "description": null
           },
