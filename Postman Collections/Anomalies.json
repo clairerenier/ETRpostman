@@ -301,7 +301,7 @@
                   "    }",
                   "    if ( tests[\"Delete Point Data PCE\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Statut_PCE Data\"] && tests[\"Delete WM_Calcul Data\"] && tests[\"Delete WM_Calcul_List Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
-                  "        postman.setNextRequest(\"[020201600PCE]Drop file PCE\");",
+                  "        postman.setNextRequest(\"ETRSP2_2036_1_Drop file PCE 1\");",
                   "    }",
                   "    else {",
                   "       tests[\"Delete data Sum up\"] = fase; ",
