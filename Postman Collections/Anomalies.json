@@ -391,7 +391,7 @@
         },
         {
           "_postman_id": "b57f439f-fcc0-31c0-2519-d1c3d3b745aa",
-          "name": "[020201600PCE]Check process cal end copy",
+          "name": "ETRSP_2036_1_Check process cal end 1",
           "event": [
             {
               "listen": "test",
