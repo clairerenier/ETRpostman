@@ -138,7 +138,7 @@
     },
     {
       "_postman_id": "781dba56-451c-61b2-5be0-6e182a690dcb",
-      "name": "[051001500PCE]PRO_ARF_10_ARF_015_PCE_SGPCEEVPEC",
+      "name": "[051001500PCE]PRO_ARF_10_ARF_015_PCE_SGPCETVPEC",
       "description": "0 - Add object where ARF-015/Date_debut condition 3, Date_fin condition 3\n1- Add object where ARF-015/Date_debut condition 2, Date_fin condition 2\n1- Add object where ARF-015/Date_debut condition 1, Date_fin condition 1",
       "item": [
         {
@@ -1001,7 +1001,7 @@
     {
       "_postman_id": "87fd911e-22f5-e9c2-bece-e9aef449641e",
       "name": "[051001200FGA]PRO_ARF_10_ARF_012_FGA_NSTOUEN",
-      "description": "",
+      "description": "0 - BT file is updated for FGA, all the field are check in ARF-015 tests",
       "item": [
         {
           "_postman_id": "8d639e34-9de0-6932-1884-6594c8d09ba9",
@@ -1130,7 +1130,7 @@
     {
       "_postman_id": "d61e431e-2dd7-28a7-8efd-9f1fb0bba423",
       "name": "[051001200PCE]PRO_ARF_10_ARF_012_PCE_SGPCEEVPEC",
-      "description": "",
+      "description": "0 - BT file is updated for PCE, all the field are check in ARF-015 tests",
       "item": [
         {
           "_postman_id": "3b20d75d-f26a-0fa5-13dd-0a2125c021ae",
