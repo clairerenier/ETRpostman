@@ -1001,7 +1001,7 @@
     {
       "_postman_id": "87fd911e-22f5-e9c2-bece-e9aef449641e",
       "name": "[051001200FGA]PRO_ARF_10_ARF_012_FGA_NSTOUEN",
-      "description": "",
+      "description": "0 - BT file is updated for FGA, all the field are check in ARF-015 tests",
       "item": [
         {
           "_postman_id": "8d639e34-9de0-6932-1884-6594c8d09ba9",
