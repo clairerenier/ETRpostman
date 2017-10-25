@@ -10,7 +10,7 @@
     {
       "_postman_id": "5ddfe1a6-752b-8b6e-0590-2a6bddcf6500",
       "name": "[051001300PCE]PRO_ARF_10_ARF_013_PCE_SGPCEEVPEC",
-      "description": "",
+      "description": "0 - BT file is updated for PCE, all the field are check in ARF-015 tests",
       "item": [
         {
           "_postman_id": "3c6b1d9b-c7f9-a26f-37e6-c4b3b88f46d9",
