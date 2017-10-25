@@ -686,7 +686,7 @@
     {
       "_postman_id": "e04f2fc0-32be-6fdc-2ddb-4ac79f3ed1cc",
       "name": "[051001300FGA]PRO_ARF_10_ARF_013_FGA_NSTOUEN",
-      "description": "",
+      "description": "0 - BT file is updated for FGA, all the field are check in ARF-015 tests",
       "item": [
         {
           "_postman_id": "e2204aeb-8ef2-0e26-476b-791fc693d736",
@@ -1130,7 +1130,7 @@
     {
       "_postman_id": "d61e431e-2dd7-28a7-8efd-9f1fb0bba423",
       "name": "[051001200PCE]PRO_ARF_10_ARF_012_PCE_SGPCEEVPEC",
-      "description": "",
+      "description": "0 - BT file is updated for PCE, all the field are check in ARF-015 tests",
       "item": [
         {
           "_postman_id": "3b20d75d-f26a-0fa5-13dd-0a2125c021ae",
