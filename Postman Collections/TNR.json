@@ -7287,6 +7287,22 @@
                       "                case \"CheckPresenceCaractComptageT\":",
                       "                    tests[\"Check presence CARACT_COMPTAGE S (PCE T)\"] = sqlResult[i].results[0].NBCARACTCOMPTAGE == 1;",
                       "                    break;",
+                      "                case \"CheckTest1T\":",
+                      "                    tests[\"Check TEST1 S (PCE T)\"] = sqlResult[i].results[0].TEST1 !== null &",
+                      "                    sqlResult[i].results[0].STATUT_TEST1 !== null;",
+                      "                    break;",
+                      "                case \"CheckTest2T\":",
+                      "                    tests[\"Check TEST2 S (PCE T)\"] = sqlResult[i].results[0].TEST2 !== null &",
+                      "                    sqlResult[i].results[0].STATUT_TEST2 !== null;",
+                      "                    break;",
+                      "                case \"CheckTest3T\":",
+                      "                    tests[\"Check TEST3 S (PCE T)\"] = sqlResult[i].results[0].TEST3 !== null &",
+                      "                    sqlResult[i].results[0].STATUT_TEST3 !== null;",
+                      "                    break;",
+                      "                case \"CheckTest4T\":",
+                      "                    tests[\"Check TEST4 S (PCE T)\"] = sqlResult[i].results[0].TEST4 !== null &",
+                      "                    sqlResult[i].results[0].STATUT_TEST4 !== null;",
+                      "                    break;",
                       "                }",
                       "            }",
                       "        }",
@@ -7325,7 +7341,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n   ]\r\n}"
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckPresenceReleve\",\r\n         \"requestContent\":\"select count(1) as nbReleve from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPresenceCaractComptage\",\r\n         \"requestContent\":\"select count(1) as nbCaractComptage from releve inner join pce on releve.uidpce = pce.uidpce inner join caract_comptage cc on cc.uidreleve = releve.uidreleve where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckTest1T\",\r\n         \"requestContent\":\"select test1, statut_test1 from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckTest2T\",\r\n         \"requestContent\":\"select test2, statut_test2 from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n      ,\r\n      {  \r\n         \"requestId\":\"CheckTest3T\",\r\n         \"requestContent\":\"select test3, statut_test3 from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n      ,\r\n      {  \r\n         \"requestId\":\"CheckTest4T\",\r\n         \"requestContent\":\"select test4, statut_test4 from releve inner join pce on releve.uidpce = pce.uidpce where pce.idpce = 'PCEPROTNR2' and releve.TYPE_RELEVE = 'S'\"\r\n      }\r\n   ]\r\n}"
                 },
                 "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
                 "description": ""
