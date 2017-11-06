@@ -70,19 +70,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePointDataFGA\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from fga p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('02/07/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idfga in ('NSTOUEN','ACHAZ600','BMOBILE2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePointDataZQG\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from zqg p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('02/07/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idzqg in ('PRC16','ORC16'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('02/07/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCETVPEC','SGPCEEVPEC','SGPCETPIL'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePointDataAPIL\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from agr_pil p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('02/07/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idagr_pil in ('SGAPIL2'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePointDataGDC\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from grp_calcul p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('02/07/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and Idgrp_calcul in ('GDCORC16','GDCORC162'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqFgaData\",\r\n         \"requestContent\":\"delete from acq_fga_conservee where uidacq_fga_conservee in (select uidacq_fga_conservee from acq_fga_conservee where code_acquisition in ('NSTOUEN','ACHAZ600','BMOBILE2') and jour_gazier= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCETVPEC','SGPCEEVPEC','SGPCETPIL') and jour_gazier= TO_DATE('01/07/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -124,19 +123,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170701_PCE_20170701103424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -178,19 +176,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -277,19 +274,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_0' from dmd_calcul where code_objet='SGPCETVPEC' and source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='0') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresencePCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentPCE\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGPCETVPEC' and plr='0') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -375,19 +371,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationAPIL\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGAPIL2'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentAPIL\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_1' from dmd_calcul where code_objet='SGAPIL2' and source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='1') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresenceAPIL\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGAPIL2' and plr='1')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentAPIL\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='SGAPIL2' and plr='1') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -473,19 +468,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationGDC\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='GDCORC16'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentGDC\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_3' from dmd_calcul where code_objet='GDCORC16' and source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='3') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresenceGDC\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='GDCORC16' and plr='3')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentGDC\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1 ) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL00ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='GDCORC16' and plr='3') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -527,19 +521,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_FGA\",\"fileName\":\"H20170701_FGA_20170701095001_CHR02_SCALA_18-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"90\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -581,19 +574,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_02\",\"processId\":\"{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}\",\"waitTimeout\":\"300\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -657,19 +649,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='NSTOUEN'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_0' from dmd_calcul where code_objet='NSTOUEN' and source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='0') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresenceFGA\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='NSTOUEN' and plr='0')\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -755,19 +746,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationZQG\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='PRC16' and plr='1'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPayloadContentZQG\",\r\n         \"requestContent\":\"select count(*) as COUNT from icepayloadext where externalid =(select source_processid||'_'||numblock||'_1' from dmd_calcul where code_objet='PRC16' and source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and plr='1') and payload like '%I413INT_NUMBLOCK%' and payload like '%I413STR_SOURCE_PROCESSID%' and payload like '%I900STR_REQUESTID%' and payload like '%I900STR_PROCESSID%' and payload like '%I900STR_STEPID%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponsePresenceZQG\",\r\n         \"requestContent\":\"select count(*) as COUNT from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='PRC16' and plr='1')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrpmresponseMasterContentZQG\",\r\n         \"requestContent\":\"select dbms_lob.substr( PAYLOAD, 4000, 1) as PAYLOAD from etrpmresponse where processid=(select courant_processid from dmd_calcul where source_processid='{{[0204ALL01ALL]PRO_CAL_04_ALL_ALL_ALL_NSTOUEN_SGPCETVPEC_SGAPIL2_PRC16_GDCORC016_sourceProcessid}}' and code_objet='PRC16' and plr='1') and stepid='CAL_02_PRO_CAL_04'\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -831,19 +821,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/09/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCECPEC ','SGPCETVPEC','SGPCEEVPEC'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC') and jour_gazier= TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculData\",\r\n         \"requestContent\":\"delete from wm_calcul where uidcalcul in (select uidcalcul from wm_calcul where idobject in ( 'SGPCECPEC','SGPCETVPEC','SGPCEEVPEC') and horodate between TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('14/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculListData\",\r\n         \"requestContent\":\"delete from wm_calcul_list where uidcalcullist in (select uidcalcullist from wm_calcul_list where idobject in ( 'SGPCECPEC','SGPCETVPEC','SGPCEEVPEC') and horodate between TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('14/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -885,19 +874,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913103424_CHR02_SCALA_1-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -939,19 +927,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -1010,19 +997,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCE\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201600PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC','SGPCECPEC') and liste_heures='06;07;08;09'\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1064,19 +1050,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913113424_CHR02_SCALA_2-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -1118,19 +1103,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -1194,19 +1178,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC') and liste_heures='06;07;08;09;10'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201601PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures='06;07;08;09'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckWMCalculListCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from wm_calcul_list where idobject in ('SGPCECPEC') and horodate between TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('14/09/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and hour_list in ('06;07;08;09;')\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1248,19 +1231,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170913123424_CHR02_SCALA_3-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -1302,19 +1284,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201602PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"240\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -1378,19 +1359,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201602PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC','SGPCECPEC') and liste_heures='10;11'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201602PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures='06;07;08;09;10'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckWMCalculListCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from wm_calcul_list where idobject in ('SGPCECPEC') and horodate between TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('14/09/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and hour_list in ('06;07;08;09;','06;07;08;09;10;')\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1432,19 +1412,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170914063424_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -1486,19 +1465,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"480\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -1562,19 +1540,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201603PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','10;11')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckWMCalculListCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from wm_calcul_list where idobject in ('SGPCECPEC') and horodate between TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('14/09/2017 09:00:00','DD/MM/YYYY HH24:MI:SS') and hour_list in ('06;07;08;09;','06;07;08;09;10;','12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05;','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05;','10;11;')\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1631,19 +1608,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('09/08/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('MEVPCET'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('MEVPCET') and jour_gazier= TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('MEVPCET'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculData\",\r\n         \"requestContent\":\"delete from wm_calcul where uidcalcul in (select uidcalcul from wm_calcul where idobject in ( 'MEVPCET','VAPIL') and horodate between TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('09/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteWmCalculListData\",\r\n         \"requestContent\":\"delete from wm_calcul_list where uidcalcullist in (select uidcalcullist from wm_calcul_list where idobject in ( 'MEVPCET','VAPIL') and horodate between TO_DATE('08/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and TO_DATE('09/08/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1685,19 +1661,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20170808_PCE_20170809060430_CHR01_SCALA_241-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -1739,19 +1714,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"180\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -1812,19 +1786,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('MEVPCET') and liste_heures in ('06;07;08;09;10;11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201604PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('VAPIL') and liste_heures in ('06;07;08;09;10;11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1878,19 +1851,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointDataPCET\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('13/09/2017 12:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/09/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCETVPEC'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePointDataPCEE\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and po.HORODATE >= TO_DATE('13/09/2017 11:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('14/09/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') and Idpce in ('SGPCEEVPEC'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC') and jour_gazier= TO_DATE('13/09/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n       {  \r\n         \"requestId\":\"DeleteStatutPceData\",\r\n         \"requestContent\":\"delete from statut where uidstatut in (select uidstatut from statut, pce where pce.uidpce=statut.uidpce and idpce in ('SGPCECPEC','SGPCETVPEC','SGPCEEVPEC'))\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
@@ -1932,19 +1904,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170913_PCE_20170914063424_CHR02_SCALA_4-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": ""
           },
           "response": []
@@ -1986,19 +1957,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}\",\"waitTimeout\":\"480\"}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": ""
           },
           "response": []
@@ -2059,19 +2029,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCESon\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCETVPEC','SGPCEEVPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalculCreationPCEFather\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where source_processid='{{[020201605PCE]PRO_CAL_02_PCE_SGPCETVPEC_SGPCEEVPEC_SGPCECPEC_VAPIL_MEVPCET_sourceProcessid}}' and code_objet in ('SGPCECPEC') and liste_heures in ('12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05','11;12;13;14;15;16;17;18;19;20;21;22;23;00;01;02;03;04;05')\"\r\n      }\r\n   ]\r\n}"
             },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "description": ""
           },
           "response": []
