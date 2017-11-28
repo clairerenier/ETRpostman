@@ -1,5 +1,4 @@
 {
-  "variables": [],
   "info": {
     "name": "Anomalies",
     "_postman_id": "8407b27e-6adf-954d-1949-84c005d0a3e3",
@@ -132,6 +131,17 @@
           "name": "[158501PCE]Check data",
           "event": [
             {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "//postman.setNextRequest(null);",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
@@ -164,17 +174,6 @@
                   "else{",
                   "    postman.setNextRequest(null);",
                   "}",
-                  ""
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "//postman.setNextRequest(null);",
-                  "",
                   ""
                 ]
               }
@@ -385,6 +384,16 @@
           "name": "ETRSP2_2036_1_Check process cal end 1",
           "event": [
             {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            },
+            {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
@@ -402,16 +411,6 @@
                   "    tests[\"Check process cal end\"] = false;",
                   "    postman.setNextRequest(\"ETRSP2_2036_2_Drop file PCE 2\"); ",
                   "}"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
                 ]
               }
             }
@@ -491,6 +490,16 @@
           "name": "ETRSP2_2036_2_Check process cal end 2",
           "event": [
             {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            },
+            {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
@@ -508,16 +517,6 @@
                   "    tests[\"Check process cal end\"] = false;",
                   "    postman.setNextRequest(\"ETRSP2_2036_3_Drop file PCE 3\"); ",
                   "}"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
                 ]
               }
             }
@@ -597,6 +596,16 @@
           "name": "ETRSP2_2036_3_Check process cal end 3",
           "event": [
             {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
+                  "console.log(sourcprocessid);"
+                ]
+              }
+            },
+            {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
@@ -614,16 +623,6 @@
                   "    tests[\"Check process cal end\"] = false;",
                   "    postman.setNextRequest(\"ETRSP2_2036_4_Check data PCE 4\"); ",
                   "}"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var sourcprocessid = postman.getEnvironmentVariable(\"[011102401]PRO_ACG_11_FGA_ACG_024_C220_sourceProcessId\");",
-                  "console.log(sourcprocessid);"
                 ]
               }
             }
