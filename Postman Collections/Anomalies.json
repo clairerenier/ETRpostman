@@ -12,13 +12,6 @@
       "description": "",
       "item": [
         {
-          "_postman_id": "1898359f-06a2-0802-e403-81097e2d92d7",
-          "name": "ETRSP2_2036_LCPEINIT_LCILE2G5_LCILE2G3_LCILE2G4",
-          "description": "",
-          "item": [],
-          "_postman_isSubFolder": true
-        },
-        {
           "_postman_id": "1083d677-da43-5de8-168a-2efca7fa9c7a",
           "name": "[158501PCE]Delete data",
           "event": [
