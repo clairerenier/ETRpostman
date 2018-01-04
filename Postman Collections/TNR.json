@@ -8412,7 +8412,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170227_PCE_20170227131828_CHR02_SCALA_12-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+              "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20171212_PCE_20171213063907_CHR01_SCALA_603-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
             },
             "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
             "description": null
