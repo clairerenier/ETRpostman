@@ -972,13 +972,14 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "24745789-11e0-4dd9-ab82-dd52d5c95fff",
                     "type": "text/javascript",
                     "exec": [
                       "tests[\"Status code is 200\"] = responseCode.code === 200;",
                       "if (tests[\"Status code is 200\"]){",
                       "    var jsonData = JSON.parse(responseBody);",
-                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
-                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_PCEVABF5_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_PCEVABF5_sourceProcessId\",jsonData.sourceProcessId);",
                       "    ",
                       "    if (jsonData.statusProcess === \"2\"){",
                       "        tests[\"Check drop file PCE\"] = false;",
@@ -1011,7 +1012,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"H20170227_PCE_20170227131828_CHR02_SCALA_12-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20171212_PCE_20171213063907_CHR01_SCALA_603-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
                 },
                 "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
                 "description": ""
