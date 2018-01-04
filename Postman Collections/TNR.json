@@ -8296,6 +8296,7 @@
             {
               "listen": "prerequest",
               "script": {
+                "id": "d55fdce3-1594-4a43-b7d4-bb817d133a96",
                 "type": "text/javascript",
                 "exec": [
                   "postman.setNextRequest(\"[00002]Drop file PCE\");",
@@ -8306,6 +8307,7 @@
             {
               "listen": "test",
               "script": {
+                "id": "fad3ae5a-f219-4283-a82e-1925797f0039",
                 "type": "text/javascript",
                 "exec": [
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -8330,9 +8332,15 @@
                   "            case \"DeleteAlerte\":",
                   "                tests[\"Delete Alerte\"] = true;",
                   "                break;",
+                  "                  case \"DeleteStatut\":",
+                  "                tests[\"Delete Statut Data\"] = true;",
+                  "                break;",
+                  "                  case \"DeletePubStatut\":",
+                  "                tests[\"Delete Pub_Statut Data\"] = true;",
+                  "                break;",
                   "        }",
                   "    }",
-                  "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"] && tests[\"Delete Alerte\"]){",
+                  "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"] && tests[\"Delete Alerte\"] && tests [\"Delete Statut Data\"] && tests [\"Delete Pub_Statut Data\"]){",
                   "        tests[\"Delete data Sum up\"] = true; ",
                   "        postman.setNextRequest(\"[00002]Drop file PCE\");",
                   "    }",
