@@ -15,344 +15,7 @@
           "_postman_id": "5a3dd147-ac61-be44-1afd-be7c0911531d",
           "name": "TRV",
           "description": "",
-          "item": [
-            {
-              "_postman_id": "236dc81d-577c-c185-d11c-b48092c6f073",
-              "name": "[00002]PRO_TRV_07_PCE_TNR_PCEVABF5",
-              "description": "",
-              "item": [
-                {
-                  "_postman_id": "3531fa38-a184-6b4f-cb1c-774407dd34f9",
-                  "name": "[00002]Delete data",
-                  "event": [
-                    {
-                      "listen": "prerequest",
-                      "script": {
-                        "id": "d55fdce3-1594-4a43-b7d4-bb817d133a96",
-                        "type": "text/javascript",
-                        "exec": [
-                          "postman.setNextRequest(\"[00002]Drop file PCE\");",
-                          ""
-                        ]
-                      }
-                    },
-                    {
-                      "listen": "test",
-                      "script": {
-                        "id": "fad3ae5a-f219-4283-a82e-1925797f0039",
-                        "type": "text/javascript",
-                        "exec": [
-                          "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                          "if (tests[\"Status code is 200\"]){",
-                          "    var jsonData = JSON.parse(responseBody);",
-                          "    var sqlResult = jsonData.sqlResult;",
-                          "    for(var i= 0; i < sqlResult.length; i++)",
-                          "    {",
-                          "        switch (sqlResult[i].requestId) {",
-                          "            case \"DeletePointData\":",
-                          "                tests[\"Delete Point Data\"] = true;",
-                          "                break;",
-                          "            case \"DeleteAcqPceData\":",
-                          "                tests[\"Delete Acq_Pce Data\"] = true;",
-                          "                break;",
-                          "            case \"DeletePubPointData\":",
-                          "                tests[\"Delete Pub_Point Data\"] = true;",
-                          "                break;",
-                          "            case \"DeleteEtrMeteringDataData\":",
-                          "                tests[\"Delete Etr_Metering_Data Data\"] = true;",
-                          "                break;",
-                          "            case \"DeleteAlerte\":",
-                          "                tests[\"Delete Alerte\"] = true;",
-                          "                break;",
-                          "                  case \"DeleteStatut\":",
-                          "                tests[\"Delete Statut Data\"] = true;",
-                          "                break;",
-                          "                  case \"DeletePubStatut\":",
-                          "                tests[\"Delete Pub_Statut Data\"] = true;",
-                          "                break;",
-                          "        }",
-                          "    }",
-                          "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"] && tests[\"Delete Alerte\"] && tests [\"Delete Statut Data\"] && tests [\"Delete Pub_Statut Data\"]){",
-                          "        tests[\"Delete data Sum up\"] = true; ",
-                          "        postman.setNextRequest(\"[00002]Drop file PCE\");",
-                          "    }",
-                          "    else {",
-                          "       tests[\"Delete data\"] = fase; ",
-                          "       //postman.setNextRequest(null);",
-                          "    }",
-                          "}",
-                          "else{",
-                          "    postman.setNextRequest(null);",
-                          "}",
-                          "",
-                          ""
-                        ]
-                      }
-                    }
-                  ],
-                  "request": {
-                    "method": "POST",
-                    "header": [
-                      {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                      }
-                    ],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('13/12/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEVABF5'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEVABF5') and jour_gazier= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointData\",\r\n         \"requestContent\":\"delete from pub_point where uidgrandeur in (select pp.uidgrandeur from pub_point pp, pce p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idpce='PCEVABF5' and horodate between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteEtrMeteringDataData\",\r\n         \"requestContent\":\"delete from ETR_METERING_DATA  where  gas_day between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and insertion_date >= (sysdate-1/24/4) and pce_code like '%PCEVABF5%'\"\r\n      },\r\n      {  \r\n      \"requestId\":\"DeleteAlerte\",\r\n         \"requestContent\":\"delete from Alerte where  uidalerte in (select uidalerte from alerte, pce where  alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and IDPCE='PCEVABF5' and horodate between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n     },\r\n      {  \r\n      \"requestId\":\"DeleteStatut\",\r\n         \"requestContent\":\"delete from pub_statut where uidpce in  (select UIDPCE from pce where type_point =(select type_point from pce where idpce ='PCVABF5') and date_fin >= sysdate and date_debut <= sysdate ) and horodate >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and horodate <= TO_DATE('13/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') \"\r\n     },\r\n       {  \r\n      \"requestId\":\"DeletePubStatut\",\r\n         \"requestContent\":\"delete from statut where uidpce in  (select UIDPCE from pce where type_point =(select type_point from pce where idpce ='PCVABF5') and date_fin >= sysdate and date_debut <= sysdate ) and horodate >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')and horodate <= TO_DATE('13/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n     }\r\n   ]\r\n}"
-                    },
-                    "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                    "description": null
-                  },
-                  "response": []
-                },
-                {
-                  "_postman_id": "29c73bee-9e15-dd9c-dbb3-5642fb23233b",
-                  "name": "[00002]Drop file PCE",
-                  "event": [
-                    {
-                      "listen": "test",
-                      "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                          "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                          "if (tests[\"Status code is 200\"]){",
-                          "    var jsonData = JSON.parse(responseBody);",
-                          "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
-                          "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
-                          "    ",
-                          "    if (jsonData.statusProcess === \"2\"){",
-                          "        tests[\"Check drop file PCE\"] = false;",
-                          "        //postman.setNextRequest(null);",
-                          "    }",
-                          "    else if (jsonData.statusProcess === \"4\"){",
-                          "       tests[\"Check drop file PCE\"] = true; ",
-                          "       postman.setNextRequest(\"[00002]Check process cal end\");",
-                          "    }",
-                          "    else {",
-                          "        tests[\"Check drop file PCE\"] = false;",
-                          "        //postman.setNextRequest(null);  ",
-                          "    }",
-                          "}",
-                          "else{",
-                          "    postman.setNextRequest(null);",
-                          "}",
-                          ""
-                        ]
-                      }
-                    }
-                  ],
-                  "request": {
-                    "method": "POST",
-                    "header": [
-                      {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                      }
-                    ],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20171212_PCE_20171213063907_CHR01_SCALA_603-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
-                    },
-                    "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
-                    "description": null
-                  },
-                  "response": []
-                },
-                {
-                  "_postman_id": "13e4ceb4-4d24-9db9-cdd3-d2e8a796163a",
-                  "name": "[00002]Check process cal end",
-                  "event": [
-                    {
-                      "listen": "test",
-                      "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                          "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                          "if (tests[\"Status code is 200\"]){",
-                          "    var jsonData = JSON.parse(responseBody);",
-                          "    if (jsonData.statusProcess === \"2\"){",
-                          "        tests[\"Check process cal end\"] = false;",
-                          "        //postman.setNextRequest(null);",
-                          "    }",
-                          "    else if (jsonData.statusProcess === \"4\"){",
-                          "       tests[\"Check process cal end\"] = true; ",
-                          "       postman.setNextRequest(\"[00002]Check data\");",
-                          "    }",
-                          "    else {",
-                          "        tests[\"Check process cal end\"] = false;",
-                          "        //postman.setNextRequest(null);  ",
-                          "    }",
-                          "}",
-                          "else{",
-                          "    postman.setNextRequest(null);",
-                          "}",
-                          "",
-                          ""
-                        ]
-                      }
-                    }
-                  ],
-                  "request": {
-                    "method": "POST",
-                    "header": [
-                      {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                      }
-                    ],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_PCE_TNR_PCEVABF5_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
-                    },
-                    "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
-                    "description": null
-                  },
-                  "response": []
-                },
-                {
-                  "_postman_id": "6f0d11fe-3cbd-ad15-68ae-fcd5248bd32b",
-                  "name": "[00002]Check data",
-                  "event": [
-                    {
-                      "listen": "prerequest",
-                      "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                          "//postman.setNextRequest(null);"
-                        ]
-                      }
-                    },
-                    {
-                      "listen": "test",
-                      "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                          "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                          "if (tests[\"Status code is 200\"]){",
-                          "    var jsonData = JSON.parse(responseBody);",
-                          "    var sqlResult = jsonData.sqlResult;",
-                          "    if(sqlResult != null){",
-                          "       for(var i= 0; i < sqlResult.length; i++)",
-                          "        {",
-                          "            if(sqlResult[i].results != null){",
-                          "               switch (sqlResult[i].requestId) {",
-                          "                case \"CheckStatutOrcProcessus\":",
-                          "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                          "                    break;",
-                          "                case \"CheckAcqPceConservee\":",
-                          "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                          "                    break;",
-                          "                case \"CheckStockAcquisition2\":",
-                          "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT >= \"101\";",
-                          "                    break;",
-                          "                case \"CheckDmdCalcul\":",
-                          "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                          "                    break;",
-                          "                case \"CheckStockAcquisitionCal\":",
-                          "                    tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"176\";",
-                          "                    break;",
-                          "                case \"CheckPointData\":",
-                          "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"24\";",
-                          "                    break;",
-                          "                case \"CheckPubPointData\":",
-                          "                    tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT >= \"248\";",
-                          "                    break;",
-                          "                case \"CheckEtrMeteringDataData\":",
-                          "                    tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT >= \"39\";",
-                          "                    break;",
-                          "                case \"CheckStockAcquisitionForAcq\":",
-                          "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                          "                    break;   ",
-                          "                case \"CheckStockAcquisitionForCal\":",
-                          "                    tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                          "                    break; ",
-                          "                case \"CheckAlerte\" :",
-                          "                    tests[\"Check Alerte\"] = sqlResult[i].results[0].COUNT >= \"10\";",
-                          "                    break; ",
-                          "                } ",
-                          "            }",
-                          "        } ",
-                          "    }",
-                          "    postman.setNextRequest(\"[00003]Delete data\");",
-                          "    ",
-                          "    var jsonData = JSON.parse(responseBody);",
-                          "    var sqlResult = jsonData.sqlResult;",
-                          "    if(sqlResult != null){",
-                          "       for(var i= 0; i < sqlResult.length; i++)",
-                          "        {",
-                          "            if(sqlResult[i].results != null){",
-                          "               switch (sqlResult[i].requestId) {",
-                          "                case \"CheckStatutOrcProcessus\":",
-                          "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
-                          "                    break;",
-                          "                case \"CheckAcqPceConservee\":",
-                          "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                          "                    break;",
-                          "                case \"CheckStockAcquisition2\":",
-                          "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"104\";",
-                          "                    break;",
-                          "                case \"CheckDmdCalcul\":",
-                          "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
-                          "                    break;",
-                          "                case \"CheckStockAcquisitionCal\":",
-                          "                    tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"176\";",
-                          "                    break;",
-                          "                case \"CheckPointData\":",
-                          "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"24\";",
-                          "                    break;",
-                          "                case \"CheckPubPointData\":",
-                          "                    tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT == \"248\";",
-                          "                    break;",
-                          "                case \"CheckEtrMeteringDataData\":",
-                          "                    tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT == \"39\";",
-                          "                    break;",
-                          "                case \"CheckStockAcquisitionForAcq\":",
-                          "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                          "                    break;   ",
-                          "                case \"CheckStockAcquisitionForCal\":",
-                          "                    tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
-                          "                    break; ",
-                          "                case \"CheckAlerte\" :",
-                          "                    tests[\"Check Alerte\"] = sqlResult[i].results[0].COUNT >= \"10\";",
-                          "                    break; ",
-                          "                } ",
-                          "            }",
-                          "        } ",
-                          "    }",
-                          "    postman.setNextRequest(\"[00003]Delete data\");",
-                          "}",
-                          "else{",
-                          "    postman.setNextRequest(null);",
-                          "}",
-                          "",
-                          ""
-                        ]
-                      }
-                    }
-                  ],
-                  "request": {
-                    "method": "POST",
-                    "header": [
-                      {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                      }
-                    ],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEVABF5') and jour_gazier= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition2 where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where lstime >=(sysdate-1/24/4) and prec_processid='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('13/12/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEVABF5') and type_grandeur in ('VOLPEC','ENEPEC','PCSMOY') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT  inner join grandeur on pub_point.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and date_modif >= (sysdate-1/24/4) and idgrandeur like '%PCEVABF5%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrMeteringDataData\",\r\n         \"requestContent\":\"select count(*) as COUNT from ETR_METERING_DATA  where  gas_day between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and insertion_date >= (sysdate-1/24/4) and pce_code like '%PCEVABF5%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}')\"\r\n         \r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAlerte\",\r\n         \"requestContent\":\"select count(*) as count from alerte, pce where  alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and IDPCE='SGGUR1133A'and alerte.lstime>=(sysdate-1/24/4) order by horodate desc, uidtest_ref desc,alerte.LSTIME DESC \"\r\n         \r\n      }\r\n   ]\r\n}"
-                    },
-                    "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
-                    "description": null
-                  },
-                  "response": []
-                }
-              ],
-              "_postman_isSubFolder": true
-            }
-          ],
+          "item": [],
           "_postman_isSubFolder": true
         },
         {
@@ -7126,6 +6789,342 @@
                 },
                 "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
                 "description": ""
+              },
+              "response": []
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "236dc81d-577c-c185-d11c-b48092c6f073",
+          "name": "[00002]PRO_TRV_07_PCE_TNR_PCEVABF5",
+          "description": "",
+          "item": [
+            {
+              "_postman_id": "3531fa38-a184-6b4f-cb1c-774407dd34f9",
+              "name": "[00002]Delete data",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "d55fdce3-1594-4a43-b7d4-bb817d133a96",
+                    "type": "text/javascript",
+                    "exec": [
+                      "postman.setNextRequest(\"[00002]Drop file PCE\");",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "fad3ae5a-f219-4283-a82e-1925797f0039",
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    for(var i= 0; i < sqlResult.length; i++)",
+                      "    {",
+                      "        switch (sqlResult[i].requestId) {",
+                      "            case \"DeletePointData\":",
+                      "                tests[\"Delete Point Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteAcqPceData\":",
+                      "                tests[\"Delete Acq_Pce Data\"] = true;",
+                      "                break;",
+                      "            case \"DeletePubPointData\":",
+                      "                tests[\"Delete Pub_Point Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteEtrMeteringDataData\":",
+                      "                tests[\"Delete Etr_Metering_Data Data\"] = true;",
+                      "                break;",
+                      "            case \"DeleteAlerte\":",
+                      "                tests[\"Delete Alerte\"] = true;",
+                      "                break;",
+                      "                  case \"DeleteStatut\":",
+                      "                tests[\"Delete Statut Data\"] = true;",
+                      "                break;",
+                      "                  case \"DeletePubStatut\":",
+                      "                tests[\"Delete Pub_Statut Data\"] = true;",
+                      "                break;",
+                      "        }",
+                      "    }",
+                      "    if (tests[\"Delete Point Data\"] && tests[\"Delete Acq_Pce Data\"] && tests[\"Delete Pub_Point Data\"] && tests[\"Delete Alerte\"] && tests [\"Delete Statut Data\"] && tests [\"Delete Pub_Statut Data\"]){",
+                      "        tests[\"Delete data Sum up\"] = true; ",
+                      "        postman.setNextRequest(\"[00002]Drop file PCE\");",
+                      "    }",
+                      "    else {",
+                      "       tests[\"Delete data\"] = fase; ",
+                      "       //postman.setNextRequest(null);",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from point where uidpoint in (select po.uidpoint from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('13/12/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEVABF5'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteAcqPceData\",\r\n         \"requestContent\":\"delete from acq_pce_conservee where uidacq_pce_conservee in (select uidacq_pce_conservee from acq_pce_conservee where code_acquisition in ('PCEVABF5') and jour_gazier= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeletePubPointData\",\r\n         \"requestContent\":\"delete from pub_point where uidgrandeur in (select pp.uidgrandeur from pub_point pp, pce p, grandeur g, GRANDEURS_OBJET go where  pp.uidgrandeur=g.UIDGRANDEUR and g.UIDGRANDEURS_OBJET=go.UIDGRANDEURS_OBJET and go.uidgrandeurs_objet=p.uidgrandeurs_objet and p.idpce='PCEVABF5' and horodate between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteEtrMeteringDataData\",\r\n         \"requestContent\":\"delete from ETR_METERING_DATA  where  gas_day between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and insertion_date >= (sysdate-1/24/4) and pce_code like '%PCEVABF5%'\"\r\n      },\r\n      {  \r\n      \"requestId\":\"DeleteAlerte\",\r\n         \"requestContent\":\"delete from Alerte where  uidalerte in (select uidalerte from alerte, pce where  alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and IDPCE='PCEVABF5' and horodate between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS'))\"\r\n     },\r\n      {  \r\n      \"requestId\":\"DeleteStatut\",\r\n         \"requestContent\":\"delete from pub_statut where uidpce in  (select UIDPCE from pce where type_point =(select type_point from pce where idpce ='PCVABF5') and date_fin >= sysdate and date_debut <= sysdate ) and horodate >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and horodate <= TO_DATE('13/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') \"\r\n     },\r\n       {  \r\n      \"requestId\":\"DeletePubStatut\",\r\n         \"requestContent\":\"delete from statut where uidpce in  (select UIDPCE from pce where type_point =(select type_point from pce where idpce ='PCVABF5') and date_fin >= sysdate and date_debut <= sysdate ) and horodate >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')and horodate <= TO_DATE('13/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS')\"\r\n     }\r\n   ]\r\n}"
+                },
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "description": null
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "29c73bee-9e15-dd9c-dbb3-5642fb23233b",
+              "name": "[00002]Drop file PCE",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_processid\",jsonData.processId);",
+                      "    postman.setEnvironmentVariable(\"PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId\",jsonData.sourceProcessId);",
+                      "    ",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check drop file PCE\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check drop file PCE\"] = true; ",
+                      "       postman.setNextRequest(\"[00002]Check process cal end\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check drop file PCE\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"alias\":\"SCALA_PCE\",\"fileName\":\"J20171212_PCE_20171213063907_CHR01_SCALA_603-1F.xml.gz\",\"wait\":\"true\",\"waitTimeout\":\"120\"}"
+                },
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/files/",
+                "description": null
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "13e4ceb4-4d24-9db9-cdd3-d2e8a796163a",
+              "name": "[00002]Check process cal end",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check process cal end\"] = true; ",
+                      "       postman.setNextRequest(\"[00002]Check data\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_PCE_TNR_PCEVABF5_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+                },
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+                "description": null
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "6f0d11fe-3cbd-ad15-68ae-fcd5248bd32b",
+              "name": "[00002]Check data",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "//postman.setNextRequest(null);"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult != null){",
+                      "       for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results != null){",
+                      "               switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessus\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckAcqPceConservee\":",
+                      "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisition2\":",
+                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT >= \"101\";",
+                      "                    break;",
+                      "                case \"CheckDmdCalcul\":",
+                      "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisitionCal\":",
+                      "                    tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"176\";",
+                      "                    break;",
+                      "                case \"CheckPointData\":",
+                      "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"24\";",
+                      "                    break;",
+                      "                case \"CheckPubPointData\":",
+                      "                    tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT >= \"248\";",
+                      "                    break;",
+                      "                case \"CheckEtrMeteringDataData\":",
+                      "                    tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT >= \"39\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisitionForAcq\":",
+                      "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break;   ",
+                      "                case \"CheckStockAcquisitionForCal\":",
+                      "                    tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break; ",
+                      "                case \"CheckAlerte\" :",
+                      "                    tests[\"Check Alerte\"] = sqlResult[i].results[0].COUNT >= \"10\";",
+                      "                    break; ",
+                      "                } ",
+                      "            }",
+                      "        } ",
+                      "    }",
+                      "    postman.setNextRequest(\"[00003]Delete data\");",
+                      "    ",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    var sqlResult = jsonData.sqlResult;",
+                      "    if(sqlResult != null){",
+                      "       for(var i= 0; i < sqlResult.length; i++)",
+                      "        {",
+                      "            if(sqlResult[i].results != null){",
+                      "               switch (sqlResult[i].requestId) {",
+                      "                case \"CheckStatutOrcProcessus\":",
+                      "                    tests[\"Check status in ORC_PROCESSUS\"] = sqlResult[i].results[0].ID_STATUT_PROCESSUS == \"4\";",
+                      "                    break;",
+                      "                case \"CheckAcqPceConservee\":",
+                      "                    tests[\"Check ACQ_PCE_CONSERVEE\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisition2\":",
+                      "                    tests[\"Check STOCK_ACQUISITION2\"] = sqlResult[i].results[0].COUNT == \"104\";",
+                      "                    break;",
+                      "                case \"CheckDmdCalcul\":",
+                      "                    tests[\"Check DMD_CALCUL\"] = sqlResult[i].results[0].COUNT == \"1\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisitionCal\":",
+                      "                    tests[\"Check STOCK_ACQUISITION_CAL\"] = sqlResult[i].results[0].COUNT == \"176\";",
+                      "                    break;",
+                      "                case \"CheckPointData\":",
+                      "                    tests[\"Check POINT data\"] = sqlResult[i].results[0].COUNT == \"24\";",
+                      "                    break;",
+                      "                case \"CheckPubPointData\":",
+                      "                    tests[\"Check PUB_POINT data\"] = sqlResult[i].results[0].COUNT == \"248\";",
+                      "                    break;",
+                      "                case \"CheckEtrMeteringDataData\":",
+                      "                    tests[\"Check ETR_METERING_DATA data\"] = sqlResult[i].results[0].COUNT == \"39\";",
+                      "                    break;",
+                      "                case \"CheckStockAcquisitionForAcq\":",
+                      "                    tests[\"Check STOCK_ACQUISITION for Acq\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break;   ",
+                      "                case \"CheckStockAcquisitionForCal\":",
+                      "                    tests[\"Check STOCK_ACQUISITION For Cal\"] = sqlResult[i].results[0].COUNT == \"0\";",
+                      "                    break; ",
+                      "                case \"CheckAlerte\" :",
+                      "                    tests[\"Check Alerte\"] = sqlResult[i].results[0].COUNT >= \"10\";",
+                      "                    break; ",
+                      "                } ",
+                      "            }",
+                      "        } ",
+                      "    }",
+                      "    postman.setNextRequest(\"[00003]Delete data\");",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckStatutOrcProcessus\",\r\n         \"requestContent\":\"select id_statut_processus from orc_processus where id_correlation='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAcqPceConservee\",\r\n         \"requestContent\":\"select count(*) as COUNT from acq_pce_conservee where code_acquisition in ('PCEVABF5') and jour_gazier= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and lstime >= sysdate-1/24\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisition2\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition2 where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckDmdCalcul\",\r\n         \"requestContent\":\"select count(*) as COUNT from dmd_calcul where lstime >=(sysdate-1/24/4) and prec_processid='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition_cal where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_PCE_TNR_PCEVABF5_processid}}')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from pce p,grandeurs_objet gr,grandeur g,point po,qualite_point qpo where p.UIDGRANDEURS_OBJET=gr.UIDGRANDEURS_OBJET and gr.UIDGRANDEURS_OBJET=g.UIDGRANDEURS_OBJET and g.UIDGRANDEUR=po.UIDGRANDEUR and po.UIDQUALITE_POINT=qpo.UIDQUALITE_POINT and ((po.HORODATE >= TO_DATE('12/12/2017 06:00:00','DD/MM/YYYY HH24:MI:SS') and po.HORODATE <= TO_DATE('13/12/2017 05:00:00','DD/MM/YYYY HH24:MI:SS') )) and Idpce in ('PCEVABF5') and type_grandeur in ('VOLPEC','ENEPEC','PCSMOY') and po.lstime >= (sysdate-1/24/4)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckPubPointData\",\r\n         \"requestContent\":\"select count(*) as COUNT from PUB_POINT  inner join grandeur on pub_point.uidgrandeur = grandeur.uidgrandeur  where  horodate between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and date_modif >= (sysdate-1/24/4) and idgrandeur like '%PCEVABF5%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckEtrMeteringDataData\",\r\n         \"requestContent\":\"select count(*) as COUNT from ETR_METERING_DATA  where  gas_day between TO_DATE('2017-12-12 06:00:00', 'YYYY-MM-DD HH24:MI:SS')and TO_DATE('2017-12-13 05:00:00', 'YYYY-MM-DD HH24:MI:SS') and insertion_date >= (sysdate-1/24/4) and pce_code like '%PCEVABF5%'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForAcq\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where lstime >=(sysdate-1/24) and processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}'\"\r\n      },\r\n      {  \r\n         \"requestId\":\"CheckStockAcquisitionForCal\",\r\n         \"requestContent\":\"select count(*) as COUNT from stock_acquisition where processid in (select courant_processid from dmd_calcul where prec_processid='{{PRO_ACG_01_PCE_TNR_SGGUR1133A_processid}}')\"\r\n         \r\n      },\r\n      {  \r\n         \"requestId\":\"CheckAlerte\",\r\n         \"requestContent\":\"select count(*) as count from alerte, pce where  alerte.uidgrandeurs_objet=pce.uidgrandeurs_objet and IDPCE='SGGUR1133A'and alerte.lstime>=(sysdate-1/24/4) order by horodate desc, uidtest_ref desc,alerte.LSTIME DESC \"\r\n         \r\n      }\r\n   ]\r\n}"
+                },
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
+                "description": null
               },
               "response": []
             }
