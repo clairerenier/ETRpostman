@@ -8464,7 +8464,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_PCE_TNR_SGGUR1133A_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+              "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_PCE_TNR_PCEVABF5_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
             },
             "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
             "description": null
