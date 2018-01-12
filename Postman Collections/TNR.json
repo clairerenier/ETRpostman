@@ -6760,6 +6760,57 @@
                 "description": null
               },
               "response": []
+            },
+            {
+              "_postman_id": "0f843187-9a84-1787-0605-c126d7c436ca",
+              "name": "[00002]Check process cal end",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                      "if (tests[\"Status code is 200\"]){",
+                      "    var jsonData = JSON.parse(responseBody);",
+                      "    if (jsonData.statusProcess === \"2\"){",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);",
+                      "    }",
+                      "    else if (jsonData.statusProcess === \"4\"){",
+                      "       tests[\"Check process cal end\"] = true; ",
+                      "       postman.setNextRequest(\"[00002]Check data\");",
+                      "    }",
+                      "    else {",
+                      "        tests[\"Check process cal end\"] = false;",
+                      "        //postman.setNextRequest(null);  ",
+                      "    }",
+                      "}",
+                      "else{",
+                      "    postman.setNextRequest(null);",
+                      "}",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"processCode\":\"PRO_CAL_01\",\"processId\":\"{{PRO_ACG_01_PCE_TNR_PCEVABF5_sourceProcessId}}\",\"waitTimeout\":\"90\"}"
+                },
+                "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/checkProcess/",
+                "description": null
+              },
+              "response": []
             }
           ],
           "_postman_isSubFolder": true
