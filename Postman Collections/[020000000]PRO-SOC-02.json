@@ -1,9 +1,7 @@
 {
-  "variables": [],
   "info": {
-    "name": "[020000000]PRO-SOC-02",
     "_postman_id": "4188cf11-5991-0675-e72b-d8f719b09763",
-    "description": "",
+    "name": "[020000000]PRO-SOC-02",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
@@ -55,20 +53,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"DeletePointData\",\r\n         \"requestContent\":\"delete from POINT where uidpoint in (select P.UIDPOINT from PWRLINE.POINT P INNER JOIN PWRLINE.GRANDEUR G ON G.UIDGRANDEUR = P.UIDGRANDEUR INNER JOIN PWRLINE.PCE ON PCE.UIDGRANDEURS_OBJET = G.UIDGRANDEURS_OBJET WHERE PCE.IDPCE In('PCEPROTNR2', 'PCEPROTNR3','PCEPROTNR1') AND G.TYPE_GRANDEUR = 'VOLPEC')\"\r\n      },\r\n      {  \r\n         \"requestId\":\"DeleteCoeffACalcule\",\r\n         \"requestContent\":\"delete from COEFF_A_CALCULE where uidcoeff_a_calcule in (select ca.uidcoeff_a_calcule from COEFF_A_CALCULE ca inner join pce on pce.uidpce = ca.uidpce where HORODATE >= to_date('01/04/2017 06:00:00','dd/mm/yyyy hh24:mi:ss') and HORODATE <= to_date('31/10/2017 06:00:00','dd/mm/yyyy hh24:mi:ss') and pce.idpce = 'PCEPROTNR1')\"\r\n      }\r\n   ]\r\n}"
             },
-            "description": ""
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/"
           },
           "response": []
         },
@@ -118,20 +114,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n            {  \r\n         \"requestId\":\"InsertPoint1\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) Values (LS_SEQ_POINT.nextval, (SELECT UIDQUALITE_POINT FROM QUALITE_POINT where libelle = 'AF'), (select g.uidgrandeur from grandeur g inner join pce p on p.uidgrandeurs_objet = g.uidgrandeurs_objet where p.idpce in ('PCEPROTNR1') and g.pas = '86400' and g.type_grandeur = 'VOLPEC'), TRUNC(sysdate)+1/4-365, 1000)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"InsertPoint2\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) Values (LS_SEQ_POINT.nextval, (SELECT UIDQUALITE_POINT FROM QUALITE_POINT where libelle = 'AF'), (select g.uidgrandeur from grandeur g inner join pce p on p.uidgrandeurs_objet = g.uidgrandeurs_objet where p.idpce in ('PCEPROTNR2') and g.pas = '86400' and g.type_grandeur = 'VOLPEC'), TRUNC(sysdate)+1/4-365, 1000)\"\r\n      },\r\n      {  \r\n         \"requestId\":\"InsertPoint3\",\r\n         \"requestContent\":\"insert into POINT (UIDPOINT, UIDQUALITE_POINT, UIDGRANDEUR, HORODATE, VALEUR) Values (LS_SEQ_POINT.nextval, (SELECT UIDQUALITE_POINT FROM QUALITE_POINT where libelle = 'AF'), (select g.uidgrandeur from grandeur g inner join pce p on p.uidgrandeurs_objet = g.uidgrandeurs_objet where p.idpce in ('PCEPROTNR3') and g.pas = '86400' and g.type_grandeur = 'VOLPEC'), TRUNC(sysdate)+1/4-365, 1000)\"\r\n      }\r\n   ]\r\n}"
             },
-            "description": ""
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/"
           },
           "response": []
         },
@@ -170,20 +164,18 @@
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_SOC_02/ws",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\"IDPCE\":\"PCEPROTNR1\",\"UIDVPCE\":\"181002\"}"
             },
-            "description": ""
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_SOC_02/ws"
           },
           "response": []
         },
@@ -191,6 +183,17 @@
           "_postman_id": "21cf959b-6dc8-9f79-4760-ad5c5755fb55",
           "name": "[020100100]Check data",
           "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            },
             {
               "listen": "test",
               "script": {
@@ -217,34 +220,71 @@
                   ""
                 ]
               }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "",
-                  "",
-                  ""
-                ]
-              }
             }
           ],
           "request": {
-            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/",
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
               "raw": "{  \r\n   \"sqlRequest\":[  \r\n      {  \r\n         \"requestId\":\"CheckCoeffACalcule\",\r\n         \"requestContent\":\"select count(*) AS COUNT from COEFF_A_CALCULE ca inner join pce on pce.uidpce = ca.uidpce where HORODATE >= to_date('01/04/2017 06:00:00','dd/mm/yyyy hh24:mi:ss') and HORODATE <= to_date('31/10/2017 06:00:00','dd/mm/yyyy hh24:mi:ss') and pce.idpce = 'PCEPROTNR1'\"\r\n      }\r\n   ]\r\n}"
             },
-            "description": ""
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_FRMK_ADMIN/ws/tests/customSQL/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8f75fd6b-3c02-f912-0c98-701630b46684",
+          "name": "[020100100]Launch process copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "function pausecomp(millis)",
+                  "         {",
+                  "          var date = new Date();",
+                  "          var curDate = null;",
+                  "          do { curDate = new Date(); }",
+                  "          while(curDate-date < millis);",
+                  "        }",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "if (tests[\"Status code is 200\"]){",
+                  "        ",
+                  "        ",
+                  "        pausecomp(3000);",
+                  "       postman.setNextRequest(\"[020100100]Check data\");",
+                  "    }",
+                  "",
+                  "else{",
+                  "    postman.setNextRequest(null);",
+                  "}",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"IDPCE\":\"PCEPROTNR1\",\"UIDVPCE\":\"181002\"}"
+            },
+            "url": "http://{{user}}:{{password}}@{{ipPort}}/rest/ETR_PRO_SOC_02/ws"
           },
           "response": []
         }
